@@ -1,0 +1,95 @@
+@charset "UTF-8";
+
+.row-padding {
+		border: 1px solid #d6d6d6;
+}
+
+.room {
+		padding: 20px;
+}
+
+.roomy-15 {
+		padding-top: 15px;
+		padding-bottom: 15px;
+}
+
+.top-ad-title {
+		margin: 5px 0px;
+}
+
+td {
+		padding: 8px 0px;
+}
+
+.top-table {
+		width: 100%;
+}
+
+.top-table-title {
+		padding: 15px 0px;
+}
+
+.top-table-left {
+		width: 70px;
+}
+
+.logo-container {
+		height: 80px;
+		line-height: 80px;
+		text-align: center;
+}
+
+.clogo {
+		width: 100%;
+		height: auto;
+		max-width: 120px;
+		max-height: 80px;
+		vertical-align: middle;
+}
+
+.container-pad {
+		padding-left: 120px;
+		padding-right: 120px;
+}
+
+.padding-0 {
+		padding: 0px;
+}
+
+h4 {
+		font-size: 18px;
+}
+
+h3 {
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+}
+
+.Tcenter {
+		text-align: center;
+}
+
+.Tright {
+		text-align: right;
+}
+
+.mar15-pad20 {
+		padding: 20px;
+		padding-right: 15px;
+		margin: 15px;
+}
+
+.padding-bottom-30 {
+		padding-bottom: 30px;
+}
+
+.padding-20 {
+		padding: 20px, 20px, 20px, 40px;
+}
+
+.title-deco {
+		color: #017576;
+		font-size: 16px;
+}

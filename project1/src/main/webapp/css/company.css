@@ -1,0 +1,119 @@
+@charset "UTF-8";
+
+
+
+.detail-container {
+    margin-top: 50px;
+}
+
+td {
+        padding: 8px 0px;
+}
+
+.row-border {
+        border: 1px solid #d6d6d6;
+}
+
+
+.top-table-left {
+        width: 70px;
+}
+
+.container-pad {
+        padding-left: 50px;
+        padding-right: 50px;
+}
+
+.logo-container {
+    height: 150px;
+    line-height:150px;
+    text-align: center;
+}
+
+.clogo {
+    width: 100%;
+    height: auto;
+    max-width: 160px;
+    vertical-align: middle;
+}
+
+body {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #666;
+  font-weight: normal;
+}
+
+.logo {
+  float: left;
+  text-align: center;
+}
+
+
+img {
+  display: inline-block;
+  max-width: 200px;
+  max-height: 150px;
+}
+
+p {
+  width: 217px;
+  height: 84px;
+  text-align: center;
+}
+
+.infoview {
+  padding: 28px 0 28px;
+  border: 1px solid #d3dee8;
+  margin-bottom: 20px;
+}
+
+.table {
+  border-top: 1px solid black;
+  border-bottom: 1px solid #ddd;
+}
+input {
+  outline: none;
+}
+
+textarea {
+  width: 100%;
+  resize: none;
+  outline: none;
+}
+
+button {
+  text-align: center;
+  width: 90px;
+  height: 35px;
+  border-radius: 5px;
+  border: 1px solid RGB(1,117,118);
+  background-color: RGB(1,117,118);
+  color: white;
+  float: right;
+}
+
+.review {
+	margin-top: 30px;
+}
+.reviewbutton {
+  float: left;
+}
+
+.helpful {
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid RGB(1,117,118);
+  background-color: RGB(1,117,118);
+  color: white;
+  margin-right: 7px;
+}
+
+.delete {
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid black;
+  background-color: white;
+  color: black;
+  width: 40px;
+}
