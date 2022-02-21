@@ -132,4 +132,42 @@ public class AdDAO {
 		}
 		return vo;
 	}
+	
+
+    public List<AdVO> getAdDetailByCid(int id) {
+        List<AdVO> list = new ArrayList<AdVO>();
+        try {
+            getConnection();
+            String sql = "SELECT * " + "FROM ad_1 " + "WHERE c_id = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                AdVO vo = new AdVO();
+                vo.setAd_id(rs.getInt(1));
+                vo.setC_id(rs.getInt(2));
+                vo.setAd_title(rs.getString(3));
+                vo.setAd_content(rs.getString(4));
+                vo.setAd_we(rs.getString(5));
+                vo.setAd_education(rs.getString(6));
+                vo.setAd_qualification(rs.getString(7));
+                vo.setAd_language(rs.getString(8));
+                vo.setAd_major(rs.getString(9));
+                vo.setAd_wage(rs.getString(10));
+                vo.setAd_workhours(rs.getString(11));
+                vo.setAd_worktype(rs.getString(12));
+                vo.setAd_workplace(rs.getString(13));
+                vo.setAd_end(rs.getString(14));
+                vo.setAd_visits(rs.getInt(15));
+                list.add(vo);
+            }
+            rs.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            disConnection();
+        }
+        return list;
+    }	
 }

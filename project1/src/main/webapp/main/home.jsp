@@ -46,7 +46,7 @@
         <div class="multi-slider">
           <c:forEach var="b" items="${bigCompany }" varStatus="status">
             <div>
-              <a href="#">
+              <a href="../company/company.do?cid=${b.c_id }">
                 <img class="slider-logo" src="${b.c_logo }" alt="">
               </a>
             </div>

@@ -16,12 +16,12 @@
   <section>
     <div class="container container-pad">
       <!-- 기업 상세 정보 -->
-      <div class="row roomy-20 m-top-20 room">
+      <div class="row roomy-20 m-top-20 row-border">
         <div class="col-md-2">
           <div class="logo-container"><img class="clogo" src="${company.c_logo }"></div>
         </div>
         <div class="col-md-5">
-          <table>
+          <table class="table-top">
             <tr>
               <th class="top-table-left">기업명</th>
               <td class="small-font">${company.c_name }</td>
@@ -44,6 +44,50 @@
           <div id="map" style="width:100%;height:180px;"></div>
         </div>
       </div>
+      
+      <div class="row m-top-40 row-padding">
+        <div class="no-select"><h4>진행중인 채용 공고</h4></div>
+        <div class="text-center topborder bggrey">
+          <div class="bggrey pad-10 col-md-10"><b>채용공고명</b></div>
+          <div class="bggrey pad-10 col-md-2"><b>모집마감일</b></div>
+        </div>
+      </div>
+        <c:forEach var="a" items="${ad }" varStatus="status">
+        <div class="row pad-10 text-center row-padding">
+          <div class="col-md-10">${a.ad_title }</div>
+          <div class="col-md-2"><b>${a.ad_end }</b></div>
+        </div>
+        </c:forEach>
+      
+      <div class="row m-top-40 row-padding">
+        <div class="no-select"><h4>면접 후기 작성</h4></div>
+        <form method=post action="">
+          <span>면접은 만족 하셨나요?</span><br>
+          <input type=radio value=1 name=goodbad checked> 만족
+          <input type=radio value=2 name=goodbad> 불만족
+          <br><span>지원하신 직무</span><br>
+          <input type=text name=job size=30>
+        </form>
+      </div>
+      
+      <div class="row m-top-20 row-padding">
+        <c:forEach var="r" items="${review }" varStatus="status">
+          <div class="review-container">
+          <c:if test="${r.review_goodbad==1}">
+            <div class="review-job">
+              <i class="fa fa-thumbs-up" aria-hidden="true"></i>&nbsp;&nbsp;${r.review_job }
+            </div>
+            <div class="review-content">${r.review_content }</div>
+          </c:if>
+          <c:if test="${r.review_goodbad==2}">
+            <div class="review-job">
+              <i class="fa fa-thumbs-down" aria-hidden="true"></i>&nbsp;&nbsp;${r.review_job }
+            </div>
+            <div class="review-content">${r.review_content }</div>
+          </c:if>
+          </div>
+        </c:forEach>
+      </div>
       <!-------------->
     </div>
   </section>
@@ -55,7 +99,7 @@
   <script>
   var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
       mapOption = {
-          center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+          center: new kakao.maps.LatLng(37.499506307492915, 127.0332437153399), // 지도의 중심좌표
           level: 4 // 지도의 확대 레벨
       };  
   
