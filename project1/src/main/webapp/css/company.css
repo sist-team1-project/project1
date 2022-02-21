@@ -61,7 +61,8 @@ td {
 .review-content {
     padding: 10px 0px;
 }
-.fa {
+.fa-thumbs-down,
+.fa-thumbs-up {
   font-size: 35px;
   color: #017576;
 }
