@@ -95,7 +95,7 @@
   
   
   
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=993898e018571ba82000b5385c58f0aa&libraries=services"></script>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=&libraries=services"></script>
   <script>
   var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
       mapOption = {
