@@ -14,9 +14,9 @@
 <body>
 <!-- 여기부터 -->
   <section>
-    <div class="container container-pad">
+    <div class="container">
       <!-- 기업 상세 정보 -->
-      <div class="row roomy-20 m-top-20 row-border">
+      <div class="row roomy-20 m-top-50 row-border">
         <div class="col-md-2">
           <div class="logo-container"><img class="clogo" src="${company.c_logo }"></div>
         </div>
