@@ -161,9 +161,9 @@
 								</div>
 								<div class="row row-padding">
 
-										<div class="content">
-												<div id="map" style="width: 100%; height: 350px;"></div>
-												<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=676eb5fa2637b234997b24dd7566e9ba&libraries=services"></script>
+										<!-- ########################################################################################## -->
+										<div id="Map" style="width:900px; height: 400px;"></div>
+												<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=993898e018571ba82000b5385c58f0aa&libraries=services"></script>
 												<script>
 													var mapContainer = document
 															.getElementById('map'), // 지도를 표시할 div 
@@ -171,7 +171,7 @@
 														center : new kakao.maps.LatLng(
 																33.450701,
 																126.570667), // 지도의 중심좌표
-														level : 3
+														level : 4
 													// 지도의 확대 레벨
 													};
 
@@ -186,10 +186,11 @@
 													// 주소로 좌표를 검색합니다
 													geocoder
 															.addressSearch(
-																	'${ad.ad_workplace}',
+																	'${ad.ad_workplace }',
 																	function(
 																			result,
 																			status) {
+
 																		// 정상적으로 검색이 완료됐으면 
 																		if (status === kakao.maps.services.Status.OK) {
 
@@ -204,23 +205,15 @@
 																						position : coords
 																					});
 
-																			// 인포윈도우로 장소에 대한 설명을 표시합니다
-																			var infowindow = new kakao.maps.InfoWindow(
-																					{
-																						content : '<div style="width:150px;text-align:center;padding:6px 0;">${company.c_name}</div>'
-																					});
-																			infowindow
-																					.open(
-																							map,
-																							marker);
-
 																			// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 																			map
 																					.setCenter(coords);
 																		}
 																	});
 												</script>
-										</div>
+												</script>
+										
+										<!-- ########################################################################################## -->
 
 								</div>
 						</div>
@@ -250,7 +243,7 @@
 
 				</div>
 		</section>
-
+		
 
 		<!-- 여기까지 직접 작성 -->
 </body>
