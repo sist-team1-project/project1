@@ -14,9 +14,14 @@
 <!-- 여기부터 -->
   <section>
     <div class="container">
-    
+      
       <!-- 인기기업 9개 -->
       <div class="row roomy-20 m-top-20">
+        <c:if test="${sessionScope.id!=null }">
+          <div class="roomy-10">
+            <h5 class="text-center">${sessionScope.name }님 안녕하세요!</h5>
+          </div>
+        </c:if>
         <div class="no-select"><h4>&nbsp;&nbsp;<i class="fa fa-thumbs-o-up" aria-hidden="true"></i> BEST 기업 & 면접 리뷰</h4></div>
         <c:forEach var="c" items="${company }" varStatus="status">
           <div class="col-md-4 pad-5">

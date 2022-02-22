@@ -10,7 +10,7 @@ import sist.com.dao.*;
 public class MainModel {
 
     @RequestMapping("main/main.do")
-    public String main_page(HttpServletRequest request) {
+    public String main_page(HttpServletRequest request, HttpServletResponse response) {
 
         CompanyDAO c = new CompanyDAO();
         AdDAO a = new AdDAO();

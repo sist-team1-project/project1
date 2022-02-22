@@ -29,6 +29,7 @@ public class DispatcherServlet extends HttpServlet {
         modelList.add("sist.com.model.FreeboardModel");
         modelList.add("sist.com.model.MainModel");
         modelList.add("sist.com.model.SearchModel");
+        modelList.add("sist.com.model.UsersModel");
     }
 
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -46,7 +47,7 @@ public class DispatcherServlet extends HttpServlet {
                 for (Method m : methods) {
                     RequestMapping rm = m.getAnnotation(RequestMapping.class);
                     if (rm.value().equals(uri)) {
-                        String jsp = (String) m.invoke(obj, request);
+                        String jsp = (String) m.invoke(obj, request, response);
                         if (jsp.startsWith("redirect:")) {
                             String s = jsp.substring(jsp.indexOf(":") + 1);
                             response.sendRedirect(s);

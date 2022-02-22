@@ -10,7 +10,7 @@ import sist.com.dao.*;
 public class CompanyModel {
     
     @RequestMapping("company/company.do")
-    public String main_page(HttpServletRequest request) {
+    public String company_page(HttpServletRequest request, HttpServletResponse response) {
         String cid = request.getParameter("cid");
         
         CompanyDAO cdao = new CompanyDAO();

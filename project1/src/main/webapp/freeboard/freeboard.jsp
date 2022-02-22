@@ -9,10 +9,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-
   <div class="container">
     <div class="row roomy-10 m-top-20">
-
+      
     </div>
   </div>
 </body>

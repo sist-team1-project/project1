@@ -11,7 +11,7 @@ import sist.com.dao.*;
 public class SearchModel {
     
 	@RequestMapping("search/searchcompany.do")
-    public String main_page(HttpServletRequest request) {
+    public String search_company_page(HttpServletRequest request, HttpServletResponse response) {
 
 		CompanyDAO c = new CompanyDAO();
         AdDAO a = new AdDAO();

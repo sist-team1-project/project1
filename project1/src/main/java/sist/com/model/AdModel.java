@@ -10,7 +10,7 @@ import sist.com.dao.*;
 public class AdModel {
     
     @RequestMapping("ad/ad.do")
-    public String main_page(HttpServletRequest request) {
+    public String ad_page(HttpServletRequest request, HttpServletResponse response) {
         String cid = request.getParameter("cid");
         String adid = request.getParameter("adid");
         

@@ -11,7 +11,7 @@ import sist.com.dao.*;
 public class FreeboardModel {
     
     @RequestMapping("freeboard/freeboard.do")
-    public String main_page(HttpServletRequest request) {
+    public String freeboard_page(HttpServletRequest request, HttpServletResponse response) {
 
         request.setAttribute("main_jsp", "../freeboard/freeboard.jsp");
         return "../main/main.jsp";

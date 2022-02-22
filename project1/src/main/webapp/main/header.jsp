@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +31,12 @@
           <li><a href="../freeboard/freeboard.do">자유게시판</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">로그인</a></li>                    
+          <c:if test="${sessionScope.id==null }">
+            <li><a href="../member/loginpage.do">로그인</a></li>
+          </c:if>
+          <c:if test="${sessionScope.id!=null }">
+            <li><a href="../member/logout.do">로그아웃</a></li>
+          </c:if>
         </ul>
       </div>
     </div>
