@@ -49,14 +49,14 @@
       <div class="row m-top-40">
         <div class="no-select"><h4><b>진행중인 채용 공고</b></h4></div>
         <div class="text-center topborder bggrey">
-          <div class="bggrey pad-10 col-md-10"><b>채용공고명</b></div>
-          <div class="bggrey pad-10 col-md-2"><b>모집마감일</b></div>
+          <div class="bggrey pad-10 col-md-9"><b>채용공고명</b></div>
+          <div class="bggrey pad-10 col-md-3"><b>모집마감일</b></div>
         </div>
       </div>
         <c:forEach var="a" items="${ad }" varStatus="status">
         <div class="row roomy-20 text-center">
-          <div class="col-md-10">${a.ad_title }</div>
-          <div class="col-md-2"><b>${a.ad_end }</b></div>
+          <div class="col-md-9">${a.ad_title }</div>
+          <div class="col-md-3"><b>${a.ad_end }</b></div>
         </div>
         </c:forEach>
       
@@ -133,6 +133,5 @@
       } 
   });    
   </script>
-    </script>
 </body>
 </html>
