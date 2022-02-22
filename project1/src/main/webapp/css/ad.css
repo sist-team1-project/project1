@@ -9,7 +9,9 @@
   margin-left: 0px;
   margin-right: 0px;
 }
-
+.margin-bottom{
+		margin-bottom: 20px;
+}
 .row-border {
   border: 1px solid #d6d6d6;
 }
@@ -53,8 +55,8 @@ td {
 
 .clogo {
   width: 100%;
-  height: auto;
-  max-width: 120px;
+  height: 100%;
+  max-width: 180px;
   vertical-align: middle;
 }
 
