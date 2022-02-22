@@ -2,14 +2,15 @@
     pageEncoding="UTF-8" import="sist.com.model.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<jsp:useBean id="model" class="sist.com.model.MainModel"/>
+
+
 
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
   <title>Insert title here</title>
-  <link rel="stylesheet" href="../../css/login.css">
+  <link rel="stylesheet" href="../css/login.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -26,7 +27,7 @@
           <!-- <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" /> -->
           <h2 class="my-5">로그인</h2>
         </div>
-
+        <c:if test="${sessionScope.id==null }">
         <!-- Login Form -->
         <form method = "post" action="login_ok.jsp">
           <input type="text" id="id" class="fadeIn second zero-raduis" name="id" placeholder="아이디">
@@ -40,8 +41,12 @@
           <input type="button" class="fadeIn fourth zero-raduis pc" value="회원가입">
        
         </form>
+        </c:if>
+        <c:if test="${sessionScope.id!=null }">
         
-
+       
+         
+        </c:if>
       </div>
   </div>
 <!-- 여기까지 직접 작성 -->
