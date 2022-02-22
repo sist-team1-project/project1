@@ -40,7 +40,7 @@
           </table>
         </div>
         <div class="col-md-5">
-          <div id="map" style="width:100%;height:180px;"></div>
+          <div id="map" style="width:100%;height:170px;"></div>
         </div>
       </div>
       <!-------------->
