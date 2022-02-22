@@ -47,7 +47,12 @@
       
       <!-- 진행중인 채용 공고 -->
       <div class="row m-top-40">
-        <div class="no-select"><h4><b>진행중인 채용 공고</b></h4></div>
+        <div class="no-select">
+        <h3>
+        <i class="fa fa-user" aria-hidden="true"></i>&nbsp;
+        <b>진행중인 채용 공고</b>
+        </h3>
+        </div>
         <div class="text-center topborder bggrey">
           <div class="bggrey pad-10 col-md-9"><b>채용공고명</b></div>
           <div class="bggrey pad-10 col-md-3"><b>모집마감일</b></div>
@@ -62,7 +67,12 @@
       
       <!-- 면접 후기 작성 -->
       <div class="row m-top-40">
-        <div class="no-select"><h4><b>면접 후기 작성</b></h4></div>
+        <div class="no-select">
+        <h3>
+        <i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;
+        <b>면접 후기 작성</b>
+        </h3>
+        </div>
         <form method=post action="">
           <span>면접은 만족 하셨나요?</span><br>
           <input type=radio value=1 name=goodbad checked> 만족
@@ -75,7 +85,12 @@
       
       <!-- 면접 후기 -->
       <div class="row m-top-40">
-          <div class="no-select"><h4><b>면접 후기</b></h4></div>
+          <div class="no-select">
+          <h3>
+          <i class="fa fa-quote-right" aria-hidden="true"></i>&nbsp;
+          <b>면접 후기</b>
+          </h3>
+          </div>
         <c:forEach var="r" items="${review }" varStatus="status">
           <div>
             <c:if test="${r.review_goodbad==1}">

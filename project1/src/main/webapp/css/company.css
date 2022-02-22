@@ -67,3 +67,10 @@ td {
   font-size: 35px;
   color: #017576;
 }
+
+h3 {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
