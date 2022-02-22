@@ -8,9 +8,9 @@ import sist.com.controller.RequestMapping;
 import sist.com.vo.*;
 import sist.com.dao.*;
 
-public class CompanySearchModel {
+public class SearchModel {
     
-	@RequestMapping("search/companysearchBar.do")
+	@RequestMapping("search/searchcompany.do")
     public String main_page(HttpServletRequest request) {
 
 		CompanyDAO c = new CompanyDAO();
@@ -18,7 +18,7 @@ public class CompanySearchModel {
         ReviewDAO r = new ReviewDAO();
         PostDAO p = new PostDAO();
 		
-        request.setAttribute("main_jsp", "../search/companySearchBar.jsp");
+        request.setAttribute("main_jsp", "../search/search_company.jsp");
         
         List<CompanyVO> company = c.bestCompanyList();
         List<String> review = new ArrayList<String>();
@@ -34,8 +34,6 @@ public class CompanySearchModel {
         }
         request.setAttribute("company", company);
         request.setAttribute("review", review);
-        
-
         
         return "../main/main.jsp";
     }

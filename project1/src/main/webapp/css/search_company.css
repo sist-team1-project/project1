@@ -1,0 +1,100 @@
+@charset "UTF-8";
+
+.container-pad {
+        padding-left: 50px;
+        padding-right: 50px;
+}
+
+.row {
+        margin-left: 0px;
+        margin-right: 0px;
+}
+
+.search-container {
+  padding-left: 20%;
+  padding-right: 20%;
+}
+
+.search-bar {
+  display: flex;
+}
+
+.search-input {
+  width: 100%;
+  height: 30px;
+  border: 2px solid black;
+  border-right: none;
+  padding: 20px;
+
+  border-radius: 10px 0 0 10px;
+  outline: none;
+  color: #9DBFAF;
+}
+
+.search-button {
+  width: 80px;
+  height: 44px;
+  border: 1px solid black;
+  background: black;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 10px 10px 0;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+
+
+/* 승경 */
+
+.search_container {
+    float: center;
+    margin: 90px auto 0 auto;
+    font-size: 18px;
+    font-weight: normal;
+    text-align: center;
+    line-height: 20px;
+}
+
+.search_title {
+    font-size: 22px;
+    font-weight: bold;
+    line-height:30px;
+}
+
+.sb-container {
+    margin: 50px auto 0 auto;
+    float: center;
+}
+
+.sb-example-1 .search {
+    width: 450px;
+    margin: 0 0 80px 750px;
+    display: flex;
+}
+
+.sb-example-1 .searchTerm {
+    width: 350px;
+    height: 14px;
+    border-style: 3px solid grey;
+    border-right: none;
+    padding: 18px 0 18px 18px;
+    border-radius: 10px 0 0 10px;
+    outline: none;
+    color: #9DBFAF;
+}
+
+.sb-example-1 .searchTerm:focus {
+    color: #017576;
+}
+
+.sb-example-1 .searchButton {
+    width: 90px;
+    height: 40px;
+    border: 1px solid black;
+    background: black;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 10px 10px 0;
+    font-size: 18px;
+}
