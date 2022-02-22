@@ -9,7 +9,7 @@ import sist.com.vo.*;
 import sist.com.dao.*;
 
 public class CompanySearchModel {
-	@RequestMapping("company/company.do")
+	@RequestMapping("company/companysearch.do")
     public String main_page(HttpServletRequest request) {
 
         request.setAttribute("main_jsp", "../search/companySearchBar.jsp");
