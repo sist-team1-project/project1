@@ -1,104 +1,120 @@
 @charset "UTF-8";
 
 .container-pad {
-  padding-left: 50px;
-  padding-right: 50px;
+		padding-left: 50px;
+		padding-right: 50px;
 }
 
 .row {
-  margin-left: 0px;
-  margin-right: 0px;
+		margin-left: 0px;
+		margin-right: 0px;
 }
-.margin-bottom{
+
+.margin-bottom {
 		margin-bottom: 20px;
 }
+
 .row-border {
-  border: 1px solid #d6d6d6;
+		border: 1px solid #d6d6d6;
 }
 
 .room {
-  padding: 20px;
+		padding: 20px;
 }
 
 .roomy-15 {
-  padding-top: 15px;
-  padding-bottom: 15px;
+		padding-top: 15px;
+		padding-bottom: 15px;
 }
 
 .top-ad-title {
-  margin: 5px 0px;
-  word-break: keep-all;
+		margin: 5px 0px;
+		word-break: keep-all;
 }
 
 td {
-  padding: 8px 0px;
-  word-break: keep-all;
+		padding: 8px 0px;
+		word-break: keep-all;
 }
 
 .top-table {
-  width: 100%;
+		width: 100%;
 }
 
 .top-table-title {
-  padding: 15px 0px;
+		padding: 15px 0px;
 }
 
 .top-table-left {
-  width: 80px;
+		width: 80px;
 }
 
 .logo-container {
-  height: 90px;
-  line-height: 90px;
-  text-align: center;
+		height: 90px;
+		line-height: 90px;
+		text-align: center;
 }
 
 .clogo {
-  width: 100%;
-  height: auto;
-  max-width: 150px;
-  max-height: 90px;
-  vertical-align: middle;
+		width: 100%;
+		height: auto;
+		max-width: 150px;
+		max-height: 90px;
+		vertical-align: middle;
+}
+
+.bggrey {
+		background-color: rgb(231, 231, 231);
 }
 
 .padding-0 {
-  padding: 0px;
+		padding: 0px;
 }
 
 h4 {
-  font-size: 18px;
+		font-size: 18px;
 }
 
 h3 {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
 }
 
 .Tcenter {
-  text-align: center;
+		text-align: center;
 }
 
 .Tright {
-  text-align: right;
+		text-align: right;
 }
 
 .mar15-pad20 {
-  padding: 20px;
-  padding-right: 15px;
-  margin: 15px;
+		padding: 20px;
+		padding-right: 15px;
+		margin: 15px;
 }
 
 .padding-bottom-30 {
-  padding-bottom: 30px;
+		padding-bottom: 30px;
 }
 
 .padding-20 {
-  padding: 20px, 20px, 20px, 40px;
+		padding: 20px, 20px, 20px, 40px;
+}
+
+.height-45 {
+		height: 45px;
+		padding: 10px;
+}
+
+.height-60 {
+		height: 60px;
+		padding: 10px;
 }
 
 .title-deco {
-  color: #017576;
-  font-size: 16px;
+		color: #017576;
+		font-size: 16px;
 }
