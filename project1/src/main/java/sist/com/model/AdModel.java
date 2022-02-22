@@ -17,6 +17,10 @@ public class AdModel {
         AdDAO a = new AdDAO();
         AdVO ad = a.getAdDetail(Integer.parseInt(adid));
         
+        if (ad.getAd_end() == null) {
+            ad.setAd_end("채용시까지");
+        }
+        
         CompanyDAO c = new CompanyDAO();
         CompanyVO company = c.getCompanyDetail(Integer.parseInt(cid));
         
