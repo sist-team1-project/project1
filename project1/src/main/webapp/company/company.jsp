@@ -14,7 +14,7 @@
 <body>
 <!-- 여기부터 -->
   <section>
-    <div class="container">
+    <div class="container container-pad">
       <!-- 기업 상세 정보 -->
       <div class="row roomy-20 m-top-50 row-border">
         <div class="col-md-2">
@@ -23,20 +23,19 @@
         <div class="col-md-5">
           <table class="table-top">
             <tr>
-              <th class="top-table-left">기업명</th>
-              <td class="small-font">${company.c_name }</td>
+              <td colspan="2" class="top-table-cname"><b>${company.c_name }</b></td>
             </tr>
             <tr>
               <th class="top-table-left">업종</th>
-              <td class="small-font">${company.c_industry }</td>
+              <td>${company.c_industry }</td>
             </tr>
             <tr>
               <th class="top-table-left">기업 규모</th>
-              <td class="small-font">${company.c_size }</td>
+              <td>${company.c_size }</td>
             </tr>
             <tr>
               <th class="top-table-left">본사</th>
-              <td class="small-font">${company.c_address }</td>
+              <td>${company.c_address }</td>
             </tr>
           </table>
         </div>
@@ -44,23 +43,26 @@
           <div id="map" style="width:100%;height:180px;"></div>
         </div>
       </div>
+      <!-------------->
       
-      <div class="row m-top-40 row-padding">
-        <div class="no-select"><h4>진행중인 채용 공고</h4></div>
+      <!-- 진행중인 채용 공고 -->
+      <div class="row m-top-40">
+        <div class="no-select"><h4><b>진행중인 채용 공고</b></h4></div>
         <div class="text-center topborder bggrey">
           <div class="bggrey pad-10 col-md-10"><b>채용공고명</b></div>
           <div class="bggrey pad-10 col-md-2"><b>모집마감일</b></div>
         </div>
       </div>
         <c:forEach var="a" items="${ad }" varStatus="status">
-        <div class="row pad-10 text-center row-padding">
+        <div class="row roomy-20 text-center">
           <div class="col-md-10">${a.ad_title }</div>
           <div class="col-md-2"><b>${a.ad_end }</b></div>
         </div>
         </c:forEach>
       
-      <div class="row m-top-40 row-padding">
-        <div class="no-select"><h4>면접 후기 작성</h4></div>
+      <!-- 면접 후기 작성 -->
+      <div class="row m-top-40">
+        <div class="no-select"><h4><b>면접 후기 작성</b></h4></div>
         <form method=post action="">
           <span>면접은 만족 하셨나요?</span><br>
           <input type=radio value=1 name=goodbad checked> 만족
@@ -69,33 +71,35 @@
           <input type=text name=job size=30>
         </form>
       </div>
+      <!-------------->
       
-      <div class="row m-top-20 row-padding">
+      <!-- 면접 후기 -->
+      <div class="row m-top-40">
+          <div class="no-select"><h4><b>면접 후기</b></h4></div>
         <c:forEach var="r" items="${review }" varStatus="status">
-          <div class="review-container">
-          <c:if test="${r.review_goodbad==1}">
-            <div class="review-job">
-              <i class="fa fa-thumbs-up" aria-hidden="true"></i>&nbsp;&nbsp;${r.review_job }
-            </div>
-            <div class="review-content">${r.review_content }</div>
-          </c:if>
-          <c:if test="${r.review_goodbad==2}">
-            <div class="review-job">
-              <i class="fa fa-thumbs-down" aria-hidden="true"></i>&nbsp;&nbsp;${r.review_job }
-            </div>
-            <div class="review-content">${r.review_content }</div>
-          </c:if>
+          <div>
+            <c:if test="${r.review_goodbad==1}">
+              <div class="review-job">
+                <i class="fa fa-thumbs-up" aria-hidden="true"></i>&nbsp;&nbsp;${r.review_job }
+              </div>
+              <div class="review-content">${r.review_content }</div>
+            </c:if>
+            <c:if test="${r.review_goodbad==2}">
+              <div class="review-job">
+                <i class="fa fa-thumbs-down" aria-hidden="true"></i>&nbsp;&nbsp;${r.review_job }
+              </div>
+              <div class="review-content">${r.review_content }</div>
+            </c:if>
           </div>
         </c:forEach>
       </div>
       <!-------------->
     </div>
   </section>
+
+
   
-  
-  
-  
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=&libraries=services"></script>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=161e8cb7c125668bd9b1d54c2ebca1d2&libraries=services"></script>
   <script>
   var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
       mapOption = {

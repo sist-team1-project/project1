@@ -1,47 +1,20 @@
 package sist.com.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
+import java.sql.*;
+import java.util.*;
 
 import sist.com.vo.*;
 
 public class AdDAO {
 
-	private Connection conn;
-	private PreparedStatement ps;
-
-	public void getConnection() {
-		try {
-			Context init = new InitialContext();
-			Context c = (Context) init.lookup("java://comp//env");
-			DataSource ds = (DataSource) c.lookup("jdbc/oracle");
-			conn = ds.getConnection();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-	}
-
-	public void disConnection() {
-		try {
-			if (ps != null)
-				ps.close();
-			if (conn != null)
-				conn.close();
-		} catch (Exception ex) {
-		}
-	}
+    private Connection conn;
+    private PreparedStatement ps;
+    private DBCPConnection dbcp = new DBCPConnection();
 
 	public List<AdVO> bestAdList() {
 		List<AdVO> list = new ArrayList<AdVO>();
 		try {
-			getConnection();
+		    conn = dbcp.getConnection();
 			String sql = "SELECT ad_id,ad_title,ad_end,ad_we,ad_education,c_id "
 					+ "FROM (SELECT ad_id,ad_title,ad_end,ad_we,ad_education,c_id,rownum as num "
 					+ "FROM (SELECT ad_id,ad_title,ad_end,ad_we,ad_education,c_id FROM  ad_1 WHERE SYSDATE-1 < TO_DATE(ad_end) OR ad_end IS NULL ORDER BY ad_visits DESC)) "
@@ -63,7 +36,7 @@ public class AdDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			disConnection();
+		    dbcp.disConnection(conn, ps);
 		}
 		return list;
 	}
@@ -71,7 +44,7 @@ public class AdDAO {
 	public List<AdVO> AdEndList() {
 		List<AdVO> list = new ArrayList<AdVO>();
 		try {
-			getConnection();
+		    conn = dbcp.getConnection();
 			String sql = "SELECT ad_id,ad_title,ad_end,ad_we,ad_education,c_id "
 					+ "FROM (SELECT ad_id,ad_title,ad_end,ad_we,ad_education,c_id,rownum as num "
 					+ "FROM (SELECT ad_id,ad_title,ad_end,ad_we,ad_education,c_id FROM  ad_1 WHERE SYSDATE-1 < TO_DATE(ad_end) ORDER BY ad_end ASC)) "
@@ -93,7 +66,7 @@ public class AdDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			disConnection();
+		    dbcp.disConnection(conn, ps);
 		}
 		return list;
 	}
@@ -101,7 +74,7 @@ public class AdDAO {
 	public AdVO getAdDetail(int id) {
 		AdVO vo = new AdVO();
 		try {
-			getConnection();
+		    conn = dbcp.getConnection();
 			String sql = "SELECT * " + "FROM ad_1 " + "WHERE ad_id = ?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, id);
@@ -128,16 +101,15 @@ public class AdDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			disConnection();
+		    dbcp.disConnection(conn, ps);
 		}
 		return vo;
 	}
-	
 
     public List<AdVO> getAdDetailByCid(int id) {
         List<AdVO> list = new ArrayList<AdVO>();
         try {
-            getConnection();
+            conn = dbcp.getConnection();
             String sql = "SELECT * " + "FROM ad_1 " + "WHERE c_id = ?";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
@@ -166,7 +138,7 @@ public class AdDAO {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            disConnection();
+            dbcp.disConnection(conn, ps);
         }
         return list;
     }	

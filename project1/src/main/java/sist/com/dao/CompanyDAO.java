@@ -2,8 +2,6 @@ package sist.com.dao;
 
 import java.sql.*;
 import java.util.*;
-import javax.sql.*; // DataSource
-import javax.naming.*; // Context 
 
 import sist.com.vo.*;
 
@@ -11,32 +9,12 @@ public class CompanyDAO {
 
     private Connection conn;
     private PreparedStatement ps;
-
-    public void getConnection() {
-        try {
-            Context init = new InitialContext();
-            Context c = (Context) init.lookup("java://comp//env");
-            DataSource ds = (DataSource) c.lookup("jdbc/oracle");
-            conn = ds.getConnection();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public void disConnection() {
-        try {
-            if (ps != null)
-                ps.close();
-            if (conn != null)
-                conn.close();
-        } catch (Exception ex) {
-        }
-    }
+    private DBCPConnection dbcp = new DBCPConnection();
 
     public List<CompanyVO> bestCompanyList() {
         List<CompanyVO> list = new ArrayList<CompanyVO>();
         try {
-            getConnection();
+            conn = dbcp.getConnection();
             String sql = "SELECT c_id, c_logo, c_name FROM ("
                     + "SELECT c_id, c_logo, c_name, rownum as num "
                     + "FROM (SELECT c_id, c_logo, c_name "
@@ -59,7 +37,7 @@ public class CompanyDAO {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            disConnection();
+            dbcp.disConnection(conn, ps);
         }
         return list;
     }
@@ -67,7 +45,7 @@ public class CompanyDAO {
     public List<CompanyVO> getBigCompanyList() {
         List<CompanyVO> list = new ArrayList<CompanyVO>();
         try {
-            getConnection();
+            conn = dbcp.getConnection();
             String sql = "SELECT c_id, c_logo, c_name FROM ("
                     + "SELECT c_id, c_logo, c_name, rownum as num "
                     + "FROM (SELECT c_id, c_logo, c_name "
@@ -91,7 +69,7 @@ public class CompanyDAO {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            disConnection();
+            dbcp.disConnection(conn, ps);
         }
         return list;
     }
@@ -99,7 +77,7 @@ public class CompanyDAO {
     public CompanyVO getCompanyDetail(int id) {
         CompanyVO vo = new CompanyVO();
         try {
-            getConnection();
+            conn = dbcp.getConnection();
             String sql = "SELECT c_id,c_logo,c_name,c_address,c_industry,c_size,c_visits FROM company_1 WHERE c_id=?";
 
             ps = conn.prepareStatement(sql);
@@ -119,7 +97,7 @@ public class CompanyDAO {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            disConnection();
+            dbcp.disConnection(conn, ps);
         }
         return vo;
     }

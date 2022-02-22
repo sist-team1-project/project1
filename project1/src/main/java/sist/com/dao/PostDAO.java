@@ -1,46 +1,20 @@
 package sist.com.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
+import java.sql.*;
+import java.util.*;
 
 import sist.com.vo.*;
 
 public class PostDAO {
+
     private Connection conn;
     private PreparedStatement ps;
-
-    public void getConnection() {
-        try {
-            Context init = new InitialContext();
-            Context c = (Context) init.lookup("java://comp//env");
-            DataSource ds = (DataSource) c.lookup("jdbc/oracle");
-            conn = ds.getConnection();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public void disConnection() {
-        try {
-            if (ps != null)
-                ps.close();
-            if (conn != null)
-                conn.close();
-        } catch (Exception ex) {
-        }
-    }
+    private DBCPConnection dbcp = new DBCPConnection();
     
     public List<PostVO> freeBoardListByVisits() {
         List<PostVO> list = new ArrayList<PostVO>();
         try {
-            getConnection();
+            conn = dbcp.getConnection();
             String sql = "SELECT post_id,post_category,post_title "
                     + "FROM (SELECT post_id,post_category,post_title,rownum as num "
                     + "FROM (SELECT post_id,post_category,post_title,post_content,post_visits,post_date "
@@ -62,7 +36,7 @@ public class PostDAO {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            disConnection();
+            dbcp.disConnection(conn, ps);
         }
         return list;
     }

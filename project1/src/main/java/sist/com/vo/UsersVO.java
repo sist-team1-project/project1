@@ -1,12 +1,14 @@
 package sist.com.vo;
 
+import java.sql.Date;
+
 public class UsersVO {
 
     private String u_id;
     private String u_password;
     private String u_name;
     private String u_profile;
-    private int u_birthday;
+    private Date u_birthday;
     private String u_gender;
     private String u_email;
     private String u_address;
@@ -45,11 +47,11 @@ public class UsersVO {
         this.u_profile = u_profile;
     }
 
-    public int getU_birthday() {
+    public Date getU_birthday() {
         return u_birthday;
     }
 
-    public void setU_birthday(int u_birthday) {
+    public void setU_birthday(Date u_birthday) {
         this.u_birthday = u_birthday;
     }
 

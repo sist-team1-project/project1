@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans>
+  <bean class="sist.com.model.MainModel"/>
+  <bean class="sist.com.model.AdModel"/>
+  <bean class="sist.com.model.CompanyModel"/>
+</beans>

@@ -1,37 +1,44 @@
 @charset "UTF-8";
 
+.container-pad {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+ .row {
+  margin-left: 0px;
+  margin-right: 0px;
+}
 
 
-.detail-container {
-    margin-top: 50px;
+.row-border {
+  border: 1px solid #d6d6d6;
 }
 
 td {
-    padding: 10px 0px;
+  padding: 10px 0px;
+  word-break: keep-all;
 }
 
-.row-border {
-    border: 1px solid #d6d6d6;
-    margin-left: 25px;
-    margin-right: 25px;
+.top-table-cname {
+  font-size: 20px;
 }
-
 
 .top-table-left {
-    width: 70px;
+  width: 70px;
 }
 
 .logo-container {
-    height: 150px;
-    line-height:150px;
-    text-align: center;
+  height: 190px;
+  line-height:190px;
+  text-align: center;
 }
 
 .clogo {
-    width: 100%;
-    height: auto;
-    max-width: 160px;
-    vertical-align: middle;
+  width: 100%;
+  height: auto;
+  max-width: 190px;
+  vertical-align: middle;
 }
 
 .topborder {
@@ -46,21 +53,15 @@ td {
   padding: 10px;
 }
 
-.row-padding {
-  padding-left: 40px;
-  padding-right: 40px;
-}
-
-.review-container {
-  padding: 10px 0px;
-}
 .review-job {
   font-size: 18px;
 }
 
 .review-content {
-    padding: 10px 0px;
+  padding: 10px 10px 10px 45px;
+  word-break: keep-all;
 }
+
 .fa-thumbs-down,
 .fa-thumbs-up {
   font-size: 35px;

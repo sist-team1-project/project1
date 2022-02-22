@@ -2,8 +2,6 @@ package sist.com.dao;
 
 import java.sql.*;
 import java.util.*;
-import javax.sql.*; // DataSource
-import javax.naming.*; // Context 
 
 import sist.com.vo.*;
 
@@ -11,32 +9,12 @@ public class ReviewDAO {
 
     private Connection conn;
     private PreparedStatement ps;
-
-    public void getConnection() {
-        try {
-            Context init = new InitialContext();
-            Context c = (Context) init.lookup("java://comp//env");
-            DataSource ds = (DataSource) c.lookup("jdbc/oracle");
-            conn = ds.getConnection();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public void disConnection() {
-        try {
-            if (ps != null)
-                ps.close();
-            if (conn != null)
-                conn.close();
-        } catch (Exception ex) {
-        }
-    }
+    private DBCPConnection dbcp = new DBCPConnection();
 
     public String bestCompanyReviewList(int id) {
         String review = "";
         try {
-            getConnection();
+            conn = dbcp.getConnection();
             String sql = "SELECT review_content FROM ("
                     + "SELECT c_id, review_content "
                     + "FROM (SELECT ROW_NUMBER() OVER(PARTITION BY c_id ORDER BY r.review_date DESC) as rnum, c_id, review_content, review_date FROM  review_1 r) "
@@ -54,7 +32,7 @@ public class ReviewDAO {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            disConnection();
+            dbcp.disConnection(conn, ps);
         }
         return review;
     }
@@ -62,7 +40,7 @@ public class ReviewDAO {
     public List<ReviewVO> getReviewDetail(int id) {
         List<ReviewVO> list = new ArrayList<ReviewVO>();
         try {
-            getConnection();
+            conn = dbcp.getConnection();
             String sql = "SELECT review_id,u_id,c_id,review_content,review_goodbad,review_job,review_date FROM review_1 WHERE c_id=?";
 
             ps = conn.prepareStatement(sql);
@@ -84,10 +62,8 @@ public class ReviewDAO {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            disConnection();
+            dbcp.disConnection(conn, ps);
         }
         return list;
     }
-    
-    
 }

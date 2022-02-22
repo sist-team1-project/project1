@@ -1,18 +1,14 @@
 package sist.com.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import sist.com.controller.RequestMapping;
+import java.util.*;
+import javax.servlet.http.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import sist.com.dao.CompanyDAO;
-import sist.com.dao.ReviewDAO;
-import sist.com.dao.UsersDAO;
-import sist.com.vo.CompanyVO;
-import sist.com.vo.UsersVO;
+import sist.com.vo.*;
+import sist.com.dao.*;
 
 public class UsersModel {
+    
     public void login(HttpServletRequest request) {
      
         String usersid = request.getParameter("id");
@@ -26,10 +22,6 @@ public class UsersModel {
             HttpSession session=request.getSession();
             session.setAttribute("result", vo);
             request.setAttribute("result", vo);
-           
         }
     }
 }
-        
-        
-        

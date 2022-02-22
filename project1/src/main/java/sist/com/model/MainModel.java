@@ -1,14 +1,12 @@
 package sist.com.model;
 
-import java.util.*;
-
-import javax.servlet.http.*;
 import sist.com.controller.RequestMapping;
+import java.util.*;
+import javax.servlet.http.*;
 
 import sist.com.vo.*;
 import sist.com.dao.*;
 
-// 메인 페이지
 public class MainModel {
 
     @RequestMapping("main/main.do")

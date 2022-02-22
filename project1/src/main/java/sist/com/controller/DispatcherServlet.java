@@ -17,28 +17,28 @@ import java.util.*;
 
 @WebServlet("*.do")
 public class DispatcherServlet extends HttpServlet {
-    
+
     private static final long serialVersionUID = 1L;
-    
+
     List<String> modelList = new ArrayList<String>();
 
     public void init(ServletConfig config) throws ServletException {
         modelList.add("sist.com.model.MainModel");
-        modelList.add("sist.com.model.FreeboardModel");
         modelList.add("sist.com.model.AdModel");
         modelList.add("sist.com.model.CompanyModel");
+        modelList.add("sist.com.model.FreeboardModel");
+        modelList.add("sist.com.model.MainModel");
+        modelList.add("sist.com.model.UsersModel");
     }
 
-    protected void service(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-
             String uri = request.getRequestURI();
 
             uri = uri.substring(request.getContextPath().length() + 1);
 
             for (String cls : modelList) {
-
+                //1. 메모리 할당
                 Class clsName = Class.forName(cls);
                 Object obj = clsName.getConstructor().newInstance();
 
@@ -51,7 +51,6 @@ public class DispatcherServlet extends HttpServlet {
                             String s = jsp.substring(jsp.indexOf(":") + 1);
                             response.sendRedirect(s);
                         } else {
-
                             RequestDispatcher rd = request.getRequestDispatcher(jsp);
                             rd.forward(request, response);
                         }
@@ -60,7 +59,7 @@ public class DispatcherServlet extends HttpServlet {
                 }
             }
         } catch (Exception ex) {
-            
+
         }
     }
 }
