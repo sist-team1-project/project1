@@ -6,8 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="../css/companySearch__.css">
+  <title>Insert title here</title>
+  <link rel="stylesheet" href="../css/companySearch.css">
 </head>
 <body>
 	<div class="search_container">

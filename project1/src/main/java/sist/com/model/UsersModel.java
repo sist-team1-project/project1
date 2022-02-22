@@ -9,6 +9,7 @@ import sist.com.dao.*;
 
 public class UsersModel {
     
+    @RequestMapping("login/login.do")
     public void login(HttpServletRequest request) {
      
         String usersid = request.getParameter("id");
