@@ -9,7 +9,6 @@
   <meta charset="UTF-8">
   <title>Insert title here</title>
   <link rel="stylesheet" href="../css/company.css">
- 
 </head>
 <body>
 <!-- 여기부터 -->
@@ -48,8 +47,9 @@
       <!-- 진행중인 채용 공고 -->
       <div class="row m-top-40">
         <div class="no-select">
+        <div class="mg-20">
         <h3><i class="fa fa-user" aria-hidden="true"></i>&nbsp;
-        <b>진행중인 채용 공고</b></h3></div>
+        <b>진행중인 채용 공고</b></h3></div></div>
         <div class="text-center topborder bggrey title-deco">
           <div class="bggrey pad-10 col-md-9"><b>채용공고명</b></div>
           <div class="bggrey pad-10 col-md-3"><b>모집마감일</b></div>
@@ -66,23 +66,31 @@
       <!-- 면접 후기 작성 -->
       <div class="row m-top-40">
         <div class="no-select">
+        <div class="mg-20">
         <h3><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;
-        <b>면접 후기 작성</b></h3></div>
-        <form method=post action="">
-          <span>면접은 만족 하셨나요?</span><br>
-          <input type=radio value=1 name=goodbad checked> 만족
-          <input type=radio value=2 name=goodbad> 불만족
-          <br><span>지원하신 직무</span><br>
-          <input type=text name=job size=30 style="border: 1px solid #d3dee8;">
-          <br><span>경험하신 면접에 대하여 작성하여 주세요</span><br>
-          <textarea rows="6" width: 100%></textarea>
-          <button class="send-button">제 &nbsp;&nbsp; 출</button>
+        <b>면접 후기 작성</b></h3></div></div>
+        <div class="review-pad">
+        <form action="index.html" method="post">
+          <div class="question">
+          <div class="mg-5">
+          <b><span class="mg-5">면접은 만족 하셨나요?</span></b><br></div>
+            <input type=radio value=1 name=goodbad checked> 만족
+            <input type=radio value=2 name=goodbad> 불만족
+          <div class="mg-5">
+          <br><b><span>지원하신 직무</span></b><br></div>
+            <input type=text name=job size=30 style="border: 1px solid #d3dee8;">
+          <div class="mg-5">
+          <br><b><span>경험하신 면접에 대하여 작성하여 주세요</span></b><br></div>
+            <textarea rows="6" width: 100%></textarea>
+            <button class="send-btn">제 &nbsp;&nbsp; 출</button>
+          </div>
+          </div>
         </form>
       </div>
       <!-------------->
       
       <!-- 면접 후기 -->
-      <div class="row m-top-40">
+     <div class="row m-top-40">
           <div class="no-select">
           <h3><i class="fa fa-quote-right" aria-hidden="true"></i>&nbsp;
           <b>면접 후기</b></h3></div>
@@ -90,13 +98,17 @@
           <div>
             <c:if test="${r.review_goodbad==1}">
               <div class="review-job">
-                <i class="fa fa-thumbs-up" aria-hidden="true"></i>&nbsp;&nbsp;${r.review_job }
+                <i class="fa fa-thumbs-up" aria-hidden="true"></i>&nbsp;&nbsp;<b>${r.review_job }</b>
+                <button class="helpful-btn">도움이됐어요</button>
+                <button class="delete-btn">삭제</button>
               </div>
               <div class="review-content">${r.review_content }</div>
             </c:if>
             <c:if test="${r.review_goodbad==2}">
               <div class="review-job">
-                <i class="fa fa-thumbs-down" aria-hidden="true"></i>&nbsp;&nbsp;${r.review_job }
+                <i class="fa fa-thumbs-down" aria-hidden="true"></i>&nbsp;&nbsp;<b>${r.review_job }</b>
+                <button class="helpful-btn">도움이됐어요</button>
+                <button class="delete-btn">삭제</button>
               </div>
               <div class="review-content">${r.review_content }</div>
             </c:if>
@@ -109,7 +121,7 @@
 
 
   
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5169c9ddd251dfb03456915e6dd020c6&libraries=services"></script>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cf7ea2881e3c2b76986cc65a16553a55&libraries=services"></script>
   <script>
   var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
       mapOption = {
@@ -143,5 +155,7 @@
       } 
   });    
   </script>
+  
+
 </body>
 </html>

@@ -60,6 +60,17 @@ td {
   padding: 10px;
 }
 
+.mg-5 {
+  margin-bottom: 5px;
+}
+
+.mg-20 {
+  margin-bottom: 20px;
+}
+
+.review-pad {
+  padding: 0 30px 0 30px;
+}
 .review-job {
   font-size: 18px;
 }
@@ -82,6 +93,10 @@ h3 {
   user-select: none;
 }
 
+.question {
+  font-size: 15px;
+}
+
 textarea {
   border: 1px solid #d3dee8;
   width: 100%;
@@ -89,13 +104,35 @@ textarea {
   outline: none;
 }
 
-.send-button {
+.send-btn {
   text-align: center;
-  width: 90px;
-  height: 35px;
+  width: 100px;
+  height: 40px;
   border-radius: 5px;
   border: 1px solid RGB(1,117,118);
   background-color: RGB(1,117,118);
   color: white;
   float: right;
+  font-size: 15px;
+}
+
+
+.helpful-btn {
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid RGB(1,117,118);
+  background-color: RGB(1,117,118);
+  color: white;
+  margin-right: 7px;
+  font-size: 15px;
+}
+
+.delete-btn {
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid black;
+  background-color: white;
+  color: black;
+  font-size: 15px;
+
 }

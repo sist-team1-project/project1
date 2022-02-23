@@ -156,15 +156,6 @@ h6 {
     font-size: 1rem;
 }
 
-h1 span,
-h2 span,
-h3 span,
-h4 span,
-h5 span,
-p span{
-    color:#00a885;
-}
-
 p {
     line-height: 1.5rem;
 }
