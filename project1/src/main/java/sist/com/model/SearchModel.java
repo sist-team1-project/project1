@@ -10,30 +10,43 @@ import sist.com.dao.*;
 
 public class SearchModel {
     
-	@RequestMapping("search/searchcompany.do")
+    @RequestMapping("search/searchcompany.do")
     public String search_company_page(HttpServletRequest request, HttpServletResponse response) {
-
-		CompanyDAO c = new CompanyDAO();
-        ReviewDAO r = new ReviewDAO();
-		
-        request.setAttribute("main_jsp", "../search/search_company.jsp");
         
-        List<CompanyVO> company = c.bestCompanyList();
-        List<String> review = new ArrayList<String>();
+        String search = request.getParameter("search");
+        CompanyDAO c = new CompanyDAO();
+        ReviewDAO r = new ReviewDAO();
+        
+        if(search != null) {
+            
+            
+            List<CompanyVO> company = c.companySearchList(search);
+            List<Integer> reviews = new ArrayList<Integer>();
+            for(CompanyVO i : company) {
+                reviews.add(i.getC_id());
+            }
+            request.setAttribute("company", company);
+            request.setAttribute("reviews", reviews);
+        }
+        
+        /*       Best 기업       */
+        List<CompanyVO> company2 = c.bestCompanyList();
+        List<String> reviews2 = new ArrayList<String>();
 
-        for (int i = 0; i < company.size(); i++) {
-            String bestreview = r.bestCompanyReviewList(company.get(i).getC_id());
+        for(CompanyVO j : company2) {
+            String bestreview = r.bestCompanyReviewList(j.getC_id());
             
             // 리뷰가 없을 경우
             if (bestreview.isEmpty()) {
                 bestreview = "유저들의 리뷰를 기다리고 있습니다.";
             }
-            review.add(bestreview);
+            reviews2.add(bestreview);
         }
         
-        request.setAttribute("company", company);
-        request.setAttribute("review", review);
+        request.setAttribute("company2", company2);
+        request.setAttribute("reviews2", reviews2);
         
+        request.setAttribute("main_jsp", "../search/search_company.jsp");
         return "../main/main.jsp";
     }
 }

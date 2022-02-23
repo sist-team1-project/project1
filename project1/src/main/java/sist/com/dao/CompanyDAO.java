@@ -110,4 +110,41 @@ public class CompanyDAO {
         }
         return vo;
     }
+    
+    public List<CompanyVO> companySearchList(String name) {
+        List<CompanyVO> list = new ArrayList<CompanyVO>();
+        try {
+            conn = dbcp.getConnection();
+            String sql = "SELECT c_id, c_name,c_logo,c_industry,c_address "
+                    + "FROM (SELECT c_id, c_name,c_logo,c_industry,c_address,rownum as num "
+                    + "FROM (SELECT c_id, c_name,c_logo,c_industry,c_address "
+                    + "FROM company_1 "
+                    + "ORDER BY c_visits DESC)) "
+                    + "WHERE c_name LIKE '%'||?||'%'";
+
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, name);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                CompanyVO vo = new CompanyVO();
+                vo.setC_id(rs.getInt(1));
+                vo.setC_name(rs.getString(2));
+                vo.setC_logo(rs.getString(3));
+                vo.setC_industry(rs.getString(4));
+                String addr = rs.getString(5);
+                addr = addr.substring(addr.indexOf(")") + 2);
+                addr = addr.substring(0,addr.indexOf(" ", addr.indexOf(" ")+1));
+                vo.setC_address(addr);
+                list.add(vo);
+            }
+            rs.close();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            dbcp.disConnection(conn, ps);
+        }
+        return list;
+    }
 }

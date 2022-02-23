@@ -40,7 +40,7 @@ public class ReviewDAO {
         return review;
     }
     
-    public List<ReviewVO> getReviewDetail(int id) {
+    public List<ReviewVO> reviewDetail(int id) {
         List<ReviewVO> list = new ArrayList<ReviewVO>();
         try {
             conn = dbcp.getConnection();
@@ -70,5 +70,30 @@ public class ReviewDAO {
             dbcp.disConnection(conn, ps);
         }
         return list;
+    }
+    
+    // 검색 - 회사 리뷰 개수
+    public int countReview(int id) {
+        int count = 0;
+        try {
+            conn = dbcp.getConnection();
+            String sql = "SELECT count(*) "
+                    + "FROM review_1 "
+                    + "WHERE c_id=?";
+
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+            rs.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            dbcp.disConnection(conn, ps);
+        }
+        return count;
     }
 }

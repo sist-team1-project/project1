@@ -21,7 +21,7 @@ public class CompanyModel {
         List<AdVO> adlist = a.companyAdList(Integer.parseInt(cid));
         
         ReviewDAO rdao = new ReviewDAO();
-        List<ReviewVO> review = rdao.getReviewDetail(Integer.parseInt(cid));
+        List<ReviewVO> review = rdao.reviewDetail(Integer.parseInt(cid));
         
         
         request.setAttribute("company", company);
