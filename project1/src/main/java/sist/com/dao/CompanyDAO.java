@@ -11,7 +11,8 @@ public class CompanyDAO {
     private PreparedStatement ps;
     private DBCPConnection dbcp = new DBCPConnection();
 
-    public List<CompanyVO> getBestCompanyList() {
+    // 메인 - 베스트 기업
+    public List<CompanyVO> bestCompanyList() {
         List<CompanyVO> list = new ArrayList<CompanyVO>();
         try {
             conn = dbcp.getConnection();
@@ -42,7 +43,8 @@ public class CompanyDAO {
         return list;
     }
     
-    public List<CompanyVO> getBigCompanyList() {
+    // 메인 - 대기업 리스트
+    public List<CompanyVO> bigCompanyList() {
         List<CompanyVO> list = new ArrayList<CompanyVO>();
         try {
             conn = dbcp.getConnection();
@@ -50,7 +52,7 @@ public class CompanyDAO {
                     + "SELECT c_id, c_logo, c_name, rownum as num "
                     + "FROM (SELECT c_id, c_logo, c_name "
                     + "FROM company_1 "
-                    + "WHERE c_size='대기업' AND NOT c_logo= 'https://work.go.kr/images/common/none_imglogo.gif'"
+                    + "WHERE c_size='대기업' AND NOT c_logo='https://work.go.kr/images/common/none_imglogo.gif'"
                     + "ORDER BY c_visits DESC)) "
                     + "WHERE num BETWEEN 1 AND 12";
 
@@ -73,12 +75,15 @@ public class CompanyDAO {
         }
         return list;
     }
-
-    public CompanyVO getCompanyDetail(int id) {
+    
+    // 기업 - 기업 상세정보
+    public CompanyVO companyDetail(int id) {
         CompanyVO vo = new CompanyVO();
         try {
             conn = dbcp.getConnection();
-            String sql = "SELECT c_id,c_logo,c_name,c_address,c_industry,c_size,c_visits FROM company_1 WHERE c_id=?";
+            String sql = "SELECT * "
+                    + "FROM company_1 "
+                    + "WHERE c_id=?";
 
             ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
@@ -89,7 +94,11 @@ public class CompanyDAO {
                 vo.setC_id(rs.getInt(1));
                 vo.setC_logo(rs.getString(2));
                 vo.setC_name(rs.getString(3));
-                vo.setC_address(rs.getString(4));
+                
+                String addr = rs.getString(4);
+                addr = addr.substring(addr.indexOf(")") + 2);
+                vo.setC_address(addr);
+                
                 vo.setC_industry(rs.getString(5));
                 vo.setC_size(rs.getString(6));
                 vo.setC_visits(rs.getInt(7));

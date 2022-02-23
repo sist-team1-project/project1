@@ -14,13 +14,11 @@ public class SearchModel {
     public String search_company_page(HttpServletRequest request, HttpServletResponse response) {
 
 		CompanyDAO c = new CompanyDAO();
-        AdDAO a = new AdDAO();
         ReviewDAO r = new ReviewDAO();
-        PostDAO p = new PostDAO();
 		
         request.setAttribute("main_jsp", "../search/search_company.jsp");
         
-        List<CompanyVO> company = c.getBestCompanyList();
+        List<CompanyVO> company = c.bestCompanyList();
         List<String> review = new ArrayList<String>();
 
         for (int i = 0; i < company.size(); i++) {
@@ -32,6 +30,7 @@ public class SearchModel {
             }
             review.add(bestreview);
         }
+        
         request.setAttribute("company", company);
         request.setAttribute("review", review);
         

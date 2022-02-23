@@ -10,7 +10,8 @@ public class AdDAO {
     private Connection conn;
     private PreparedStatement ps;
     private DBCPConnection dbcp = new DBCPConnection();
-
+    
+    // 메인 - Best 공고
 	public List<AdVO> bestAdList() {
 		List<AdVO> list = new ArrayList<AdVO>();
 		try {
@@ -26,8 +27,19 @@ public class AdDAO {
 				AdVO vo = new AdVO();
 				vo.setAd_id(rs.getInt(1));
 				vo.setAd_title(rs.getString(2));
-				vo.setAd_end(rs.getString(3));
-				vo.setAd_we(rs.getString(4));
+				
+				String ad_end = rs.getString(3);
+				if(ad_end == null) {
+				    ad_end = "채용시까지";
+				}
+				vo.setAd_end(ad_end);
+				
+				String we = rs.getString(4);
+	            if(we.startsWith("경력")) {
+	                we = we.substring(0,we.indexOf(" ("));
+	            }
+				vo.setAd_we(we);
+				
 				vo.setAd_education(rs.getString(5));
 				vo.setC_id(rs.getInt(6));
 				list.add(vo);
@@ -41,7 +53,8 @@ public class AdDAO {
 		return list;
 	}
 
-	public List<AdVO> AdEndList() {
+	// 메인 - 마감 임박 공고
+	public List<AdVO> adEndList() {
 		List<AdVO> list = new ArrayList<AdVO>();
 		try {
 		    conn = dbcp.getConnection();
@@ -56,8 +69,19 @@ public class AdDAO {
 				AdVO vo = new AdVO();
 				vo.setAd_id(rs.getInt(1));
 				vo.setAd_title(rs.getString(2));
-				vo.setAd_end(rs.getString(3));
-				vo.setAd_we(rs.getString(4));
+				
+                String ad_end = rs.getString(3);
+                if(ad_end == null) {
+                    ad_end = "채용시까지";
+                }
+                vo.setAd_end(ad_end);
+                
+                String we = rs.getString(4);
+                if(we.startsWith("경력")) {
+                    we = we.substring(0,we.indexOf(" ("));
+                }
+                vo.setAd_we(we);
+                
 				vo.setAd_education(rs.getString(5));
 				vo.setC_id(rs.getInt(6));
 				list.add(vo);
@@ -70,12 +94,15 @@ public class AdDAO {
 		}
 		return list;
 	}
-
-	public AdVO getAdDetail(int id) {
+	
+	// 공고 - 공고 상세정보
+	public AdVO adDetail(int id) {
 		AdVO vo = new AdVO();
 		try {
 		    conn = dbcp.getConnection();
-			String sql = "SELECT * " + "FROM ad_1 " + "WHERE ad_id = ?";
+			String sql = "SELECT * "
+			        + "FROM ad_1 "
+			        + "WHERE ad_id = ?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, id);
 
@@ -94,7 +121,14 @@ public class AdDAO {
 			vo.setAd_workhours(rs.getString(11));
 			vo.setAd_worktype(rs.getString(12));
 			vo.setAd_workplace(rs.getString(13));
-			vo.setAd_end(rs.getString(14));
+			
+            String ad_end = rs.getString(14);
+            if(ad_end == null) {
+                ad_end = "채용시까지";
+            }
+            vo.setAd_end(ad_end);
+            
+            vo.setAd_end(ad_end);
 			vo.setAd_visits(rs.getInt(15));
 
 			rs.close();
@@ -106,11 +140,14 @@ public class AdDAO {
 		return vo;
 	}
 
-    public List<AdVO> getAdDetailByCid(int id) {
+	// 기업 - 진행중인 채용 공고
+    public List<AdVO> companyAdList(int id) {
         List<AdVO> list = new ArrayList<AdVO>();
         try {
             conn = dbcp.getConnection();
-            String sql = "SELECT * " + "FROM ad_1 " + "WHERE c_id = ?";
+            String sql = "SELECT ad_id,c_id,ad_title,ad_end "
+                    + "FROM ad_1 "
+                    + "WHERE c_id=?";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
 
@@ -120,18 +157,13 @@ public class AdDAO {
                 vo.setAd_id(rs.getInt(1));
                 vo.setC_id(rs.getInt(2));
                 vo.setAd_title(rs.getString(3));
-                vo.setAd_content(rs.getString(4));
-                vo.setAd_we(rs.getString(5));
-                vo.setAd_education(rs.getString(6));
-                vo.setAd_qualification(rs.getString(7));
-                vo.setAd_language(rs.getString(8));
-                vo.setAd_major(rs.getString(9));
-                vo.setAd_wage(rs.getString(10));
-                vo.setAd_workhours(rs.getString(11));
-                vo.setAd_worktype(rs.getString(12));
-                vo.setAd_workplace(rs.getString(13));
-                vo.setAd_end(rs.getString(14));
-                vo.setAd_visits(rs.getInt(15));
+                
+                String ad_end = rs.getString(4);
+                if(ad_end == null) {
+                    ad_end = "채용시까지";
+                }
+                vo.setAd_end(ad_end);
+                
                 list.add(vo);
             }
             rs.close();

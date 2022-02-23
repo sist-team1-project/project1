@@ -18,7 +18,7 @@ public class MainModel {
         PostDAO p = new PostDAO();
         
         /*       Best 기업       */
-        List<CompanyVO> company = c.getBestCompanyList();
+        List<CompanyVO> company = c.bestCompanyList();
         List<String> review = new ArrayList<String>();
 
         for (int i = 0; i < company.size(); i++) {
@@ -31,27 +31,16 @@ public class MainModel {
             review.add(bestreview);
         }
         
-        List<CompanyVO> bigCompany = c.getBigCompanyList();
+        List<CompanyVO> bigCompany = c.bigCompanyList();
         
         /*       Best 공고       */
         List<AdVO> ad = a.bestAdList();
         List<CompanyVO> adCompany = new ArrayList<CompanyVO>();
         
         for (int i = 0; i < ad.size(); i++) {
-            CompanyVO info = c.getCompanyDetail(ad.get(i).getC_id());
-
-            // 마감 날짜가 없을 경우
-            if (ad.get(i).getAd_end() == null) {
-                ad.get(i).setAd_end("채용시까지");
-            }
-            
-            String we = ad.get(i).getAd_we();
-            if(we.startsWith("경력")) {
-                ad.get(i).setAd_we(we.substring(0,we.indexOf(" (")));
-            }
+            CompanyVO info = c.companyDetail(ad.get(i).getC_id());
             
             String addr = info.getC_address();
-            addr = addr.substring(addr.indexOf(")") + 2);
             addr = addr.substring(0,addr.indexOf(" ", addr.indexOf(" ")+1));
             info.setC_address(addr);
             adCompany.add(info);
@@ -59,26 +48,20 @@ public class MainModel {
         
         
         /*       마감 임박 공고       */
-        List<AdVO> adEnd = a.AdEndList();
+        List<AdVO> adEnd = a.adEndList();
         List<CompanyVO> adEndCompany = new ArrayList<CompanyVO>();
         
         for (int i = 0; i < adEnd.size(); i++) {
-            CompanyVO info = c.getCompanyDetail(adEnd.get(i).getC_id());
-            
-            String we = adEnd.get(i).getAd_we();
-            if(we.startsWith("경력")) {
-                adEnd.get(i).setAd_we(we.substring(0,we.indexOf(" (")));
-            }
-            
+            CompanyVO info = c.companyDetail(adEnd.get(i).getC_id());
+
             String addr = info.getC_address();
-            addr = addr.substring(addr.indexOf(")") + 2);
             addr = addr.substring(0,addr.indexOf(" ", addr.indexOf(" ")+1));
             info.setC_address(addr);
             adEndCompany.add(info);
         }
         
         
-        List<PostVO> freeBoardVisits = p.getFreeboardListByVisits();
+        List<PostVO> freeBoardVisits = p.freeboardListByVisits();
         
         
         request.setAttribute("company", company);

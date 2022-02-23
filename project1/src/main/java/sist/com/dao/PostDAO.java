@@ -11,7 +11,8 @@ public class PostDAO {
     private PreparedStatement ps;
     private DBCPConnection dbcp = new DBCPConnection();
     
-    public List<PostVO> getFreeboardListByVisits() {
+    // 메인 - 자유게시판 조회수 순
+    public List<PostVO> freeboardListByVisits() {
         List<PostVO> list = new ArrayList<PostVO>();
         try {
             conn = dbcp.getConnection();
@@ -41,7 +42,8 @@ public class PostDAO {
         return list;
     }
     
-    public List<PostVO> getFreeboardList(int page) {
+    // 자유게시판 - 게시물 목록
+    public List<PostVO> freeboardList(int page) {
         List<PostVO> list = new ArrayList<PostVO>();
         try {
             conn = dbcp.getConnection();

@@ -15,14 +15,10 @@ public class AdModel {
         String adid = request.getParameter("adid");
         
         AdDAO a = new AdDAO();
-        AdVO ad = a.getAdDetail(Integer.parseInt(adid));
-        
-        if (ad.getAd_end() == null) {
-            ad.setAd_end("채용시까지");
-        }
+        AdVO ad = a.adDetail(Integer.parseInt(adid));
         
         CompanyDAO c = new CompanyDAO();
-        CompanyVO company = c.getCompanyDetail(Integer.parseInt(cid));
+        CompanyVO company = c.companyDetail(Integer.parseInt(cid));
         
         request.setAttribute("ad", ad);
         request.setAttribute("company", company);
