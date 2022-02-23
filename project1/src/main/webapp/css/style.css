@@ -553,6 +553,8 @@ footer{
 .short-line {
   text-overflow:ellipsis;
   white-space:nowrap;
+  display: block;
+  overflow:hidden;
 }
 
 .short-multi-line {

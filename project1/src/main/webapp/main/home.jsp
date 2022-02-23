@@ -14,9 +14,14 @@
 <!-- 여기부터 -->
   <section>
     <div class="container">
-    
+      
       <!-- 인기기업 9개 -->
       <div class="row roomy-20 m-top-20">
+        <c:if test="${sessionScope.id!=null }">
+          <div class="roomy-10">
+            <h5 class="text-center">${sessionScope.name }님 안녕하세요!</h5>
+          </div>
+        </c:if>
         <div class="no-select"><h4>&nbsp;&nbsp;<i class="fa fa-thumbs-o-up" aria-hidden="true"></i> BEST 기업 & 면접 리뷰</h4></div>
         <c:forEach var="c" items="${company }" varStatus="status">
           <div class="col-md-4 pad-5">
@@ -26,10 +31,10 @@
                   <td class="c-logo">
                     <img class="c-logoimg" src="${c.c_logo }">
                   </td>
-                  <td class="c-content short-container">
+                  <td class="c-content">
                     <a href="../company/company.do?cid=${c.c_id }">
                       <div class="c-name short-line"><b>${c.c_name }</b></div>
-                      <div class="short-multi-line small-font">${review[status.index] }</div>
+                      <div class="short-container"><span class="short-multi-line small-font">${review[status.index] }</span></div>
                     </a>
                   </td>
                 </tr>
@@ -71,7 +76,7 @@
                   </td>
                 </tr>
                 <tr>
-                  <td class="short-container">
+                  <td>
                     <a class="short-line" href="../ad/ad.do?cid=${a.c_id }&adid=${a.ad_id}"><b>${a.ad_title }</b></a>
                   </td>
                 </tr>
@@ -112,7 +117,7 @@
                   </td>
                 </tr>
                 <tr>
-                  <td class="short-container">
+                  <td>
                     <a class="short-line" href="../ad/ad.do?cid=${a.c_id }&adid=${a.ad_id}"><b>${a.ad_title }</b></a>
                   </td>
                 </tr>
@@ -142,7 +147,7 @@
               </tr>
               <c:forEach var="p" items="${freeBoardVisits }" varStatus="status">
                 <tr>
-                  <td class="pad-5 short-container"><span class="post-category">[${p.post_category}] </span><a class="short-line" href="#">${p.post_title }</a></td>
+                  <td class="pad-5 short-line"><span class="post-category">[${p.post_category}] </span><a href="#">${p.post_title }</a></td>
                 </tr>
               </c:forEach>
             </table>
@@ -158,7 +163,7 @@
               </tr>
               <c:forEach var="p" items="${freeBoardVisits }" varStatus="status">
                 <tr>
-                  <td class="pad-5 short-container"><span class="post-category">[${p.post_category}] </span><a class="short-line" href="#">${p.post_title }</a></td>
+                  <td class="pad-5 short-line"><span class="post-category">[${p.post_category}] </span><a href="#">${p.post_title }</a></td>
                 </tr>
               </c:forEach>
             </table>

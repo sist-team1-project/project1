@@ -11,7 +11,7 @@ import sist.com.dao.*;
 public class SearchModel {
     
 	@RequestMapping("search/searchcompany.do")
-    public String main_page(HttpServletRequest request) {
+    public String search_company_page(HttpServletRequest request, HttpServletResponse response) {
 
 		CompanyDAO c = new CompanyDAO();
         AdDAO a = new AdDAO();
@@ -20,7 +20,7 @@ public class SearchModel {
 		
         request.setAttribute("main_jsp", "../search/search_company.jsp");
         
-        List<CompanyVO> company = c.bestCompanyList();
+        List<CompanyVO> company = c.getBestCompanyList();
         List<String> review = new ArrayList<String>();
 
         for (int i = 0; i < company.size(); i++) {

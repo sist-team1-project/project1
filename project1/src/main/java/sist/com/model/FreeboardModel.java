@@ -11,8 +11,21 @@ import sist.com.dao.*;
 public class FreeboardModel {
     
     @RequestMapping("freeboard/freeboard.do")
-    public String main_page(HttpServletRequest request) {
-
+    public String freeboard_page(HttpServletRequest request, HttpServletResponse response) {
+        
+        String page = request.getParameter("page");
+        if(page==null) page = "1";
+        
+        int curPage = Integer.parseInt(page);
+        
+        PostDAO dao = new PostDAO();
+        List<PostVO> post = dao.getFreeboardList(curPage);
+        for(PostVO p : post) {
+            String date = p.getPost_date();
+            p.setPost_date(date.substring(0,date.indexOf(" ")));
+        }
+        
+        request.setAttribute("post", post);
         request.setAttribute("main_jsp", "../freeboard/freeboard.jsp");
         return "../main/main.jsp";
     }

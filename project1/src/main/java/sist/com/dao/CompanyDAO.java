@@ -11,7 +11,7 @@ public class CompanyDAO {
     private PreparedStatement ps;
     private DBCPConnection dbcp = new DBCPConnection();
 
-    public List<CompanyVO> bestCompanyList() {
+    public List<CompanyVO> getBestCompanyList() {
         List<CompanyVO> list = new ArrayList<CompanyVO>();
         try {
             conn = dbcp.getConnection();

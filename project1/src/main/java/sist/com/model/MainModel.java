@@ -10,7 +10,7 @@ import sist.com.dao.*;
 public class MainModel {
 
     @RequestMapping("main/main.do")
-    public String main_page(HttpServletRequest request) {
+    public String main_page(HttpServletRequest request, HttpServletResponse response) {
 
         CompanyDAO c = new CompanyDAO();
         AdDAO a = new AdDAO();
@@ -18,7 +18,7 @@ public class MainModel {
         PostDAO p = new PostDAO();
         
         /*       Best 기업       */
-        List<CompanyVO> company = c.bestCompanyList();
+        List<CompanyVO> company = c.getBestCompanyList();
         List<String> review = new ArrayList<String>();
 
         for (int i = 0; i < company.size(); i++) {
@@ -78,7 +78,7 @@ public class MainModel {
         }
         
         
-        List<PostVO> freeBoardVisits = p.freeBoardListByVisits();
+        List<PostVO> freeBoardVisits = p.getFreeboardListByVisits();
         
         
         request.setAttribute("company", company);

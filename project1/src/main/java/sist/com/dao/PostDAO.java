@@ -11,7 +11,7 @@ public class PostDAO {
     private PreparedStatement ps;
     private DBCPConnection dbcp = new DBCPConnection();
     
-    public List<PostVO> freeBoardListByVisits() {
+    public List<PostVO> getFreeboardListByVisits() {
         List<PostVO> list = new ArrayList<PostVO>();
         try {
             conn = dbcp.getConnection();
@@ -30,6 +30,45 @@ public class PostDAO {
                 vo.setPost_id(rs.getInt(1));
                 vo.setPost_category(rs.getString(2));
                 vo.setPost_title(rs.getString(3));
+                list.add(vo);
+            }
+            rs.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            dbcp.disConnection(conn, ps);
+        }
+        return list;
+    }
+    
+    public List<PostVO> getFreeboardList(int page) {
+        List<PostVO> list = new ArrayList<PostVO>();
+        try {
+            conn = dbcp.getConnection();
+            String sql = "SELECT post_id,post_category,post_title,u_id,post_date,post_visits "
+                    + "FROM (SELECT post_id,post_category,post_title,u_id,post_date,post_visits,rownum as num "
+                    + "FROM (SELECT /*+ INDEX_DESC(post_1 post_id_pk_1)*/post_id,post_category,post_title,u_id,post_date,post_visits "
+                    + "FROM post_1 "
+                    + "WHERE board_id=1)) "
+                    + "WHERE num BETWEEN ? AND ?";
+            
+            int rowSize=10;
+            int start = (rowSize * page) - (rowSize) - 1;
+            int end = rowSize * page;
+            
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1,  start);
+            ps.setInt(2,  end);
+            
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                PostVO vo = new PostVO();
+                vo.setPost_id(rs.getInt(1));
+                vo.setPost_category(rs.getString(2));
+                vo.setPost_title(rs.getString(3));
+                vo.setU_id(rs.getString(4));
+                vo.setPost_date(rs.getString(5));
+                vo.setPost_visits(rs.getInt(6));
                 list.add(vo);
             }
             rs.close();
