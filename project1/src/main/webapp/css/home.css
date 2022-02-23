@@ -132,7 +132,10 @@ sup {
   justify-content: center;
 }
 
-
+.postplus { 
+    text-decoration: underline;
+    text-align: right;
+}
 
 /*   공통   */
 /* 링크 제거 */

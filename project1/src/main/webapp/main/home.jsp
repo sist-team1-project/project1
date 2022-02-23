@@ -144,6 +144,9 @@
                 <th class="post pad-5 no-select">
                 조회수 순&nbsp;<sup>HOT</sup>
                 </th>
+                <th class="post postplus">
+                  <a href="../freeboard/freeboard.do"><span>더보기</span></a> 
+                </th>
               </tr>
               <c:forEach var="p" items="${freeBoardVisits }" varStatus="status">
                 <tr>
@@ -159,6 +162,9 @@
               <tr>
                 <th class="post pad-5 no-select">
                 댓글 순&nbsp;<sup>HOT</sup>
+                </th>
+                <th class="post postplus">
+                  <a href="../freeboard/freeboard.do"><span>더보기</span></a> 
                 </th>
               </tr>
               <c:forEach var="p" items="${freeBoardVisits }" varStatus="status">
