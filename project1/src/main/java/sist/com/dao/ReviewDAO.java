@@ -11,15 +11,18 @@ public class ReviewDAO {
     private PreparedStatement ps;
     private DBCPConnection dbcp = new DBCPConnection();
 
+    // 메인 - 베스트 기업의 리뷰
     public String bestCompanyReviewList(int id) {
         String review = "";
         try {
             conn = dbcp.getConnection();
-            String sql = "SELECT review_content FROM ("
-                    + "SELECT c_id, review_content "
-                    + "FROM (SELECT ROW_NUMBER() OVER(PARTITION BY c_id ORDER BY r.review_date DESC) as rnum, c_id, review_content, review_date FROM  review_1 r) "
-                    + "WHERE rnum=1) "
-                    + "WHERE c_id = ?";
+            String sql = "SELECT review_content "
+                    + "FROM (SELECT review_content,rownum as num "
+                    + "FROM (SELECT review_content "
+                    + "FROM review_1 "
+                    + "WHERE c_id=? "
+                    + "ORDER BY review_date DESC)) "
+                    + "WHERE num=1";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
                 
@@ -41,7 +44,9 @@ public class ReviewDAO {
         List<ReviewVO> list = new ArrayList<ReviewVO>();
         try {
             conn = dbcp.getConnection();
-            String sql = "SELECT review_id,u_id,c_id,review_content,review_goodbad,review_job,review_date FROM review_1 WHERE c_id=?";
+            String sql = "SELECT review_id,u_id,c_id,review_content,review_goodbad,review_job,review_date "
+                    + "FROM review_1 "
+                    + "WHERE c_id=?";
 
             ps = conn.prepareStatement(sql);
             ps.setInt(1, id);

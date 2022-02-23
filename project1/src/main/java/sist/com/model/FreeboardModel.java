@@ -19,7 +19,7 @@ public class FreeboardModel {
         int curPage = Integer.parseInt(page);
         
         PostDAO dao = new PostDAO();
-        List<PostVO> post = dao.getFreeboardList(curPage);
+        List<PostVO> post = dao.freeboardList(curPage);
         for(PostVO p : post) {
             String date = p.getPost_date();
             p.setPost_date(date.substring(0,date.indexOf(" ")));

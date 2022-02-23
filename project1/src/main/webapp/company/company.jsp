@@ -55,7 +55,7 @@
           <div class="bggrey pad-10 col-md-3"><b>모집마감일</b></div>
         </div>
       </div>
-        <c:forEach var="a" items="${ad }" varStatus="status">
+        <c:forEach var="a" items="${adlist }" varStatus="status">
         <div class="row roomy-20 text-center">
           <a href="../ad/ad.do?cid=${a.c_id }&adid=${a.ad_id}">
           <div class="col-md-9 underline"><b>${a.ad_title }</b></div>
