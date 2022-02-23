@@ -18,7 +18,7 @@ public class MainModel {
         PostDAO p = new PostDAO();
         
         /*       Best 기업       */
-        List<CompanyVO> company = c.bestCompanyList();
+        List<CompanyVO> company = c.getBestCompanyList();
         List<String> review = new ArrayList<String>();
 
         for (int i = 0; i < company.size(); i++) {
@@ -78,7 +78,7 @@ public class MainModel {
         }
         
         
-        List<PostVO> freeBoardVisits = p.freeBoardListByVisits();
+        List<PostVO> freeBoardVisits = p.getFreeboardListByVisits();
         
         
         request.setAttribute("company", company);

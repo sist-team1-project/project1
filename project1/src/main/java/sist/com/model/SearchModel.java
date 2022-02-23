@@ -20,7 +20,7 @@ public class SearchModel {
 		
         request.setAttribute("main_jsp", "../search/search_company.jsp");
         
-        List<CompanyVO> company = c.bestCompanyList();
+        List<CompanyVO> company = c.getBestCompanyList();
         List<String> review = new ArrayList<String>();
 
         for (int i = 0; i < company.size(); i++) {
