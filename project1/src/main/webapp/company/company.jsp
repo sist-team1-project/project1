@@ -40,7 +40,7 @@
           </table>
         </div>
         <div class="col-md-5">
-          <div id="map" style="width:100%;height:170px;"></div>
+          <div id="map" style="width:100%;height:190px;"></div>
         </div>
       </div>
       <!-------------->
@@ -48,37 +48,35 @@
       <!-- 진행중인 채용 공고 -->
       <div class="row m-top-40">
         <div class="no-select">
-        <h3>
-        <i class="fa fa-user" aria-hidden="true"></i>&nbsp;
-        <b>진행중인 채용 공고</b>
-        </h3>
-        </div>
-        <div class="text-center topborder bggrey">
+        <h3><i class="fa fa-user" aria-hidden="true"></i>&nbsp;
+        <b>진행중인 채용 공고</b></h3></div>
+        <div class="text-center topborder bggrey title-deco">
           <div class="bggrey pad-10 col-md-9"><b>채용공고명</b></div>
           <div class="bggrey pad-10 col-md-3"><b>모집마감일</b></div>
         </div>
       </div>
         <c:forEach var="a" items="${ad }" varStatus="status">
         <div class="row roomy-20 text-center">
-          <div class="col-md-9">${a.ad_title }</div>
-          <div class="col-md-3"><b>${a.ad_end }</b></div>
+          <a href="../ad/ad.do?cid=${a.c_id }&adid=${a.ad_id}">
+          <div class="col-md-9 underline"><b>${a.ad_title }</b></div>
+          <div class="col-md-3 underline"><b>${a.ad_end }</b></div></a>
         </div>
         </c:forEach>
       
       <!-- 면접 후기 작성 -->
       <div class="row m-top-40">
         <div class="no-select">
-        <h3>
-        <i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;
-        <b>면접 후기 작성</b>
-        </h3>
-        </div>
+        <h3><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;
+        <b>면접 후기 작성</b></h3></div>
         <form method=post action="">
           <span>면접은 만족 하셨나요?</span><br>
           <input type=radio value=1 name=goodbad checked> 만족
           <input type=radio value=2 name=goodbad> 불만족
           <br><span>지원하신 직무</span><br>
-          <input type=text name=job size=30>
+          <input type=text name=job size=30 style="border: 1px solid #d3dee8;">
+          <br><span>경험하신 면접에 대하여 작성하여 주세요</span><br>
+          <textarea rows="6" width: 100%></textarea>
+          <button class="send-button">제 &nbsp;&nbsp; 출</button>
         </form>
       </div>
       <!-------------->
@@ -86,11 +84,8 @@
       <!-- 면접 후기 -->
       <div class="row m-top-40">
           <div class="no-select">
-          <h3>
-          <i class="fa fa-quote-right" aria-hidden="true"></i>&nbsp;
-          <b>면접 후기</b>
-          </h3>
-          </div>
+          <h3><i class="fa fa-quote-right" aria-hidden="true"></i>&nbsp;
+          <b>면접 후기</b></h3></div>
         <c:forEach var="r" items="${review }" varStatus="status">
           <div>
             <c:if test="${r.review_goodbad==1}">
