@@ -267,7 +267,7 @@
 														<th class="no-select top-ad-title Tcenter mar15-pad20 title-deco bggrey">추천수험서</th>
 												</tr>
 												<tr>
-														<td class="Tcenter padding-bottom-30">도서도서도서</td>
+														<td class="Tcenter height-60">도서도서도서</td>
 												</tr>
 										</table>
 								</div>
@@ -289,7 +289,7 @@
 
 						<!-- 				지도 API			 -->
 
-		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=161e8cb7c125668bd9b1d54c2ebca1d2&libraries=services"></script>
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5169c9ddd251dfb03456915e6dd020c6&libraries=services"></script>
 		<script>
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			mapOption = {
@@ -306,7 +306,7 @@
 			var geocoder = new kakao.maps.services.Geocoder();
 
 			// 주소로 좌표를 검색합니다
-			geocoder.addressSearch('${company.c_address }',
+			geocoder.addressSearch('${ad.ad_workplace }',
 					function(result, status) {
 
 						// 정상적으로 검색이 완료됐으면 
