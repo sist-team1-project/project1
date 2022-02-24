@@ -29,7 +29,6 @@ public class DispatcherServlet extends HttpServlet {
         modelList.add("sist.com.model.FreeboardModel");
         modelList.add("sist.com.model.MainModel");
         modelList.add("sist.com.model.SearchModel");
-        modelList.add("sist.com.model.SearchModel2");
         modelList.add("sist.com.model.UsersModel");
     }
 

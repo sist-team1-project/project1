@@ -20,7 +20,7 @@
       </div>
       <c:if test="${sessionScope.id==null }">
         <!-- Login Form -->
-        <form method="post" action="../member/login.do">
+        <form method="post" action="../users/login.do">
           <input type="text" id="id" class="fadeIn second zero-raduis" name="id" placeholder="아이디"> <input type="password" id="password" class="fadeIn third zero-raduis" name="pwd" placeholder="비밀번호">
           <div id="formFooter">
             <a class="underlineHover" href="#">아이디 찾기 </a> <a class="underlineHover" href="#">비밀번호 찾기</a>

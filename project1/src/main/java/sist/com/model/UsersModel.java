@@ -10,13 +10,13 @@ import sist.com.dao.*;
 
 public class UsersModel {
     
-    @RequestMapping("member/loginpage.do")
+    @RequestMapping("users/loginpage.do")
     public String login_page(HttpServletRequest request, HttpServletResponse response) {
         request.setAttribute("main_jsp", "../login/login.jsp");
         return "../main/main.jsp";
     }
     
-    @RequestMapping("member/login.do")
+    @RequestMapping("users/login.do")
     public String memberLogin(HttpServletRequest request, HttpServletResponse response) {
         String id = request.getParameter("id");
         String pwd = request.getParameter("pwd");
@@ -31,7 +31,7 @@ public class UsersModel {
         return "../login/login_ok.jsp";
     }
 
-    @RequestMapping("member/logout.do")
+    @RequestMapping("users/logout.do")
     public String memberLogout(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         session.invalidate(); //session해제
