@@ -116,7 +116,6 @@
           <label class="control-label col-sm-3"> 비밀번호 찾기 질문/답변</label>
           <div class="col-md-5 col-sm-8">
             <div >
-                
                 <input type="text" name="captcha" id="captcha" class="form-control label-warning"  />                
               </div>
           </div>
