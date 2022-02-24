@@ -35,7 +35,7 @@
             <li><a href="../users/loginpage.do">로그인</a></li>
           </c:if>
           <c:if test="${sessionScope.id!=null }">
-            <li><a href="#">마이페이지</a></li>
+            <li><a href="../user/mypage.do">마이페이지</a></li>
             <li><a href="../users/logout.do">로그아웃</a></li>
           </c:if>
         </ul>
