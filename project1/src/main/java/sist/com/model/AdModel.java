@@ -8,21 +8,25 @@ import sist.com.vo.*;
 import sist.com.dao.*;
 
 public class AdModel {
-    
-    @RequestMapping("ad/ad.do")
-    public String ad_page(HttpServletRequest request, HttpServletResponse response) {
-        String cid = request.getParameter("cid");
-        String adid = request.getParameter("adid");
-        
-        AdDAO a = new AdDAO();
-        AdVO ad = a.adDetail(Integer.parseInt(adid));
-        
-        CompanyDAO c = new CompanyDAO();
-        CompanyVO company = c.companyDetail(Integer.parseInt(cid));
-        
-        request.setAttribute("ad", ad);
-        request.setAttribute("company", company);
-        request.setAttribute("main_jsp", "../ad/ad.jsp");
-        return "../main/main.jsp";
-    }
+
+	@RequestMapping("ad/ad.do")
+	public String ad_page(HttpServletRequest request, HttpServletResponse response) {
+		String cid = request.getParameter("cid");
+		String adid = request.getParameter("adid");
+		String bname = request.getParameter("bname");
+
+		AdDAO a = new AdDAO();
+		AdVO ad = a.adDetail(Integer.parseInt(adid));
+
+		CompanyDAO c = new CompanyDAO();
+		CompanyVO company = c.companyDetail(Integer.parseInt(cid));
+
+		List<BookVO> bookList = a.recommended_books(bname);
+
+		request.setAttribute("ad", ad);
+		request.setAttribute("company", company);
+		request.setAttribute("bookList", bookList);
+		request.setAttribute("main_jsp", "../ad/ad.jsp");
+		return "../main/main.jsp";
+	}
 }

@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="sist.com.model.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+		pageEncoding="UTF-8" import="sist.com.model.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -23,7 +24,8 @@
 										<div class="col-lg-6 padding-0">
 												<table class="top-table">
 														<tr>
-																<th class="top-table-title title-deco no-select" colspan="2">지원자격</th>
+																<th class="top-table-title title-deco no-select"
+																		colspan="2">지원자격</th>
 														</tr>
 														<tr>
 																<th class="top-table-left no-select">경력</th>
@@ -38,7 +40,8 @@
 										<div class="col-lg-6 padding-0">
 												<table class="top-table">
 														<tr>
-																<th class="top-table-title title-deco no-select" colspan="2">근무조건</th>
+																<th class="top-table-title title-deco no-select"
+																		colspan="2">근무조건</th>
 														</tr>
 														<tr>
 																<th class="top-table-left no-select">근무예정지</th>
@@ -58,9 +61,9 @@
 										<table class="top-table">
 												<tr>
 														<th class="top-table-left no-select">기업명</th>
-														<td>
-																<a href="../company/company.do?cid=${company.c_id }">${company.c_name } </a>
-														</td>
+														<td><a
+																href="../company/company.do?cid=${company.c_id }">${company.c_name }
+														</a></td>
 												</tr>
 												<tr>
 														<th class="top-table-left no-select">업종</th>
@@ -88,7 +91,8 @@
 										<div>
 												<table class="top-table">
 														<tr>
-																<th class="no-select top-ad-title Tcenter mar15-pad20 title-deco bggrey">직무내용</th>
+																<th
+																		class="no-select top-ad-title Tcenter mar15-pad20 title-deco bggrey">직무내용</th>
 														</tr>
 														<tr>
 																<td>
@@ -187,7 +191,8 @@
 						<div class="row m-top-60">
 								<div class="top-ad-title">
 										<h3>
-												<i class="fa fa-trophy" aria-hidden="true"></i>&nbsp; <b>우대사항 및 전형방법</b>
+												<i class="fa fa-trophy" aria-hidden="true"></i>&nbsp; <b>우대사항
+														및 전형방법</b>
 										</h3>
 								</div>
 								<div class="row row-border">
@@ -258,27 +263,49 @@
 						<div class="row m-top-60">
 								<div class="top-ad-title">
 										<h3>
-												<i class="fa fa-graduation-cap" aria-hidden="true"></i>&nbsp; <b>추천 도서</b>
+												<i class="fa fa-graduation-cap" aria-hidden="true"></i>&nbsp;
+												<b>추천 도서</b>
 										</h3>
 								</div>
 								<div class="row row-border">
-										<table class="top-table">
-												<tr>
-														<th class="no-select top-ad-title Tcenter mar15-pad20 title-deco bggrey">추천수험서</th>
-												</tr>
-												<tr>
-														<td class="Tcenter height-60">도서도서도서</td>
-												</tr>
-										</table>
+										<div class="row bggrey">
+												<div class="Tcenter title-deco height-45">
+														<strong>추천수험서</strong>
+												</div>
+										</div>
+										<div>
+												<div class="row row-border height-60">
+														<c:forEach var="bookList" items="${bookList }"
+																varStatus="status">
+																<div class="row roomy-20 row-border">
+																		<div class="col-sm-2">
+																				<div class="result-container">
+																						<img src="${bookList.book_img }">
+																				</div>
+																		</div>
+																		<div class="col-sm-2">
+																				<div class="content short-line">
+																						<a
+																								href="../ad/ad.do?bname=${ad.ad_qualification }"><b>${bookList.book_title }</b></a>
+																				</div>
+																				<div class="content short-line no-select">${bookList.book_sold }
+																				</div>
+																		</div>
+																</div>
+														</c:forEach>
+												</div>
+										</div>
 								</div>
 						</div>
+
 
 						<!-- ########################################################################################## -->
 
 						<!-- 				홈/즐겨찾기 버튼				 -->
 
 						<div class="Tcenter row roomy-40">
-								<a href="../main/main.do" class="btn btn-xs btn-success">홈으로</a>&nbsp;&nbsp; <a href="#" class="btn btn-xs btn-danger"> 즐겨찾기 추가</a>&nbsp;&nbsp;
+								<a href="../main/main.do" class="btn btn-xs btn-success">홈으로</a>&nbsp;&nbsp;
+								<a href="#" class="btn btn-xs btn-danger"> 즐겨찾기 추가</a>&nbsp;&nbsp;
 								<div class="no-select row Tright">조회수&nbsp;&nbsp;</div>
 						</div>
 
@@ -287,9 +314,10 @@
 
 		<!-- ########################################################################################## -->
 
-						<!-- 				지도 API			 -->
+		<!-- 				지도 API			 -->
 
-		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5169c9ddd251dfb03456915e6dd020c6&libraries=services"></script>
+		<script type="text/javascript"
+				src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5169c9ddd251dfb03456915e6dd020c6&libraries=services"></script>
 		<script>
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			mapOption = {
@@ -326,8 +354,8 @@
 						}
 					});
 		</script>
-		
+
 		<!-- 여기까지 직접 작성 -->
-		
+
 </body>
 </html>
