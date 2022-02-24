@@ -89,20 +89,18 @@ public class CompanyDAO {
             ps.setInt(1, id);
 
             ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-
-                vo.setC_id(rs.getInt(1));
-                vo.setC_logo(rs.getString(2));
-                vo.setC_name(rs.getString(3));
+            rs.next();
+            vo.setC_id(rs.getInt(1));
+            vo.setC_logo(rs.getString(2));
+            vo.setC_name(rs.getString(3));
+            
+            String addr = rs.getString(4);
+            addr = addr.substring(addr.indexOf(")") + 2);
+            vo.setC_address(addr);
                 
-                String addr = rs.getString(4);
-                addr = addr.substring(addr.indexOf(")") + 2);
-                vo.setC_address(addr);
-                
-                vo.setC_industry(rs.getString(5));
-                vo.setC_size(rs.getString(6));
-                vo.setC_visits(rs.getInt(7));
-            }
+            vo.setC_industry(rs.getString(5));
+            vo.setC_size(rs.getString(6));
+            vo.setC_visits(rs.getInt(7));
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {

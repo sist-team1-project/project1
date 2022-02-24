@@ -23,11 +23,6 @@ public class MainModel {
 
         for (int i = 0; i < company.size(); i++) {
             String bestreview = r.bestCompanyReviewList(company.get(i).getC_id());
-            
-            // 리뷰가 없을 경우
-            if (bestreview.isEmpty()) {
-                bestreview = "유저들의 리뷰를 기다리고 있습니다.";
-            }
             review.add(bestreview);
         }
         

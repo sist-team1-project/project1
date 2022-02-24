@@ -28,8 +28,11 @@ public class ReviewDAO {
                 
             ResultSet rs = ps.executeQuery();
             
-            while (rs.next()) {
+            try {
+                rs.next();
                 review = rs.getString(1);
+            } catch (Exception ex) {
+                review = "유저들의 리뷰를 기다리고 있습니다.";
             }
             rs.close();
         } catch (Exception ex) {
@@ -85,9 +88,8 @@ public class ReviewDAO {
             ps.setInt(1, id);
 
             ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                count = rs.getInt(1);
-            }
+            count = rs.getInt(1);
+            
             rs.close();
         } catch (Exception ex) {
             ex.printStackTrace();

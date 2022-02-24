@@ -13,7 +13,6 @@ public class AdModel {
 	public String ad_page(HttpServletRequest request, HttpServletResponse response) {
 		String cid = request.getParameter("cid");
 		String adid = request.getParameter("adid");
-		String bname = request.getParameter("bname");
 
 		AdDAO a = new AdDAO();
 		AdVO ad = a.adDetail(Integer.parseInt(adid));
@@ -21,11 +20,24 @@ public class AdModel {
 		CompanyDAO c = new CompanyDAO();
 		CompanyVO company = c.companyDetail(Integer.parseInt(cid));
 
-		List<BookVO> bookList = a.recommended_books(bname);
-
+		BookDAO b = new BookDAO();
+		List<List<BookVO>> booksList = new ArrayList<List<BookVO>>();
+		List<String> qualList = new ArrayList<String>();
+		
+		String qualifications = ad.getAd_qualification();
+		StringTokenizer st = new StringTokenizer(qualifications, ",");
+		
+		while (st.hasMoreTokens()) {
+		    String qualification = st.nextToken();
+		    qualList.add(qualification);
+		    List<BookVO> books = b.recommended_books(qualification);
+		    booksList.add(books);
+		}
+		
 		request.setAttribute("ad", ad);
 		request.setAttribute("company", company);
-		request.setAttribute("bookList", bookList);
+		request.setAttribute("booksList", booksList);
+		request.setAttribute("qualList", qualList);
 		request.setAttribute("main_jsp", "../ad/ad.jsp");
 		return "../main/main.jsp";
 	}

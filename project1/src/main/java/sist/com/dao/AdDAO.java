@@ -170,38 +170,4 @@ public class AdDAO {
 		}
 		return list;
 	}
-
-	// 공고 추천 수험서
-	public List<BookVO> recommended_books(String bname) {
-		List<BookVO> list = new ArrayList<BookVO>();
-
-		try {
-			dbcp.getConnection();
-			String sql = "select book_id, book_title, book_img, book_sold, book_link "
-					+ "from (select book_id, book_title, book_img, book_sold, book_link, rownum as num "
-					+ "from (select book_id, book_title, book_img, book_sold, book_link from textbook_1 where book_title like '%||?||%' order by book_sold desc)) "
-					+ "where num between 1 and 5";
-			ps = conn.prepareStatement(sql);
-			ps.setString(1, bname);
-			ResultSet rs = ps.executeQuery();
-			while (rs.next()) {
-				BookVO vo = new BookVO();
-				vo.setBook_id(rs.getInt(1));
-				vo.setBook_title(rs.getString(2));
-				vo.setBook_img(rs.getString(3));
-				vo.setBook_sold(rs.getInt(4));
-				vo.setBook_link(rs.getString(5));
-				list.add(vo);
-			}
-			rs.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			dbcp.disConnection(conn, ps);
-		}
-
-		return list;
-	}
-
 }

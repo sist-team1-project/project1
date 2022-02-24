@@ -82,9 +82,6 @@ h3 {
 		user-select: none;
 }
 
-.Tcenter {
-		text-align: center;
-}
 
 .Tright {
 		text-align: right;
@@ -117,4 +114,37 @@ h3 {
 .title-deco {
 		color: #017576;
 		font-size: 16px;
+}
+
+.qual-name {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 15px;
+}
+
+
+.book-container {
+  padding: 20px;
+}
+
+.book-img {
+  width: 100%;
+  height: auto;
+  max-height: 190px;
+}
+
+.short-multi-line {
+  -webkit-line-clamp:2;
+}
+
+.vcenter {
+  vertical-align: middle;
+}
+
+/* 링크 언더바 제거 */
+a,
+a:link,
+a:active,
+a:hover {
+  text-decoration: none;
 }
