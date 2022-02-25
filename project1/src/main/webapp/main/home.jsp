@@ -63,6 +63,11 @@
       <!-- 채용공고 top9 -->
       <div class="row roomy-20">
         <div class="no-select"><h4>&nbsp;&nbsp;<i class="fa fa-handshake-o" aria-hidden="true"></i> BEST 공고</h4></div>
+        <div class="post adplus">
+          <a href="../ad/ad.do"><h6>
+            더 많은 공고를 보고싶다면?&nbsp;<i class="fa fa-hand-o-right" aria-hidden="true"></i></h6>
+          </a> 
+        </div>
         <c:forEach var="a" items="${ad }" varStatus="status">
           <div class="col-md-6 pad-5">
             <div class="room">
@@ -94,10 +99,10 @@
       <!-------------->
       
       <!-- 책 추천 홍보 -->   
-      <div class="row">
+      <div class="row">     
         <div class="col-md-12 book pad-5 no-select">
           해당 공고와 관련된 자격증이 걱정이세요? 공고에서 요구하는 자격증의 수험서도 함께 추천 받아보세요!
-        </div>
+        </div> 
       </div>
       <!-------------->
       
@@ -164,7 +169,7 @@
                 댓글 순&nbsp;<sup>HOT</sup>
                 </th>
                 <th class="post postplus">
-                  <a href="../freeboard/freeboard.do"><span>더보기</span></a> 
+                  <a href="../freeboard/freeboard.do"><span>더보기</span></a>
                 </th>
               </tr>
               <c:forEach var="p" items="${freeBoardVisits }" varStatus="status">

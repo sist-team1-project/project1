@@ -135,6 +135,15 @@ sup {
 .postplus { 
     text-decoration: underline;
     text-align: right;
+    padding-right: 10px;
+}
+.adplus {
+	text-decoration: none;
+	text-align: right;
+	width: 250px;
+	float: right;
+	padding-right: 15px;
+	color: rgb(214,214,214);
 }
 
 /*   공통   */
