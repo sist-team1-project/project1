@@ -13,7 +13,7 @@
   <li>이름 :${user.u_id }  </li>
   <li>성별 :${user.u_gender } </li>
   <li>이메일 :${user.u_email } </li>
-  <li>주소 : ${user.uaddress }</li>
+  <li>주소 : ${user.u_address }</li>
 </ul>  
 
 

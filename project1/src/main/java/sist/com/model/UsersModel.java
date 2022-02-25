@@ -43,8 +43,10 @@ public class UsersModel {
         HttpSession session = request.getSession();
         String id = (String) session.getAttribute("id");
         UsersDAO dao = new UsersDAO();
-        //UsersVO user = dao.userDetail(Integer.parseInt(id));
-        //request.setAttribute("user", user);
+
+        UsersVO user = dao.userDetail(id);
+        
+        request.setAttribute("user", user);
 
         request.setAttribute("main_jsp", "../login/mypage.jsp");
         return "../main/main.jsp";
