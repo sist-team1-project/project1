@@ -251,17 +251,19 @@ a:focus {
 .open > .dropdown-toggle.btn-primary.focus {
     border-color:#eee;
 }
-.btn-default{
+
+
+.btn-default,
+.btn-default:focus,
+.btn-default:active,
+.btn-default:active:hover,
+.btn-default:hover{
     color: #575757;
-    background-color: transparent;
+    background-color: #fff;
     border:1px solid;
     border-color: #b6b6b6;
 }
-.btn-default:hover{
-    color: #fff;
-    background-color: #797979;
-    border-color: #797979;
-}
+
 
 /* --------- */
 
@@ -336,7 +338,7 @@ a:focus {
 }
 
 .m-bottom-10 {
-    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .m-bottom-20 {

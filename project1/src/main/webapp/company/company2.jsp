@@ -46,74 +46,70 @@
       
       <!-- 진행중인 채용 공고 -->
       <div class="row m-top-40">
-        <div class="no-select"><h3><i class="fa fa-user" aria-hidden="true"></i>&nbsp;<b>진행중인 채용 공고</b></h3></div>
-        <div class="row text-center topborder bggrey title-deco">
-          <div class="bggrey roomy-10 col-md-9"><b>채용공고명</b></div>
-          <div id="adend" class="bggrey roomy-10 col-md-3"><b>모집마감일</b></div>
+        <div class="no-select">
+        <div class="mg-20">
+        <h3><i class="fa fa-user" aria-hidden="true"></i>&nbsp;
+        <b>진행중인 채용 공고</b></h3></div></div>
+        <div class="text-center topborder bggrey title-deco">
+          <div class="bggrey padding-10 col-md-9"><b>채용공고명</b></div>
+          <div id="adend" class="bggrey padding-10 col-md-3"><b>모집마감일</b></div>
         </div>
+      </div>
         <c:forEach var="a" items="${adlist }" varStatus="status">
-        <div class="row roomy-10 text-center">
+        <div class="row roomy-20 text-center">
           <a href="../ad/ad.do?cid=${a.c_id }&adid=${a.ad_id}">
             <div class="col-md-9 underline">${a.ad_title }</div>
-            <div class="col-md-3 underline"><b>${a.ad_end }</b></div>
+            <div class="col-md-3 underline">${a.ad_end }</div>
           </a>
         </div>
         </c:forEach>
-      </div>
       
       <!-- 면접 후기 작성 -->
       <div class="row m-top-40">
         <div><h3><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp; <b>면접 후기 작성</b></h3></div>
-        <div class="row review-container row-border topborder">
+        <div class="row room row-border topborder">
           <form action="index.html" method="post">
-            <div class="big-font m-bottom-10"><b>면접은 만족 하셨나요?</b></div>
-            <div>
-              <input type="radio" value=1 name="goodbad" id="good" checked><label for="goodbad">만족</label> 
-              <input type=radio value=2 name=goodbad id="bad"><label for="bad">불만족</label>
+            <div class="padding-10">면접은 만족 하셨나요?</div>
+            <div class="padding-5"><input type=radio value=1 name=goodbad checked>만족 <input type=radio value=2 name=goodbad>불만족</div>
+            
+            <div class="padding-10">지원하신 직무</div>
+            <div class="padding-5"><input class="form-control" type=text name=job></div>
+            
+            <div class="padding-10">경험하신 면접에 대하여 작성하여 주세요</div>
+            
+            <div class="col-auto"><textarea class="form-control"></textarea></div>
+            <div class="col-auto">
+              <input type=submit value="제출" class="btn btn-primary mb-3">
             </div>
-            
-            <div class="big-font m-top-20 m-bottom-10"><b>지원하신 직무</b></div>
-            <div><input class="form-control" type=text name=job></div>
-            
-            <div class="big-font m-top-20 m-bottom-10"><b>경험하신 면접에 대하여 작성하여 주세요</b></div>
-            <div><textarea class="form-control" rows="6"></textarea></div>
-            <div class="m-top-20"><input type=submit value="제출" class="btn btn-primary btn-100"></div>
           </form>
         </div>
       </div>
       <!-------------->
       
       <!-- 면접 후기 -->
-      
-      <div class="row m-top-40">
-        <div class="no-select"><h3><i class="fa fa-quote-right" aria-hidden="true"></i>&nbsp;<b>면접 후기</b></h3></div>
-        <div class="row room row-border">
-          <c:forEach var="r" items="${review }" varStatus="status">
-            <div class="room">
-              <c:if test="${r.review_goodbad==1}">
-                <div class="review-job">
-                  <i class="fa fa-thumbs-up" aria-hidden="true"></i>&nbsp;&nbsp;<b>${r.review_job }</b>
-                  <button class="btn btn-xs btn-like">도움이됐어요</button>
-                  <button class="btn btn-xs btn-default">삭제</button>
-                </div>
-                <div class="review-content">${r.review_content }</div>
-              </c:if>
-              <c:if test="${r.review_goodbad==2}">
-                <div class="review-job">
-                  <i class="fa fa-thumbs-down" aria-hidden="true"></i>&nbsp;&nbsp;<b>${r.review_job }</b>
-                  <button class="btn btn-xs btn-like">도움이됐어요</button>
-                  <button class="btn btn-xs btn-default">삭제</button>
-                </div>
-                <div class="review-content">${r.review_content }</div>
-              </c:if>
-            </div>
-          </c:forEach>
-        </div>
-      </div>
-      <div class="row roomy-40 text-center">
-        <a href="../main/main.do" class="btn btn-primary">홈으로</a>&nbsp;&nbsp; 
-        <a href="#" class="btn btn-default"> 즐겨찾기 추가</a>&nbsp;&nbsp;
-        <div class="row no-select text-right">조회수 ${company.c_visits }</div>
+     <div class="row m-top-40">
+          <div class="no-select">
+          <h3><i class="fa fa-quote-right" aria-hidden="true"></i>&nbsp;<b>면접 후기</b></h3></div>
+        <c:forEach var="r" items="${review }" varStatus="status">
+          <div>
+            <c:if test="${r.review_goodbad==1}">
+              <div class="review-job">
+                <i class="fa fa-thumbs-up" aria-hidden="true"></i>&nbsp;&nbsp;<b>${r.review_job }</b>
+                <button class="helpful-btn">도움이됐어요</button>
+                <button class="delete-btn">삭제</button>
+              </div>
+              <div class="review-content">${r.review_content }</div>
+            </c:if>
+            <c:if test="${r.review_goodbad==2}">
+              <div class="review-job">
+                <i class="fa fa-thumbs-down" aria-hidden="true"></i>&nbsp;&nbsp;<b>${r.review_job }</b>
+                <button class="helpful-btn">도움이됐어요</button>
+                <button class="delete-btn">삭제</button>
+              </div>
+              <div class="review-content">${r.review_content }</div>
+            </c:if>
+          </div>
+        </c:forEach>
       </div>
       <!-------------->
     </div>

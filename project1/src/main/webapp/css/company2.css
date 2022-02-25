@@ -56,7 +56,6 @@ td {
   background-color: rgb(231, 231, 231);
 }
 
-
 .padding-5 {
   padding:5px 20px;
   text-align: center;
@@ -67,39 +66,63 @@ td {
   text-align: center;
 }
 
+.padding-15 {
+  padding: 15px 20px;
+  text-align: center;
+  word-break: keep-all;
+}
+
+.fa-thumbs-down,
+.fa-thumbs-up {
+  font-size: 35px;
+  color: #017576;
+}
+
+h3 {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.question {
+  font-size: 15px;
+}
+
+textarea {
+  border: 1px solid #d3dee8;
+  width: 100%;
+  resize: none;
+  outline: none;
+}
+
+
+.helpful-btn {
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid RGB(1,117,118);
+  background-color: RGB(1,117,118);
+  color: white;
+  margin-right: 7px;
+  font-size: 15px;
+}
+
+.delete-btn {
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid black;
+  background-color: white;
+  color: black;
+  font-size: 15px;
+
+}
+
+
 .title-deco {
   color: #017576;
   font-size: 16px;
   font-weight: bold;
 }
-
-.review-job {
-  font-size: 20px;
-}
-
-.review-container {
-    padding: 20px 70px;
-    text-align: center;
-    font-size: 16px;
-}
-
-textarea {
-  resize: none;
-}
-
-.btn-like,
-.btn-like:focus,
-.btn-like:active,
-.btn-like:active:hover,
-.btn-like:hover {
-  background-color: #F78181;
-  color: white;
-}
-
-.btn-100 {
-  width: 100%;
-}
-
 
 @media screen and (max-width: 992px) {
   #adend {
