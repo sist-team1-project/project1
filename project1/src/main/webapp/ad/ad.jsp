@@ -6,8 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="../css/ad.css">
+  <title>Insert title here</title>
+  <link rel="stylesheet" href="../css/addetail.css">
 </head>
 <body>
   <section>
@@ -74,7 +74,7 @@
 
       <!-- ############################################################################################################################ -->
 
-      <!-- 				모집 요강				 -->
+      <!--              모집 요강                -->
 
       <div class="row m-top-60">
         <div class="top-ad-title">
@@ -126,7 +126,7 @@
 
       <!-- ############################################################################################################################ -->
 
-      <!-- 				근무 조건				 -->
+      <!--              근무 조건                -->
 
       <div class="row m-top-60">
         <div class="top-ad-title">
@@ -161,7 +161,7 @@
       </div>
       <!-- ############################################################################################################################ -->
 
-      <!-- 				우대사항 및 전형방법				 -->
+      <!--              우대사항 및 전형방법              -->
 
       <div class="row m-top-60">
         <div class="top-ad-title">
@@ -217,7 +217,7 @@
 
       <!-- ############################################################################################################################ -->
 
-      <!-- 				위치정보				 -->
+      <!--              위치정보                 -->
 
       <div class="row m-top-60">
         <div class="top-ad-title">
@@ -232,7 +232,7 @@
 
       <!-- ########################################################################################## -->
 
-      <!-- 				추천 도서				 -->
+      <!--              추천 도서                -->
 
                      
     <div class="row m-top-60">
@@ -269,7 +269,7 @@
 
       <!-- ########################################################################################## -->
 
-      <!-- 				홈/즐겨찾기 버튼				 -->
+      <!--              홈/즐겨찾기 버튼                -->
 
       <div class="text-center row roomy-40">
         <a href="../main/main.do" class="btn btn-primary">홈으로</a>&nbsp;<a href="#" class="btn btn-default"> 즐겨찾기 추가</a>&nbsp;&nbsp;
@@ -281,45 +281,45 @@
 
   <!-- ########################################################################################## -->
 
-  <!-- 				지도 API			 -->
+  <!--              지도 API           -->
 
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5169c9ddd251dfb03456915e6dd020c6&libraries=services"></script>
   <script>
-			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-			mapOption = {
-				center : new kakao.maps.LatLng(37.499506307492915,
-						127.0332437153399), // 지도의 중심좌표
-				level : 4
-			// 지도의 확대 레벨
-			};
+            var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+            mapOption = {
+                center : new kakao.maps.LatLng(37.499506307492915,
+                        127.0332437153399), // 지도의 중심좌표
+                level : 4
+            // 지도의 확대 레벨
+            };
 
-			// 지도를 생성합니다    
-			var map = new kakao.maps.Map(mapContainer, mapOption);
+            // 지도를 생성합니다    
+            var map = new kakao.maps.Map(mapContainer, mapOption);
 
-			// 주소-좌표 변환 객체를 생성합니다
-			var geocoder = new kakao.maps.services.Geocoder();
+            // 주소-좌표 변환 객체를 생성합니다
+            var geocoder = new kakao.maps.services.Geocoder();
 
-			// 주소로 좌표를 검색합니다
-			geocoder.addressSearch('${ad.ad_workplace }',
-					function(result, status) {
+            // 주소로 좌표를 검색합니다
+            geocoder.addressSearch('${ad.ad_workplace }',
+                    function(result, status) {
 
-						// 정상적으로 검색이 완료됐으면 
-						if (status === kakao.maps.services.Status.OK) {
+                        // 정상적으로 검색이 완료됐으면 
+                        if (status === kakao.maps.services.Status.OK) {
 
-							var coords = new kakao.maps.LatLng(result[0].y,
-									result[0].x);
+                            var coords = new kakao.maps.LatLng(result[0].y,
+                                    result[0].x);
 
-							// 결과값으로 받은 위치를 마커로 표시합니다
-							var marker = new kakao.maps.Marker({
-								map : map,
-								position : coords
-							});
+                            // 결과값으로 받은 위치를 마커로 표시합니다
+                            var marker = new kakao.maps.Marker({
+                                map : map,
+                                position : coords
+                            });
 
-							// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-							map.setCenter(coords);
-						}
-					});
-		</script>
+                            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                            map.setCenter(coords);
+                        }
+                    });
+        </script>
 
   <!-- 여기까지 직접 작성 -->
 
