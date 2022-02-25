@@ -115,7 +115,7 @@
           </div>
         </c:forEach>
       </div>
-      
+       
      <div class="row roomy-40 text-center">
        <a href="../main/main.do" class="btn btn-primary">홈으로</a>&nbsp;&nbsp; 
        <a href="#" class="btn btn-default"> 즐겨찾기 추가</a>&nbsp;&nbsp;
