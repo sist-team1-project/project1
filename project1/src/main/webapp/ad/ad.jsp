@@ -14,68 +14,55 @@
     <!-- 공고 메인 정보 -->
     <div class="container container-pad">
       <div class="row row-border room m-top-40">
-        <div class="col-md-8 roomy-15">
-          <div class="top-ad-title">
-            <h3>
-              <b>${ad.ad_title }</b>
-            </h3>
-          </div>
-          <div class="col-lg-6 padding-0">
-            <table class="top-table">
-              <tr>
-                <th class="top-table-title title-deco no-select" colspan="2">지원자격</th>
-              </tr>
-              <tr>
-                <th class="top-table-left no-select">경력</th>
-                <td>${ad.ad_we }</td>
-              </tr>
-              <tr>
-                <th class="top-table-left no-select">학력</th>
-                <td>${ad.ad_education }</td>
-              </tr>
-            </table>
-          </div>
-          <div class="col-lg-6 padding-0">
-            <table class="top-table">
-              <tr>
-                <th class="top-table-title title-deco no-select" colspan="2">근무조건</th>
-              </tr>
-              <tr>
-                <th class="top-table-left no-select">근무예정지</th>
-                <td>${ad.ad_workplace }</td>
-              </tr>
-              <tr>
-                <th class="top-table-left no-select">임금</th>
-                <td>${ad.ad_wage }</td>
-              </tr>
-            </table>
-          </div>
+        <div class="col-md-12 roomy-10">
+          <h4><b>${ad.ad_title }</b></h4>
         </div>
-        <div class="col-md-4 roomy-15">
-          <div class="logo-container margin-bottom">
-            <img class="clogo" src="${company.c_logo }">
-          </div>
+        <div class="col-md-4 roomy-10 no-select">
+          <div class="top-table-title title-deco"><b>지원자격</b></div>
           <table class="top-table">
             <tr>
-              <th class="top-table-left no-select">기업명</th>
+              <th class="width-80">경력</th>
+              <td>${ad.ad_we }</td>
+            </tr>
+            <tr>
+              <th>학력</th>
+              <td>${ad.ad_education }</td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-md-4 roomy-10 no-select">
+          <div class="top-table-title title-deco"><b>근무조건</b></div>
+          <table class="top-table">
+            <tr>
+              <th class="width-80">근무예정지</th>
+              <td class="word-break">${ad.ad_workplace }</td>
+            </tr>
+            <tr>
+              <th class="width-80">임금</th>
+              <td>${ad.ad_wage }</td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-md-4 roomy-10 no-select">
+          <div class="logo-container "><img class="clogo" src="${company.c_logo }"></div>
+          <table class="top-table">
+            <tr>
+              <th class="top-table-left">기업명</th>
               <td><a href="../company/company.do?cid=${company.c_id }">${company.c_name } </a></td>
             </tr>
             <tr>
-              <th class="top-table-left no-select">업종</th>
+              <th class="width-80">업종</th>
               <td>${company.c_industry }</td>
             </tr>
             <tr>
-              <th class="top-table-left no-select">기업규모</th>
+              <th class="width-80">기업규모</th>
               <td>${company.c_size }</td>
             </tr>
           </table>
         </div>
-      </div>
-
+      </div>   
       <!-- ############################################################################################################################ -->
-
       <!--              모집 요강                -->
-
       <div class="row m-top-60">
         <div class="top-ad-title">
           <h3>
@@ -83,51 +70,30 @@
           </h3>
         </div>
         <div class="row row-border">
-          <div>
-            <table class="top-table">
-              <tr>
-                <th class="no-select top-ad-title text-center mar15-pad20 title-deco bggrey">직무내용</th>
-              </tr>
-              <tr>
-                <td>
-                  <ul>
-                    <li>${ad.ad_content }</li>
-                  </ul>
-                </td>
-              </tr>
-            </table>
-          </div>
+          <div class="row bggrey no-select title-deco padding-10">직무내용</div>
+          <div class="row content">${ad.ad_content }</div>
 
-
-          <div class="row bggrey">
-            <div class="col-md-4 text-center title-deco height-45">
-              <strong>경력조건</strong>
-            </div>
-            <div class="col-md-4 text-center title-deco height-45">
-              <strong>학력</strong>
-            </div>
-            <div class="col-md-4 text-center title-deco height-45">
-              <strong>근무예정지</strong>
-            </div>
-          </div>
           <div class="row">
-            <div class="col-md-4">
-               <div class="text-center roomy-20">${ad.ad_we }</div>
+            <div class="col-md-4 col-padding-0">
+              <div class="row bggrey title-deco padding-10">경력조건</div>
+              <div class="row bgwhite padding-15"><div>${ad.ad_we }</div></div>
             </div>
-            <div class="col-md-4">
-              <div class="text-center roomy-20">${ad.ad_education }</div>
+            <div class="col-md-4 col-padding-0">
+              <div class="row bggrey title-deco padding-10">학력</div>
+              <div class="row bgwhite padding-15"><div>${ad.ad_education }</div></div>
             </div>
-            <div class="col-md-4">
-              <div class="text-center roomy-20">${ad.ad_workplace }</div>
+            <div class="col-md-4 col-padding-0">
+              <div class="row bggrey title-deco padding-10">근무예정지</div>
+              <div class="row bgwhite padding-15"><div>${ad.ad_workplace }</div></div>
             </div>
           </div>
         </div>
       </div>
+    
 
       <!-- ############################################################################################################################ -->
 
       <!--              근무 조건                -->
-
       <div class="row m-top-60">
         <div class="top-ad-title">
           <h3>
@@ -135,34 +101,27 @@
           </h3>
         </div>
         <div class="row row-border">
-          <div class="row bggrey">
-            <div class="col-md-4 text-center title-deco height-45">
-              <strong>임금조건</strong>
-            </div>
-            <div class="col-md-4 text-center title-deco height-45">
-              <strong>근무시간</strong>
-            </div>
-            <div class="col-md-4 text-center title-deco height-45">
-              <strong>근무형태</strong>
-            </div>
-          </div>
           <div class="row">
-            <div class="col-md-4">
-              <div class="text-center roomy-20">${ad.ad_wage }</div>
+            <div class="col-md-4 col-padding-0">
+              <div class="row bggrey title-deco padding-10">임금조건</div>
+              <div class="row bgwhite padding-15"><div>${ad.ad_wage }</div></div>
             </div>
-            <div class="col-md-4">
-              <div class="text-center roomy-20">${ad.ad_workhours }</div>
+            <div class="col-md-4 col-padding-0">
+              <div class="row bggrey title-deco padding-10">근무시간</div>
+              <div class="row bgwhite padding-15"><div>${ad.ad_workhours }</div></div>
             </div>
-            <div class="col-md-4">
-              <div class="text-center roomy-20">${ad.ad_worktype }</div>
+            <div class="col-md-4 col-padding-0">
+              <div class="row bggrey title-deco padding-10">근무형태</div>
+              <div class="row bgwhite padding-15"><div>${ad.ad_worktype }</div></div>
             </div>
           </div>
         </div>
       </div>
+      
+
       <!-- ############################################################################################################################ -->
 
       <!--              우대사항 및 전형방법              -->
-
       <div class="row m-top-60">
         <div class="top-ad-title">
           <h3>
@@ -170,47 +129,23 @@
           </h3>
         </div>
         <div class="row row-border">
-          <div class="row bggrey">
-            <div class="col-md-3 text-center title-deco height-45">
-              <strong>우대전공</strong>
+          <div class="row">
+            <div class="col-md-3 col-padding-0">
+              <div class="row bggrey title-deco padding-10">우대전공</div>
+              <div class="row bgwhite padding-15"><div>${ad.ad_major }</div></div>
             </div>
-            <div class="col-md-3 text-center title-deco height-45">
-              <strong>우대자격증</strong>
+            <div class="col-md-3 col-padding-0">
+              <div class="row bggrey title-deco padding-10">우대 자격증</div>
+              <div class="row bgwhite padding-15"><div>${ad.ad_qualification }</div></div>
             </div>
-            <div class="col-md-3 text-center title-deco height-45">
-              <strong>우대언어</strong>
+            <div class="col-md-3 col-padding-0">
+              <div class="row bggrey title-deco padding-10">우대 언어</div>
+              <div class="row bgwhite padding-15"><div>${ad.ad_language }</div></div>
             </div>
-            <div class="col-md-3 text-center title-deco height-45">
-              <strong>접수마감일</strong>
+            <div class="col-md-3 col-padding-0">
+              <div class="row bggrey title-deco padding-10">접수 마감일</div>
+              <div class="row bgwhite padding-15"><div>${ad.ad_end }</div></div>
             </div>
-          </div>
-          <div class="row col-md-3">
-            <table class="top-table">
-              <tr>
-                <td class="text-center height-60 vcetner">${ad.ad_major }</td>
-              </tr>
-            </table>
-          </div>
-          <div class="row col-md-3">
-            <table class="top-table">
-              <tr>
-                <td class="text-center height-60">${ad.ad_qualification }</td>
-              </tr>
-            </table>
-          </div>
-          <div class="row col-md-3">
-            <table class="top-table">
-              <tr>
-                <td class="text-center height-60">${ad.ad_language }</td>
-              </tr>
-            </table>
-          </div>
-          <div class="row col-md-3">
-            <table class="top-table">
-              <tr>
-                <td class="text-center height-60">${ad.ad_end }</td>
-              </tr>
-            </table>
           </div>
         </div>
       </div>
@@ -240,11 +175,10 @@
           <h3><i class="fa fa-graduation-cap" aria-hidden="true"></i>&nbsp; <b>추천 도서</b></h3>
         </div>
         <div class="row row-border">
-          <div class="bggrey text-center title-deco height-45"><strong>추천수험서</strong></div>
-          <div class="book-container">
+          <div class="row bggrey title-deco padding-10">추천 수험서</div>
+          <div class="row content">
             <c:forEach var="b" items="${booksList }" varStatus="status">
               <div class="row">
-              
                 <!-- 추천 수험서가 있을 경우에만 출력 -->
                 <c:choose>
                   <c:when test="${fn:length(b)!=0 }">
@@ -264,16 +198,14 @@
           </div>
         </div>
       </div>            
-          
-
-
+        
       <!-- ########################################################################################## -->
 
       <!--              홈/즐겨찾기 버튼                -->
 
       <div class="text-center row roomy-40">
         <a href="../main/main.do" class="btn btn-primary">홈으로</a>&nbsp;<a href="#" class="btn btn-default"> 즐겨찾기 추가</a>&nbsp;&nbsp;
-        <div class="no-select row Tright">조회수&nbsp;&nbsp;</div>
+        <div class="row no-select padding-10">조회수 ${ad.ad_visits }</div>
       </div>
 
     </div>

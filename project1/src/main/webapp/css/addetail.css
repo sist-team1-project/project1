@@ -1,130 +1,104 @@
 @charset "UTF-8";
 
 .container-pad {
-        padding-left: 50px;
-        padding-right: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
 .row {
-        margin-left: 0px;
-        margin-right: 0px;
-}
-
-.margin-bottom {
-        margin-bottom: 20px;
+  margin-left: 0px;
+  margin-right: 0px;
 }
 
 .row-border {
-        border: 1px solid #d6d6d6;
+  border: 1px solid #d6d6d6;
 }
 
 .room {
-        padding: 20px;
+  padding: 20px;
 }
 
-.roomy-15 {
-        padding-top: 15px;
-        padding-bottom: 15px;
+/*  맨 위 테이블  */
+.top-table-title {
+  padding: 8px 0px;
 }
 
-.top-ad-title {
-        margin: 5px 0px;
-        word-break: keep-all;
-}
-
-td {
-        padding: 8px 0px;
-        word-break: keep-all;
+.width-80 {
+  width: 80px;
 }
 
 .top-table {
-        width: 100%;
+  width: 100%;
 }
 
-.top-table-title {
-        padding: 15px 0px;
+th {
+  vertical-align: top;
+  padding: 10px 0px;
 }
 
-.top-table-left {
-        width: 80px;
+th, td {
+  padding: 12px 0px;
+  word-break: keep-all;
 }
+
 
 .logo-container {
-        height: 90px;
-        line-height: 90px;
-        text-align: center;
+  height: 70px;
+  line-height: 70px;
+  text-align: center;
 }
 
 .clogo {
-        width: 100%;
-        height: auto;
-        max-width: 150px;
-        max-height: 90px;
-        vertical-align: middle;
+  width: 100%;
+  height: auto;
+  max-width: 160px;
+  max-height: 70px;
+  vertical-align: middle;
 }
+/* ----------- */
 
+
+/*     중앙    */
 .bggrey {
-        background-color: rgb(231, 231, 231);
+  background-color: rgb(231, 231, 231);
 }
 
-.padding-0 {
-        padding: 0px;
+.bgwhite {
+  background-color: #fff;
 }
 
-h4 {
-        font-size: 18px;
+.col-padding-0 {
+  padding: 0px;
 }
 
-h3 {
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
+.padding-10 {
+  padding:10px 20px;
+  text-align: center;
 }
 
-
-.Tright {
-        text-align: right;
-}
-
-.mar15-pad20 {
-        padding: 20px;
-        padding-right: 15px;
-        margin: 15px;
-}
-
-.padding-bottom-30 {
-        padding-bottom: 30px;
-}
-
-.padding-20 {
-        padding: 20px, 20px, 20px, 40px;
-}
-
-.height-45 {
-        height: 45px;
-        padding: 10px;
-}
-
-.height-60 {
-        height: 60px;
-        padding: 10px;
+.padding-15 {
+  padding: 15px 20px;
+  text-align: center;
+  word-break: keep-all;
 }
 
 .title-deco {
-        color: #017576;
-        font-size: 16px;
+  color: #017576;
+  font-size: 16px;
+  font-weight: bold;
 }
 
+.content {
+  padding: 20px;
+}
+/* ----------- */
+
+
+/*     도서    */
 .qual-name {
   font-size: 20px;
   font-weight: bold;
   padding: 15px;
-}
-
-
-.book-container {
-  padding: 20px;
 }
 
 .book-img {
@@ -132,19 +106,17 @@ h3 {
   height: auto;
   max-height: 190px;
 }
+/* ----------- */
 
-.short-multi-line {
-  -webkit-line-clamp:2;
-}
 
-.vcenter {
-  vertical-align: middle;
-}
-
-링크 언더바 제거
-a,
-a:link,
-a:active,
-a:hover {
+/* 링크 언더바 제거 */
+a, a:link, a:active, a:hover {
   text-decoration: none;
 }
+/* ----------- */
+
+/* 다중 줄 줄임 2줄만 */
+.short-multi-line {
+  -webkit-line-clamp: 2;
+}
+/* ----------- */
