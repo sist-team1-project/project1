@@ -84,8 +84,8 @@
             <textarea rows="6" width: 100%></textarea>
             <button class="send-btn">제 &nbsp;&nbsp; 출</button>
           </div>
-          </div>
         </form>
+        </div>
       </div>
       <!-------------->
       
@@ -98,23 +98,31 @@
           <div>
             <c:if test="${r.review_goodbad==1}">
               <div class="review-job">
-                <i class="fa fa-thumbs-up" aria-hidden="true"></i>&nbsp;&nbsp;<b>${r.review_job }</b>
+                <i class="fa fa-thumbs-o-up" style="font-size: 30px;" aria-hidden="true"></i>&nbsp;&nbsp;<b>${r.review_job }</b>
                 <button class="helpful-btn">도움이됐어요</button>
                 <button class="delete-btn">삭제</button>
               </div>
-              <div class="review-content">${r.review_content }</div>
+              <div class="review-content mg-20">${r.review_content }</div>
             </c:if>
             <c:if test="${r.review_goodbad==2}">
               <div class="review-job">
-                <i class="fa fa-thumbs-down" aria-hidden="true"></i>&nbsp;&nbsp;<b>${r.review_job }</b>
+                <i class="fa fa-thumbs-o-down" style="font-size: 30px;" aria-hidden="true"></i>&nbsp;&nbsp;<b>${r.review_job }</b>
                 <button class="helpful-btn">도움이됐어요</button>
                 <button class="delete-btn">삭제</button>
               </div>
-              <div class="review-content">${r.review_content }</div>
+              <div class="review-content mg-20">${r.review_content }</div>
             </c:if>
           </div>
         </c:forEach>
       </div>
+      
+     <div class="row roomy-40 text-center">
+       <a href="../main/main.do" class="btn btn-primary">홈으로</a>&nbsp;&nbsp; 
+       <a href="#" class="btn btn-default"> 즐겨찾기 추가</a>&nbsp;&nbsp;
+       <div class="row no-select text-right">조회수 ${company.c_visits }</div>
+     </div>
+
+      
       <!-------------->
     </div>
   </section>

@@ -80,12 +80,6 @@ td {
   word-break: keep-all;
 }
 
-.fa-thumbs-down,
-.fa-thumbs-up {
-  font-size: 35px;
-  color: #017576;
-}
-
 h3 {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -134,5 +128,5 @@ textarea {
   background-color: white;
   color: black;
   font-size: 15px;
-
 }
+
