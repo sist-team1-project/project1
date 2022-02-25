@@ -101,6 +101,7 @@ public class CompanyDAO {
             vo.setC_industry(rs.getString(5));
             vo.setC_size(rs.getString(6));
             vo.setC_visits(rs.getInt(7));
+            rs.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
