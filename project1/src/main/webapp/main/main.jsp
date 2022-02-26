@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="../css/responsive.css" />
 
   <script src="../js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body data-spy="scroll" data-target=".navbar-collapse">
 
@@ -34,7 +35,7 @@
   
   
   <!-- 자바스크립트 -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
   <script src="../js/vendor/bootstrap.min.js"></script>
   <script src="../js/jquery.collapse.js"></script>
   <script src="../js/bootsnav.js"></script>
