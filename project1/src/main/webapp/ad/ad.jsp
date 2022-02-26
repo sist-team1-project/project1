@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="../css/addetail.css">
+<link rel="stylesheet" href="../css/ad_book.css">
 </head>
 <body>
 		<section>
@@ -196,6 +197,54 @@
 												<c:forEach var="b" items="${booksList }" varStatus="status">
 														<div class="row">
 																<!-- 추천 수험서가 있을 경우에만 출력 -->
+
+																<!-- ######################################################################################################################## -->
+
+
+																<%--
+																<div class="spacer"></div>
+																<div class="arrow" onclick="mySlideLeft()">
+																		<img src="http://cerati.org/eoitecne/img/down.png" class="arrowleft arimage" />
+																</div>
+																<div class="slider-cont" id="slider-cont">
+																		<!--<div class="slider-layer"  id="slider-cont"></div>-->
+																		<div class="test-slider">
+																				<div class="cont-slider" onclick="selectSliderElement(this)" id="ext-1">
+																						<img class="flat-w-image image-slider" src="http://cerati.org/eoitecne/imghttp://cerati.org/eoitecne//prodotti/05.png" /><img src="http://cerati.org/eoitecne/img/prodotti/05.png" class="image-w" />
+																				</div>
+																				<div class="cont-slider" onclick="selectSliderElement(this)" id="ext-2">
+																						<img class="flat-w-image image-slider" src="http://cerati.org/eoitecne/img/prodotti/02.png" /><img src="http://cerati.org/eoitecne/img/prodotti/02.png" class="image-w" />
+																				</div>
+																				<div class="cont-slider" onclick="selectSliderElement(this)" id="ext-3">
+																						<img class="flat-w-image image-slider" src="http://cerati.org/eoitecne/img/prodotti/05.png" /><img src="http://cerati.org/eoitecne/img/prodotti/05.png" class="image-w" />
+																				</div>
+																				<div class="cont-slider" onclick="selectSliderElement(this)" id="ext-4">
+																						<img class="flat-w-image image-slider" src="http://cerati.org/eoitecne/img/prodotti/02.png" /><img src="http://cerati.org/eoitecne/img/prodotti/02.png" class="image-w" />
+																				</div>
+																				<div class="cont-slider" onclick="selectSliderElement(this)" id="ext-5">
+																						<img class="flat-w-image image-slider" src="http://cerati.org/eoitecne/img/prodotti/05.png" /><img src="http://cerati.org/eoitecne/img/prodotti/05.png" class="image-w" />
+																				</div>
+																				<div class="cont-slider" onclick="selectSliderElement(this)" id="ext-6">
+																						<img class="flat-w-image image-slider" src="http://cerati.org/eoitecne/img/prodotti/02.png" /><img src="http://cerati.org/eoitecne/img/prodotti/02.png" class="image-w" />
+																				</div>
+																				<div class="cont-slider" onclick="selectSliderElement(this)" id="ext-7">
+																						<img class="flat-w-image image-slider" src="http://cerati.org/eoitecne/img/prodotti/05.png" /><img src="http://cerati.org/eoitecne/img/prodotti/05.png" class="image-w" />
+																				</div>
+																				<div class="cont-slider" onclick="selectSliderElement(this)" id="ext-8">
+																						<img class="flat-w-image image-slider" src="http://cerati.org/eoitecne/img/prodotti/02.png" /><img src="http://cerati.org/eoitecne/img/prodotti/02.png" class="image-w" />
+																				</div>
+																		</div>
+																</div>
+																<div class="arrow" onclick="mySlideRight()">
+																		<img src="http://cerati.org/eoitecne/img/down.png" class="arrowright arimage" />
+																</div>
+
+
+--%>
+
+
+																<!-- ######################################################################################################################## -->
+
 																<c:choose>
 																		<c:when test="${fn:length(b)!=0 }">
 																				<div class="qual-name">${qualList[status.index] }</div>
@@ -247,34 +296,37 @@
 				level : 4
 			// 지도의 확대 레벨
 			};
-
 			// 지도를 생성합니다    
 			var map = new kakao.maps.Map(mapContainer, mapOption);
-
 			// 주소-좌표 변환 객체를 생성합니다
 			var geocoder = new kakao.maps.services.Geocoder();
-
 			// 주소로 좌표를 검색합니다
 			geocoder.addressSearch('${ad.ad_workplace }',
 					function(result, status) {
-
 						// 정상적으로 검색이 완료됐으면 
 						if (status === kakao.maps.services.Status.OK) {
-
 							var coords = new kakao.maps.LatLng(result[0].y,
 									result[0].x);
-
 							// 결과값으로 받은 위치를 마커로 표시합니다
 							var marker = new kakao.maps.Marker({
 								map : map,
 								position : coords
 							});
-
 							// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 							map.setCenter(coords);
 						}
 					});
 		</script>
+
+		<!-- ######################################################################################################################## -->
+
+
+		<script type="text/javascript">
+			
+		</script>
+
+
+		<!-- ######################################################################################################################## -->
 
 		<!-- 여기까지 직접 작성 -->
 
