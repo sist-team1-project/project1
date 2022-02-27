@@ -37,7 +37,6 @@
   <!-- 자바스크립트 -->
   
   <script src="../js/vendor/bootstrap.min.js"></script>
-  <script src="../js/jquery.collapse.js"></script>
   <script src="../js/bootsnav.js"></script>
   <script type="text/javascript" src="../css/slick/slick.js" charset="utf-8"></script>
   <script type="text/javascript" src="../css/slick/slick.min.js" charset="utf-8"></script>

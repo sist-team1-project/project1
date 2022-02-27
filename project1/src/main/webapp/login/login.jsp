@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="../css/login.css">
+<script type="text/javascript" src="../js/login.js"></script>
 </head>
 <body>
   <!-- 여기부터 -->
@@ -24,7 +25,6 @@
                 </div>
               </div>
               <div class="formcontent-pad">
-
                 <div class="fadeIn first">
                   <h4>
                     <b>로그인</b>
@@ -32,11 +32,12 @@
                 </div>
                 <!-- Login Form -->
                 <form method="post" action="../users/login.do">
-                  <input type="text" id="id" class="fadeIn second" name="id" placeholder="아이디"> <input type="password" id="pwd" class="fadeIn third" name="pwd" placeholder="비밀번호">
+                  <input type="text" id="id" class="fadeIn second" name="id" placeholder="아이디">
+                  <input type="password" id="pwd" class="fadeIn third" name="pwd" placeholder="비밀번호">
                   <div class="formFooter fadeIn third">
                     <a class="underlineHover" href="#">아이디 찾기 </a> <a class="underlineHover" href="#">비밀번호 찾기</a>
                   </div>
-                  <input type="submit" class="login fadeIn fourth " value="로그인"> <input type="button" class="join fadeIn fourth" value="회원가입">
+                  <input type="button" id="login" class="login fadeIn fourth " value="로그인"> <input type="button" class="join fadeIn fourth" value="회원가입">
                 </form>
               </div>
             </div>
@@ -47,10 +48,8 @@
 
         </c:if>
       </div>
-
     </div>
   </section>
-
   <!-- 여기까지 직접 작성 -->
 </body>
 </html>

@@ -10,13 +10,13 @@ import sist.com.vo.*;
 
 public class UsersModel {
 
-    @RequestMapping("users/loginpage.do")
+    @RequestMapping("users/login.do")
     public String login_page(HttpServletRequest request, HttpServletResponse response) {
         request.setAttribute("main_jsp", "../login/login.jsp");
         return "../main/main.jsp";
     }
 
-    @RequestMapping("users/login.do")
+    @RequestMapping("users/login_result.do")
     public String memberLogin(HttpServletRequest request, HttpServletResponse response) {
         String id = request.getParameter("id");
         String pwd = request.getParameter("pwd");
@@ -28,7 +28,7 @@ public class UsersModel {
             session.setAttribute("id", id);
             session.setAttribute("name", result);
         }
-        return "../login/login_ok.jsp";
+        return "../login/login_result.jsp";
     }
 
     @RequestMapping("users/logout.do")
