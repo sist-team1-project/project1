@@ -63,7 +63,7 @@
       <!-- 채용공고 top9 -->
       <div class="row roomy-20">
         <div class="no-select"><h4>&nbsp;&nbsp;<i class="fa fa-handshake-o" aria-hidden="true"></i> BEST 공고</h4></div>
-        <div class="post adplus">
+        <div class="col-md-12 adplus">
           <h6><a href="../ad/ad.do">더 많은 공고를 보고싶다면?&nbsp;<i class="fa fa-hand-o-right" aria-hidden="true"></i></a></h6>
         </div>
         <c:forEach var="a" items="${ad }" varStatus="status">
