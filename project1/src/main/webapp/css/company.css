@@ -1,14 +1,5 @@
 @charset "UTF-8";
 
-.container-pad {
-  padding-left: 40px;
-  padding-right: 40px;
-} 
-
-.row {
-  margin-left: 0px;
-  margin-right: 0px;
-}
 
 .room {
   padding: 20px;
@@ -105,4 +96,12 @@ textarea {
   #adend {
     display:none;
   }
+}
+
+@media screen and (min-width: 992px) {
+  .container-pad {
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+
 }
