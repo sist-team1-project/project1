@@ -8,7 +8,7 @@
 </head>
 <body>
   <footer>
-    <div class="container-fluid fix bg-grey text-center p-top-30 p-bottom-30 m-top-30">
+    <div class="container-fluid fix bg-grey text-center p-top-30 p-bottom-30 m-top-40">
       <div class="col-md-12">
         <p>Made by SIST Team1 2022. All Rights Reserved</p>
       </div>

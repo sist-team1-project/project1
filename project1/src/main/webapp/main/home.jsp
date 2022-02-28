@@ -64,9 +64,7 @@
       <div class="row roomy-20">
         <div class="no-select"><h4>&nbsp;&nbsp;<i class="fa fa-handshake-o" aria-hidden="true"></i> BEST 공고</h4></div>
         <div class="post adplus">
-          <a href="../ad/ad.do"><h6>
-            더 많은 공고를 보고싶다면?&nbsp;<i class="fa fa-hand-o-right" aria-hidden="true"></i></h6>
-          </a> 
+          <h6><a href="../ad/ad.do">더 많은 공고를 보고싶다면?&nbsp;<i class="fa fa-hand-o-right" aria-hidden="true"></i></a></h6>
         </div>
         <c:forEach var="a" items="${ad }" varStatus="status">
           <div class="col-md-6 pad-5">
@@ -153,9 +151,9 @@
                   <a href="../freeboard/freeboard.do"><span>더보기</span></a> 
                 </th>
               </tr>
-              <c:forEach var="p" items="${freeBoardVisits }" varStatus="status">
+              <c:forEach var="b" items="${freeBoardVisits }" varStatus="status">
                 <tr>
-                  <td class="pad-5 short-line"><span class="post-category">[${p.post_category}] </span><a href="#">${p.post_title }</a></td>
+                  <td class="pad-5 short-line"><span class="post-category">[${b.board_category}] </span><a href="#">${b.board_title }</a></td>
                 </tr>
               </c:forEach>
             </table>
@@ -172,9 +170,9 @@
                   <a href="../freeboard/freeboard.do"><span>더보기</span></a>
                 </th>
               </tr>
-              <c:forEach var="p" items="${freeBoardVisits }" varStatus="status">
+              <c:forEach var="b" items="${freeBoardVisits }" varStatus="status">
                 <tr>
-                  <td class="pad-5 short-line"><span class="post-category">[${p.post_category}] </span><a href="#">${p.post_title }</a></td>
+                  <td class="pad-5 short-line"><span class="post-category">[${b.board_category}] </span><a href="#">${b.board_title }</a></td>
                 </tr>
               </c:forEach>
             </table>

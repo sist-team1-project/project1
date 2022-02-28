@@ -15,7 +15,7 @@ public class MainModel {
         CompanyDAO c = new CompanyDAO();
         AdDAO a = new AdDAO();
         ReviewDAO r = new ReviewDAO();
-        PostDAO p = new PostDAO();
+        BoardDAO p = new BoardDAO();
         
         /*       Best 기업       */
         List<CompanyVO> company = c.bestCompanyList();
@@ -56,7 +56,7 @@ public class MainModel {
         }
         
         
-        List<PostVO> freeBoardVisits = p.freeboardListByVisits();
+        List<BoardVO> freeBoardVisits = p.freeboardListByVisits();
         
         
         request.setAttribute("company", company);
