@@ -84,15 +84,15 @@
 
         <div class="col-md-4">
           <div class="row bggrey title-deco no-select roomy-10 text-center">경력조건</div>
-          <div class="row roomy-20 text-center">${ad.ad_we }</div>
+          <div class="row text-center content">${ad.ad_we }</div>
         </div>
         <div class="col-md-4">
           <div class="row bggrey title-deco no-select roomy-10 text-center">학력</div>
-          <div class="row roomy-20 text-center">${ad.ad_education }</div>
+          <div class="row text-center content">${ad.ad_education }</div>
         </div>
         <div class="col-md-4">
           <div class="row bggrey title-deco no-select roomy-10 text-center">근무예정지</div>
-          <div class="row roomy-20 text-center">
+          <div class="row text-center content">
             <a href="#wptarget">${ad.ad_workplace }</a>
           </div>
         </div>
@@ -112,15 +112,15 @@
       <div class="row row-border">
         <div class="col-md-4">
           <div class="row bggrey title-deco no-select roomy-10 text-center">임금조건</div>
-          <div class="row roomy-20 text-center">${ad.ad_wage }</div>
+          <div class="row text-center content">${ad.ad_wage }</div>
         </div>
         <div class="col-md-4">
           <div class="row bggrey title-deco no-select roomy-10 text-center">근무시간</div>
-          <div class="row roomy-20 text-center">${ad.ad_workhours }</div>
+          <div class="row text-center content">${ad.ad_workhours }</div>
         </div>
         <div class="col-md-4">
           <div class="row bggrey title-deco no-select roomy-10 text-center">근무형태</div>
-          <div class="row roomy-20 text-center">${ad.ad_worktype }</div>
+          <div class="row text-center content">${ad.ad_worktype }</div>
         </div>
 
       </div>
@@ -137,21 +137,21 @@
       <div class="row row-border">
         <div class="col-md-3">
           <div class="row bggrey title-deco no-select roomy-10 text-center">우대전공</div>
-          <div class="row roomy-20 text-center">${ad.ad_major }</div>
+          <div class="row text-center content">${ad.ad_major }</div>
         </div>
         <div class="col-md-3">
           <div class="row bggrey title-deco no-select roomy-10 text-center">우대 자격증</div>
-          <div class="rrow roomy-20 text-center">
+          <div class="rrow text-center content">
             <a href="#btarget">${ad.ad_qualification }</a>
           </div>
         </div>
         <div class="col-md-3">
           <div class="row bggrey title-deco no-select roomy-10 text-center">우대 언어</div>
-          <div class="row roomy-20 text-center">${ad.ad_language }</div>
+          <div class="row text-center content">${ad.ad_language }</div>
         </div>
         <div class="col-md-3">
           <div class="row bggrey title-deco no-select roomy-10 text-center">접수 마감일</div>
-          <div class="row roomy-20 text-center">${ad.ad_end }</div>
+          <div class="row text-center content">${ad.ad_end }</div>
         </div>
       </div>
 
@@ -183,9 +183,9 @@
       </div>
       <div class="row row-border">
         <div class="col-sm-12 bggrey title-deco no-select roomy-10 text-center">추천 수험서</div>
-        <div class="col-sm-12 content">
+        <div class="col-sm-12">
           <c:forEach var="b" items="${booksList }" varStatus="status">
-            <div class="row">
+            <div class="row content">
 
              <!-- 추천 수험서가 있을 경우에만 출력 -->
 
