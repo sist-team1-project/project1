@@ -106,8 +106,10 @@ public class BoardDAO {
         try {
             conn = dbcp.getConnection();
             String sql = "SELECT * "
-                    + "FROM board_1";
+                    + "FROM board_1 "
+                    + "WHERE board_id=?";
             ps = conn.prepareStatement(sql);
+            ps.setInt(1,  id);
             ResultSet rs = ps.executeQuery();
             rs.next();
 

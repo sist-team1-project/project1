@@ -47,9 +47,7 @@ public class FreeboardModel {
         
         String id = request.getParameter("bid");
         BoardDAO dao = new BoardDAO();
-        
         BoardVO detail = dao.freeboardDetail(Integer.parseInt(id));
-        
         request.setAttribute("detail", detail);
         request.setAttribute("main_jsp", "../freeboard/detail.jsp");
         return "../main/main.jsp";

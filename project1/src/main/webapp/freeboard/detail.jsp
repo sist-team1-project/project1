@@ -13,36 +13,38 @@
 
   <div class="container container-pad">
 
-    <div class="row m-top-40">
-      <div class="col-sm-12 roomy-10">
+    <div class="row m-top-70">
+      <div class="col-md-12 roomy-10">
         <h4><b>[${detail.board_category }]&nbsp;&nbsp;${detail.board_title }</b></h4>
       </div>
     </div>
     <div class="row roomy-10">
-      <div class="col-xs-12">
-        ${detail.u_id }&nbsp;&nbsp;${detail.board_date }&nbsp;&nbsp;${detail.board_visits }
+      <div class="col-md-12">
+        <b>${detail.u_id }</b>&nbsp;&nbsp;&nbsp;${detail.board_date }&nbsp;&nbsp;&nbsp;조회수 ${detail.board_visits }
       </div>
     </div>
     <hr>
-    <div class="row roomy-40">
-      <div class="col-sm-12">
+    <div class="row roomy-40 content">
+      <div class="col-md-12">
         ${detail.board_content }
       </div>
     </div>
     
-    <div class="row roomy-10">
-      <div class="col-md-8">
+    <div class="row roomy-20">
+      <div class="col-md-12 text-center">
         <form>
-          <textarea></textarea>
-          <button type="submit">댓글<br>작성</button>
+          <textarea class="insert-textarea"></textarea>
+          <button id="insert-btn" type="submit">댓글<br>작성</button>
         </form>
       </div>
     </div>
-    <div class="row roomy-10">
-      <div class="col-sm-12">
-        <a>수정</a>
-        <a>삭제</a>
-        <a>목록</a>
+    <div class="row roomy-20">
+      <div class="col-md-12 bottom-btn">
+        <c:if test="${detail.u_id==sessionScope.id }">
+          <a href="#" class="btn btn-default pink-btn">수정</a>
+          <a href="#" class="btn btn-default pink-btn">삭제</a>
+        </c:if>
+        <a href="../freeboard/freeboard.do" class="btn btn-default">목록</a>
       </div>
     </div>
   </div>

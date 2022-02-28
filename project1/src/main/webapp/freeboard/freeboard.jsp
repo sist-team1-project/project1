@@ -46,7 +46,7 @@
     </c:forEach>
     <div class="row roomy-10">
       <div class="post">
-        <button type="button" class="btn btn-primary">글쓰기</button>
+        <a href="#" class="btn btn-primary">글쓰기</a>
       </div>
     </div>
     
