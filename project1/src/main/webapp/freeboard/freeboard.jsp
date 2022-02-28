@@ -1,47 +1,78 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="sist.com.model.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="sist.com.model.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Insert title here</title>
-  <link rel="stylesheet" href="../css/freeboard.css">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/freeboard.css">
 </head>
 <body>
-  <div class="container">
+  <div class="container container-pad">
+    <div class="row roomy-10 m-top-40 p-l-15">
+      <h4>
+        <b>자유게시판</b>
+      </h4>
+    </div>
     
-    <div class="row m-top-40"><div class="col-md-12 no-select"><h4><b>자유게시판</b></h4></div></div>
+    <!-- 게시물 관리 (로그인시에만) -->
     <c:if test="${sessionScope.id!=null }">
-      <div class="row m-top-20">
-        <div class="col-md-4 top-menu">자유게시판</div>
-        <div class="col-md-4 top-menu">내가 쓴 글 관리</div>
-        <div class="col-md-4 top-menu">내가 쓴 댓글 관리</div>
-      </div>  
+      <div class="row p-l-15">
+        <a href="../freeboard/freeboard.do" class="top-menu-selected">자유게시판</a> <a href="#" class="top-menu-notselected">내가 쓴 글 관리</a> <a href="#" class="top-menu-notselected">내가 쓴 댓글 관리</a>
+      </div>
     </c:if>
-    <div id="board-top" class="row m-top-20 topborder pad-10 text-center">
+    
+    <!-- 리스트 상단 -->
+    <div class="row top-border"></div>
+    <div id="board-top" class="row roomy-10 text-center">
       <div class="col-sm-7">제목</div>
-      <div class="col-sm-5">
-        <div class="col-sm-5">글쓴이</div>
-        <div class="col-sm-4">날짜</div>
-        <div class="col-sm-3">조회수</div>
+      <div class="col-sm-2">글쓴이</div>
+      <div class="col-sm-2">날짜</div>
+      <div class="col-sm-1">조회</div>
+    </div>
+
+    <!-- 리스트 -->
+    <c:forEach var="b" items="${board }" varStatus="status">
+      <div class="row row-border roomy-15">
+        <div id="post-title" class="col-sm-7 post-title-container short-container">
+          <a href="../freeboard/detail.do?bid=${b.board_id }" class="post-title short-line">[${b.board_category }]&nbsp;&nbsp;${b.board_title }</a>
+        </div>
+        <div id="post-name" class="col-sm-2 text-center">${b.u_id }</div>
+        <div id="post-date" class="col-sm-2 text-center">${b.board_date }</div>
+        <div id="post-visits" class="col-sm-1 text-center">
+          <span id="small">조회수 </span>${b.board_visits }</div>
+      </div>
+    </c:forEach>
+    <div class="row roomy-10">
+      <div class="post">
+        <button type="button" class="btn btn-primary">글쓰기</button>
       </div>
     </div>
     
-    <c:forEach var="p" items="${post }" varStatus="status">
-      <div class="row row-border pad-10">
-        <div id="post-title" class="col-sm-7 post-title-container short-container"><span class="post-title short-line">[${p.post_category }]&nbsp;&nbsp;${p.post_title }</span></div>
-        <div class="col-sm-5 small-font">
-          <div class="col-sm-5 text-center">${p.u_id }</div>
-          <div class="col-sm-4 text-center">${p.post_date }</div>
-          <div id = "visits" class="col-sm-3 text-center">${p.post_visits }</div>
-          <div id = "visits-small" class="col-md-3 text-center">조회수 ${p.post_visits }</div>
-        </div>      
-      </div>  
-    </c:forEach>
-
-    
+    <!-- 페이지 -->
+    <div class="row roomy-10">
+      <div class="page no-select">
+        <ul>
+          <c:if test="${startPage>1 }">
+            <li><a href="../freeboard/freeboard.do?page=${startPage-1 }">&laquo;</a></li>
+          </c:if>
+          <c:set var="style" value="" />
+          <c:forEach var="i" begin="${startPage }" end="${endPage }">
+            <c:if test="${i==curPage }">
+              <c:set var="style" value="class=current" />
+              <li class="current">${i }</li>
+            </c:if>
+            <c:if test="${i!=curPage }">
+              <li><a href="../freeboard/freeboard.do?page=${i }">${i }</a></li>
+            </c:if>
+          </c:forEach>
+          <c:if test="${endPage<totalPage }">
+            <li><a href="../freeboard/freeboard.do?page=${endPage+1 }">&raquo;</a></li>
+          </c:if>
+        </ul>
+      </div>
+    </div>
   </div>
 </body>
 </html>

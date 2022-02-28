@@ -1,0 +1,45 @@
+@charset "UTF-8";
+
+
+
+.padding-40 {
+  padding: 20px;
+}
+
+textarea, button {
+  vertical-align: middle;
+}
+
+textarea {
+  width: 80%;
+  height: 80px;
+  resize: none;
+  border: 1px solid #d6d6d6;
+  display:inline;
+  padding: 5px;
+  outline: none;
+}
+
+button {
+  width: 20%;
+  height: 80px;
+  color: white;
+  background-color: #017576;
+  border: 1px solid #017576;
+  padding: 5px;
+  display:inline;
+  padding: 10px;
+  margin-left: -5px;
+
+}
+
+@media screen and (min-width: 992px) {
+  .container-pad {
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+  
+  .row-border {
+    border: 1px solid #d6d6d6;
+  }
+}
