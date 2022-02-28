@@ -1,14 +1,5 @@
 @charset "UTF-8";
 
-.container-pad {
-  padding-left: 40px;
-  padding-right: 40px;
-}
-
-.row {
-  margin-left: 0px;
-  margin-right: 0px;
-}
 
 .row-border {
   border: 1px solid #d6d6d6;
@@ -63,24 +54,6 @@ th, td {
   background-color: rgb(231, 231, 231);
 }
 
-.bgwhite {
-  background-color: #fff;
-}
-
-.col-padding-0 {
-  padding: 0px;
-}
-
-.padding-10 {
-  padding:10px 20px;
-  text-align: center;
-}
-
-.padding-15 {
-  padding: 15px 20px;
-  text-align: center;
-  word-break: keep-all;
-}
 
 .title-deco {
   color: #017576;
@@ -98,7 +71,8 @@ th, td {
 .qual-name {
   font-size: 20px;
   font-weight: bold;
-  padding: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .book-img {
@@ -120,3 +94,12 @@ a, a:link, a:active, a:hover {
   -webkit-line-clamp: 2;
 }
 /* ----------- */
+
+
+@media screen and (min-width: 992px) {
+  .container-pad {
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+
+}
