@@ -21,11 +21,6 @@ public class FreeboardModel {
         BoardDAO dao = new BoardDAO();
         List<BoardVO> board = dao.freeboardList(curPage);
         
-        for(BoardVO p : board) {
-            String date = p.getBoard_date();
-            p.setBoard_date(date.substring(0,date.indexOf(" ")));
-        }
-        
         int totalPage = dao.freeboardTotalPage();
         final int BLOCK = 10;
         int startPage = ((curPage - 1) / BLOCK * BLOCK) + 1;

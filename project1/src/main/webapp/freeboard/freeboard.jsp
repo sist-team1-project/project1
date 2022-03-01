@@ -10,7 +10,7 @@
 </head>
 <body>
   <div class="container container-pad">
-    <div class="row roomy-10 m-top-40 p-l-15">
+    <div class="row roomy-10 m-top-40 p-l-15 no-select">
       <h4>
         <b>자유게시판</b>
       </h4>
@@ -18,8 +18,10 @@
     
     <!-- 게시물 관리 (로그인시에만) -->
     <c:if test="${sessionScope.id!=null }">
-      <div class="row p-l-15">
-        <a href="../freeboard/freeboard.do" class="top-menu-selected">자유게시판</a> <a href="#" class="top-menu-notselected">내가 쓴 글 관리</a> <a href="#" class="top-menu-notselected">내가 쓴 댓글 관리</a>
+      <div class="row p-l-15 no-select">
+        <a href="../freeboard/freeboard.do" class="top-menu-selected">자유게시판</a>
+        <a href="#" class="top-menu-notselected">내가 쓴 글 관리</a>
+        <a href="#" class="top-menu-notselected">내가 쓴 댓글 관리</a>
       </div>
     </c:if>
     
@@ -36,11 +38,11 @@
     <c:forEach var="b" items="${board }" varStatus="status">
       <div class="row row-border roomy-15">
         <div id="post-title" class="col-sm-7 post-title-container short-container">
-          <a href="../freeboard/detail.do?bid=${b.board_id }" class="post-title short-line">[${b.board_category }]&nbsp;&nbsp;${b.board_title }</a>
+          <a href="../freeboard/detail.do?bid=${b.board_id }" class="post-title short-line"><span class="category">[${b.board_category }]</span>&nbsp;&nbsp;${b.board_title }</a>
         </div>
-        <div id="post-name" class="col-sm-2 text-center">${b.u_id }</div>
-        <div id="post-date" class="col-sm-2 text-center">${b.board_date }</div>
-        <div id="post-visits" class="col-sm-1 text-center">
+        <div class="col-sm-2 text-center">${b.u_id }</div>
+        <div class="col-sm-2 text-center">${b.board_date }</div>
+        <div class="col-sm-1 text-center">
           <span id="small">조회수 </span>${b.board_visits }</div>
       </div>
     </c:forEach>

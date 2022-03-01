@@ -1,5 +1,7 @@
 package sist.com.vo;
 
+import java.util.*;
+
 public class BoardVO {
 
     private int board_id;
@@ -8,7 +10,7 @@ public class BoardVO {
     private String board_title;
     private String board_content;
     private int board_visits;
-    private String board_date;
+    private Date board_date;
 
     public int getBoard_id() {
         return board_id;
@@ -58,11 +60,11 @@ public class BoardVO {
         this.board_visits = board_visits;
     }
 
-    public String getBoard_date() {
+    public Date getBoard_date() {
         return board_date;
     }
 
-    public void setBoard_date(String board_date) {
+    public void setBoard_date(Date board_date) {
         this.board_date = board_date;
     }
 }

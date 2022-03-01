@@ -18,10 +18,10 @@ public class BoardDAO {
             conn = dbcp.getConnection();
             String sql = "SELECT board_id,board_category,board_title "
                     + "FROM (SELECT board_id,board_category,board_title,rownum as num "
-                    + "FROM (SELECT board_id,board_category,board_title,board_content,board_visits,board_date "
+                    + "FROM (SELECT /*+ INDEX_DESC(board_1 board_id_pk_1)*/ board_id,board_category,board_title "
                     + "FROM board_1 "
-                    + "WHERE SYSDATE-8 < TO_DATE(board_date,'YYYY-MM-DD HH24:MI:SS')"
-                    + "ORDER BY board_visits))"
+                    + "WHERE SYSDATE-8 < board_date "
+                    + "ORDER BY board_visits DESC)) "
                     + "WHERE num BETWEEN 1 AND 5";
             ps = conn.prepareStatement(sql);
 
@@ -68,7 +68,7 @@ public class BoardDAO {
                 vo.setBoard_category(rs.getString(2));
                 vo.setBoard_title(rs.getString(3));
                 vo.setU_id(rs.getString(4));
-                vo.setBoard_date(rs.getString(5));
+                vo.setBoard_date(rs.getDate(5));
                 vo.setBoard_visits(rs.getInt(6));
                 list.add(vo);
             }
@@ -81,6 +81,7 @@ public class BoardDAO {
         return list;
     }
     
+    // 자유게시판 - 페이징 - 총 페이지 수
     public int freeboardTotalPage() {
         int total = 0;
         try {
@@ -100,12 +101,24 @@ public class BoardDAO {
         return total;
     }
     
+    // 자유게시판 - 게시물 정보 & 조회수 증가
     public BoardVO freeboardDetail(int id) {
         BoardVO vo = new BoardVO();
         
         try {
             conn = dbcp.getConnection();
-            String sql = "SELECT * "
+            
+            // 조회수 증가
+            String sql = "UPDATE board_1 "
+                    + "SET board_visits=board_visits+1 "
+                    + "WHERE board_id=?";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1,  id);
+            
+            ps.executeUpdate(); // commit
+            
+            // 게시물 정보
+            sql = "SELECT * "
                     + "FROM board_1 "
                     + "WHERE board_id=?";
             ps = conn.prepareStatement(sql);
@@ -119,7 +132,7 @@ public class BoardDAO {
             vo.setBoard_title(rs.getString(4));
             vo.setBoard_content(rs.getString(5));
             vo.setBoard_visits(rs.getInt(6));
-            vo.setBoard_date(rs.getString(7));
+            vo.setBoard_date(rs.getDate(7));
             
             rs.close();
         } catch (Exception ex) {
@@ -128,5 +141,27 @@ public class BoardDAO {
             dbcp.disConnection(conn, ps);
         }
         return vo;
+    }
+    
+    public void freeboardInsert(BoardVO vo) {
+        try {
+            conn = dbcp.getConnection();
+            
+            
+            String sql = "INSERT INTO board_1 "
+                    + "VALUES(board_id_seq_1.NEXTVAL,?,?,?,?,0, ";
+            ps = conn.prepareStatement(sql);
+            /*            ps.setInt(1,  id);*/
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+
+            
+            
+            rs.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            dbcp.disConnection(conn, ps);
+        }
     }
 }
