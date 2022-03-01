@@ -11,7 +11,7 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
 <body>
-<div class="container">
+ <div id="formContent">
     <div class="row">
     <div class="col-md-8">
       <section>      
@@ -22,7 +22,7 @@
           <label class="control-label col-sm-3">아이디 <span class="text-danger">*</span></label>
           <div class="col-md-8 col-sm-9">
               <div class="input-group">
-              <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
               <input type="email" class="form-control" name="id" id="id" placeholder="아이디를 입력하세요." value="">
             </div> 
            <small> 아이디는 6~12자로 되어야 합니다. </small> </div>
@@ -91,14 +91,13 @@
           <label class="control-label col-sm-3">이메일 주소 <span class="text-danger">*</span></label>
           <div class="col-md-5 col-sm-8">
             <div class="input-group">
-              <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+              <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
             <input type="text" class="form-control" name="contactnum" id="contactnum" placeholder="이메일 주소를 입력하세요." value="">
             </div>
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label col-sm-3">주소</label> <br>
-          <small>(if any)</small></label>
+          <label class="control-label col-sm-3">주소</label>
           <div class="col-md-5 col-sm-8">
             <input type="text" class="form-control" name="contactnum2" id="contactnum2" placeholder="주소를 입력하세요." value="">
           </div>
@@ -107,24 +106,21 @@
           <label class="control-label col-sm-3">프로필사진 <br>
           <small>(optional)</small></label>
           <div class="col-md-5 col-sm-8">
-            <div class="input-group"> <span class="input-group-addon" id="file_upload"><i class="glyphicon glyphicon-upload"></i></span>
+            <div class="input-group"> <span class="input-group-addon" id="file_upload"><i class="glyphicon glyphicon-picture"></i></span>
               <input type="file" name="file_nm" id="file_nm" class="form-control upload" placeholder="" aria-describedby="file_upload">
             </div>
           </div>
         </div>
         <div class="form-group">
           <label class="control-label col-sm-3"> 비밀번호 찾기 질문/답변</label>
-          <div class="col-md-5 col-sm-8">
-            <div >
-                <input type="text" name="captcha" id="captcha" class="form-control label-warning"  />                
-              </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-xs-offset-3 col-md-8 col-sm-9"><span class="text-muted"><span class="label label-danger">알림:-</span> 회원가입 약관 어쩌구 저쩌구 블라블라</a>.</span> </div>
-        </div>
-        <div class="form-group">
-          <div class="col-xs-offset-3 col-xs-10">
+          <div class="col-xs-8">
+            <div class="form-inline">
+              <div class="form-group">
+                <select name="dd" class="form-control">
+                  <option value="">선택</option>
+                  <option value="1" >기억에 남는 추억의 장소는? </option><option value="2" >자신의 인생 좌우명은? </option><option value="3" >자신의 보물 제1호는? </option><option value="4" >가장 기억에 남는 선생님 성함은? </option><option value="5" >타인이 모르는 자신만의 신체비밀이 있다면? </option><option value="6" >추억하고 싶은 날짜가 있다면? </option><option value="7" >받았던 선물 중 기억에 남는 독특한 선물은? </option><option value="8" >유년시절 가장 생각나는 친구 이름은? </option><option value="9" >인상 깊게 읽은 책 이름은? </option><option value="10" >읽은 책 중에서 좋아하는 구절이 있다면? </option><option value="11" >자신이 두번째로 존경하는 인물은? </option><option value="12" >친구들에게 공개하지 않은 어릴 적 별명이 있다면? </option><option value="13" >초등학교 때 기억에 남는 짝꿍 이름은? </option><option value="14" >다시 태어나면 되고 싶은 것은? </option><option value="15" >내가 좋아하는 캐릭터는? </option></select>
+                    <input type="text" class="form-control" name="contactnum3" id="contactnum3" placeholder="답변을 입력하세요." value=""> <br>
+         </div>
             <input name="Submit" type="submit" value="가입" class="btn btn-primary">
           </div>
         </div>
