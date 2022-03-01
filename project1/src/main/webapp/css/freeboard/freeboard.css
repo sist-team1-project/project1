@@ -30,6 +30,14 @@
     padding-bottom: 15px;
 }
 
+sup {
+  color: #F78181;
+}
+
+.category {
+  color: #017576;
+}
+
 
 
 /*   반응형   */
@@ -42,25 +50,22 @@
 }
 
 @media screen and (max-width: 768px) {
+  
   #board-top {
     display: none;
   }
-  .post-title-container {
-    line-height: 50px;
-  }
-  .post-title {
-    vertical-align: middle;
-  }
-  .row-border {
+  
+  .border-bttom {
     border-bottom: 1px solid #d6d6d6;
   }
-}
-
-@media screen and (max-width: 768px) {
-  #post-title {
-    font-size: 15px;
+  
+  #board-title {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px;
   }
-  #post-title, #post-name, #post-date, #post-visits {
+  
+  #board-title, #board-uid, #board-date, #board-visits {
     text-align: left;
   }
 }
@@ -104,7 +109,7 @@
 
 
 
-/* 링크 제거 */
+/* 링크 효과 제거 */
 a,
 a:link,
 a:active,

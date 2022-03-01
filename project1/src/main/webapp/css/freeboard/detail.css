@@ -1,11 +1,11 @@
 @charset "UTF-8";
 
 
-.insert-textarea, #insert-btn {
+textarea, #insert-btn {
   vertical-align: middle;
 }
 
-.insert-textarea {
+textarea {
   width: 85%;
   height: 80px;
   resize: none;
@@ -28,15 +28,6 @@
   border-radius: 0px 10px 10px 0px;
 }
 
-.bottom-btn {
-  text-align: right;
-}
-
-.pink-btn {
-  background-color: #F78181;
-  border-color: #F78181;
-  color: white;
-}
 
 .content {
   min-height: 300px;
@@ -55,7 +46,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .insert-textarea {
+  textarea {
     width: 80%;
   }
   #insert-btn {

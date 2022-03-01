@@ -6,13 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../css/freeboard.css">
+<link rel="stylesheet" href="../css/freeboard/freeboard.css">
 </head>
 <body>
   <div class="container container-pad">
     <div class="row roomy-10 m-top-40 p-l-15 no-select">
       <h4>
-        <b>자유게시판</b>
+        <i class="fa fa-smile-o" aria-hidden="true"></i>&nbsp;<b>자유게시판</b>
       </h4>
     </div>
     
@@ -36,13 +36,18 @@
 
     <!-- 리스트 -->
     <c:forEach var="b" items="${board }" varStatus="status">
-      <div class="row row-border roomy-15">
-        <div id="post-title" class="col-sm-7 post-title-container short-container">
-          <a href="../freeboard/detail.do?bid=${b.board_id }" class="post-title short-line"><span class="category">[${b.board_category }]</span>&nbsp;&nbsp;${b.board_title }</a>
+      <div class="row roomy-15 border-bttom">
+        <div id="board-title" class="col-sm-7 short-line">
+          <a href="../freeboard/detail.do?bid=${b.board_id }"><span class="category">[${b.board_category }]</span>&nbsp;&nbsp;${b.board_title }</a>
+          <!-- 오늘 날짜에는 new 표시 -->
+          <fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" var="today"/>
+          <c:if test="${today==b.board_date }">
+            <sup>new</sup>
+          </c:if>
         </div>
-        <div class="col-sm-2 text-center">${b.u_id }</div>
-        <div class="col-sm-2 text-center">${b.board_date }</div>
-        <div class="col-sm-1 text-center">
+        <div id="board-uid" class="col-sm-2 text-center">${b.u_id }</div>
+        <div id="board-date" class="col-sm-2 text-center">${b.board_date }</div>
+        <div id="board-visits" class="col-sm-1 text-center">
           <span id="small">조회수 </span>${b.board_visits }</div>
       </div>
     </c:forEach>
@@ -61,7 +66,7 @@
       <div class="page no-select">
         <ul>
           <c:if test="${startPage>1 }">
-            <li><a href="../freeboard/freeboard.do?page=${startPage-1 }">&laquo;</a></li>
+            <li><a href="../freeboard/freeboard.do?page=${startPage-1 }"><i class="fa fa-caret-left" aria-hidden="true"></i></a></li>
           </c:if>
           <c:set var="style" value="" />
           <c:forEach var="i" begin="${startPage }" end="${endPage }">
@@ -74,7 +79,7 @@
             </c:if>
           </c:forEach>
           <c:if test="${endPage<totalPage }">
-            <li><a href="../freeboard/freeboard.do?page=${endPage+1 }">&raquo;</a></li>
+            <li><a href="../freeboard/freeboard.do?page=${endPage+1 }"><i class="fa fa-caret-right" aria-hidden="true"></i></a></li>
           </c:if>
         </ul>
       </div>

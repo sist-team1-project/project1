@@ -67,6 +67,7 @@ public class FreeboardModel {
         String category = request.getParameter("category");
         String title = request.getParameter("title");
         String content = request.getParameter("content");
+        content = content.replace("\n", "<br>");
 
         BoardVO vo = new BoardVO();
         vo.setU_id(uid);
@@ -77,6 +78,47 @@ public class FreeboardModel {
 
         BoardDAO dao = new BoardDAO();
         dao.freeboardInsert(vo);
+
+        return "redirect:../freeboard/freeboard.do";
+    }
+
+    @RequestMapping("freeboard/update.do")
+    public String freeboard_update(HttpServletRequest request, HttpServletResponse response) {
+        
+        String bid = request.getParameter("bid");
+        
+        BoardDAO dao = new BoardDAO();
+        BoardVO detail = dao.freeboardUpdateDetail(Integer.parseInt(bid));
+        
+        request.setAttribute("detail", detail);
+        request.setAttribute("main_jsp", "../freeboard/update.jsp");
+        
+        return "../main/main.jsp";
+    }
+    
+    @RequestMapping("freeboard/update_ok.do")
+    public String freeboard_update_ok(HttpServletRequest request, HttpServletResponse response) {
+
+        try {
+            request.setCharacterEncoding("UTF-8");
+        } catch (Exception ex) {
+        }
+        
+        String bid = request.getParameter("bid");
+        String category = request.getParameter("category");
+        String title = request.getParameter("title");
+        String content = request.getParameter("content");
+        content = content.replace("\n", "<br>");
+
+        BoardVO vo = new BoardVO();
+
+        vo.setBoard_id(Integer.parseInt(bid));
+        vo.setBoard_category(category);
+        vo.setBoard_title(title);
+        vo.setBoard_content(content);
+
+        BoardDAO dao = new BoardDAO();
+        dao.freeboardUpdate(vo);
 
         return "redirect:../freeboard/freeboard.do";
     }

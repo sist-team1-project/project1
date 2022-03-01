@@ -165,4 +165,56 @@ public class BoardDAO {
             dbcp.disConnection(conn, ps);
         }
     }
+    
+    public BoardVO freeboardUpdateDetail(int id) {
+        BoardVO vo = new BoardVO();
+        
+        try {
+            conn = dbcp.getConnection();
+            
+            String sql = "SELECT board_id,board_category,board_title,board_content "
+                    + "FROM board_1 "
+                    + "WHERE board_id=?";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1,  id);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            
+            vo.setBoard_id(rs.getInt(1));
+            vo.setBoard_category(rs.getString(2));
+            vo.setBoard_title(rs.getString(3));
+            String content = rs.getString(4).replace("<br>", "\n");
+            vo.setBoard_content(content);
+            
+            rs.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            dbcp.disConnection(conn, ps);
+        }
+        return vo;
+        
+    }
+    // 자유게시판 - 게시물 수정
+    public void freeboardUpdate(BoardVO vo) {
+        try {
+            conn = dbcp.getConnection();
+            
+            String sql = "UPDATE board_1 SET board_category=?,board_title=?,board_content=? "
+                    + "WHERE board_id=?";
+            
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, vo.getBoard_category());
+            ps.setString(2, vo.getBoard_title());
+            ps.setString(3, vo.getBoard_content());
+            ps.setInt(4, vo.getBoard_id());
+            
+            ps.executeUpdate(); // commit
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            dbcp.disConnection(conn, ps);
+        }
+    }
 }
