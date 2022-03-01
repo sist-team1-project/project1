@@ -264,6 +264,15 @@ a:focus {
     border-color: #b6b6b6;
 }
 
+.btn-pink,
+.btn-pink:focus,
+.btn-pink:active,
+.btn-pink:active:hover,
+.btn-pink:hover {
+  background-color: #F78181;
+  border-color: #F78181;
+  color: white;
+}
 
 /* --------- */
 
