@@ -137,7 +137,7 @@
     </div>
     <div class="row roomy-40 text-center">
       <a href="../main/main.do" class="btn btn-primary">홈으로</a>&nbsp;&nbsp; <a href="#" class="btn btn-default"> 즐겨찾기 추가</a>&nbsp;&nbsp;
-      <div class="row no-select text-right">조회수 ${company.c_visits }</div>
+      <div class="row no-select text-center" style="margin-top: 20px;">조회수 ${company.c_visits }</div>
     </div>
     <!-------------->
 

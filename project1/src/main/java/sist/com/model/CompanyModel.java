@@ -16,7 +16,6 @@ public class CompanyModel {
         CompanyDAO cdao = new CompanyDAO();
         CompanyVO company = cdao.companyDetail(Integer.parseInt(cid));
 
-        
         AdDAO a = new AdDAO();
         List<AdVO> adlist = a.companyAdList(Integer.parseInt(cid));
         

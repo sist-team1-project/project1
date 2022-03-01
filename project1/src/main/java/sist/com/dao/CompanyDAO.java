@@ -81,7 +81,16 @@ public class CompanyDAO {
         CompanyVO vo = new CompanyVO();
         try {
             conn = dbcp.getConnection();
-            String sql = "SELECT * "
+            
+            String sql = "UPDATE company_1 "
+                    + "SET c_visits=c_visits+1 "
+                    + "WHERE c_id=?";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1,  id);
+            
+            ps.executeUpdate();
+            
+            sql = "SELECT * "
                     + "FROM company_1 "
                     + "WHERE c_id=?";
 
