@@ -143,21 +143,22 @@ public class BoardDAO {
         return vo;
     }
     
+    // 자유게시판 - 게시물 작성
     public void freeboardInsert(BoardVO vo) {
         try {
             conn = dbcp.getConnection();
             
+            String sql = "INSERT INTO board_1(board_id,u_id,board_category,board_title,board_content) "
+                    + "VALUES(board_id_seq_1.NEXTVAL,?,?,?,?)";
             
-            String sql = "INSERT INTO board_1 "
-                    + "VALUES(board_id_seq_1.NEXTVAL,?,?,?,?,0, ";
             ps = conn.prepareStatement(sql);
-            /*            ps.setInt(1,  id);*/
-            ResultSet rs = ps.executeQuery();
-            rs.next();
+            ps.setString(1, vo.getU_id());
+            ps.setString(2, vo.getBoard_category());
+            ps.setString(3, vo.getBoard_title());
+            ps.setString(4, vo.getBoard_content());
+            
+            ps.executeUpdate(); // commit
 
-            
-            
-            rs.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {

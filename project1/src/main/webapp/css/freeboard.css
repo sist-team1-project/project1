@@ -73,7 +73,8 @@
 
 
 
-/*  하단 페이지  */
+/*  페이지  */
+
 .page {
   display: block;
   width: 100%;
@@ -91,6 +92,10 @@
   color: black;
   font-weight: bold;
 }
+
+
+
+/* 글쓰기 버튼 */
 
 .post {
   text-align: right;

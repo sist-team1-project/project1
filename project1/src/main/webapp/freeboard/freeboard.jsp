@@ -46,14 +46,18 @@
           <span id="small">조회수 </span>${b.board_visits }</div>
       </div>
     </c:forEach>
-    <div class="row roomy-10">
-      <div class="post">
-        <a href="#" class="btn btn-primary">글쓰기</a>
+    
+    <!-- 글쓰기 버튼 로그인시에만 보이기 -->
+    <c:if test="${sessionScope.id!=null }">
+      <div class="row">
+        <div class="post">
+          <a href="../freeboard/insert.do" class="btn btn-primary">글쓰기</a>
+        </div>
       </div>
-    </div>
+    </c:if>
     
     <!-- 페이지 -->
-    <div class="row roomy-10">
+    <div class="row roomy-20">
       <div class="page no-select">
         <ul>
           <c:if test="${startPage>1 }">

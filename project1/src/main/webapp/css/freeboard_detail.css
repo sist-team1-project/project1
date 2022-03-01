@@ -1,12 +1,9 @@
 @charset "UTF-8";
 
 
-
-
 .insert-textarea, #insert-btn {
   vertical-align: middle;
 }
-
 
 .insert-textarea {
   width: 85%;
