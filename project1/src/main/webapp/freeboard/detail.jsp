@@ -57,7 +57,7 @@
       <div class="col-md-12 text-right">
         <c:if test="${detail.u_id==sessionScope.id }">
           <a href="../freeboard/update.do?bid=${detail.board_id }" class="btn btn-pink">수정</a>
-          <a href="#" class="btn btn-pink">삭제</a>
+          <a href="../freeboard/delete_ok.do?bid=${detail.board_id }" class="btn btn-pink">삭제</a>
         </c:if>
         <a href="../freeboard/freeboard.do" class="btn btn-default">목록</a>
       </div>

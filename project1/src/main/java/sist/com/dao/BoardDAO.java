@@ -217,4 +217,24 @@ public class BoardDAO {
             dbcp.disConnection(conn, ps);
         }
     }
+
+    // 자유게시판 - 게시물 수정
+    public void freeboardDelete(int id) {
+        try {
+            conn = dbcp.getConnection();
+            
+            String sql = "DELETE FROM board_1 "
+                    + "WHERE board_id=?";
+            
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            
+            ps.executeUpdate(); // commit
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            dbcp.disConnection(conn, ps);
+        }
+    }
 }

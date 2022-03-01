@@ -122,4 +122,15 @@ public class FreeboardModel {
 
         return "redirect:../freeboard/freeboard.do";
     }
+    
+    @RequestMapping("freeboard/delete_ok.do")
+    public String freeboard_delete_ok(HttpServletRequest request, HttpServletResponse response) {
+
+        String bid = request.getParameter("bid");
+
+        BoardDAO dao = new BoardDAO();
+        dao.freeboardDelete(Integer.parseInt(bid));
+
+        return "redirect:../freeboard/freeboard.do";
+    }
 }
