@@ -86,7 +86,7 @@ public class BoardDAO {
         int total = 0;
         try {
             conn = dbcp.getConnection();
-            String sql = "SELECT CEIL(COUNT(*)/12.0) "
+            String sql = "SELECT CEIL(COUNT(*)/10.0) "
                     + "FROM board_1";
             ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
