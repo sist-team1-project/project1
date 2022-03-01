@@ -20,7 +20,6 @@
 }
 
 .formContent {
-  -webkit-border-radius: 10px 10px 10px 10px;
   border-radius: 10px 10px 10px 10px;
   background: #fff;
   width: 100%;
@@ -35,12 +34,7 @@
   text-align: right;
 }
 
-a {
-  color: #92badd;
-  display:inline-block;
-  text-decoration: none;
-  font-weight: 400;
-}
+
 
 .box {
   width: 100%;
@@ -56,7 +50,7 @@ a {
     padding: 40px 30px;
 }
 
-/* FORM TYPOGRAPHY*/
+/* 폼 */
 
 .login {
   background-color: #017576;
@@ -64,29 +58,24 @@ a {
 }
 
 .join {
-  background-color: #f6f6f6;
+  background-color: rgb(230, 230, 230);
   color: black;
+}
+
+:focus {
+  outline: none;
 }
 
 input[type="text"], input[type="password"] {
   width: 100%;
   padding: 12px 25px;
   margin: 5px 0px;
-  border: 2px solid #f6f6f6;
+  border: 1px solid #F2F2F2;
   
   text-align: center;
   text-decoration: none;
   display: inline-block;
-
-  -webkit-transition: all 0.5s ease-in-out;
-  -moz-transition: all 0.5s ease-in-out;
-  -ms-transition: all 0.5s ease-in-out;
-  -o-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
-  -webkit-border-radius: 5px 5px 5px 5px;
-  border-radius: 5px 5px 5px 5px;
 }
-
 
 input[type="button"], input[type="submit"] {
   width: 100%;
@@ -95,20 +84,25 @@ input[type="button"], input[type="submit"] {
   padding: 12px 25px;
   text-align: center;
   text-decoration: none;
-  text-transform: uppercase;
   cursor: pointer;
   margin: 5px 0px;
-  
-  -webkit-border-radius: 5px 5px 5px 5px;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -ms-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
 }
-/* ANIMATIONS */
 
-/* Simple CSS3 Fade-in-down Animation */
+
+
+
+
+/* 링크 효과 제거 */
+a,
+a:link,
+a:active,
+a:hover {
+  text-decoration: none;
+}
+
+
+
+/* 애니메이션 */
 .fadeInDown {
   -webkit-animation-name: fadeInDown;
   animation-name: fadeInDown;
@@ -144,7 +138,6 @@ input[type="button"], input[type="submit"] {
   }
 }
 
-/* Simple CSS3 Fade-in Animation */
 @-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 @-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
@@ -186,34 +179,4 @@ input[type="button"], input[type="submit"] {
   -webkit-animation-delay: 1s;
   -moz-animation-delay: 1s;
   animation-delay: 1s;
-}
-
-/* Simple CSS3 Fade-in Animation */
-.underlineHover:after {
-  display: block;
-  width: 0;
-  height: 2px;
-  background-color: #017576;
-  content: "";
-  transition: width 0.2s;
-}
-
-.underlineHover:hover {
-  color: #0d0d0d;
-}
-
-.underlineHover:hover:after{
-  width: 100%;
-}
-
-
-
-/* OTHERS */
-
-*:focus {
-    outline: none;
-} 
-
-#icon {
-  width:30%;
 }

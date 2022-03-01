@@ -35,7 +35,7 @@
                   <input type="text" id="id" class="fadeIn second" name="id" placeholder="아이디">
                   <input type="password" id="pwd" class="fadeIn third" name="pwd" placeholder="비밀번호">
                   <div class="formFooter fadeIn third">
-                    <a class="underlineHover" href="#">아이디 찾기 </a> <a class="underlineHover" href="#">비밀번호 찾기</a>
+                    <a href="#">아이디 찾기</a>&nbsp;&nbsp;&nbsp;<a href="#">비밀번호 찾기</a>
                   </div>
                   <input type="button" id="login" class="login fadeIn fourth " value="로그인"> <input type="button" class="join fadeIn fourth" value="회원가입">
                 </form>
