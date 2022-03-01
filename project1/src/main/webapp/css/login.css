@@ -1,7 +1,4 @@
 @charset "UTF-8";
-.zero-raduis{
-    border-radius: 0px !important;
-}
 
 .row {
   margin-left: 0px;
@@ -29,13 +26,6 @@
   text-align: center;
 }
 
-.formFooter {
-  padding: 5px 0px ;
-  text-align: right;
-}
-
-
-
 .box {
   width: 100%;
   max-width: 480px;
@@ -49,6 +39,13 @@
 .formcontent-pad {
     padding: 40px 30px;
 }
+
+.formFooter {
+  padding: 5px 0px ;
+  text-align: right;
+}
+
+
 
 /* 폼 */
 
@@ -70,7 +67,7 @@ input[type="text"], input[type="password"] {
   width: 100%;
   padding: 12px 25px;
   margin: 5px 0px;
-  border: 1px solid #F2F2F2;
+  border: 1px solid rgb(230, 230, 230);
   
   text-align: center;
   text-decoration: none;
@@ -87,7 +84,6 @@ input[type="button"], input[type="submit"] {
   cursor: pointer;
   margin: 5px 0px;
 }
-
 
 
 
