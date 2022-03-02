@@ -30,29 +30,21 @@ public class MainModel {
         
         /*       Best 공고       */
         List<AdVO> ad = a.bestAdList();
-        List<CompanyVO> adCompany = new ArrayList<CompanyVO>();
+        List<String> adCname = new ArrayList<String>();
         
         for (int i = 0; i < ad.size(); i++) {
-            CompanyVO info = c.companyDetail(ad.get(i).getC_id());
-            
-            String addr = info.getC_address();
-            addr = addr.substring(0,addr.indexOf(" ", addr.indexOf(" ")+1));
-            info.setC_address(addr);
-            adCompany.add(info);
+            String cname = c.companyName(ad.get(i).getC_id());
+            adCname.add(cname);
         }
         
         
         /*       마감 임박 공고       */
         List<AdVO> adEnd = a.adEndList();
-        List<CompanyVO> adEndCompany = new ArrayList<CompanyVO>();
+        List<String> adEndCname = new ArrayList<String>();
         
         for (int i = 0; i < adEnd.size(); i++) {
-            CompanyVO info = c.companyDetail(adEnd.get(i).getC_id());
-
-            String addr = info.getC_address();
-            addr = addr.substring(0,addr.indexOf(" ", addr.indexOf(" ")+1));
-            info.setC_address(addr);
-            adEndCompany.add(info);
+            String cname = c.companyName(ad.get(i).getC_id());
+            adEndCname.add(cname);
         }
         
         
@@ -65,9 +57,9 @@ public class MainModel {
         request.setAttribute("bigCompany", bigCompany);
         
         request.setAttribute("ad", ad);
-        request.setAttribute("adCompany", adCompany);
+        request.setAttribute("adCname", adCname);
         request.setAttribute("adEnd", adEnd);
-        request.setAttribute("adEndCompany", adEndCompany);
+        request.setAttribute("adEndCname", adEndCname);
         
         request.setAttribute("freeBoardVisits", freeBoardVisits);
         

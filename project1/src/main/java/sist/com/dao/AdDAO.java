@@ -16,9 +16,9 @@ public class AdDAO {
 		List<AdVO> list = new ArrayList<AdVO>();
 		try {
 			conn = dbcp.getConnection();
-			String sql = "SELECT ad_id,ad_title,ad_end,ad_we,ad_education,c_id "
-					+ "FROM (SELECT ad_id,ad_title,ad_end,ad_we,ad_education,c_id,rownum as num "
-					+ "FROM (SELECT ad_id,ad_title,ad_end,ad_we,ad_education,c_id FROM  ad_1 WHERE SYSDATE-1 < TO_DATE(ad_end) OR ad_end IS NULL ORDER BY ad_visits DESC)) "
+			String sql = "SELECT ad_id,ad_title,ad_end,ad_we,ad_education,ad_workplace,c_id "
+					+ "FROM (SELECT ad_id,ad_title,ad_end,ad_we,ad_education,ad_workplace,c_id,rownum as num "
+					+ "FROM (SELECT ad_id,ad_title,ad_end,ad_we,ad_education,ad_workplace,c_id FROM  ad_1 WHERE SYSDATE-1 < TO_DATE(ad_end) OR ad_end IS NULL ORDER BY ad_visits DESC)) "
 					+ "WHERE num BETWEEN 1 AND 12";
 			ps = conn.prepareStatement(sql);
 
@@ -39,9 +39,13 @@ public class AdDAO {
 					we = we.substring(0, we.indexOf(" ("));
 				}
 				vo.setAd_we(we);
-
-				vo.setAd_education(rs.getString(5));
-				vo.setC_id(rs.getInt(6));
+				
+                vo.setAd_education(rs.getString(5));
+                
+                String addr = rs.getString(6);
+                addr = addr.substring(0,addr.indexOf(" ", addr.indexOf(" ")+1));
+                vo.setAd_workplace(addr);
+                vo.setC_id(rs.getInt(7));
 				list.add(vo);
 			}
 			rs.close();
@@ -58,9 +62,9 @@ public class AdDAO {
 		List<AdVO> list = new ArrayList<AdVO>();
 		try {
 			conn = dbcp.getConnection();
-			String sql = "SELECT ad_id,ad_title,ad_end,ad_we,ad_education,c_id "
-					+ "FROM (SELECT ad_id,ad_title,ad_end,ad_we,ad_education,c_id,rownum as num "
-					+ "FROM (SELECT ad_id,ad_title,ad_end,ad_we,ad_education,c_id FROM  ad_1 WHERE SYSDATE-1 < TO_DATE(ad_end) ORDER BY ad_end ASC)) "
+			String sql = "SELECT ad_id,ad_title,ad_end,ad_we,ad_education,ad_workplace,c_id "
+					+ "FROM (SELECT ad_id,ad_title,ad_end,ad_we,ad_education,ad_workplace,c_id,rownum as num "
+					+ "FROM (SELECT ad_id,ad_title,ad_end,ad_we,ad_education,ad_workplace,c_id FROM  ad_1 WHERE SYSDATE-1 < TO_DATE(ad_end) ORDER BY ad_end ASC)) "
 					+ "WHERE num BETWEEN 1 AND 6";
 			ps = conn.prepareStatement(sql);
 
@@ -83,7 +87,11 @@ public class AdDAO {
 				vo.setAd_we(we);
 
 				vo.setAd_education(rs.getString(5));
-				vo.setC_id(rs.getInt(6));
+				
+				String addr = rs.getString(6);
+	            addr = addr.substring(0,addr.indexOf(" ", addr.indexOf(" ")+1));
+				vo.setAd_workplace(addr);
+                vo.setC_id(rs.getInt(7));
 				list.add(vo);
 			}
 			rs.close();

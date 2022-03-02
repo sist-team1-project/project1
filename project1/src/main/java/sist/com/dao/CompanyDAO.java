@@ -76,6 +76,30 @@ public class CompanyDAO {
         return list;
     }
     
+    // 메인 - 공고 회사 이름 가져오기
+    public String companyName(int id) {
+        String name = "";
+        try {
+            conn = dbcp.getConnection();
+            
+            String sql = "SELECT c_name "
+                    + "FROM company_1 "
+                    + "WHERE c_id=?";
+
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            name = rs.getString(1);
+            rs.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            dbcp.disConnection(conn, ps);
+        }
+        return name;
+    }
     // 기업 - 기업 상세정보
     public CompanyVO companyDetail(int id) {
         CompanyVO vo = new CompanyVO();

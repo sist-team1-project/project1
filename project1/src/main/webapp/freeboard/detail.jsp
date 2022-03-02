@@ -23,12 +23,15 @@
 </head>
 <body>
   <div class="container container-pad">
+  
     <!-- 제목 -->
     <div class="row m-top-40">
       <div class="col-md-12 roomy-10">
         <h4><b>[${detail.board_category }]&nbsp;&nbsp;${detail.board_title }</b></h4>
       </div>
     </div>
+    <!------------->
+    
     <!-- 날짜 / 조회수 -->
     <div class="row roomy-10">
       <div class="col-md-12">
@@ -36,6 +39,8 @@
       </div>
     </div>
     <hr>
+    <!------------->
+    
     <!-- 내용 -->
     <div class="row roomy-20 content">
       <div class="col-md-12">
@@ -43,10 +48,12 @@
       </div>
     </div>
     <hr>
+    <!------------->
     
     <!-- 댓글 작성 -->
     <div class="row roomy-20">
       <div class="col-md-12 text-center">
+        <!-- 로그인했을 때 댓글창 -->
         <c:if test="${sessionScope.id!=null }">
           <form method=post action="../freeboard/reply_ok.do" id="reply-form">
             <input type="hidden" id="uid" name="uid" value="${sessionScope.id }">
@@ -55,12 +62,14 @@
             <button type="button" id="reply-btn">댓글<br>작성</button>
           </form>
         </c:if>
+        <!-- 로그인 안했을 때 댓글창 -->
         <c:if test="${sessionScope.id==null }">
           <textarea readonly>로그인한 뒤 작성하여 주세요.</textarea>
           <button type="button" id="reply-btn">댓글<br>작성</button>
         </c:if>
       </div>
     </div>
+    <!------------->
     
     <!-- 댓글 출력 -->
     <c:forEach var="r" items="${reply }" varStatus="status">
@@ -70,12 +79,13 @@
           ${r.reply_content } 
         </div>
         <div class="col-xs-4 col-sm-3 reply_delete_btn">
-          ${r.reply_date }&nbsp;&nbsp;
-          <c:if test="${r.u_id==sessionScope.id}"><a href="../freeboard/reply_delete_ok.do?bid=${r.board_id }&rid=${r.reply_id }"><i class="fa fa-times" aria-hidden="true"></i></a></c:if>
+          <c:if test="${r.u_id==sessionScope.id}"><a href="../freeboard/reply_delete_ok.do?bid=${r.board_id }&rid=${r.reply_id }"><i class="fa fa-times" aria-hidden="true"></i></a></c:if>&nbsp;
+          ${r.reply_date }
         </div>
       </div>
     </c:forEach>
-
+    <!------------->
+    
     <!-- 하단 버튼 -->
     <div class="row roomy-20">
       <div class="col-md-12 text-right">
@@ -84,9 +94,10 @@
           <a href="../freeboard/delete_ok.do?bid=${detail.board_id }" id="delete-btn" class="btn btn-pink" onclick="return confirm('게시물을 삭제 하시겠습니까?')">삭제</a>
         </c:if>
         <a href="../freeboard/freeboard.do" class="btn btn-default">목록</a>
-        
       </div>
     </div>
+    <!------------->
+    
   </div>
 </body>
 </html>
