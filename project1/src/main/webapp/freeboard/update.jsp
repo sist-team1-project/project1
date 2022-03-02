@@ -5,41 +5,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="../css/freeboard/insert.css">
-<script>
-	$(function() {
-		$('#insert-btn').click(function() {
-			let category = $('#category').val();
-			if (category.trim() == "none") {
-				$('#category').focus();
-				return;
-			}
-
-			let title = $('#title').val();
-			if (title.trim() == "") {
-				$('#title').focus();
-				return;
-			}
-
-			let content = $('#content').val();
-			if (content.trim() == "") {
-				$('#content').focus();
-				return;
-			}
-
-			alert("게시물이 수정되었습니다");
-			$('#update-form').submit();
-		})
-	})
-	
-    $(function() {
-        $('#cancel-btn').click(function() {
-            history.back();
-        })
-    })
-</script>
+  <meta charset="UTF-8">
+  <title>Insert title here</title>
+  <link rel="stylesheet" href="../css/freeboard/insert.css">
+  <script type="text/javascript" src="../js/freeboard.js"></script>
 </head>
 <body>
   <div class="container container-pad">
@@ -78,12 +47,11 @@
 
       <div class="row roomy-10">
         <div class="col-sm-12 text-right">
-            <input type="button" id="insert-btn" class="btn btn-primary" value="수정">
-            <input type="button" id="cancel-btn" class="btn btn-default" value="취소">
+          <input type="button" id="update-btn" class="btn btn-primary" value="수정">
+          <input type="button" id="cancel-btn" class="btn btn-default" value="취소">
         </div>
       </div>
     </form>
   </div>
-
 </body>
 </html>

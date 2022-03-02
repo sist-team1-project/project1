@@ -41,9 +41,15 @@ public class FreeboardModel {
     public String freeboard_detail(HttpServletRequest request, HttpServletResponse response) {
 
         String id = request.getParameter("bid");
-        BoardDAO dao = new BoardDAO();
-        BoardVO detail = dao.freeboardDetail(Integer.parseInt(id));
+        
+        BoardDAO bdao = new BoardDAO();
+        BoardVO detail = bdao.freeboardDetail(Integer.parseInt(id));
+        
+        ReplyDAO rdao = new ReplyDAO();
+        List<ReplyVO> reply = rdao.replyList(Integer.parseInt(id));
+
         request.setAttribute("detail", detail);
+        request.setAttribute("reply", reply);
         request.setAttribute("main_jsp", "../freeboard/detail.jsp");
         return "../main/main.jsp";
     }
@@ -132,5 +138,41 @@ public class FreeboardModel {
         dao.freeboardDelete(Integer.parseInt(bid));
 
         return "redirect:../freeboard/freeboard.do";
+    }
+    
+    @RequestMapping("freeboard/reply_ok.do")
+    public String freeboard_reply_ok(HttpServletRequest request, HttpServletResponse response) {
+
+        try {
+            request.setCharacterEncoding("UTF-8");
+        } catch (Exception ex) {
+        }
+        
+        String bid = request.getParameter("bid");
+        String uid = request.getParameter("uid");
+        String content = request.getParameter("content");
+        content = content.replace("\n", "<br>");
+        
+        ReplyVO vo = new ReplyVO();
+        vo.setBoard_id(Integer.parseInt(bid));
+        vo.setU_id(uid);
+        vo.setReply_content(content);
+        
+        ReplyDAO dao = new ReplyDAO();
+        dao.replyInsert(vo);
+
+        return "redirect:../freeboard/detail.do?bid=" + bid;
+    }
+
+    @RequestMapping("freeboard/reply_delete_ok.do")
+    public String freeboard_reply_delete_ok(HttpServletRequest request, HttpServletResponse response) {
+        
+        String bid = request.getParameter("bid");
+        String rid = request.getParameter("rid");
+
+        ReplyDAO dao = new ReplyDAO();
+        dao.freeboardReplyDelete(Integer.parseInt(rid));
+
+        return "redirect:../freeboard/detail.do?bid=" + bid;
     }
 }
