@@ -37,7 +37,8 @@
                   <div class="formFooter fadeIn third">
                     <a href="#">아이디 찾기</a>&nbsp;&nbsp;&nbsp;<a href="#">비밀번호 찾기</a>
                   </div>
-                  <input type="button" id="login" class="login fadeIn fourth " value="로그인"> <input type="button" class="join fadeIn fourth" value="회원가입">
+                  <input type="button" id="login" class="login fadeIn fourth " value="로그인">
+                   <input type="button" class="join fadeIn fourth" value="회원가입" onclick="location.href='../login/join.jsp'">
                   <small>자리JOB기는 회원님의 익명성을 보장하기 위해 <br>어떠한 개인정보도 노출하지 않습니다.</small>
                 </form>
               </div>

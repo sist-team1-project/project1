@@ -17,13 +17,17 @@
       <section>      
         <h1 class="entry-title"><span>회원가입</span> </h1>
         <hr>
-            <form class="form-horizontal" method="post" name="signup" id="signup" enctype="multipart/form-data" >        
+            <form method="post" action="../login/sign_up_ok.do" name="sign_up_frm" id="sign_up_frm">
         <div class="form-group">
           <label class="control-label col-sm-3">아이디 <span class="text-danger">*</span></label>
           <div class="col-md-8 col-sm-9">
               <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-              <input type="email" class="form-control" name="id" id="id" placeholder="아이디를 입력하세요." value="">
+              <div class="col-sm-12">
+              <input type="email" class="form-control" name="id" id="id" placeholder="아이디를 입력하세요." value=""></div>
+              <div class="col-sm-">
+              <input type=button id="checkBtn" value="중복체크" class="btn btn-sm btn-primary"></div>
+              
             </div> 
            <small> 아이디는 6~12자로 되어야 합니다. </small> </div>
         </div>
@@ -119,7 +123,7 @@
                 <select name="dd" class="form-control">
                   <option value="">선택</option>
                   <option value="1" >기억에 남는 추억의 장소는? </option><option value="2" >자신의 인생 좌우명은? </option><option value="3" >자신의 보물 제1호는? </option><option value="4" >가장 기억에 남는 선생님 성함은? </option><option value="5" >타인이 모르는 자신만의 신체비밀이 있다면? </option><option value="6" >추억하고 싶은 날짜가 있다면? </option><option value="7" >받았던 선물 중 기억에 남는 독특한 선물은? </option><option value="8" >유년시절 가장 생각나는 친구 이름은? </option><option value="9" >인상 깊게 읽은 책 이름은? </option><option value="10" >읽은 책 중에서 좋아하는 구절이 있다면? </option><option value="11" >자신이 두번째로 존경하는 인물은? </option><option value="12" >친구들에게 공개하지 않은 어릴 적 별명이 있다면? </option><option value="13" >초등학교 때 기억에 남는 짝꿍 이름은? </option><option value="14" >다시 태어나면 되고 싶은 것은? </option><option value="15" >내가 좋아하는 캐릭터는? </option></select>
-                    <input type="text" class="form-control" name="contactnum3" id="contactnum3" placeholder="답변을 입력하세요." value=""> <br>
+                    <input type="text" class="form-control" name="contactnum3" id="contactnum3" placeholder="답변을 입력하세요." value=""> 
          </div>
             <input name="Submit" type="submit" value="가입" class="btn btn-primary">
           </div>

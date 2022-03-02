@@ -1,8 +1,15 @@
 package sist.com.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import java.util.StringTokenizer;
 
 import javax.servlet.http.*;
+
+import sist.com.dao.UsersDAO;
+import sist.com.vo.UsersVO;
 
 import sist.com.controller.RequestMapping;
 import sist.com.dao.*;
@@ -51,4 +58,65 @@ public class UsersModel {
         request.setAttribute("main_jsp", "../login/mypage.jsp");
         return "../main/main.jsp";
     }
-}
+    @RequestMapping("login/join.do")
+    public String loginJoin(HttpServletRequest request,HttpServletResponse response)
+    {
+        request.setAttribute("main_jsp", "../login/join.jsp");
+        return "../login/join.jsp";
+    }
+    @RequestMapping("login/idcheck.do")
+    public String memberIdCheck(HttpServletRequest request,
+            HttpServletResponse response)
+    {
+        return "../member/idcheck.jsp";
+    }
+    @RequestMapping("login/idcheck_result.do")
+    public String memberIdCheckResult(HttpServletRequest request,
+            HttpServletResponse response)
+    {
+        String id=request.getParameter("id"); 
+        UsersDAO dao=new UsersDAO();
+        int count=dao.loginIdcheck(id);
+        request.setAttribute("count", count);
+        return "../login/idcheck_result.jsp";
+    }
+    @RequestMapping("login/join_ok.do")
+    public String memberJoinOk(HttpServletRequest request,
+            HttpServletResponse response)
+    {
+        try
+        {
+            request.setCharacterEncoding("UTF-8");
+        }catch(Exception ex){}
+        // 입력값 받기 
+        String id=request.getParameter("u_id");
+        String password=request.getParameter("u_password");
+        String name=request.getParameter("u_name");
+        String profile=request.getParameter("u_profile");
+        String birthday=request.getParameter("u_birthday");
+        String gender=request.getParameter("u_gender");
+        String email=request.getParameter("u_email");
+        String address=request.getParameter("u_address");
+        String question=request.getParameter("u_question");
+        String answer=request.getParameter("u_answer");
+        
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+        Date b_day = formatter.parse(birthday);
+        
+        UsersVO vo=new UsersVO();
+        vo.setU_id(id);
+        vo.setU_password(password);
+        vo.setU_name(name);
+        vo.setU_profile(profile);
+        vo.setU_birthday(b_day);
+        vo.setU_gender(gender);
+        vo.setU_email(email);
+        vo.setU_address(address);
+        vo.setU_question(question);
+        UsersDAO dao=new UsersDAO();
+        //메소드 (INSERT)
+        dao.loginJoin(vo);
+        return "redirect:../main/main.do";
+    }
+ }
+    
