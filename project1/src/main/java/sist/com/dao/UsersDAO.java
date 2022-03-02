@@ -1,8 +1,6 @@
 package sist.com.dao;
 
 import java.sql.*;
-import java.sql.Date;
-import java.util.*;
 
 import sist.com.vo.*;
 
@@ -15,8 +13,7 @@ public class UsersDAO {
         String result = "";
         try {
             conn = dbcp.getConnection();
-            String sql = "SELECT COUNT(*) FROM users_1 "
-                    + "WHERE u_id=?";
+            String sql = "SELECT COUNT(*) FROM users_1 " + "WHERE u_id=?";
             ps = conn.prepareStatement(sql);
             ps.setString(1, id);
             ResultSet rs = ps.executeQuery();
@@ -26,9 +23,7 @@ public class UsersDAO {
             if (count == 0) {
                 return "FAIL";
             } else {
-                sql = "SELECT u_password,u_name "
-                        + "FROM users_1 "
-                        + "WHERE u_id=?";
+                sql = "SELECT u_password,u_name " + "FROM users_1 " + "WHERE u_id=?";
                 ps = conn.prepareStatement(sql);
                 ps.setString(1, id);
                 rs = ps.executeQuery();
@@ -50,55 +45,45 @@ public class UsersDAO {
         }
         return result;
     }
-    public int loginIdcheck(String id)
-    {
-        int count=0;
-        try
-        {
-            conn=dbcp.getConnection();
-            String sql="SELECT COUNT(*) FROM users_1 "
-                    +"WHERE u_id=?";
-            ps=conn.prepareStatement(sql);
-            ps.setString(1,id);
-            ResultSet rs=ps.executeQuery();
+
+    public int loginIdcheck(String id) {
+        int count = 0;
+        try {
+            conn = dbcp.getConnection();
+            String sql = "SELECT COUNT(*) FROM users_1 " + "WHERE u_id=?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
             rs.next();
-            count=rs.getInt(1);
+            count = rs.getInt(1);
             rs.close();
-        }catch(Exception ex)
-        {
+        } catch (Exception ex) {
             ex.printStackTrace();
-        }
-        finally
-        {
+        } finally {
             dbcp.disConnection(conn, ps);
         }
         return count;
     }
-    
-    public void loginJoin(UsersVO vo)
-    {
-        try
-        {
-            conn=dbcp.getConnection();
-            String sql="INSERT INTO users_1 VALUES(?,?,?,?,?,?,?,?,?,?,'n')";
+
+    public void loginJoin(UsersVO vo) {
+        try {
+            conn = dbcp.getConnection();
+            String sql = "INSERT INTO users_1 VALUES(?,?,?,?,?,?,?,?,?,?,'n')";
             ps.getConnection().prepareStatement(sql);
             ps.setString(1, vo.getU_id());
             ps.setString(2, vo.getU_password());
             ps.setString(3, vo.getU_name());
             ps.setString(4, vo.getU_profile());
-            ps.setDate(5, vo.getU_birthday());
+            ps.setString(5, vo.getU_birthday());
             ps.setString(6, vo.getU_gender());
             ps.setString(7, vo.getU_email());
             ps.setString(8, vo.getU_address());
             ps.setString(9, vo.getU_question());
             ps.setString(10, vo.getU_answer());
             ps.executeUpdate();
-        }catch(Exception ex)
-        {
+        } catch (Exception ex) {
             ex.printStackTrace();
-        }
-        finally
-        {
+        } finally {
             dbcp.disConnection(conn, ps);
         }
     }
@@ -107,27 +92,25 @@ public class UsersDAO {
         UsersVO vo = new UsersVO();
         try {
             conn = dbcp.getConnection();
-            String sql = "SELECT * "
-                    + "FROM users_1 "
-                    + "WHERE u_id=?";
-            
+            String sql = "SELECT * " + "FROM users_1 " + "WHERE u_id=?";
+
             ps = conn.prepareStatement(sql);
             ps.setString(1, id);
-            
+
             ResultSet rs = ps.executeQuery();
             rs.next();
             vo.setU_id(rs.getString(1));
             vo.setU_password(rs.getString(2));
             vo.setU_name(rs.getString(3));
             vo.setU_profile(rs.getString(4));
-            vo.setU_birthday(rs.getDate(5));
+            vo.setU_birthday(rs.getString(5));
             vo.setU_gender(rs.getString(6));
             vo.setU_email(rs.getString(7));
             vo.setU_address(rs.getString(8));
             vo.setU_question(rs.getString(9));
             vo.setU_answer(rs.getString(10));
             rs.close();
-            
+
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {

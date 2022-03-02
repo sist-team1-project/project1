@@ -18,7 +18,6 @@ $(function(){
             success:function(res){
                 let result = res.trim();
                 if(result == 'FAIL'){
-                    alert(result);
                     alert("로그인 정보가 올바르지 않습니다");
                     $('#id').val("");
                     $('#pwd').val("");
