@@ -5,6 +5,7 @@ $('.multi-slider').slick({
   slidesToShow: 5,
   slidesToScroll: 5,
   centeredSlides: true,
+  accessibility: false,
   responsive: [
     {
       breakpoint: 1024,
