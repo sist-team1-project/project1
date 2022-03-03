@@ -68,7 +68,7 @@ public class UsersDAO {
     public void loginJoin(UsersVO vo) {
         try {
             conn = dbcp.getConnection();
-            String sql = "INSERT INTO users_1 VALUES(?,?,?,?,?,?,?,?,?,?,?,'n')";
+            String sql = "INSERT INTO users_1 VALUES(?,?,?,?,?,?,?,?,?,?,?)";
             ps=conn.prepareStatement(sql);
             ps.setString(1, vo.getU_id());
             ps.setString(2, vo.getU_password());
