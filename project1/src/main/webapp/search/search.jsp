@@ -5,6 +5,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+function checkedArray(){
+	  var checkedList = [];
+	  $("input[name=chkbox]:checked").each(function(){
+	    checkedList.push($(this).val());
+	  }
+	  return checkedList;
+	  
+	  
+}
+</script>
 </head>
 <body>
 	<!-- 여기부터 -->
@@ -110,7 +122,7 @@
 							</div>
 						</div>
 						<div>
-							<button class='bg-finence text-white'
+							<button class='bg-finence text-white' id="search-button"
 								style="margin: auto; padding: 5px 20px; border-raidus: 10px; display: block;">검색</button>
 						</div>
 					</div>
