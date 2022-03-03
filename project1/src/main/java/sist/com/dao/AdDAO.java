@@ -39,13 +39,13 @@ public class AdDAO {
 					we = we.substring(0, we.indexOf(" ("));
 				}
 				vo.setAd_we(we);
-				
-                vo.setAd_education(rs.getString(5));
-                
-                String addr = rs.getString(6);
-                addr = addr.substring(0,addr.indexOf(" ", addr.indexOf(" ")+1));
-                vo.setAd_workplace(addr);
-                vo.setC_id(rs.getInt(7));
+
+				vo.setAd_education(rs.getString(5));
+
+				String addr = rs.getString(6);
+				addr = addr.substring(0, addr.indexOf(" ", addr.indexOf(" ") + 1));
+				vo.setAd_workplace(addr);
+				vo.setC_id(rs.getInt(7));
 				list.add(vo);
 			}
 			rs.close();
@@ -87,11 +87,11 @@ public class AdDAO {
 				vo.setAd_we(we);
 
 				vo.setAd_education(rs.getString(5));
-				
+
 				String addr = rs.getString(6);
-	            addr = addr.substring(0,addr.indexOf(" ", addr.indexOf(" ")+1));
+				addr = addr.substring(0, addr.indexOf(" ", addr.indexOf(" ") + 1));
 				vo.setAd_workplace(addr);
-                vo.setC_id(rs.getInt(7));
+				vo.setC_id(rs.getInt(7));
 				list.add(vo);
 			}
 			rs.close();
@@ -178,4 +178,50 @@ public class AdDAO {
 		}
 		return list;
 	}
+
+	// 채용정보 상세검색
+	public List<AdVO> adSearchList(String search) {
+		List<AdVO> list = new ArrayList<AdVO>();
+		try {
+			conn = dbcp.getConnection();
+			String sql = "SELECT * " + "FROM ad_1 "
+					+ "WHERE ad_title LIKE '%'||?||'%' OR ad_workplace LIKE '%'||?||'%' OR ad_content OR '%'||?||'%'";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, search);
+			ps.setString(2, search);
+			ps.setString(3, search);
+
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				AdVO vo = new AdVO();
+				vo.setAd_id(rs.getInt(1));
+				vo.setC_id(rs.getInt(2));
+				vo.setAd_title(rs.getString(3));
+				vo.setAd_content(rs.getString(4));
+				vo.setAd_we(rs.getString(5));
+				vo.setAd_education(rs.getString(6));
+				vo.setAd_qualification(rs.getString(7));
+				vo.setAd_language(rs.getString(8));
+				vo.setAd_major(rs.getString(9));
+				vo.setAd_wage(rs.getString(10));
+				vo.setAd_workhours(rs.getString(11));
+				vo.setAd_worktype(rs.getString(12));
+				vo.setAd_workplace(rs.getString(13));
+				String ad_end = rs.getString(14);
+				if (ad_end == null) {
+					ad_end = "채용시까지";
+				}
+				vo.setAd_end(ad_end);
+				vo.setAd_visits(rs.getInt(15));
+
+				rs.close();
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			dbcp.disConnection(conn, ps);
+		}
+		return list;
+	}
+
 }

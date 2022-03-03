@@ -49,4 +49,21 @@ public class SearchModel {
         request.setAttribute("main_jsp", "../search/search_company.jsp");
         return "../main/main.jsp";
     }
+    
+    
+    
+    @RequestMapping("search/searchad.do")
+    public String search_ad_page(HttpServletRequest request, HttpServletResponse response) {
+    	String search = request.getParameter("search");
+    	
+    	AdDAO a = new AdDAO();
+    	
+    	if(search != null) {
+    		
+    		List<AdVO> ad = a.adSearchList(search);
+    		request.setAttribute("search", search);
+    	}
+    	request.setAttribute("main_jsp", "../search/search.jsp");
+    	return "../main/main.jsp";
+    }
 }
