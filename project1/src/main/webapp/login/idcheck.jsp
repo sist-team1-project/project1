@@ -34,7 +34,7 @@ $(function(){
         $.ajax({
             type:'POST',
             url:'../login/idcheck_result.do',
-            data:{"id":id},
+            data:{"u_id":id},
             success:function(result) 
             {
                 let count=result.trim();
@@ -64,7 +64,7 @@ $(function(){
     <table class="table">
      <tr>
        <td class="text-center">
-       ID:<input type=text name=id id="check_id" class="input-sm" size=15>
+       ID:<input type=text name=u_id id="check_id" class="input-sm" size=15>
        <input type=button value="아이디체크" class="btn btn-sm btn-danger"
          id="idBtn"> 
        </td>
