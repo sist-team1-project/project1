@@ -22,7 +22,7 @@
   </script>
 </head>
 <body>
-  <div class="container container-pad">
+  <div class="container container-pad container-height">
   
     <!-- 제목 -->
     <div class="row m-top-40">
@@ -79,8 +79,10 @@
           ${r.reply_content } 
         </div>
         <div class="col-xs-4 col-sm-3 reply_delete_btn">
-          <c:if test="${r.u_id==sessionScope.id}"><a href="../freeboard/reply_delete_ok.do?bid=${r.board_id }&rid=${r.reply_id }"><i class="fa fa-times" aria-hidden="true"></i></a></c:if>&nbsp;
-          ${r.reply_date }
+          <c:if test="${r.u_id==sessionScope.id}">
+            <a href="../freeboard/reply_delete_ok.do?bid=${r.board_id }&rid=${r.reply_id }" onclick="return confirm('댓글을 삭제 하시겠습니까?')"><i class="fa fa-times" aria-hidden="true"></i></a>
+          </c:if>
+          &nbsp;${r.reply_date }
         </div>
       </div>
     </c:forEach>

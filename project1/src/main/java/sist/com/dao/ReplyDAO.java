@@ -47,6 +47,30 @@ public class ReplyDAO {
         return list;
     }
     
+    public int replyCount(int id) {
+        int count = 0;
+        try {
+            conn = dbcp.getConnection();
+            String sql = "SELECT COUNT(*) "
+                    + "FROM reply_1 "
+                    + "WHERE board_id=?";
+            
+
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            count = rs.getInt(1);
+            rs.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            dbcp.disConnection(conn, ps);
+        }
+        return count;
+    }
+    
     public void replyInsert(ReplyVO vo) {
         try {
             conn = dbcp.getConnection();

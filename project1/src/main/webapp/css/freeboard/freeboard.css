@@ -5,7 +5,7 @@
   border-top: 1px solid black;
 }
 
-.top-menu-selected {
+.selected {
   display: inline-block;
   background-color: rgb(231, 231, 231);
   padding:11px;
@@ -13,7 +13,7 @@
   border-radius: 10px 10px 0px 0px;
 }
 
-.top-menu-notselected {
+.unselected {
   display: inline-block;
   background-color: #fff;
   padding:11px;
@@ -38,8 +38,13 @@ sup {
   color: #017576;
 }
 
+.rcount {
+  color: #017576;
+}
 
-
+#list {
+  min-height: 500px;
+}
 /*   반응형   */
 
 @media screen and (min-width: 992px) {
@@ -97,7 +102,6 @@ sup {
   color: black;
   font-weight: bold;
 }
-
 
 
 /* 글쓰기 버튼 */
