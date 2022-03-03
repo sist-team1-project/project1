@@ -34,7 +34,7 @@ $(function(){
         $.ajax({
             type:'POST',
             url:'../login/idcheck_result.do',
-            data:{"u_id":id},
+            data:{"id":id},
             success:function(result) 
             {
                 let count=result.trim();
@@ -52,7 +52,7 @@ $(function(){
         })
     })
     $('#okBtn').click(function(){
-        parent.join_frm.id.value=$('#check_id').val()
+        parent.join_frm.u_id.value=$('#check_id').val()
         parent.Shadowbox.close()
     })
 })

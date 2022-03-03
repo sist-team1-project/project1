@@ -30,8 +30,8 @@ $(function(){
         new daum.Postcode({
             oncomplete:function(data)
             {
-                $('#u_post').val(data.zonecode)
-                $('#u_address1').val(data.address)
+                $('#post').val(data.zonecode)
+                $('#addr1').val(data.address)
             }
         }).open()
     })
