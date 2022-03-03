@@ -25,21 +25,19 @@ h1{
 <script type="text/javascript">
 $(function(){
     $('#idBtn').click(function(){
-        // id읽기
         let id=$('#check_id').val();
         if(id.trim()=="")
         {
             $('#check_id').focus();
             return;
         }
-        // 서버로 요청 => 결과값을 읽기 
         $.ajax({
             type:'POST',
-            url:'../login/idcheck_result.do',// 요청
+            url:'../login/idcheck_result.do',
             data:{"id":id},
-            success:function(result) //결과값 받기
+            success:function(result) 
             {
-                let count=result.trim();//0,1
+                let count=result.trim();
                 if(count==0)
                 {
                     $('#print').html('<font color=blue>'+id+"는(은) 사용가능합니다</font>")

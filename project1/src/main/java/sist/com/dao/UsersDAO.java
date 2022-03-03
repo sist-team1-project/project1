@@ -68,18 +68,19 @@ public class UsersDAO {
     public void loginJoin(UsersVO vo) {
         try {
             conn = dbcp.getConnection();
-            String sql = "INSERT INTO users_1 VALUES(?,?,?,?,?,?,?,?,?,?,'n')";
-            ps.getConnection().prepareStatement(sql);
+            String sql = "INSERT INTO users_1 VALUES(?,?,?,?,?,?,?,?,?,?,?,'n')";
+            ps=conn.prepareStatement(sql);
             ps.setString(1, vo.getU_id());
             ps.setString(2, vo.getU_password());
             ps.setString(3, vo.getU_name());
-            ps.setString(4, vo.getU_profile());
-            ps.setString(5, vo.getU_birthday());
-            ps.setString(6, vo.getU_gender());
-            ps.setString(7, vo.getU_email());
-            ps.setString(8, vo.getU_address());
-            ps.setString(9, vo.getU_question());
-            ps.setString(10, vo.getU_answer());
+            ps.setString(4, vo.getU_birthday());
+            ps.setString(5, vo.getU_gender());
+            ps.setString(6, vo.getU_email());
+            ps.setString(7, vo.getU_post());
+            ps.setString(8, vo.getU_address1());
+            ps.setString(9, vo.getU_address2());
+            ps.setString(10, vo.getU_question());
+            ps.setString(11, vo.getU_answer());
             ps.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -102,13 +103,14 @@ public class UsersDAO {
             vo.setU_id(rs.getString(1));
             vo.setU_password(rs.getString(2));
             vo.setU_name(rs.getString(3));
-            vo.setU_profile(rs.getString(4));
-            vo.setU_birthday(rs.getString(5));
-            vo.setU_gender(rs.getString(6));
-            vo.setU_email(rs.getString(7));
-            vo.setU_address(rs.getString(8));
-            vo.setU_question(rs.getString(9));
-            vo.setU_answer(rs.getString(10));
+            vo.setU_birthday(rs.getString(4));
+            vo.setU_gender(rs.getString(5));
+            vo.setU_email(rs.getString(6));
+            vo.setU_post(rs.getString(7));
+            vo.setU_address1(rs.getString(8));
+            vo.setU_address2(rs.getString(9));
+            vo.setU_question(rs.getString(10));
+            vo.setU_answer(rs.getString(11));
             rs.close();
 
         } catch (Exception ex) {
