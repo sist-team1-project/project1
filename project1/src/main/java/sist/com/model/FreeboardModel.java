@@ -20,11 +20,9 @@ public class FreeboardModel {
     public String freeboard_list(HttpServletRequest request, HttpServletResponse response) {
         
         String page = request.getParameter("page");
-        String sub = request.getParameter("sub");
-        
+        String tab = request.getParameter("tab");
         HttpSession session = request.getSession();
         String id = (String) session.getAttribute("id");
-        
         
         if (page == null)
             page = "1";
@@ -36,14 +34,14 @@ public class FreeboardModel {
         BoardDAO bdao = new BoardDAO();
         List<BoardVO> board = new ArrayList<BoardVO>();
         int totalPage = 1;
-        
-        if (sub == null) { // 자유게시판
+        if (tab.equals("tab1")) { // 자유게시판
             board = bdao.freeboardList(curPage);
             totalPage = bdao.freeboardTotalPage(0,"");
-        } else if (sub.equals("1")) { // 내가 쓴 글 관리
+        } else if (tab.equals("tab2")) { // 내가 쓴 글 관리
             board = bdao.freeboardMyList(curPage, 1, id);
             totalPage = bdao.freeboardTotalPage(1,id);
-        } else if (sub.equals("2")) { // 내가 쓴 댓글 관리
+        } else if (tab.equals("tab3")) { // 내가 쓴 댓글 관리
+            
             board = bdao.freeboardMyList(curPage, 2, id);
             totalPage = bdao.freeboardTotalPage(2,id);
         }
@@ -62,7 +60,7 @@ public class FreeboardModel {
         if (endPage > totalPage) {
             endPage = totalPage;
         }
-        request.setAttribute("sub", sub);
+        request.setAttribute("tab", tab);
         request.setAttribute("curPage", curPage);
         request.setAttribute("totalPage", totalPage);
         request.setAttribute("startPage", startPage);

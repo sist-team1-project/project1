@@ -2,20 +2,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script type="text/javascript">
-	$(function() {
-		$('.paging').css("cursor", "pointer")
-		$('.paging').click(function() {
-			let page = $(this).val();
-			$.ajax({
-				type : 'get',
-				url : '../freeboard/freeboardlist.do',
-				data : {"page":page,"sub":${sub },
-				success : function(result) {
-					$('#wrapping').html(result);
-				}
-			})
-		})
-	})
+    $(function() {
+    	var tab = "<c:out value='${tab }'/>";
+        $('.paging').css("cursor", "pointer")
+        $('.paging').click(function() {
+            let page = $(this).val();
+            $.ajax({
+                type : 'get',
+                url : '../freeboard/freeboardlist.do',
+                data : {"page":page,"tab":tab},
+                success : function(result) {
+                    $('#wrapping').html(result);
+                }
+            })
+        })
+    })
 </script>
 <div id="wrapping">
   <!--    리스트    -->
@@ -47,15 +48,16 @@
     </c:forEach>
   </div>
   
-  <!-- 글쓰기 버튼 로그인시에만 보이기 -->
-  <c:if test="${sub==0 }">
-  <c:if test="${sessionScope.id!=null }">
-    <div class="row">
-      <div class="post">
-        <a href="../freeboard/insert.do" class="btn btn-primary">글쓰기</a>
+  <!-- 자유게시판에서만 글쓰기 -->
+  <c:if test="${tab eq 'tab1' }">
+    <!-- 글쓰기 버튼 로그인시에만 보이기 -->
+    <c:if test="${sessionScope.id!=null }">
+      <div class="row">
+        <div class="post">
+          <a href="../freeboard/insert.do" class="btn btn-primary">글쓰기</a>
+        </div>
       </div>
-    </div>
-  </c:if>
+    </c:if>
   </c:if>
   
   <!--    페이징    -->
