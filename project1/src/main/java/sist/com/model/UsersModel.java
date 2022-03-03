@@ -53,7 +53,7 @@ public class UsersModel {
     @RequestMapping("login/join.do")
     public String loginJoin(HttpServletRequest request, HttpServletResponse response) {
         request.setAttribute("main_jsp", "../login/join.jsp");
-        return "../login/join.jsp";
+        return "../main/main.jsp";
     }
 
     @RequestMapping("login/idcheck.do")

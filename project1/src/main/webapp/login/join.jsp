@@ -113,12 +113,12 @@ $(function(){
   </div>
   <div class="wrapper row3">
    <main class="container clear">
-   <form method="post" action="../member/join_ok.do" name="join_frm" id="join_frm">
+   <form method="post" action="../login/join_ok.do" name="join_frm" id="join_frm">
     <table class="table">
       <tr>
        <td class="text-right" width=15%>아이디</td>
        <td width=85% class="inline">
-         <input type=text name=id id="join_id" size=15 class="input-sm" readonly>
+         <input type=text name=id id="join_id" size=15 class="input-sm" >
          <input type=button id="checkBtn" value="아이디중복체크" class="btn btn-sm btn-primary">
        </td>
       </tr>
