@@ -24,7 +24,6 @@ public class ReplyDAO {
                     + "FROM reply_1 "
                     + "WHERE board_id=?))";
             
-
             ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             

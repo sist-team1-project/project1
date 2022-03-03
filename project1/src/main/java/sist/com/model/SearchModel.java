@@ -11,46 +11,45 @@ import sist.com.dao.*;
 public class SearchModel {
     
     @RequestMapping("search/searchcompany.do")
-    public String search_company_page(HttpServletRequest request, HttpServletResponse response) {
+    public String search_company(HttpServletRequest request, HttpServletResponse response) {
         
-        String search = request.getParameter("search");
+        /*       Best 기업       */
         CompanyDAO c = new CompanyDAO();
         ReviewDAO r = new ReviewDAO();
         
-        if(search != null) {
-            
-            
-            List<CompanyVO> company = c.companySearchList(search);
-            List<Integer> reviews = new ArrayList<Integer>();
-            for(CompanyVO i : company) {
-                reviews.add(i.getC_id());
-            }
-            request.setAttribute("company", company);
-            request.setAttribute("reviews", reviews);
-        }
-        
-        /*       Best 기업       */
-        List<CompanyVO> company2 = c.bestCompanyList();
-        List<String> reviews2 = new ArrayList<String>();
+        List<CompanyVO> company = c.bestCompanyList();
+        List<String> review = new ArrayList<String>();
 
-        for(CompanyVO j : company2) {
-            String bestreview = r.bestCompanyReviewList(j.getC_id());
-            
-            // 리뷰가 없을 경우
-            if (bestreview.isEmpty()) {
-                bestreview = "유저들의 리뷰를 기다리고 있습니다.";
-            }
-            reviews2.add(bestreview);
+        for (int i = 0; i < company.size(); i++) {
+            String bestreview = r.bestCompanyReviewList(company.get(i).getC_id());
+            review.add(bestreview);
         }
         
-        request.setAttribute("company2", company2);
-        request.setAttribute("reviews2", reviews2);
+        
+        request.setAttribute("company", company);
+        request.setAttribute("review", review);
         
         request.setAttribute("main_jsp", "../search/search_company.jsp");
         return "../main/main.jsp";
     }
     
-    
+    @RequestMapping("search/searchcompany_result.do")
+    public String search_company_result(HttpServletRequest request, HttpServletResponse response) {
+        
+        String search = request.getParameter("search");
+        CompanyDAO c = new CompanyDAO();
+     
+        List<CompanyVO> c_result = c.companySearchList(search);
+        List<Integer> r_result = new ArrayList<Integer>();
+        for(CompanyVO i : c_result) {
+            r_result.add(i.getC_id());
+        }
+        
+        request.setAttribute("c_result", c_result);
+        request.setAttribute("r_result", r_result);
+        ;
+        return "../search/search_company_result.jsp";
+    }
     
     @RequestMapping("search/searchad.do")
     public String search_ad_page(HttpServletRequest request, HttpServletResponse response) {

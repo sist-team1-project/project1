@@ -3,16 +3,15 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script type="text/javascript">
     $(function() {
-    	var tab = "<c:out value='${tab }'/>";
         $('.paging').css("cursor", "pointer")
         $('.paging').click(function() {
             let page = $(this).val();
             $.ajax({
                 type : 'get',
                 url : '../freeboard/freeboardlist.do',
-                data : {"page":page,"tab":tab},
-                success : function(result) {
-                    $('#wrapping').html(result);
+                data : {"page":page,"tab":"${tab }"},
+                success : function(res) {
+                    $('#wrapping').html(res);
                 }
             })
         })
