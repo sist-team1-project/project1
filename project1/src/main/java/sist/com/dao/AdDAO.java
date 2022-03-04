@@ -179,49 +179,66 @@ public class AdDAO {
 		return list;
 	}
 
-	// 채용정보 상세검색
-	public List<AdVO> adSearchList(String search) {
-		List<AdVO> list = new ArrayList<AdVO>();
-		try {
-			conn = dbcp.getConnection();
-			String sql = "SELECT * " + "FROM ad_1 "
-					+ "WHERE ad_title LIKE '%'||?||'%' OR ad_workplace LIKE '%'||?||'%' OR ad_content OR '%'||?||'%'";
-			ps = conn.prepareStatement(sql);
-			ps.setString(1, search);
-			ps.setString(2, search);
-			ps.setString(3, search);
+	public List<AdVO> adSearchList(String keyword, String address) {
+	    List<AdVO> list = new ArrayList<AdVO>();
+       try {
+            conn = dbcp.getConnection();
+            if(keyword.equals("") && address.equals("")) {
+                System.out.println("검색정보없음");
+                return list;
+            }
+            
+            String sql = "SELECT * FROM ad_1 WHERE ";
 
-			ResultSet rs = ps.executeQuery();
-			while (rs.next()) {
-				AdVO vo = new AdVO();
-				vo.setAd_id(rs.getInt(1));
-				vo.setC_id(rs.getInt(2));
-				vo.setAd_title(rs.getString(3));
-				vo.setAd_content(rs.getString(4));
-				vo.setAd_we(rs.getString(5));
-				vo.setAd_education(rs.getString(6));
-				vo.setAd_qualification(rs.getString(7));
-				vo.setAd_language(rs.getString(8));
-				vo.setAd_major(rs.getString(9));
-				vo.setAd_wage(rs.getString(10));
-				vo.setAd_workhours(rs.getString(11));
-				vo.setAd_worktype(rs.getString(12));
-				vo.setAd_workplace(rs.getString(13));
-				String ad_end = rs.getString(14);
-				if (ad_end == null) {
-					ad_end = "채용시까지";
-				}
-				vo.setAd_end(ad_end);
-				vo.setAd_visits(rs.getInt(15));
+            String search = "ad_title LIKE '%'||?||'%' ";
+            sql = sql + search;
+            
+            search ="AND ad_workplace LIKE '%'||?||'%' ";
+            sql = sql + search;
+            
+            
+            ps = conn.prepareStatement(sql);
+            
+            if(!keyword.equals("")) {
+                
+            }
+            ps.setString(1, keyword);
+            ps.setString(2, address);
+            
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                AdVO vo = new AdVO();
+                vo.setAd_id(rs.getInt(1));
+                vo.setC_id(rs.getInt(2));
+                vo.setAd_title(rs.getString(3));
+                System.out.println(rs.getString(3));
+                vo.setAd_content(rs.getString(4));
+                vo.setAd_we(rs.getString(5));
+                vo.setAd_education(rs.getString(6));
+                vo.setAd_qualification(rs.getString(7));
+                vo.setAd_language(rs.getString(8));
+                vo.setAd_major(rs.getString(9));
+                vo.setAd_wage(rs.getString(10));
+                vo.setAd_workhours(rs.getString(11));
+                vo.setAd_worktype(rs.getString(12));
+                vo.setAd_workplace(rs.getString(13));
+                System.out.println(rs.getString(13));
+                String ad_end = rs.getString(14);
+                if (ad_end == null) {
+                    ad_end = "채용시까지";
+                }
+                vo.setAd_end(ad_end);
+                vo.setAd_visits(rs.getInt(15));
 
-				rs.close();
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			dbcp.disConnection(conn, ps);
-		}
-		return list;
+            }
+            rs.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            dbcp.disConnection(conn, ps);
+        }
+	    
+	    return list;
 	}
 
 }
