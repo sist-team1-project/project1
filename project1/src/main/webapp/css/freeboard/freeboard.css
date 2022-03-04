@@ -34,6 +34,9 @@ sup {
   color: #017576;
 }
 
+#data {
+  min-height: 620px;
+}
 #list {
   min-height: 500px;
 }
