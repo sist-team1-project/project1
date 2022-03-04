@@ -3,13 +3,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script type="text/javascript">
     $(function() {
+    	let tab = $('#tab').val();
         $('.paging').css("cursor", "pointer")
         $('.paging').click(function() {
             let page = $(this).val();
             $.ajax({
                 type : 'get',
                 url : '../freeboard/freeboardlist.do',
-                data : {"page":page,"tab":"${tab }"},
+                data : {"page":page,"tab":tab},
                 success : function(res) {
                     $('#wrapping').html(res);
                 }
@@ -17,13 +18,16 @@
         })
     })
 </script>
+
 <div id="wrapping">
   <!--    리스트    -->
   <div id="list">
     <c:forEach var="b" items="${board }" varStatus="status">
       <div class="row roomy-15 border-bttom">
         <div id="board-title" class="col-sm-7 short-line">
-  
+          <!-- 탭 번호 -->
+          <input type="hidden" id="tab" value="${tab }">
+          
           <!-- 게시물 카테고리 / 제목 -->
           <a href="../freeboard/detail.do?bid=${b.board_id }"><span class="category">[${b.board_category }]&nbsp;&nbsp;</span>${b.board_title }</a>
           <!-- ----------------- -->
@@ -47,10 +51,11 @@
     </c:forEach>
   </div>
   
-  <!-- 자유게시판에서만 글쓰기 -->
+  
   <c:if test="${tab eq 'tab1' }">
-    <!-- 글쓰기 버튼 로그인시에만 보이기 -->
+  <!-- 자유게시판에서만 글쓰기 -->
     <c:if test="${sessionScope.id!=null }">
+    <!-- 글쓰기 버튼 로그인시에만 보이기 -->
       <div class="row">
         <div class="post">
           <a href="../freeboard/insert.do" class="btn btn-primary">글쓰기</a>
