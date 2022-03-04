@@ -30,7 +30,7 @@
   <div class="col-md-3">이메일</div>
   <div class="col-md-9">${user.u_email }</div>
   <div class="col-md-3">주소</div>
-  <div class="col-md-9">${user.u_address }</div>
+  <div class="col-md-9">${user.u_address1 }</div>
 </div>
 </div>
 </div>
