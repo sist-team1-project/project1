@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="../css/freeboard/freeboard.css">
   <script type="text/javascript">
     $(function() {
+    	
         $.ajax({
             type: 'get',
             url: '../freeboard/freeboardlist.do',
@@ -21,7 +22,7 @@
         $('.menu').click(function() {
         	$('.menu').css('background-color', 'white');
         	$(this).css('background-color', '#E7E7E7');
-        	let tab = $(this).attr('id');
+        	let tab = $(this).attr('data-tab');
             $.ajax({
                 type : 'get',
                 url : '../freeboard/freeboardlist.do',
@@ -31,7 +32,7 @@
                 }
             })
         })
-        $('#tab1').click();
+        $('#default').click();
     })
   </script>
 </head>
@@ -46,9 +47,11 @@
     <!-- 게시물 관리 (로그인시에만) -->
     <c:if test="${sessionScope.id!=null }">
       <div class="row p-l-15 no-select">
-        <span id="tab1" class="menu">자유게시판</span>
-        <span id="tab2" class="menu">내가 쓴 글 관리</span>
-        <span id="tab3" class="menu">내가 쓴 댓글 관리</span>
+      <ul class="tab">
+        <li data-tab="tab1" id="default" class="menu">자유게시판</li>
+        <li data-tab="tab2" class="menu">내가 쓴 글 관리</li>
+        <li data-tab="tab3" class="menu">내가 쓴 댓글 관리</li>
+      </ul>
       </div>
     </c:if>
     <div class="row top-border"></div>

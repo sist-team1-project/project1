@@ -237,8 +237,6 @@ public class AdDAO {
         } finally {
             dbcp.disConnection(conn, ps);
         }
-	    
 	    return list;
 	}
-
 }

@@ -18,10 +18,9 @@ public class ReviewDAO {
             conn = dbcp.getConnection();
             String sql = "SELECT review_content "
                     + "FROM (SELECT review_content,rownum as num "
-                    + "FROM (SELECT review_content "
+                    + "FROM (SELECT /*+ INDEX_DESC(review_1 review_id_pk_1)*/ review_content "
                     + "FROM review_1 "
-                    + "WHERE c_id=? "
-                    + "ORDER BY review_date DESC)) "
+                    + "WHERE c_id=?)) "
                     + "WHERE num=1";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
@@ -43,11 +42,11 @@ public class ReviewDAO {
         return review;
     }
     
-    public List<ReviewVO> reviewDetail(int id) {
+    public List<ReviewVO> reviewList(int id) {
         List<ReviewVO> list = new ArrayList<ReviewVO>();
         try {
             conn = dbcp.getConnection();
-            String sql = "SELECT review_id,u_id,c_id,review_content,review_goodbad,review_job,review_date "
+            String sql = "SELECT /*+ INDEX_DESC(review_1 review_id_pk_1)*/ review_id,u_id,c_id,review_content,review_goodbad,review_job,review_date "
                     + "FROM review_1 "
                     + "WHERE c_id=?";
 

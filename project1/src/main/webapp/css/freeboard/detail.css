@@ -33,8 +33,22 @@ textarea {
   vertical-align: top;
 }
 
-.reply_delete_btn {
-  text-align: right;
+.reply-delete-btn {
+  padding : 2px 7px;
+  border : 1px solid #b6b6b6;
+  border-radius : 5px;
+}
+
+.word {
+  word-wrap : break-word;
+}
+
+/* 링크 언더바 제거 */
+a,
+a:link,
+a:active,
+a:hover {
+  text-decoration: none;
 }
 
 @media screen and (min-width: 992px) {

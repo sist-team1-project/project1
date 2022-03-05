@@ -5,6 +5,11 @@
   border-top: 1px solid black;
 }
 
+.tab {
+  margin: 0px;
+  padding: 0px;
+}
+
 .menu {
   display: inline-block;
   background-color: #fff;
