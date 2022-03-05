@@ -1,30 +1,28 @@
 @charset "UTF-8";
 
+.min-height {
+  min-height: 750px;
+}
 
 .top-border {
   border-top: 1px solid black;
 }
 
-.tab {
-  margin: 0px;
+.menu {
+  text-align: right;
   padding: 0px;
 }
 
-.menu {
+.menu li {
   display: inline-block;
-  background-color: #fff;
-  padding:11px;
-  border: 1px solid rgb(231, 231, 231);
-  border-radius: 10px 10px 0px 0px;
-}
-
-#board-top {
-  font-weight: bold;
+  padding: 7px 7px;
+  border: 1px solid #b6b6b6;
+  border-radius: 5px;
 }
 
 .roomy-15 {
-    padding-top: 15px;
-    padding-bottom: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 sup {
@@ -39,14 +37,10 @@ sup {
   color: #017576;
 }
 
-#data {
-  min-height: 620px;
-}
 #list {
   min-height: 500px;
 }
 /*   반응형   */
-
 @media screen and (min-width: 992px) {
   .container-pad {
     padding-left: 40px;
@@ -54,37 +48,38 @@ sup {
   }
 }
 
-@media screen and (max-width: 768px) {
-  
-  #board-top {
-    display: none;
-  }
-  
-  .border-bttom {
-    border-bottom: 1px solid #d6d6d6;
-  }
-  
-  #board-title {
-    font-size: 16px;
-    font-weight: bold;
-    padding: 10px;
-  }
-  
-  #board-title, #board-uid, #board-date, #board-visits {
-    text-align: left;
-  }
+@media
+screen
+and
+(max-width:
+768px)
+{
+#board-top {
+  display: none;
 }
 
+.border-bttom {
+  border-bottom: 1px solid #d6d6d6;
+}
+
+#board-title {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.menu, .check, #board-title, #board-uid, #board-date, #board-visits {
+  text-align: left;
+}
+
+}
 @media screen and (min-width: 768px) {
   #small {
     display: none;
   }
 }
 
-
-
 /*  페이지  */
-
 .page {
   display: block;
   width: 100%;
@@ -103,20 +98,13 @@ sup {
   font-weight: bold;
 }
 
-
 /* 글쓰기 버튼 */
-
 .post {
   text-align: right;
   padding-right: 15px;
 }
 
-
-
 /* 링크 효과 제거 */
-a,
-a:link,
-a:active,
-a:hover {
+a, a:link, a:active, a:hover {
   text-decoration: none;
 }

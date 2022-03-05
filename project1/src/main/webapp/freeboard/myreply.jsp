@@ -10,18 +10,17 @@
 </head>
 <body>
   <div class="container container-pad min-height">
+  <c:if test="${sessionScope.id!=null }">
+  <!-- 로그인 유저 -->
     <div class="row roomy-10 m-top-60 p-l-15 no-select">
-      <div class="col-sm-3"><h4><i class="fa fa-smile-o" aria-hidden="true"></i>&nbsp;<b>자유게시판</b></h4></div>
-      
-      <c:if test="${sessionScope.id!=null }">
-        <div class="col-sm-9">
+      <div class="col-sm-4"><h4><i class="fa fa-comment" aria-hidden="true"></i>&nbsp;<b>내 댓글 보기</b></h4></div>
+        <div class="col-sm-8">
           <ul class="menu">
             <li><a href="../freeboard/freeboard.do">자유게시판</a></li>
             <li><a href="../freeboard/mypost.do">내 게시물 보기</a></li>
             <li><a href="../freeboard/myreply.do">내 댓글 보기</a></li>
           </ul>
         </div>
-      </c:if>
     </div>
 
     <!-- 리스트 상단 -->
@@ -63,37 +62,28 @@
       </c:forEach>
     </div>
     
-    
-    <c:if test="${sessionScope.id!=null }">
-      <!-- 글쓰기 버튼 로그인시에만 보이기 -->
-      <div class="row roomy-10">
-          <div class="post">
-          <a href="../freeboard/insert.do" class="btn btn-primary">글쓰기</a>
-        </div>
-      </div>
-    </c:if>
-  
     <!--    페이징    -->
     <div class="row roomy-20">
       <div class="page no-select">
         <ul>
           <c:if test="${startPage>1 }">
-            <li class="paging"><a href="../freeboard/freeboard.do?page=${startPage-1 }"><i class="fa fa-caret-left" aria-hidden="true"></i></a></li>
+            <li class="paging"><a href="../freeboard/myreply.do?page=${startPage-1 }"><i class="fa fa-caret-left" aria-hidden="true"></i></a></li>
           </c:if>
           <c:forEach var="i" begin="${startPage }" end="${endPage }">
             <c:if test="${i==curPage }">
               <li class="current">${i }</li>
             </c:if>
             <c:if test="${i!=curPage }">
-              <li class="paging"><a href="../freeboard/freeboard.do?page=${i }">${i }</a></li>
+              <li class="paging"><a href="../freeboard/myreply.do?page=${i }">${i }</a></li>
             </c:if>
           </c:forEach>
           <c:if test="${endPage<totalPage }">
-            <li class="paging"><a href="../freeboard/freeboard.do?page=${endPage+1 }"><i class="fa fa-caret-right" aria-hidden="true"></i></a></li>
+            <li class="paging"><a href="../freeboard/myreply.do?page=${endPage+1 }"><i class="fa fa-caret-right" aria-hidden="true"></i></a></li>
           </c:if>
         </ul>
       </div>
     </div>
+  </c:if>
   </div>
 </body>
 </html>

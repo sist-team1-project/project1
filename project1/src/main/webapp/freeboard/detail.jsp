@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="../css/freeboard/detail.css">
   <script>
     $(function() {
-    	
     	replyList();
     	
         $('#reply-btn').click(function() {
@@ -22,26 +21,27 @@
             
             $.ajax({
                 type:'POST',
-                url : '../freeboard/reply_ok.do',
+                url : '../reply/reply_ok.do',
                 data : $('#reply-form').serialize(),
                 success : function(){
                 	replyList();
-                	$('#reply-content').value("")
                }
             });
         })
     })
     
     function replyList() {
+        $('#reply-content').val("");
         $.ajax({
             type : 'get',
-            url : '../freeboard/reply.do',
+            url : '../reply/reply.do',
             data : {"bid" : "${detail.board_id}"},
             success : function(result) {
                 $('#reply').html(result);
             }
-        })
+        });
     }
+
   </script>
 </head>
 <body>
@@ -67,7 +67,7 @@
     <!-- 내용 -->
     <div class="row roomy-10 content">
       <div class="col-md-12">
-        ${detail.board_content }
+        <pre>${detail.board_content }</pre>
       </div>
     </div>
     <hr>
@@ -91,7 +91,7 @@
       <div class="col-md-12 text-center">
         <!-- 로그인했을 때 댓글창 -->
         <c:if test="${sessionScope.id!=null }">
-          <form method=post action="../freeboard/reply_ok.do" id="reply-form">
+          <form id="reply-form">
             <input type="hidden" id="uid" name="uid" value="${sessionScope.id }">
             <input type="hidden" id="bid" name="bid" value="${detail.board_id }">
             <textarea id="reply-content" name="content"></textarea>

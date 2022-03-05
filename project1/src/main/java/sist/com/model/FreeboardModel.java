@@ -7,44 +7,21 @@ import javax.servlet.http.*;
 import sist.com.vo.*;
 import sist.com.dao.*;
 
+// 자유 게시판
 public class FreeboardModel {
     
+    // 자유게시판 - 페이지 이동
     @RequestMapping("freeboard/freeboard.do")
     public String freeboard(HttpServletRequest request, HttpServletResponse response) {
-
-        request.setAttribute("main_jsp", "../freeboard/freeboard.jsp");
-        return "../main/main.jsp";
-    }
-    
-    @RequestMapping("freeboard/freeboardlist.do")
-    public String freeboard_list(HttpServletRequest request, HttpServletResponse response) {
         
         String page = request.getParameter("page");
-        String tab = request.getParameter("tab");
-        HttpSession session = request.getSession();
-        String id = (String) session.getAttribute("id");
         
-        if (page == null)
-            page = "1";
-             
+        if (page == null) page = "1";
+        
         int curPage = Integer.parseInt(page);
         
-        
-        // 게시물 목록 가져오기
         BoardDAO bdao = new BoardDAO();
-        List<BoardVO> board = new ArrayList<BoardVO>();
-        int totalPage = 1;
-        if (tab.equals("tab1")) { // 자유게시판
-            board = bdao.freeboardList(curPage);
-            totalPage = bdao.freeboardTotalPage(0,"");
-        } else if (tab.equals("tab2")) { // 내가 쓴 글 관리
-            board = bdao.freeboardMyList(curPage, 1, id);
-            totalPage = bdao.freeboardTotalPage(1,id);
-        } else if (tab.equals("tab3")) { // 내가 쓴 댓글 관리
-            
-            board = bdao.freeboardMyList(curPage, 2, id);
-            totalPage = bdao.freeboardTotalPage(2,id);
-        }
+        List<BoardVO> board = bdao.freeboardList(curPage, 1);
         
         // 댓글 수 가져오기
         ReplyDAO rdao = new ReplyDAO();
@@ -53,6 +30,8 @@ public class FreeboardModel {
             rcount.add(rdao.replyCount(b.getBoard_id()));
         }
         
+        int totalPage = bdao.freeboardTotalPage("", 1);
+        
         // 페이지
         final int BLOCK = 10;
         int startPage = ((curPage - 1) / BLOCK * BLOCK) + 1;
@@ -60,17 +39,99 @@ public class FreeboardModel {
         if (endPage > totalPage) {
             endPage = totalPage;
         }
-        request.setAttribute("tab", tab);
         request.setAttribute("curPage", curPage);
         request.setAttribute("totalPage", totalPage);
         request.setAttribute("startPage", startPage);
         request.setAttribute("endPage", endPage);
         request.setAttribute("board", board);
         request.setAttribute("rcount", rcount);
-        
-        return "../freeboard/list.jsp";
+        request.setAttribute("main_jsp", "../freeboard/freeboard.jsp");
+        return "../main/main.jsp";
     }
     
+    // 내 게시물 관리 - 페이지 이동
+    @RequestMapping("freeboard/mypost.do")
+    public String freeboard_mypost(HttpServletRequest request, HttpServletResponse response) {
+        
+        String page = request.getParameter("page");
+        HttpSession session = request.getSession();
+        String id = (String) session.getAttribute("id");
+        
+        if (page == null) page = "1";
+        
+        int curPage = Integer.parseInt(page);
+        
+        BoardDAO bdao = new BoardDAO();
+        List<BoardVO> board = bdao.freeboardMyList(curPage, id, 1);
+        
+        // 댓글 수 가져오기
+        ReplyDAO rdao = new ReplyDAO();
+        List<Integer> rcount = new ArrayList<Integer>();
+        for (BoardVO b : board) {
+            rcount.add(rdao.replyCount(b.getBoard_id()));
+        }
+        
+        int totalPage = bdao.freeboardTotalPage(id, 2);
+        
+        // 페이지
+        final int BLOCK = 10;
+        int startPage = ((curPage - 1) / BLOCK * BLOCK) + 1;
+        int endPage = ((curPage - 1) / BLOCK * BLOCK) + BLOCK;
+        if (endPage > totalPage) {
+            endPage = totalPage;
+        }
+        request.setAttribute("curPage", curPage);
+        request.setAttribute("totalPage", totalPage);
+        request.setAttribute("startPage", startPage);
+        request.setAttribute("endPage", endPage);
+        request.setAttribute("board", board);
+        request.setAttribute("rcount", rcount);
+        request.setAttribute("main_jsp", "../freeboard/mypost.jsp");
+        return "../main/main.jsp";
+    }
+    
+    // 내 댓글 관리 - 페이지 이동
+    @RequestMapping("freeboard/myreply.do")
+    public String freeboard_myreply(HttpServletRequest request, HttpServletResponse response) {
+        
+        String page = request.getParameter("page");
+        HttpSession session = request.getSession();
+        String id = (String) session.getAttribute("id");
+        
+        if (page == null) page = "1";
+        
+        int curPage = Integer.parseInt(page);
+        
+        BoardDAO bdao = new BoardDAO();
+        List<BoardVO> board = bdao.freeboardMyList(curPage, id, 2);
+        
+        // 댓글 수 가져오기
+        ReplyDAO rdao = new ReplyDAO();
+        List<Integer> rcount = new ArrayList<Integer>();
+        for (BoardVO b : board) {
+            rcount.add(rdao.replyCount(b.getBoard_id()));
+        }
+        
+        int totalPage = bdao.freeboardTotalPage(id, 3);
+        
+        // 페이지
+        final int BLOCK = 10;
+        int startPage = ((curPage - 1) / BLOCK * BLOCK) + 1;
+        int endPage = ((curPage - 1) / BLOCK * BLOCK) + BLOCK;
+        if (endPage > totalPage) {
+            endPage = totalPage;
+        }
+        request.setAttribute("curPage", curPage);
+        request.setAttribute("totalPage", totalPage);
+        request.setAttribute("startPage", startPage);
+        request.setAttribute("endPage", endPage);
+        request.setAttribute("board", board);
+        request.setAttribute("rcount", rcount);
+        request.setAttribute("main_jsp", "../freeboard/myreply.jsp");
+        return "../main/main.jsp";
+    }
+    
+    // 게시물 - 상세 정보 출력
     @RequestMapping("freeboard/detail.do")
     public String freeboard_detail(HttpServletRequest request, HttpServletResponse response) {
 
@@ -85,25 +146,15 @@ public class FreeboardModel {
         return "../main/main.jsp";
     }
     
-    @RequestMapping("freeboard/reply.do")
-    public String freeboard_reply(HttpServletRequest request, HttpServletResponse response) {
-
-        String id = request.getParameter("bid");
-
-        ReplyDAO rdao = new ReplyDAO();
-        List<ReplyVO> reply = rdao.replyList(Integer.parseInt(id));
-
-        request.setAttribute("reply", reply);
-        return "../freeboard/reply.jsp";
-    }
-    
+    // 게시물 - 작성 페이지 이동
     @RequestMapping("freeboard/insert.do")
     public String freeboard_insert(HttpServletRequest request, HttpServletResponse response) {
 
         request.setAttribute("main_jsp", "../freeboard/insert.jsp");
         return "../main/main.jsp";
     }
-
+    
+    // 게시물 - 작성
     @RequestMapping("freeboard/insert_ok.do")
     public String freeboard_insert_ok(HttpServletRequest request, HttpServletResponse response) {
 
@@ -116,7 +167,6 @@ public class FreeboardModel {
         String category = request.getParameter("category");
         String title = request.getParameter("title");
         String content = request.getParameter("content");
-        content = content.replace("\n", "<br>");
 
         BoardVO vo = new BoardVO();
         vo.setU_id(uid);
@@ -130,7 +180,8 @@ public class FreeboardModel {
 
         return "redirect:../freeboard/freeboard.do";
     }
-
+    
+    // 게시물 - 수정 페이지 이동
     @RequestMapping("freeboard/update.do")
     public String freeboard_update(HttpServletRequest request, HttpServletResponse response) {
 
@@ -144,7 +195,8 @@ public class FreeboardModel {
 
         return "../main/main.jsp";
     }
-
+    
+    // 게시물 - 수정
     @RequestMapping("freeboard/update_ok.do")
     public String freeboard_update_ok(HttpServletRequest request, HttpServletResponse response) {
 
@@ -157,8 +209,7 @@ public class FreeboardModel {
         String category = request.getParameter("category");
         String title = request.getParameter("title");
         String content = request.getParameter("content");
-        content = content.replace("\n", "<br>");
-
+        
         BoardVO vo = new BoardVO();
 
         vo.setBoard_id(Integer.parseInt(bid));
@@ -171,7 +222,8 @@ public class FreeboardModel {
 
         return "redirect:../freeboard/freeboard.do";
     }
-
+    
+    // 게시물 - 삭제
     @RequestMapping("freeboard/delete_ok.do")
     public String freeboard_delete_ok(HttpServletRequest request, HttpServletResponse response) {
 
@@ -182,39 +234,17 @@ public class FreeboardModel {
 
         return "redirect:../freeboard/freeboard.do";
     }
+    
+    // 내 게시물 관리 - 다중 게시물 삭제
+    @RequestMapping("freeboard/delete_multi_ok.do")
+    public String freeboard_delete_multi_ok(HttpServletRequest request, HttpServletResponse response) {
 
-    @RequestMapping("freeboard/reply_ok.do")
-    public void freeboard_reply_ok(HttpServletRequest request, HttpServletResponse response) {
-
-        try {
-            request.setCharacterEncoding("UTF-8");
-        } catch (Exception ex) {
-        }
-
-        String bid = request.getParameter("bid");
-        String uid = request.getParameter("uid");
-        String content = request.getParameter("content");
+        String[] bid = request.getParameterValues("bid");
+        BoardDAO dao = new BoardDAO();
         
-        content = content.replace("\n", "<br>");
-
-        ReplyVO vo = new ReplyVO();
-        vo.setBoard_id(Integer.parseInt(bid));
-        vo.setU_id(uid);
-        vo.setReply_content(content);
-
-        ReplyDAO dao = new ReplyDAO();
-        dao.replyInsert(vo);
-    }
-
-    @RequestMapping("freeboard/reply_delete_ok.do")
-    public String freeboard_reply_delete_ok(HttpServletRequest request, HttpServletResponse response) {
-
-        String bid = request.getParameter("bid");
-        String rid = request.getParameter("rid");
-
-        ReplyDAO dao = new ReplyDAO();
-        dao.freeboardReplyDelete(Integer.parseInt(rid));
-
-        return "redirect:../freeboard/detail.do?bid=" + bid;
+        for(int i = 0; i < bid.length; i++) {
+            dao.freeboardDelete(Integer.parseInt(bid[i]));
+        }
+        return "../freeboard/freeboard.do";
     }
 }

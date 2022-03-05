@@ -41,19 +41,21 @@ public class BoardDAO {
     }
 
     // 자유게시판 - 게시물 목록
-    public List<BoardVO> freeboardList(int page) {
+    public List<BoardVO> freeboardList(int page, int no) {
         List<BoardVO> list = new ArrayList<BoardVO>();
         try {
             conn = dbcp.getConnection();
-            String sql = "SELECT board_id,board_category,board_title,u_id,board_date,board_visits "
+
+            String sql = "";
+            sql = "SELECT board_id,board_category,board_title,u_id,board_date,board_visits "
                     + "FROM (SELECT board_id,board_category,board_title,u_id,board_date,board_visits,rownum as num "
                     + "FROM (SELECT /*+ INDEX_DESC(board_1 board_id_pk_1)*/board_id,board_category,board_title,u_id,board_date,board_visits "
                     + "FROM board_1)) " + "WHERE num BETWEEN ? AND ?";
-
+            
             int rowSize = 10;
             int start = (rowSize * page) - (rowSize) + 1;
             int end = rowSize * page;
-
+            
             ps = conn.prepareStatement(sql);
             ps.setInt(1, start);
             ps.setInt(2, end);
@@ -78,35 +80,36 @@ public class BoardDAO {
         return list;
     }
 
-    // 자유게시판 - 내 게시물/댓글 목록
-    public List<BoardVO> freeboardMyList(int page, int sub, String id) {
+    public List<BoardVO> freeboardMyList(int page, String uid, int no) {
         List<BoardVO> list = new ArrayList<BoardVO>();
         try {
             conn = dbcp.getConnection();
-            String sql="";
             
-            if (sub == 1) {
+            String sql = "";
+            if (no == 1) {
                 sql = "SELECT board_id,board_category,board_title,u_id,board_date,board_visits "
                         + "FROM (SELECT board_id,board_category,board_title,u_id,board_date,board_visits,rownum as num "
                         + "FROM (SELECT /*+ INDEX_DESC(board_1 board_id_pk_1)*/board_id,board_category,board_title,u_id,board_date,board_visits "
                         + "FROM board_1 " + "WHERE u_id=?)) " + "WHERE num BETWEEN ? AND ?";
-            } else if (sub == 2) {
+            } else if (no == 2) {
                 sql = "SELECT board_id,board_category,board_title,u_id,board_date,board_visits "
                         + "FROM (SELECT board_id,board_category,board_title,u_id,board_date,board_visits,rownum as num "
                         + "FROM (SELECT DISTINCT /*+ INDEX_DESC(board_1 board_id_pk_1)*/b.board_id,b.board_category,b.board_title,b.u_id,b.board_date,b.board_visits "
                         + "FROM board_1 b, reply_1 r " + "WHERE b.board_id=r.board_id AND r.u_id=?)) "
                         + "WHERE num BETWEEN ? AND ?";
+                
             }
-
+            
             int rowSize = 10;
             int start = (rowSize * page) - (rowSize) + 1;
             int end = rowSize * page;
-
+            
             ps = conn.prepareStatement(sql);
-            ps.setString(1, id);
+            ps.setString(1, uid);
             ps.setInt(2, start);
             ps.setInt(3, end);
-
+            
+            
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 BoardVO vo = new BoardVO();
@@ -126,27 +129,23 @@ public class BoardDAO {
         }
         return list;
     }
-    
+
     // 자유게시판 - 페이징 - 총 페이지 수
-    public int freeboardTotalPage(int sub, String id) {
+    public int freeboardTotalPage(String id, int no) {
         int total = 0;
         try {
             conn = dbcp.getConnection();
             String sql = "";
-            if (sub == 0) {
+            if (no == 1) {
                 sql = "SELECT CEIL(COUNT(*)/10.0) " + "FROM board_1";
-                
+
                 ps = conn.prepareStatement(sql);
-            } else if (sub == 1) {
-                sql = "SELECT CEIL(COUNT(*)/10.0) "
-                        + "FROM board_1 "
-                        + "WHERE u_id=?";
+            } else if (no == 2) {
+                sql = "SELECT CEIL(COUNT(*)/10.0) " + "FROM board_1 " + "WHERE u_id=?";
                 ps = conn.prepareStatement(sql);
                 ps.setString(1, id);
-            } else if (sub == 2) {
-                sql = "SELECT CEIL(COUNT(*)/10.0) "
-                        + "FROM (SELECT DISTINCT b.board_id "
-                        + "FROM board_1 b, reply_1 r "
+            } else if (no == 3) {
+                sql = "SELECT CEIL(COUNT(*)/10.0) " + "FROM (SELECT DISTINCT b.board_id " + "FROM board_1 b, reply_1 r "
                         + "WHERE b.board_id=r.board_id AND r.u_id=?)";
                 ps = conn.prepareStatement(sql);
                 ps.setString(1, id);
