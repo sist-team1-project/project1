@@ -12,6 +12,7 @@
     $(function() {
         $('#we-checkall').click(function() {
         	if ($('#we-checkall').is(":checked")) $('.we').prop("checked", false);
+        	if ($('#we-checkall').not(":checked")) $('#we-checkall').prop("checked", true);
         })
 
         $('.we').click(function() {
@@ -22,18 +23,59 @@
             }
         })
         
- 
+        $('#edu-checkall').click(function() {
+            if ($('#edu-checkall').is(":checked")) $('.edu').prop("checked", false);
+            if ($('#edu-checkall').not(":checked")) $('#edu-checkall').prop("checked", true);
+        })
+
+        $('.edu').click(function() {
+            if ($('.edu').is(":checked")) $('#edu-checkall').prop("checked", false);
+            if($('.edu:checked').length==$('.edu').length){
+                $('#edu-checkall').prop('checked',true);
+                $('.edu:checked').prop('checked',false);
+            }
+        })
+
+        $('#size-checkall').click(function() {
+            if ($('#size-checkall').is(":checked")) $('.size').prop("checked", false);
+            if ($('#size-checkall').not(":checked")) $('#size-checkall').prop("checked", true);
+        })
+
+        $('.size').click(function() {
+            if ($('.size').is(":checked")) $('#size-checkall').prop("checked", false);
+            if($('.size:checked').length==$('.size').length){
+                $('#size-checkall').prop('checked',true);
+                $('.size:checked').prop('checked',false);
+            }
+        })
+        
         $('#search-btn').click(function() {
             let keyword = $('#keyword').val();
+            
             let address = $('#sido').val() + " " + $('#gugun').val();
-            let we = [];
+            
+            let we = "";
             $('input[name=we]:checked').each(function() {
-            	we.push($(this).val());
+            	we += $(this).val() +"|";
             })
+            we = we.slice(0, -1);
+            
+            let edu = "";
+            $('input[name=edu]:checked').each(function() {
+                edu += $(this).val() +"|";
+            })
+            edu = edu.slice(0, -1);
+            
+            let size = "";
+            $('input[name=size]:checked').each(function() {
+            	size += $(this).val() +"|";
+            })
+            size = size.slice(0, -1);
+            
             $.ajax({
                 type : 'post',
                 url : '../search/searchad_result.do',
-                data : {"keyword" : keyword, "address" : address, "we" : we},
+                data : {"keyword" : keyword, "address" : address, "we" : we, "edu" : edu, "size" : size},
                 success : function(result) {
                     $('#search-result').html(result);
                 }
@@ -67,7 +109,7 @@
         <div class="row">
           <div class="col-xs-2 col-sm-2">경력</div>
           <div class="col-xs-10 col-sm-4">
-            <input type='checkbox' id="we-checkall" name="we" value="" checked> 전체<br> 
+            <input type='checkbox' id="we-checkall" name="we" value="신입|경력|관계없음" checked> 전체<br> 
             <input type='checkbox' class="we" name="we" value="신입"> 신입<br>
             <input type='checkbox' class="we" name="we" value="경력"> 경력<br>
             <input type='checkbox' class="we" name="we" value="관계없음"> 관계없음<br>
@@ -75,18 +117,25 @@
           
           <div class="col-xs-2 col-sm-2">학력</div>
           <div class="col-xs-10 col-sm-4">
-            <input type='checkbox' name="edu" value="전체" checked> 전체 <input type='checkbox' name='학력' value="중졸이하"> 중졸이하 <input type='checkbox' name='학력' value="고졸"> 고졸<br>
-            <input type='checkbox' name="edu" value="대졸(2~3년)"> 대졸(2~3년) <input type='checkbox' name='학력' value="대졸(4년)"> 대졸(4년)<br>
-            <input type='checkbox' name="edu" value="석사"> 석사 <input type='checkbox' name='학력' value="박사"> 박사 <input type='checkbox' name='학력' value="학력무관"> 학력무관<br>
+            <input type='checkbox' id="edu-checkall" name="edu" value="중졸이하|고졸|2~3년|4년|석사|박사|학력무관" checked> 전체 
+            <input type='checkbox' class="edu" name='edu' value="중졸이하"> 중졸이하 
+            <input type='checkbox' class="edu" name='edu' value="고졸"> 고졸<br>
+            
+            <input type='checkbox' class="edu"  name="edu" value="2~3년"> 대졸(2~3년) 
+            <input type='checkbox' class="edu" name='edu' value="4년"> 대졸(4년)<br>
+            
+            <input type='checkbox' class="edu" name="edu" value="석사"> 석사 
+            <input type='checkbox' class="edu"  name='edu' value="박사"> 박사 
+            <input type='checkbox' class="edu" name='edu' value="학력무관"> 학력무관<br>
           </div>
         </div>
         <div class="row">
           <div class="col-xs-2">기업형태</div>
           <div class="col-xs-10">
-            <input type='checkbox' name='' value="전체" checked> 전체 
-            <input type='checkbox' name='기업형태' value="대기업"> 대기업 
-            <input type='checkbox' name='기업형태' value="중견기업"> 중견기업 
-            <input type='checkbox' name='기업형태' value="중소기업"> 중소기업
+            <input type='checkbox' id="size-checkall" name="size" value="대기업|중견기업|중소기업|기타|-" checked> 전체 
+            <input type='checkbox' class="size" name="size" value="대기업"> 대기업 
+            <input type='checkbox' class="size" name="size" value="중견기업"> 중견기업 
+            <input type='checkbox' class="size" name="size" value="중소기업"> 중소기업
           </div>
         </div>
         <div class="row">

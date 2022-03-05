@@ -66,17 +66,16 @@ public class SearchModel {
     public String search_ad_result(HttpServletRequest request, HttpServletResponse response) {
         String keyword = request.getParameter("keyword");
         String address = request.getParameter("address");
-        String[] we = request.getParameterValues("we");
-
+        String we = request.getParameter("we");
+        String edu = request.getParameter("edu");
+        String size = request.getParameter("size");
+        System.out.println(size);
         if (address.equals("시/도 선택 ")) {
             address = "";
         }
 
-        System.out.println("키워드: " + keyword);
-
-
         AdDAO a = new AdDAO();
-        List<AdVO> ad = a.adSearchList(keyword, address);
+        List<AdVO> ad = a.adSearchList(keyword, address, we, edu, size);
 
         request.setAttribute("main_jsp", "../search/search_ad.jsp");
         return "../search/search_ad_result.jsp";
