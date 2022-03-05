@@ -30,6 +30,7 @@ public class DispatcherServlet extends HttpServlet {
         modelList.add("sist.com.model.MainModel");
         modelList.add("sist.com.model.SearchModel");
         modelList.add("sist.com.model.UsersModel");
+        modelList.add("sist.com.model.ReplyModel");
     }
 
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

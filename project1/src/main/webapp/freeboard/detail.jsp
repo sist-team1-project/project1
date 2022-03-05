@@ -11,7 +11,6 @@
   <script>
     $(function() {
     	replyList();
-    	
         $('#reply-btn').click(function() {
             let content = $('#reply-content').val();
             if (content.trim() == "") {
@@ -24,18 +23,20 @@
                 url : '../reply/reply_ok.do',
                 data : $('#reply-form').serialize(),
                 success : function(){
-                	replyList();
+                    replyList();
                }
             });
         })
+
     })
     
     function replyList() {
         $('#reply-content').val("");
+        let bid = $('#bid').val();
         $.ajax({
             type : 'get',
             url : '../reply/reply.do',
-            data : {"bid" : "${detail.board_id}"},
+            data : {"bid" : bid},
             success : function(result) {
                 $('#reply').html(result);
             }
@@ -89,7 +90,7 @@
     <!-- 댓글 작성 -->
     <div class="row roomy-20">
       <div class="col-md-12 text-center">
-        <!-- 로그인했을 때 댓글창 -->
+        <!-- 로그인 했을 때 댓글창 -->
         <c:if test="${sessionScope.id!=null }">
           <form id="reply-form">
             <input type="hidden" id="uid" name="uid" value="${sessionScope.id }">
@@ -109,10 +110,9 @@
     
     <!-- 댓글 출력 -->
     <div id="reply">
+    
     </div>
     <!------------->
-    
-
     
   </div>
 </body>
