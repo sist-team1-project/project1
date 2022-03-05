@@ -8,13 +8,13 @@ import sist.com.vo.*;
 
 public class UsersModel {
 
-    @RequestMapping("users/login.do")
+    @RequestMapping("users/loginpage.do")
     public String login_page(HttpServletRequest request, HttpServletResponse response) {
         request.setAttribute("main_jsp", "../login/login.jsp");
         return "../main/main.jsp";
     }
 
-    @RequestMapping("users/login_result.do")
+    @RequestMapping("users/login.do")
     public String memberLogin(HttpServletRequest request, HttpServletResponse response) {
         String id = request.getParameter("id");
         String pwd = request.getParameter("pwd");
@@ -105,10 +105,5 @@ public class UsersModel {
         
         dao.loginJoin(vo);
         return "redirect:../main/main.do";
-    }
-@RequestMapping("login/idfind.do")
-public String idfind(HttpServletRequest request, HttpServletResponse response) {
-    request.setAttribute("main_jsp", "../login/idfind.jsp");
-    return "../main/main.jsp";
     }
 }
