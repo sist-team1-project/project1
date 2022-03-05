@@ -572,6 +572,19 @@ footer{
 
 
 
+/* 내용 출력 */
+pre {
+  white-space: pre-wrap;
+  background-color: white;
+  border: none;
+  font-size: 14px;
+  padding: 0px;
+  font-family: 'Nanum Gothic';
+}
+/* --------- */
+
+
+
 /* 선택 제거 */
 .no-select {
   -webkit-user-select: none;
