@@ -108,7 +108,13 @@ public class AdDAO {
 		AdVO vo = new AdVO();
 		try {
 			conn = dbcp.getConnection();
-			String sql = "SELECT * " + "FROM ad_1 " + "WHERE ad_id = ?";
+			
+			String sql = "UPDATE ad_1 " + "SET ad_visits = ad_visits+1 " + "WHERE ad_id=?";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate(); // commit
+			
+			sql = "SELECT * " + "FROM ad_1 " + "WHERE ad_id = ?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, id);
 
