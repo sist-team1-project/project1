@@ -32,7 +32,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <c:if test="${sessionScope.id==null }">
-            <li><a href="../users/login.do">로그인</a></li>
+            <li><a href="../users/loginpage.do">로그인</a></li>
           </c:if>
           <c:if test="${sessionScope.id!=null }">
             <li><a href="../users/mypage.do">마이페이지</a></li>
