@@ -31,11 +31,11 @@
                   </h4>
                 </div>
                 <!-- Login Form -->
-                <form method="post" action="../users/login.do">
+                <form method="post" action="../login/login.do">
                   <input type="text" id="id" class="fadeIn second" name="id" placeholder="아이디">
                   <input type="password" id="pwd" class="fadeIn third" name="pwd" placeholder="비밀번호">
                   <div class="formFooter fadeIn third">
-                    <a href="#">아이디 찾기</a>&nbsp;&nbsp;&nbsp;<a href="#">비밀번호 찾기</a>
+                    <a href="../login/idfind.do">아이디 찾기</a>&nbsp;&nbsp;&nbsp;<a href="#">비밀번호 찾기</a>
                   </div>
                   <input type="button" id="login" class="login fadeIn fourth " value="로그인">
                    <input type="button" class="join fadeIn fourth" value="회원가입" onclick="location.href='../login/join.do'">

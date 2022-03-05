@@ -106,4 +106,9 @@ public class UsersModel {
         dao.loginJoin(vo);
         return "redirect:../main/main.do";
     }
+@RequestMapping("login/idfind.do")
+public String idfind(HttpServletRequest request, HttpServletResponse response) {
+    request.setAttribute("main_jsp", "../login/idfind.jsp");
+    return "../main/main.jsp";
+    }
 }
