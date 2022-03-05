@@ -6,13 +6,13 @@
     	let tab = $('#tab').val();
         $('.paging').css("cursor", "pointer")
         $('.paging').click(function() {
-            let page = $(this).val();
+            let page = $(this).attr('data-page');
             $.ajax({
                 type : 'get',
                 url : '../freeboard/freeboardlist.do',
                 data : {"page":page,"tab":tab},
-                success : function(res) {
-                    $('#wrapping').html(res);
+                success : function(result) {
+                    $('#wrapping').html(result);
                 }
             })
         })
@@ -67,24 +67,22 @@
   <!--    페이징    -->
   <div class="row roomy-20">
     <div class="page no-select">
-      <ol>
+      <ul>
         <c:if test="${startPage>1 }">
-          <li class="paging" value="${startPage-1 }"><i class="fa fa-caret-left" aria-hidden="true"></i></li>
+          <li class="paging" data-page="${startPage-1 }"><i class="fa fa-caret-left" aria-hidden="true"></i></li>
         </c:if>
-        <c:set var="style" value="" />
         <c:forEach var="i" begin="${startPage }" end="${endPage }">
           <c:if test="${i==curPage }">
-            <c:set var="style" value="class=current" />
             <li class="current">${i }</li>
           </c:if>
           <c:if test="${i!=curPage }">
-            <li class="paging" value="${i }">${i }</li>
+            <li class="paging" data-page="${i }">${i }</li>
           </c:if>
         </c:forEach>
         <c:if test="${endPage<totalPage }">
-          <li class="paging" value="${endPage+1 }"><i class="fa fa-caret-right" aria-hidden="true"></i></li>
+          <li class="paging" data-page="${endPage+1 }"><i class="fa fa-caret-right" aria-hidden="true"></i></li>
         </c:if>
-      </ol>
+      </ul>
     </div>
   </div>
 

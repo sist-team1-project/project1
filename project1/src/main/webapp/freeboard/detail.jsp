@@ -10,15 +10,38 @@
   <link rel="stylesheet" href="../css/freeboard/detail.css">
   <script>
     $(function() {
+    	
+    	replyList();
+    	
         $('#reply-btn').click(function() {
             let content = $('#reply-content').val();
             if (content.trim() == "") {
-                $('#category').focus();
+                $('#reply-content').focus();
                 return;
             }
-            $('#reply-form').submit();
+            
+            $.ajax({
+                type:'POST',
+                url : '../freeboard/reply_ok.do',
+                data : $('#reply-form').serialize(),
+                success : function(){
+                	replyList();
+                	$('#reply-content').value("")
+               }
+            });
         })
     })
+    
+    function replyList() {
+        $.ajax({
+            type : 'get',
+            url : '../freeboard/reply.do',
+            data : {"bid" : "${detail.board_id}"},
+            success : function(result) {
+                $('#reply').html(result);
+            }
+        })
+    }
   </script>
 </head>
 <body>
@@ -42,12 +65,25 @@
     <!------------->
     
     <!-- 내용 -->
-    <div class="row roomy-20 content">
+    <div class="row roomy-10 content">
       <div class="col-md-12">
         ${detail.board_content }
       </div>
     </div>
     <hr>
+    <!------------->
+    
+    <!-- 버튼 -->
+    <div class="row roomy-10">
+      <div class="col-md-12 text-right">
+        <c:if test="${detail.u_id==sessionScope.id }">
+          <!-- 글쓴이일 때 수정/삭제 버튼 -->
+          <a href="../freeboard/update.do?bid=${detail.board_id }" class="btn btn-pink">수정</a>
+          <a href="../freeboard/delete_ok.do?bid=${detail.board_id }" id="delete-btn" class="btn btn-pink" onclick="return confirm('게시물을 삭제 하시겠습니까?')">삭제</a>
+        </c:if>
+        <a href="../freeboard/freeboard.do" class="btn btn-default">목록</a>
+      </div>
+    </div>
     <!------------->
     
     <!-- 댓글 작성 -->
@@ -72,33 +108,11 @@
     <!------------->
     
     <!-- 댓글 출력 -->
-    <c:forEach var="r" items="${reply }" varStatus="status">
-      <div class="row roomy-20">
-        <div class="col-sm-2 short-line">${r.u_id }</div>
-        <div class="col-xs-8 col-sm-7">
-          ${r.reply_content } 
-        </div>
-        <div class="col-xs-4 col-sm-3 reply_delete_btn">
-          <c:if test="${r.u_id==sessionScope.id}">
-            <a href="../freeboard/reply_delete_ok.do?bid=${r.board_id }&rid=${r.reply_id }" onclick="return confirm('댓글을 삭제 하시겠습니까?')"><i class="fa fa-times" aria-hidden="true"></i></a>
-          </c:if>
-          &nbsp;${r.reply_date }
-        </div>
-      </div>
-    </c:forEach>
-    <!------------->
-    
-    <!-- 하단 버튼 -->
-    <div class="row roomy-20">
-      <div class="col-md-12 text-right">
-        <c:if test="${detail.u_id==sessionScope.id }">
-          <a href="../freeboard/update.do?bid=${detail.board_id }" class="btn btn-pink">수정</a>
-          <a href="../freeboard/delete_ok.do?bid=${detail.board_id }" id="delete-btn" class="btn btn-pink" onclick="return confirm('게시물을 삭제 하시겠습니까?')">삭제</a>
-        </c:if>
-        <a href="../freeboard/freeboard.do" class="btn btn-default">목록</a>
-      </div>
+    <div id="reply">
     </div>
     <!------------->
+    
+
     
   </div>
 </body>
