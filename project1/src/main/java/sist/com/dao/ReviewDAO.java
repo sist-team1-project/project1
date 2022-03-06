@@ -97,4 +97,27 @@ public class ReviewDAO {
         }
         return count;
     }
+    
+    // 추가 - 면접 후기 제출
+    public void reviewInsert(ReviewVO vo) {
+    	
+    	try {
+    		conn = dbcp.getConnection();
+    		String sql="INSERT INTO review_1 VALUES (review_id,u_id,c_id,review_job,review_date) "
+    				+"VALUES(review_id_seq_nextval,?,?,?)";
+    		
+    		ps = conn.prepareStatement(sql);
+    		
+    		ps.setInt(1, vo.getReview_goodbad());
+    		ps.setString(2, vo.getReview_job());
+    		ps.setString(3, vo.getReview_content());
+    		
+    		ps.executeUpdate();
+    		
+    	} catch (Exception ex) {
+    		ex.printStackTrace();
+    	} finally {
+    		dbcp.disConnection(conn, ps);
+    	}
+    }
 }

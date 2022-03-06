@@ -77,7 +77,7 @@
         </h3>
       </div>
       <div class="row review-container row-border topborder">
-        <form action="index.html" method="post">
+        <form action="../company/review_insert.do" method="post">
           <div class="big-font m-bottom-10">
             <b>면접은 만족 하셨나요?</b>
           </div>
@@ -96,10 +96,10 @@
             <b>경험하신 면접에 대하여 작성하여 주세요</b>
           </div>
           <div>
-            <textarea class="form-control" rows="6"></textarea>
+            <textarea class="form-control" rows="6" name=content></textarea>
           </div>
           <div class="m-top-20">
-            <input type=submit value="제출" class="btn btn-primary btn-100">
+            <input type="submit" value="제출" class="btn btn-primary btn-100">
           </div>
         </form>
       </div>
