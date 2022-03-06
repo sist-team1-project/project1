@@ -3,7 +3,6 @@ package sist.com.model;
 import sist.com.controller.RequestMapping;
 import java.util.*;
 import javax.servlet.http.*;
-
 import sist.com.vo.*;
 import sist.com.dao.*;
 
@@ -21,13 +20,36 @@ public class CompanyModel {
         
         ReviewDAO rdao = new ReviewDAO();
         List<ReviewVO> review = rdao.reviewList(Integer.parseInt(cid));
-        
-        
+
         request.setAttribute("company", company);
         request.setAttribute("adlist", adlist);
         request.setAttribute("review", review);
         
         request.setAttribute("main_jsp", "../company/company.jsp");
+        
         return "../main/main.jsp";
+    }
+    @RequestMapping("company/review_insert.do")
+    public String review_insert(HttpServletRequest request, HttpServletResponse response) {
+        String cid = request.getParameter("cid");
+        
+        try
+        {
+        	request.setCharacterEncoding("UTF-8");
+        }catch(Exception ex) {}
+        
+        int goodbad=Integer.parseInt(request.getParameter("goodbad"));
+        String job=request.getParameter("job");
+        String content=request.getParameter("content");
+        
+        ReviewVO vo = new ReviewVO();
+        vo.setReview_goodbad(goodbad);
+        vo.setReview_job(job);
+        vo.setReview_content(content);
+        
+        ReviewDAO rdao = new ReviewDAO();
+        rdao.reviewInsert(vo);
+        
+        return "redirect:../company/company.do?cid=" + cid;
     }
 }
