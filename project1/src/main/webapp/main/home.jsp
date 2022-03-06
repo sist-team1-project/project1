@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="sist.com.model.*"%>
+    pageEncoding="UTF-8" import="sist.com.model.*,sist.com.dao.*,java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -144,9 +143,20 @@
       </div>
       <!-------------->  
       
+      <!---- 최근 본 공고 목록(cookie) ---->
+      <div class="row roomy-20">
+        <div class="col-md-12 no-select"><h4>최근 본 공고</h4></div>
+        <div class="col-md-12" id="cookieView">
+            <c:forEach var="ck" items="${cookieList}">
+                ${ck.ad_id} /// ${ck.ad_title} /// ${ck.ad_end}
+            </c:forEach>
+        </div>      
+      </div>      
+      <!-------------------->
+      
     </div>
   </section>
-  <!--  슬라이더 -->
+  <!-- 슬라이더 -->
   <script type="text/javascript" src="../css/slick/slick.js" charset="utf-8"></script>
   <script type="text/javascript" src="../css/slick/slick.min.js" charset="utf-8"></script>
   <script type="text/javascript">

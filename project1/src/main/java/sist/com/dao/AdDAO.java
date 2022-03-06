@@ -102,7 +102,48 @@ public class AdDAO {
 		}
 		return list;
 	}
-
+	// 메인 - 최근 조회한 공고
+		public List<AdVO> adCookieList(List<String> cookieList) {
+			List<AdVO> list = new ArrayList<AdVO>();
+			try {
+				conn = dbcp.getConnection();
+				String sql = "";
+				sql += "SELECT    ad_id,    ad_title,    ad_end ";
+				sql += "FROM    ad_1 ";
+				sql += "where ad_id in (";
+				System.out.println(cookieList.size());
+					for (int i = 0; i < cookieList.size(); i++) {
+						if (i != cookieList.size()-1) {
+							sql += "'" + cookieList.get(i)+ "',";
+						} else {
+							sql += "'" + cookieList.get(i)+ "'";
+						}
+					} 
+				sql += 		")";
+				ps = conn.prepareStatement(sql);
+				
+				ResultSet rs = ps.executeQuery();
+				while (rs.next()) {
+					AdVO vo = new AdVO();
+					vo.setAd_id(rs.getInt(1));
+					vo.setAd_title(rs.getString(2));
+					
+					String ad_end = rs.getString(3);
+					if (ad_end == null) {
+						ad_end = "채용시까지";
+					}
+					vo.setAd_end(ad_end);
+					
+					list.add(vo);
+				}
+				rs.close();
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			} finally {
+				dbcp.disConnection(conn, ps);
+			}
+			return list;
+		}
 	// 공고 - 공고 상세정보
 	public AdVO adDetail(int id) {
 		AdVO vo = new AdVO();

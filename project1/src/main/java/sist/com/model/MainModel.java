@@ -50,7 +50,28 @@ public class MainModel {
         
         List<BoardVO> freeBoardVisits = p.freeboardListByVisits();
         
+        /*       Cookie        */
+        Cookie[] cookies = request.getCookies();
+        List<String> adIds = new ArrayList<String>();
         
+        if (cookies != null) {
+			for (Cookie cook : cookies) {
+				String name = cook.getName();
+				String value = cook.getValue();
+				
+				if (name.equals("adview")) {
+					System.out.println(value);
+					
+					for (String id : value.split("%2C")) {
+						adIds.add(id);
+					}
+				}
+			}
+		}
+        
+        List<AdVO> cookieList = a.adCookieList(adIds);
+        request.setAttribute("cookieList", cookieList);         
+                
         request.setAttribute("company", company);
         request.setAttribute("review", review);
         
