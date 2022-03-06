@@ -12,6 +12,7 @@
 </head>
 <body>
 		<section>
+		<input type="hidden" id="ad_id" value="${ad.ad_id }">
 				<!-- 공고 메인 정보 -->
 				<div class="container container-pad">
 						<div class="row row-border room m-top-40">
