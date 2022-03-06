@@ -66,15 +66,15 @@
     
     <c:if test="${sessionScope.id!=null }">
       <!-- 글쓰기 버튼 로그인시에만 보이기 -->
-      <div class="row roomy-10">
-          <div class="post">
+      <div class="row">
+        <div class="post">
           <a href="../freeboard/insert.do" class="btn btn-primary">글쓰기</a>
         </div>
       </div>
     </c:if>
   
     <!--    페이징    -->
-    <div class="row roomy-20">
+    <div class="row roomy-10">
       <div class="page no-select">
         <ul>
           <c:if test="${startPage>1 }">
