@@ -220,11 +220,11 @@ public class FreeboardModel {
         BoardDAO dao = new BoardDAO();
         dao.freeboardUpdate(vo);
 
-        return "redirect:../freeboard/freeboard.do";
+        return "redirect:../freeboard/detail.do?bid=" + bid;
     }
     
     // 게시물 - 삭제
-    @RequestMapping("freeboard/delete_ok.do")
+    @RequestMapping("freeboard/delete.do")
     public String freeboard_delete_ok(HttpServletRequest request, HttpServletResponse response) {
 
         String bid = request.getParameter("bid");
@@ -236,7 +236,7 @@ public class FreeboardModel {
     }
     
     // 내 게시물 관리 - 다중 게시물 삭제
-    @RequestMapping("freeboard/delete_multi_ok.do")
+    @RequestMapping("freeboard/delete_multi.do")
     public String freeboard_delete_multi_ok(HttpServletRequest request, HttpServletResponse response) {
 
         String[] bid = request.getParameterValues("bid");

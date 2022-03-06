@@ -91,7 +91,7 @@ public class ReplyDAO {
         }
     }
     
-    public void freeboardReplyDelete(int id) {
+    public void replyDelete(int id) {
         try {
             conn = dbcp.getConnection();
             
@@ -100,6 +100,27 @@ public class ReplyDAO {
             
             ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
+            
+            ps.executeUpdate(); // commit
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            dbcp.disConnection(conn, ps);
+        }
+    }
+
+    public void replyUpdate(int id, String content) {
+        try {
+            conn = dbcp.getConnection();
+            
+            String sql = "UPDATE reply_1 "
+                    + "SET reply_content=? "
+                    + "WHERE reply_id=?";
+            
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, content);
+            ps.setInt(2, id);
             
             ps.executeUpdate(); // commit
 

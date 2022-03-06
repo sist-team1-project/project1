@@ -40,7 +40,7 @@
     	else {
     		confirm("정말 삭제하시겠습니까?");
     		$.ajax({
-    			url : '../freeboard/delete_multi_ok.do',
+    			url : '../freeboard/delete_multi.do',
     			type : 'post',
     			traditional : true,
     			data : {

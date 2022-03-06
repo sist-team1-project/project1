@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-textarea, #reply-btn {
+textarea, #reply-insert-btn, .reply-update {
   vertical-align: middle;
 }
 
@@ -14,7 +14,7 @@ textarea {
   outline: none;
 }
 
-#reply-btn {
+#reply-insert-btn {
   width: 15%;
   height: 80px;
   color: white;
@@ -27,12 +27,27 @@ textarea {
   border-radius: 0px 10px 10px 0px;
 }
 
+.reply-update {
+  width: 15%;
+  height: 80px;
+  color: white;
+  background-color: #d6d6d6;
+  border: 1px solid #d6d6d6;
+  padding: 5px;
+  display: inline;
+  padding: 10px;
+  margin-left: -5px;
+  border-radius: 0px 10px 10px 0px;
+}
+
 .content {
   min-height: 400px;
   vertical-align: top;
 }
 
-.reply-delete-btn {
+.reply-delete-btn,
+.reply-update-btn {
+  font-size: 12px;
   padding: 2px 7px;
   border: 1px solid #b6b6b6;
   border-radius: 5px;
@@ -65,10 +80,9 @@ a, a:link, a:active, a:hover {
   textarea {
     width: 80%;
   }
-  #insert-btn {
+  
+  #reply-insert-btn {
     width: 20%;
   }
-  .reply_delete_btn {
-    text-align: center;
-  }
+
 }

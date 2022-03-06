@@ -25,8 +25,8 @@ public class ReplyModel {
     
     
     // 댓글 - 댓글 작성
-    @RequestMapping("reply/reply_ok.do")
-    public void freeboard_reply_ok(HttpServletRequest request, HttpServletResponse response) {
+    @RequestMapping("reply/insert.do")
+    public void freeboard_reply_insert(HttpServletRequest request, HttpServletResponse response) {
 
         try {
             request.setCharacterEncoding("UTF-8");
@@ -47,15 +47,27 @@ public class ReplyModel {
     }
     
     // 댓글 - 댓글 삭제
-    @RequestMapping("reply/reply_delete_ok.do")
-    public String freeboard_reply_delete_ok(HttpServletRequest request, HttpServletResponse response) {
+    @RequestMapping("reply/delete.do")
+    public void freeboard_reply_delete(HttpServletRequest request, HttpServletResponse response) {
 
-        String bid = request.getParameter("bid");
         String rid = request.getParameter("rid");
 
         ReplyDAO dao = new ReplyDAO();
-        dao.freeboardReplyDelete(Integer.parseInt(rid));
+        dao.replyDelete(Integer.parseInt(rid));
+    }
+    
+    @RequestMapping("reply/update.do")
+    public void freeboard_reply_update(HttpServletRequest request, HttpServletResponse response) {
 
-        return "redirect:../freeboard/detail.do?bid=" + bid;
+        try {
+            request.setCharacterEncoding("UTF-8");
+        } catch (Exception ex) {
+        }
+
+        String rid = request.getParameter("rid");
+        String content = request.getParameter("content");
+        
+        ReplyDAO dao = new ReplyDAO();
+        dao.replyUpdate(Integer.parseInt(rid), content);
     }
 }

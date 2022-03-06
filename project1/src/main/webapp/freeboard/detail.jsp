@@ -11,7 +11,8 @@
   <script>
     $(function() {
     	replyList();
-        $('#reply-btn').click(function() {
+    	
+        $('#reply-insert-btn').click(function() {
             let content = $('#reply-content').val();
             if (content.trim() == "") {
                 $('#reply-content').focus();
@@ -20,7 +21,7 @@
             
             $.ajax({
                 type:'POST',
-                url : '../reply/reply_ok.do',
+                url : '../reply/insert.do',
                 data : $('#reply-form').serialize(),
                 success : function(){
                     replyList();
@@ -60,6 +61,7 @@
     <div class="row roomy-10">
       <div class="col-md-12">
         <b>${detail.u_id }</b>&nbsp;&nbsp;&nbsp;${detail.board_date }&nbsp;&nbsp;&nbsp;조회수 ${detail.board_visits }
+        <input type="hidden" id="bid" name="bid" value="${detail.board_id }"> <!-- 게시물 번호 -->
       </div>
     </div>
     <hr>
@@ -80,7 +82,7 @@
         <c:if test="${detail.u_id==sessionScope.id }">
           <!-- 글쓴이일 때 수정/삭제 버튼 -->
           <a href="../freeboard/update.do?bid=${detail.board_id }" class="btn btn-pink">수정</a>
-          <a href="../freeboard/delete_ok.do?bid=${detail.board_id }" id="delete-btn" class="btn btn-pink" onclick="return confirm('게시물을 삭제 하시겠습니까?')">삭제</a>
+          <a href="../freeboard/delete.do?bid=${detail.board_id }" id="delete-btn" class="btn btn-pink" onclick="return confirm('게시물을 삭제 하시겠습니까?')">삭제</a>
         </c:if>
         <a href="../freeboard/freeboard.do" class="btn btn-default">목록</a>
       </div>
@@ -93,24 +95,25 @@
         <!-- 로그인 했을 때 댓글창 -->
         <c:if test="${sessionScope.id!=null }">
           <form id="reply-form">
-            <input type="hidden" id="uid" name="uid" value="${sessionScope.id }">
-            <input type="hidden" id="bid" name="bid" value="${detail.board_id }">
+            <input type="hidden" name="uid" value="${sessionScope.id }">
+            <input type="hidden" name="bid" value="${detail.board_id }">
             <textarea id="reply-content" name="content"></textarea>
-            <button type="button" id="reply-btn">댓글<br>작성</button>
+            <button type="button" id="reply-insert-btn">댓글<br>작성</button>
           </form>
         </c:if>
         <!-- 로그인 안했을 때 댓글창 -->
         <c:if test="${sessionScope.id==null }">
           <textarea readonly>로그인한 뒤 작성하여 주세요.</textarea>
-          <button type="button" id="reply-btn">댓글<br>작성</button>
+          <button type="button" id="reply-insert-btn">댓글<br>작성</button>
         </c:if>
       </div>
     </div>
     <!------------->
     
     <!-- 댓글 출력 -->
-    <div id="reply">
     
+    <div id="reply">
+      
     </div>
     <!------------->
     

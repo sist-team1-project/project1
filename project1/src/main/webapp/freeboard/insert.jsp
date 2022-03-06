@@ -81,7 +81,7 @@
 
       <div class="row roomy-10">
         <div class="col-sm-12 text-right">
-            <input type="submit" id="insert-btn" class="btn btn-primary" value="글쓰기">
+            <input type="button" id="insert-btn" class="btn btn-primary" value="글쓰기">
             <input type="button" id="cancel-btn" class="btn btn-default" value="취소">
         </div>
       </div>
