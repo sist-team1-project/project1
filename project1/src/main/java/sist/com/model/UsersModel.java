@@ -2,19 +2,21 @@ package sist.com.model;
 
 import javax.servlet.http.*;
 
+import sist.com.dao.UsersDAO;
+
 import sist.com.controller.RequestMapping;
 import sist.com.dao.*;
 import sist.com.vo.*;
 
 public class UsersModel {
 
-    @RequestMapping("users/loginpage.do")
+    @RequestMapping("member/loginpage.do")
     public String login_page(HttpServletRequest request, HttpServletResponse response) {
-        request.setAttribute("main_jsp", "../login/login.jsp");
+        request.setAttribute("main_jsp", "../member/login.jsp");
         return "../main/main.jsp";
     }
 
-    @RequestMapping("users/login.do")
+    @RequestMapping("member/login.do")
     public String memberLogin(HttpServletRequest request, HttpServletResponse response) {
         String id = request.getParameter("id");
         String pwd = request.getParameter("pwd");
@@ -26,17 +28,17 @@ public class UsersModel {
             session.setAttribute("id", id);
             session.setAttribute("name", result);
         }
-        return "../login/login_result.jsp";
+        return "../member/login_result.jsp";
     }
 
-    @RequestMapping("users/logout.do")
+    @RequestMapping("member/logout.do")
     public String memberLogout(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         session.invalidate(); // session해제
         return "redirect:../main/main.do";
     }
 
-    @RequestMapping("users/mypage.do")
+    @RequestMapping("member/mypage.do")
     public String mypage(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         String id = (String) session.getAttribute("id");
@@ -46,31 +48,31 @@ public class UsersModel {
 
         request.setAttribute("user", user);
 
-        request.setAttribute("main_jsp", "../login/mypage.jsp");
+        request.setAttribute("main_jsp", "../member/mypage.jsp");
         return "../main/main.jsp";
     }
 
-    @RequestMapping("login/join.do")
+    @RequestMapping("member/join.do")
     public String loginJoin(HttpServletRequest request, HttpServletResponse response) {
-        request.setAttribute("main_jsp", "../login/join.jsp");
+        request.setAttribute("main_jsp", "../member/join.jsp");
         return "../main/main.jsp";
     }
 
-    @RequestMapping("login/idcheck.do")
+    @RequestMapping("member/idcheck.do")
     public String loginIdCheck(HttpServletRequest request, HttpServletResponse response) {
-        return "../login/idcheck.jsp";
+        return "../member/idcheck.jsp";
     }
 
-    @RequestMapping("login/idcheck_result.do")
+    @RequestMapping("member/idcheck_result.do")
     public String loginIdCheckResult(HttpServletRequest request, HttpServletResponse response) {
         String id = request.getParameter("id");
         UsersDAO dao = new UsersDAO();
         int count = dao.loginIdcheck(id);
         request.setAttribute("count", count);
-        return "../login/idcheck_result.jsp";
+        return "../member/idcheck_result.jsp";
     }
 
-    @RequestMapping("login/join_ok.do")
+    @RequestMapping("member/join_ok.do")
     public String loginJoinOk(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.setCharacterEncoding("UTF-8");
@@ -105,5 +107,30 @@ public class UsersModel {
         
         dao.loginJoin(vo);
         return "redirect:../main/main.do";
+    }
+    @RequestMapping("member/idfind.do")
+    public String idfind(HttpServletRequest request, HttpServletResponse response) {
+        request.setAttribute("main_jsp", "../member/idfind.jsp");
+        return "../main/main.jsp";
+    }
+    @RequestMapping("member/idfind_result.do")
+    public String memberIdFindResult(HttpServletRequest request,
+            HttpServletResponse response)
+    {
+        String name=request.getParameter("name");
+        UsersDAO dao=new UsersDAO();
+        String result=dao.idfind_name(name);
+        request.setAttribute("result", result);
+        return "../member/idfind_result.jsp";
+    }
+    @RequestMapping("member/email_result.do")
+    public String memberEmailResult(HttpServletRequest request,
+            HttpServletResponse response)
+    {
+        String email=request.getParameter("email");
+        UsersDAO dao=new UsersDAO();
+        String result=dao.idfind_email(email);
+        request.setAttribute("result", result);
+        return "../member/idfind_result.jsp";
     }
 }

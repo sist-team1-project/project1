@@ -30,15 +30,15 @@
                   </h4>
                 </div>
                 <!-- Login Form -->
-                <form method="post" action="../users/login.do">
+                <form method="post" action="../member/login.do">
                   <input type="text" id="id" class="fadeIn second" name="id" placeholder="아이디">
                   <input type="password" id="pwd" class="fadeIn third" name="pwd" placeholder="비밀번호">
                   <div class="formFooter fadeIn third">
-                    <a href="#">아이디 찾기</a>&nbsp;&nbsp;&nbsp;<a href="#">비밀번호 찾기</a>
+                    <a href="../member/idfind.do">아이디 찾기</a>&nbsp;&nbsp;&nbsp;<a href="#">비밀번호 찾기</a>
                   </div>
                   <input type="submit" id="login" class="login fadeIn fourth " value="로그인">
                 </form>
-                <a type="button" class="join fadeIn fourth" href="../login/join.do">회원가입</a>
+                <a type="button" class="join fadeIn fourth" href="../member/join.do">회원가입</a>
                 <div class="roomy-10"><small>자리JOB기는 회원님의 익명성을 보장하기 위해 <br>어떠한 개인정보도 노출하지 않습니다.</small></div>
               </div>
             </div>

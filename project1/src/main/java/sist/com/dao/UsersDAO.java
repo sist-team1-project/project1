@@ -120,4 +120,91 @@ public class UsersDAO {
         }
         return vo;
     }
+ // ID => 전화번호로 찾기 
+    public String idfind_name(String name)
+    {
+        String result="";
+        try
+        {
+            conn=dbcp.getConnection();
+            String sql="SELECT COUNT(*) "
+                      +"FROM users_1 "
+                      +"WHERE u_name=?";
+            ps=conn.prepareStatement(sql);
+            ps.setString(1, name);
+            ResultSet rs=ps.executeQuery();
+            rs.next();
+            int count=rs.getInt(1);
+            rs.close();
+            if(count==0)
+            {
+                result="no";
+            }
+            else
+            {
+                // 전화번호가 존재 
+                sql="SELECT RPAD(SUBSTR(u_id,1,3),LENGTH(u_id),'*') "
+                   +"FROM users_1 "
+                   +"WHERE u_name=?";
+                ps=conn.prepareStatement(sql);
+                ps.setString(1,name);
+                rs=ps.executeQuery();
+                rs.next();
+                result=rs.getString(1);
+                rs.close();
+            }
+            
+        }catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        finally
+        {
+            dbcp.disConnection(conn, ps);
+        }
+        return result;
+    }
+    public String idfind_email(String email)
+    {
+        String result="";
+        try
+        {
+            conn=dbcp.getConnection();
+            String sql="SELECT COUNT(*) "
+                      +"FROM users_1 "
+                      +"WHERE u_email=?";
+            ps=conn.prepareStatement(sql);
+            ps.setString(1, email);
+            ResultSet rs=ps.executeQuery();
+            rs.next();
+            int count=rs.getInt(1);
+            rs.close();
+            if(count==0)
+            {
+                result="no";
+            }
+            else
+            {
+                
+                sql="SELECT RPAD(SUBSTR(u_id,1,3),LENGTH(u_id),'*') "
+                   +"FROM users_1 "
+                   +"WHERE u_email=?";
+                ps=conn.prepareStatement(sql);
+                ps.setString(1, email);
+                rs=ps.executeQuery();
+                rs.next();
+                result=rs.getString(1);
+                rs.close();
+            }
+            
+        }catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        finally
+        {
+            dbcp.disConnection(conn, ps);
+        }
+        return result;
+    }
 }

@@ -18,7 +18,7 @@ $(function(){
     $('#checkBtn').click(function(){
       
         Shadowbox.open({
-            content:'../login/idcheck.do',
+            content:'../member/idcheck.do',
             player:'iframe',
             title:'아이디 중복체크',
             width:420,
@@ -97,7 +97,7 @@ $(function(){
   </div>
   <div class="wrapper row3">
    <main class="container clear">
-   <form method="post" action="../login/join_ok.do" name="join_frm" id="join_frm">
+   <form method="post" action="../member/join_ok.do" name="join_frm" id="join_frm">
     <table class="table">
       <tr>
        <td class="text-right" width=15%>아이디</td>

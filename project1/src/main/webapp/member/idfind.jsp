@@ -13,28 +13,28 @@
  $(function(){
     $("#tabs").tabs();
     
-    $('#telBtn').on('click',function(){
-        let tel=$('#tel').val(); 
-        if(tel.trim()=="")
+    $('#nameBtn').on('click',function(){
+        let name=$('#name').val(); 
+        if(name.trim()=="")
         {
-            $('#tel').focus();
-            $('#tel_find').text("전화번호를 입력하세요")
+            $('#name').focus();
+            $('#name_find').text("이름을 입력하세요")
             return;
         }
         $.ajax({
             type:'post',
             url:'../member/idfind_result.do',
-            data:{"tel":tel},
-            success:function(res)
+            data:{"name":name},
+            success:function(res) 
             {
                 let t=res.trim();
                 if(t=='no')
                 {
-                    $('#tel_find').text('전화번호가 존재하지 않습니다!!')
+                    $('#name_find').text('이름이 존재하지 않습니다!!')
                 }
                 else
                 {
-                    $('#tel_find').text(t);
+                    $('#name_find').text(t);
                 }
                 
             }
@@ -71,23 +71,27 @@
 </head>
 <body>
   <div class="wrapper row3">
+  <div id="breadcrumb" class="clear"> 
+   </div>
+  </div>
+  <div class="wrapper row3">
    <div style="height:650px">
        <main class="container clear">
         <h2 class="sectiontitle">아이디 찾기</h2>
         <div id="tabs">
           <ul>
-            <li><a href="#tabs-1">전화번호</a></li>
+            <li><a href="#tabs-1">이름</a></li>
             <li><a href="#tabs-2">이메일</a></li>
           </ul>
           <div id="tabs-1">
             <p class="inline">
-              <input type=text id="tel" size=20 class="input-sm">
+              <input type=text id="name" size=20 class="input-sm">
               <input type=button value="검색" class="btn btn-sm btn-danger"
-               id="telBtn">
+               id="nameBtn">
             </p>
-            <p id="tel_find" style="font-size: 15pt;color:red"></p>
-          </div>
-          <div id="tabs-2">
+            <p id="name_find" style="font-size: 15pt;color:red"></p>
+          </div>          <div id="tabs-2">
+
             <p class="inline">
               <input type=text id="email" size=35 class="input-sm">
               <input type=button value="검색" class="btn btn-sm btn-danger"
