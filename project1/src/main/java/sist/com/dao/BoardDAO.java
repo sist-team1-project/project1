@@ -19,7 +19,9 @@ public class BoardDAO {
             String sql = "SELECT board_id,board_category,board_title "
                     + "FROM (SELECT board_id,board_category,board_title,rownum as num "
                     + "FROM (SELECT /*+ INDEX_DESC(board_1 board_id_pk_1)*/ board_id,board_category,board_title "
-                    + "FROM board_1 " + "WHERE SYSDATE-8 < board_date " + "ORDER BY board_visits DESC)) "
+                    + "FROM board_1 "
+                    + "WHERE SYSDATE-8 < board_date "
+                    + "ORDER BY board_visits DESC)) "
                     + "WHERE num BETWEEN 1 AND 5";
             ps = conn.prepareStatement(sql);
 
@@ -39,7 +41,39 @@ public class BoardDAO {
         }
         return list;
     }
+    
+    // 메인 - 자유게시판 댓글 순
+    public List<BoardVO> freeboardListByReply() {
+        List<BoardVO> list = new ArrayList<BoardVO>();
+        try {
+            conn = dbcp.getConnection();
+            String sql = "SELECT board_id,board_category,board_title "
+                    + "FROM (SELECT board_id,board_category,board_title,rownum AS num "
+                    + "FROM (SELECT b.board_id,b.board_category,b.board_title,NVL(count,0) AS count "
+                    + "FROM (SELECT /*+ INDEX_DESC(board_1 board_id_pk_1)*/ board_id,board_category,board_title FROM board_1 WHERE SYSDATE-8 < board_date) b, "
+                    + "(SELECT board_id,count(reply_id) AS count FROM reply_1 GROUP BY board_id) r "
+                    + "WHERE b.board_id=r.board_id(+)) "
+                    + "ORDER BY count DESC) "
+                    + "WHERE num BETWEEN 1 AND 5";
+            ps = conn.prepareStatement(sql);
 
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                BoardVO vo = new BoardVO();
+                vo.setBoard_id(rs.getInt(1));
+                vo.setBoard_category(rs.getString(2));
+                vo.setBoard_title(rs.getString(3));
+                list.add(vo);
+            }
+            rs.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            dbcp.disConnection(conn, ps);
+        }
+        return list;
+    }
+    
     // 자유게시판 - 게시물 목록
     public List<BoardVO> freeboardList(int page, int no) {
         List<BoardVO> list = new ArrayList<BoardVO>();

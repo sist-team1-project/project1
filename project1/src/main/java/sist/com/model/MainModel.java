@@ -49,6 +49,7 @@ public class MainModel {
         
         
         List<BoardVO> freeBoardVisits = p.freeboardListByVisits();
+        List<BoardVO> freeBoardReply = p.freeboardListByReply();
         
         /*       Cookie        */
         Cookie[] cookies = request.getCookies();
@@ -83,6 +84,7 @@ public class MainModel {
         request.setAttribute("adEndCname", adEndCname);
         
         request.setAttribute("freeBoardVisits", freeBoardVisits);
+        request.setAttribute("freeBoardReply", freeBoardReply);
         
         request.setAttribute("main_jsp", "../main/home.jsp");
         

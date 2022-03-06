@@ -121,22 +121,22 @@
         <div class="col-md-6 pad-5">
           <div class="unit">
             <div class="row board-title pad-5 no-select">
-              <div class="col-xs-7">조회수 순&nbsp;<sup>HOT</sup></div>
+              <div class="col-xs-7"><b>조회수 순</b>&nbsp;<sup>HOT</sup></div>
               <div class="col-xs-5"><a href="../freeboard/freeboard.do"><span class="boardplus">더보기</span></a></div>
             </div>
-            <c:forEach var="b" items="${freeBoardVisits }" varStatus="status">
-              <div class="pad-5 short-line"><span class="post-category">[${b.board_category}] </span><a href="#">${b.board_title }</a></div>
+            <c:forEach var="bv" items="${freeBoardVisits }" varStatus="status">
+              <div class="pad-5 short-line"><span class="post-category">[${bv.board_category}] </span><a href="../freeboard/detail.do?bid=${bv.board_id }">${bv.board_title }</a></div>
             </c:forEach>
           </div>
         </div>
         <div class="col-md-6 pad-5">
           <div class="unit">
-            <div class="row board-title pad-5 no-select">
-              <div class="col-xs-7">댓글 순&nbsp;<sup>HOT</sup></div>
+            <div class="row pad-5 no-select">
+              <div class="col-xs-7"><b>댓글 순</b>&nbsp;<sup>HOT</sup></div>
               <div class="col-xs-5"><a href="../freeboard/freeboard.do"><span class="boardplus">더보기</span></a></div>
             </div>
-            <c:forEach var="b" items="${freeBoardVisits }" varStatus="status">
-              <div class="pad-5 short-line"><span class="post-category">[${b.board_category}] </span><a href="#">${b.board_title }</a></div>
+            <c:forEach var="br" items="${freeBoardReply }" varStatus="status">
+              <div class="pad-5 short-line"><span class="post-category">[${br.board_category}] </span><a href="../freeboard/detail.do?bid=${br.board_id }">${br.board_title }</a></div>
             </c:forEach>
           </div>
         </div>
