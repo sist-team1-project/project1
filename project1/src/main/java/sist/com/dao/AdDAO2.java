@@ -5,7 +5,7 @@ import java.util.*;
 
 import sist.com.vo.*;
 
-public class AdDAO {
+public class AdDAO2 {
 
 	private Connection conn;
 	private PreparedStatement ps;
@@ -102,50 +102,7 @@ public class AdDAO {
 		}
 		return list;
 	}
-	
-	// 메인 - 최근 조회한 공고
-	public List<AdVO> adCookieList(List<String> cookieList) {
-		List<AdVO> list = new ArrayList<AdVO>();
-		try {
-			conn = dbcp.getConnection();
-			String sql = "";
-			sql += "SELECT ad_id,ad_title,ad_end ";
-			sql += "FROM ad_1 ";
-			sql += "where ad_id in (";
-			System.out.println(cookieList.size());
-				for (int i = 0; i < cookieList.size(); i++) {
-					if (i != cookieList.size()-1) {
-						sql += "'" + cookieList.get(i)+ "',";
-					} else {
-						sql += "'" + cookieList.get(i)+ "'";
-					}
-				} 
-			sql += ")";
-			ps = conn.prepareStatement(sql);
-			
-			ResultSet rs = ps.executeQuery();
-			while (rs.next()) {
-				AdVO vo = new AdVO();
-				vo.setAd_id(rs.getInt(1));
-				vo.setAd_title(rs.getString(2));
-				
-				String ad_end = rs.getString(3);
-				if (ad_end == null) {
-					ad_end = "채용시까지";
-				}
-				vo.setAd_end(ad_end);
-				
-				list.add(vo);
-			}
-			rs.close();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			dbcp.disConnection(conn, ps);
-		}
-		return list;
-	}
-		
+
 	// 공고 - 공고 상세정보
 	public AdVO adDetail(int id) {
 		AdVO vo = new AdVO();
@@ -200,7 +157,7 @@ public class AdDAO {
 		List<AdVO> list = new ArrayList<AdVO>();
 		try {
 			conn = dbcp.getConnection();
-			String sql = "SELECT ad_id,c_id,ad_title,ad_end " + "FROM ad_1 " + "WHERE c_id=? AND (SYSDATE-1 < TO_DATE(ad_end) OR ad_end IS NULL)";
+			String sql = "SELECT ad_id,c_id,ad_title,ad_end " + "FROM ad_1 " + "WHERE c_id=?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, id);
 
@@ -228,43 +185,22 @@ public class AdDAO {
 		return list;
 	}
 
-    public List<AdVO> adSearchList(int page, String keyword, String address, String we, String edu, String size, String worktype, String qual, String lang, String date1, String date2) {
+    public List<AdVO> adSearchList(String keyword, String address, String we, String edu, String size) {
         List<AdVO> list = new ArrayList<AdVO>();
        try {
             conn = dbcp.getConnection();
-            
-            int rowSize = 10;
-            int start = (rowSize * page) - (rowSize) + 1;
-            int end = rowSize * page;
-            
+
             String sql = "SELECT c_id,ad_id,ad_title,ad_we,ad_education,ad_workplace,ad_wage,ad_worktype,ad_end "
-                    + "FROM (SELECT c_id,ad_id,ad_title,ad_we,ad_education,ad_workplace,ad_wage,ad_worktype,ad_end,rownum As num "
-                    + "FROM (SELECT c_id,ad_id,ad_title,ad_we,ad_education,ad_workplace,ad_wage,ad_worktype,ad_end "
-                    + "FROM (SELECT a.c_id,ad_id,ad_title,ad_we,ad_education,ad_workplace,ad_wage,ad_worktype,ad_qualification,ad_language,ad_end,c_size FROM ad_1 a, company_1 c "
+                    + "FROM (SELECT a.c_id,ad_id,ad_title,ad_we,ad_education,ad_workplace,ad_wage,ad_worktype,ad_end,c_size from ad_1 a, company_1 c "
                     + "WHERE a.c_id = c.c_id(+)) "
-                    + "WHERE ad_title LIKE '%'||?||'%' "
-                    + "AND ad_workplace LIKE '%'||?||'%' "
-                    + "AND regexp_like(ad_we, ?) "
-                    + "AND regexp_like(ad_education, ?) "
-                    + "AND regexp_like(c_size, ?) "
-                    + "AND regexp_like(ad_worktype, ?) ";
-            if(qual.equals("")) {
-                sql += "AND ad_qualification LIKE '%'||?||'%' ";
-            } else {
-                sql += "AND regexp_like(ad_qualification, ?) ";
-            }
-            if(lang.equals("")) {
-                sql += "AND ad_language LIKE '%'||?||'%' ";
-            } else {
-                sql += "AND regexp_like(ad_language, ?) ";
-            }
-            if(date2.equals("")) {
-                sql += "AND (TO_DATE(ad_end) >= TO_DATE(?) OR ad_end IS NULL) ";
-            } else {
-                sql += "AND (TO_DATE(ad_end) BETWEEN TO_DATE(?) AND TO_DATE(?) OR ad_end IS NULL) ";
-            }
-            sql += "ORDER BY ad_end ASC)) "
-                + "WHERE num BETWEEN ? AND ?";
+                    + "WHERE ";
+
+            sql += "ad_title LIKE '%'||?||'%' ";
+            sql += "AND ad_workplace LIKE '%'||?||'%' ";
+            sql += "AND regexp_like(ad_we, ?)";
+            sql += "AND regexp_like(ad_education, ?)";
+            sql += "AND regexp_like(c_size, ?)";
+            
             
             ps = conn.prepareStatement(sql);
             
@@ -273,41 +209,26 @@ public class AdDAO {
             ps.setString(3, we);
             ps.setString(4, edu);
             ps.setString(5, size);
-            ps.setString(6, worktype);
-            ps.setString(7, qual);
-            ps.setString(8, lang);
-            if(date2.equals("")) {
-                ps.setString(9, date1);
-                ps.setInt(10, start);
-                ps.setInt(11, end);
-            } else {
-                ps.setString(9, date1);
-                ps.setString(10, date2);
-                ps.setInt(11, start);
-                ps.setInt(12, end);
-            }
-            
-            
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 AdVO avo = new AdVO();
                 avo.setC_id(rs.getInt(1));
                 avo.setAd_id(rs.getInt(2));
                 avo.setAd_title(rs.getString(3));
-                //System.out.println(rs.getString(3));
+                System.out.println(rs.getString(3));
                 avo.setAd_we(rs.getString(4));
                 avo.setAd_education(rs.getString(5));
                 avo.setAd_workplace(rs.getString(6));
                 avo.setAd_wage(rs.getString(7));
                 avo.setAd_worktype(rs.getString(8));
                 String ad_end = rs.getString(9);
-                
                 if (ad_end == null) {
                     ad_end = "채용시까지";
                 }
                 avo.setAd_end(ad_end);
                 list.add(avo);
             }
+            System.out.println("검색 개수: " + list.size());
             rs.close();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -315,66 +236,5 @@ public class AdDAO {
             dbcp.disConnection(conn, ps);
         }
         return list;
-    }
-    
-    public int adSearchListTotalPage(String keyword, String address, String we, String edu, String size, String worktype, String qual, String lang, String date1, String date2) {
-        int total = 0;
-        try {
-            conn = dbcp.getConnection();
-            
-            String sql = "SELECT CEIL(COUNT(*)/10.0) "
-                    + "FROM (SELECT c_id,ad_id,ad_title,ad_we,ad_education,ad_workplace,ad_wage,ad_worktype,ad_end "
-                    + "FROM (SELECT a.c_id,ad_id,ad_title,ad_we,ad_education,ad_workplace,ad_wage,ad_worktype,ad_qualification,ad_language,ad_end,c_size FROM ad_1 a, company_1 c "
-                    + "WHERE a.c_id = c.c_id(+)) "
-                    + "WHERE ad_title LIKE '%'||?||'%' "
-                    + "AND ad_workplace LIKE '%'||?||'%' "
-                    + "AND regexp_like(ad_we, ?)"
-                    + "AND regexp_like(ad_education, ?) "
-                    + "AND regexp_like(c_size, ?) "
-                    + "AND regexp_like(ad_worktype, ?) ";
-            if(qual.equals("")) {
-                sql += "AND ad_qualification LIKE '%'||?||'%' ";
-            } else {
-                sql += "AND regexp_like(ad_qualification, ?) ";
-            }
-            if(lang.equals("")) {
-                sql += "AND ad_language LIKE '%'||?||'%' ";
-            } else {
-                sql += "AND regexp_like(ad_language, ?) ";
-            }
-            if(date2.equals("")) {
-                sql += "AND (TO_DATE(ad_end) >= TO_DATE(?) OR ad_end IS NULL))";
-            } else {
-                sql += "AND (TO_DATE(ad_end) BETWEEN TO_DATE(?) AND TO_DATE(?) OR ad_end IS NULL))";
-            }
-
-            
-            ps = conn.prepareStatement(sql);
-            
-            ps.setString(1, keyword);
-            ps.setString(2, address);
-            ps.setString(3, we);
-            ps.setString(4, edu);
-            ps.setString(5, size);
-            ps.setString(6, worktype);
-            ps.setString(7, qual);
-            ps.setString(8, lang);
-            if(date2.equals("")) {
-                ps.setString(9, date1);
-            } else {
-                ps.setString(9, date1);
-                ps.setString(10, date2);
-            }
-            
-            ResultSet rs = ps.executeQuery();
-            rs.next();
-            total = rs.getInt(1);
-            rs.close();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        } finally {
-            dbcp.disConnection(conn, ps);
-        }
-        return total;
     }
 }

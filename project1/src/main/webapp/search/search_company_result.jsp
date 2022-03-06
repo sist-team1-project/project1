@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="sist.com.model.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<div class="m-top-40">
+<div class="m-top-40 result-container">
   <c:forEach var="c" items="${c_result }" varStatus="status">
     <div class="row roomy-20 row-border">
       <div class="col-sm-2">
-        <div class="result-container">
+        <div class="logo-container">
           <img class="clogo" src="${c.c_logo }">
         </div>
       </div>

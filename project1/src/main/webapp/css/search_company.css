@@ -36,7 +36,7 @@
   font-size: 18px;
 }
 
-.result-container {
+.logo-container {
   height: 80px;
   line-height:80px;
   text-align: center;
@@ -67,6 +67,11 @@
   padding-bottom: 30px;
 }
 
+.result-container {
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
 @media screen and (max-width: 768px) {
   .content,
   .review {
@@ -80,6 +85,11 @@
     white-space: unset;
     overflow: unset;
   }
+  
+  .result-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }
 
 @media screen and (min-width: 992px) {
@@ -87,5 +97,4 @@
     padding-left: 80px;
     padding-right: 80px;
   }
-
 }
