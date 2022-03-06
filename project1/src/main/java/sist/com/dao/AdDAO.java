@@ -108,8 +108,8 @@ public class AdDAO {
 			try {
 				conn = dbcp.getConnection();
 				String sql = "";
-				sql += "SELECT    ad_id,    ad_title,    ad_end ";
-				sql += "FROM    ad_1 ";
+				sql += "SELECT ad_id,ad_title,ad_end ";
+				sql += "FROM ad_1 ";
 				sql += "where ad_id in (";
 				System.out.println(cookieList.size());
 					for (int i = 0; i < cookieList.size(); i++) {
@@ -119,7 +119,7 @@ public class AdDAO {
 							sql += "'" + cookieList.get(i)+ "'";
 						}
 					} 
-				sql += 		")";
+				sql += ")";
 				ps = conn.prepareStatement(sql);
 				
 				ResultSet rs = ps.executeQuery();
