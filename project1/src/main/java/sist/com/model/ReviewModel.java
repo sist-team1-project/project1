@@ -6,32 +6,11 @@ import javax.servlet.http.*;
 import sist.com.vo.*;
 import sist.com.dao.*;
 
-public class CompanyModel {
+public class ReviewModel {
     
-    @RequestMapping("company/company.do")
-    public String company_page(HttpServletRequest request, HttpServletResponse response) {
-        String cid = request.getParameter("cid");
-        
-        CompanyDAO cdao = new CompanyDAO();
-        CompanyVO company = cdao.companyDetail(Integer.parseInt(cid));
-
-        AdDAO a = new AdDAO();
-        List<AdVO> adlist = a.companyAdList(Integer.parseInt(cid));
-        
-        ReviewDAO rdao = new ReviewDAO();
-        List<ReviewVO> review = rdao.reviewList(Integer.parseInt(cid));
-
-        request.setAttribute("company", company);
-        request.setAttribute("adlist", adlist);
-        request.setAttribute("review", review);
-        
-        request.setAttribute("main_jsp", "../company/company.jsp");
-        
-        return "../main/main.jsp";
-    }
-    
-    @RequestMapping("company/review.do")
+    @RequestMapping("review/review.do")
     public String company_review(HttpServletRequest request, HttpServletResponse response) {
+        
         String cid = request.getParameter("cid");
         
         ReviewDAO rdao = new ReviewDAO();
@@ -42,8 +21,9 @@ public class CompanyModel {
         return "../company/review.jsp";
     }
     
-    @RequestMapping("company/review_insert.do")
+    @RequestMapping("review/insert.do")
     public void company_review_insert(HttpServletRequest request, HttpServletResponse response) {
+        
         String uid = request.getParameter("uid");
         String cid = request.getParameter("cid");
         String content = request.getParameter("content");
@@ -66,16 +46,29 @@ public class CompanyModel {
         rdao.reviewInsert(vo); 
     }
     
-    @RequestMapping("company/review_delete.do")
+    @RequestMapping("review/delete.do")
     public void company_review_delete(HttpServletRequest request, HttpServletResponse response) {
+        
         String rid = request.getParameter("rid");
-        
-        try {
-            request.setCharacterEncoding("UTF-8");
-        } catch(Exception ex) {}
-        
         
         ReviewDAO rdao = new ReviewDAO();
         rdao.reviewDelete(Integer.parseInt(rid));
+    }
+    
+    @RequestMapping("review/update.do")
+    public void company_review_update(HttpServletRequest request, HttpServletResponse response) {
+
+        try {
+            request.setCharacterEncoding("UTF-8");
+        } catch (Exception ex) {
+        }
+
+        String rid = request.getParameter("rid");
+        String goodbad = request.getParameter("goodbad");
+        String job = request.getParameter("job");
+        String content = request.getParameter("content");
+        
+        ReviewDAO dao = new ReviewDAO();
+        dao.reviewUpdate(Integer.parseInt(rid), Integer.parseInt(goodbad), job, content);
     }
 }

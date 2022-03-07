@@ -98,19 +98,22 @@ public class ReviewDAO {
         return count;
     }
     
-    // 추가 - 면접 후기 제출
+    // 추가 - 면접 후기 입력
     public void reviewInsert(ReviewVO vo) {
     	
     	try {
     		conn = dbcp.getConnection();
-    		String sql="INSERT INTO review_1 VALUES (review_id,u_id,c_id,review_job,review_date) "
-    				+"VALUES(review_id_seq_nextval,?,?,?)";
+    		String sql="INSERT INTO review_1(review_id,u_id,c_id,review_content,review_goodbad,review_job) "
+    				+"VALUES(review_id_seq_1.NEXTVAL,?,?,?,?,?)";
     		
     		ps = conn.prepareStatement(sql);
     		
-    		ps.setInt(1, vo.getReview_goodbad());
-    		ps.setString(2, vo.getReview_job());
-    		ps.setString(3, vo.getReview_content());
+    		ps.setString(1, vo.getU_id());
+            ps.setInt(2, vo.getC_id());
+            ps.setString(3, vo.getReview_content());
+    		ps.setInt(4, vo.getReview_goodbad());
+    		ps.setString(5, vo.getReview_job());
+    		
     		
     		ps.executeUpdate();
     		
@@ -119,5 +122,48 @@ public class ReviewDAO {
     	} finally {
     		dbcp.disConnection(conn, ps);
     	}
+    }
+    
+    // 추가 - 면접 후기 삭제
+    public void reviewDelete(int id) {
+        
+        try {
+            conn = dbcp.getConnection();
+            String sql="DELETE FROM review_1 "
+                    + "WHERE review_id=?";
+            
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            dbcp.disConnection(conn, ps);
+        }
+    }
+    
+
+    public void reviewUpdate(int id, int goodbad, String job, String content) {
+        try {
+            conn = dbcp.getConnection();
+            
+            String sql = "UPDATE review_1 "
+                    + "SET review_goodbad=?, review_job=?, review_content=? "
+                    + "WHERE review_id=?";
+            
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, goodbad);
+            ps.setString(2, job);
+            ps.setString(3, content);
+            ps.setInt(4, id);
+            
+            ps.executeUpdate();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            dbcp.disConnection(conn, ps);
+        }
     }
 }
