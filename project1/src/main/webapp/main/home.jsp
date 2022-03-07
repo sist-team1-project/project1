@@ -21,16 +21,18 @@
       
      <c:if test="${not empty cookieList}">
       <!---- 최근 본 공고 목록(cookie) ---->
-        <div class="row roomy-20">
-          <div class="no-select"><h4>&nbsp;&nbsp;<i class="fa fa-address-card" aria-hidden="true"></i> 최근 본 공고</h4></div>  
+        <div class="row roomy-20" id="cookieDiv">
+          <div class="no-select">
+            <h4>&nbsp;&nbsp;<i class="fa fa-address-card" aria-hidden="true"></i> 최근 본 공고</h4>
+          </div>  
           <div id="cookieView">
             <c:forEach var="ck" items="${cookieList}" varStatus="status">
-              <div class="col-md-3 pad-5">
+              <div class="col-md-3 pad-5 cookieArea">
                 <div class="unit c-container">
                   <div class="small-font no-select">
                     <span class="lightyellowtag">${ck.ad_end} </span>
                     <span class="greytag">${ck.ad_workplace} </span>
-                    <a href="#"><i class="fa fa-window-close c-delete"></i></a>
+                   <a href="#" onclick="setCookie('adview', ${ck.ad_id}, -1, this)"><i class="fa fa-window-close c-delete"></i></a>
                   </div>
                   <div class="roomy-10 short-line">
                     <a href="../ad/ad.do?cid=${ck.c_id }&adid=${ck.ad_id}"><b>${ck.ad_title}</b></a>
@@ -204,6 +206,23 @@
 			}
 		} ]
 	});
+	
+    function setCookie(cookie_name, value, days, obj) {
+        var exdate = new Date();
+        exdate.setDate(exdate.getDate() + days);
+        // 설정 일수만큼 현재시간에 만료값으로 지정
+
+        var cookie_value = escape(value) + ((days == null) ? '' : '; expires=' + exdate.toUTCString());
+        document.cookie = cookie_name + '=' + cookie_value+"; path=/";
+        
+        // 클릭한 X아이콘에서 가장 가까운 클래스 pad-5를 찾아 삭제
+        $(obj).closest('.cookieArea').remove();
+        
+        if ($('.cookieArea').length == 0) {
+        	// 최근 본 공고를 모두 지위서 0개인 경우에는 '최근 본 공고' 글자까지 삭제
+ 			$('#cookieDiv').remove();
+		}
+      }
   </script>
 </body>
 </html>
