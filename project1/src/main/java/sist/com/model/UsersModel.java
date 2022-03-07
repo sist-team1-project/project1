@@ -2,6 +2,11 @@ package sist.com.model;
 
 import javax.servlet.http.*;
 
+
+
+import sist.com.dao.UsersDAO;
+import sist.com.vo.UsersVO;
+
 import sist.com.dao.UsersDAO;
 
 import sist.com.controller.RequestMapping;
@@ -132,5 +137,47 @@ public class UsersModel {
         String result=dao.idfind_email(email);
         request.setAttribute("result", result);
         return "../member/idfind_result.jsp";
+    }
+    @RequestMapping("member/join_update.do")
+    public String joinUpdate(HttpServletRequest request,
+            HttpServletResponse response)
+    {
+        // 정보를 출력해 준다
+        HttpSession session=request.getSession();
+        // id,name가 저장 
+        String id=(String)session.getAttribute("id");
+        // DAO연동 => id에 해당되는 데이터를 읽어 온다 
+        UsersDAO dao=new UsersDAO();
+        UsersVO vo=dao.memberUpdateData(id);
+        
+        request.setAttribute("vo", vo); //DTO 
+        // vo=> JSP에서 출력에 필요한 데이터를 전송하는 목적으로 모아서 처리 
+        request.setAttribute("main_jsp", "../member/join_update.jsp");
+        return "../main/main.jsp";
+    }
+    @RequestMapping("member/join_delete.do")
+    public String memberjoinDelete(HttpServletRequest request,
+            HttpServletResponse response)
+    {
+        
+        request.setAttribute("main_jsp", "../member/join_delete.jsp");
+        return "../main/main.jsp";
+    }
+    @RequestMapping("member/join_delete_ok.do")
+    public String memberJoinDeleteOk(HttpServletRequest request,
+            HttpServletResponse response)
+    {
+        String pwd=request.getParameter("pwd");
+        HttpSession session=request.getSession(); // id,name,admin
+        String id=(String)session.getAttribute("id");
+        UsersDAO dao=new UsersDAO();
+        // 결과값 
+        String result=dao.memberJoinDelete(pwd, id);
+        if(result.equals("yes"))
+        {
+            session.invalidate(); // 세션 해제 
+        }
+        request.setAttribute("result", result);
+        return "../member/join_delete_ok.jsp";//ajax => _ok
     }
 }

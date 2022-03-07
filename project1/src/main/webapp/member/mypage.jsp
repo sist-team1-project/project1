@@ -15,9 +15,10 @@
     <div class="col-sm-3">
       <a href="#"><h3>마이페이지</h3></a>
         <div class="list-group sm-4">
-            <a class="list-group-item list-group-item-info text-center font-weight-bold">내 정보</a><a href="#"
-                        class="list-group-item list-group-item-action text-center font-weight-bold">개인정보 수정</a> <a href="#"
-                        class="list-group-item list-group-item-action text-center font-weight-bold">즐겨찾기 관리</a>
+            <a class="list-group-item list-group-item-info text-center font-weight-bold">내 정보</a>
+            <a href="../member/join_update.do"class="list-group-item list-group-item-action text-center font-weight-bold">개인정보 수정</a>
+             <a href="../member/join_delete.do"class="list-group-item list-group-item-action text-center font-weight-bold">회원 탈퇴</a>
+            <a href="#" class="list-group-item list-group-item-action text-center font-weight-bold">즐겨찾기 관리</a>
      </div>
    </div>
 <div class="container">

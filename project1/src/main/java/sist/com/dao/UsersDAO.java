@@ -2,6 +2,8 @@ package sist.com.dao;
 
 import java.sql.*;
 
+import sist.com.vo.UsersVO;
+
 import sist.com.vo.*;
 
 public class UsersDAO {
@@ -197,6 +199,77 @@ public class UsersDAO {
                 rs.close();
             }
             
+        }catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        finally
+        {
+            dbcp.disConnection(conn, ps);
+        }
+        return result;
+    }
+    public UsersVO memberUpdateData(String id)
+    {
+        UsersVO vo=new UsersVO();
+        try
+        {
+            conn=dbcp.getConnection();
+            String sql="SELECT u_id,u_name,u_gender,u_birthday,u_email,u_post,u_address1,"
+                      +"NVL(u_address2,' ')"
+                      +"FROM users_1 "
+                      +"WHERE u_id=?";
+            ps=conn.prepareStatement(sql);
+            ps.setString(1, id);
+            ResultSet rs=ps.executeQuery();
+            rs.next();
+            vo.setU_id(rs.getString(1));
+            vo.setU_name(rs.getString(2));
+            vo.setU_gender(rs.getString(3));
+            vo.setU_birthday(rs.getString(4));
+            vo.setU_email(rs.getString(5));
+            vo.setU_post(rs.getString(6));
+            vo.setU_address1(rs.getString(7));
+            vo.setU_address2(rs.getString(8));
+            rs.close();
+        }catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        finally
+        {
+            dbcp.disConnection(conn, ps);
+        }
+        return vo;
+    }
+    public String memberJoinDelete(String pwd,String id)
+    {
+        String result="";
+        try
+        {
+            conn=dbcp.getConnection();
+            String sql="SELECT u_password FROM users_1 "
+                      +"WHERE u_id=?";
+            ps=conn.prepareStatement(sql);
+            ps.setString(1, id);
+            ResultSet rs=ps.executeQuery();
+            rs.next();
+            String db_pwd=rs.getString(1);
+            rs.close();
+            
+            if(db_pwd.equals(pwd))
+            {
+                result="yes";
+                sql="DELETE FROM users_1 "
+                   +"WHERE u_id=?";
+                ps=conn.prepareStatement(sql);
+                ps.setString(1, id);
+                ps.executeUpdate();
+            }
+            else
+            {
+                result="no";
+            }
         }catch(Exception ex)
         {
             ex.printStackTrace();
