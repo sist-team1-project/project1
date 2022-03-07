@@ -109,7 +109,7 @@ public class AdDAO {
 		try {
 			conn = dbcp.getConnection();
 			String sql = "";
-			sql += "SELECT ad_id,ad_title,ad_end ";
+			sql += "SELECT ad_id,ad_title,ad_end,ad_workplace,c_id ";
 			sql += "FROM ad_1 ";
 			sql += "where ad_id in (";
 			System.out.println(cookieList.size());
@@ -134,6 +134,10 @@ public class AdDAO {
 					ad_end = "채용시까지";
 				}
 				vo.setAd_end(ad_end);
+				String addr = rs.getString(4);
+				addr = addr.substring(0, addr.indexOf(" ", addr.indexOf(" ") + 1));
+				vo.setAd_workplace(addr);
+				vo.setC_id(rs.getInt(5));
 				
 				list.add(vo);
 			}

@@ -21,15 +21,18 @@
       
        <!---- 최근 본 공고 목록(cookie) ---->
       <div class="row roomy-20">
-        <div class="col-md-12 no-select"><h4>최근 본 공고</h4></div>
+        <div class="col-md-12 no-select"><h4>&nbsp;&nbsp;<i class="fa fa-address-card" aria-hidden="true"></i> 최근 본 공고</h4></div>
         <div class="col-md-12" id="cookieView">
           <c:forEach var="ck" items="${cookieList}" varStatus="status">
             <div class="col-md-3 pad-5">
               <div class="unit">
                 <div class="small-font no-select">
-                  <span>${ck.ad_id} </span>
-                  <span>${ck.ad_title} </span>
-                  <span>${ck.ad_end} </span>
+                  <span class="lightyellowtag">${ck.ad_end} </span>
+                  <span class="greytag">${ck.ad_workplace} </span>
+                  <a href="#"><i class="fa fa-star-o favorite"></i></a>
+                </div>
+                <div class="roomy-10 short-line">
+                  <a href="../ad/ad.do?cid=${ck.c_id }&adid=${ck.ad_id}"><b>${ck.ad_title}</b></a>
                 </div>
               </div>
             </div>
