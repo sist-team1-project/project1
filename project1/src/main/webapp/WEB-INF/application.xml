@@ -5,4 +5,5 @@
   <bean class="sist.com.model.AdModel"/>
   <bean class="sist.com.model.CompanyModel"/>
   <bean class="sist.com.model.UsersModel"/>
+  <bean class="sist.com.model.FavoriteModel"/>
 </beans>
