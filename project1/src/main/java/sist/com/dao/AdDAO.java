@@ -134,6 +134,7 @@ public class AdDAO {
 					ad_end = "채용시까지";
 				}
 				vo.setAd_end(ad_end);
+				
 				String addr = rs.getString(4);
 				addr = addr.substring(0, addr.indexOf(" ", addr.indexOf(" ") + 1));
 				vo.setAd_workplace(addr);

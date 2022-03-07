@@ -19,33 +19,30 @@
         </c:if>
       </div>
       
-       <!---- 최근 본 공고 목록(cookie) ---->
-      <c:forEach var="cooiek" items="${cookieList }" varStatus="status">
-      <c:if test="${not empty cookieList}">
-      <div class="row roomy-20">
-        <div class="no-select"><h4>&nbsp;&nbsp;<i class="fa fa-address-card" aria-hidden="true"></i> 최근 본 공고</h4></div>
-            </c:if>  
-        <div id="cookieView">
-          <c:forEach var="ck" items="${cookieList}" varStatus="status">
-            <div class="col-md-3 pad-5">
-              <div class="unit c-container">
-                <div class="small-font no-select">
-                  <span class="lightyellowtag">${ck.ad_end} </span>
-                  <span class="greytag">${ck.ad_workplace} </span>
-                  <a href="#"><i class="fa fa-window-close c-delete"></i></a>
-                </div>
-                <div class="roomy-10 short-line">
-                  <a href="../ad/ad.do?cid=${ck.c_id }&adid=${ck.ad_id}"><b>${ck.ad_title}</b></a>
+     <c:if test="${not empty cookieList}">
+      <!---- 최근 본 공고 목록(cookie) ---->
+        <div class="row roomy-20">
+          <div class="no-select"><h4>&nbsp;&nbsp;<i class="fa fa-address-card" aria-hidden="true"></i> 최근 본 공고</h4></div>  
+          <div id="cookieView">
+            <c:forEach var="ck" items="${cookieList}" varStatus="status">
+              <div class="col-md-3 pad-5">
+                <div class="unit c-container">
+                  <div class="small-font no-select">
+                    <span class="lightyellowtag">${ck.ad_end} </span>
+                    <span class="greytag">${ck.ad_workplace} </span>
+                    <a href="#"><i class="fa fa-window-close c-delete"></i></a>
+                  </div>
+                  <div class="roomy-10 short-line">
+                    <a href="../ad/ad.do?cid=${ck.c_id }&adid=${ck.ad_id}"><b>${ck.ad_title}</b></a>
+                  </div>
                 </div>
               </div>
-            </div>
-          </c:forEach>
-        </div>      
-      </div>  
-
-      </c:forEach>    
+            </c:forEach>
+          </div>      
+        </div>
       <!-------------------->
-           
+     </c:if>
+     
       <!-- 인기기업 9개 -->
       <div class="row roomy-20">
         <div class="no-select"><h4>&nbsp;&nbsp;<i class="fa fa-thumbs-o-up" aria-hidden="true"></i> BEST 기업 & 면접 리뷰</h4></div>
