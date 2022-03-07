@@ -96,7 +96,7 @@
                 <span class="greytag"> ${a.ad_education } </span>
                 <c:choose>
                   <c:when test="${sessionScope.id==null }">
-                    <a href="#" onclick="return confirm('먼저 로그인을 진행해주세요')"><i class="fa fa-star-o favorite"></i></a>
+                    <a href="../member/loginpage.do" onclick="return confirm('먼저 로그인을 진행해주세요')"><i class="fa fa-star-o favorite"></i></a>
                   </c:when>
                   <c:when test="${sessionScope.id!=null }">
                     <a href="#"><i class="fa fa-star favorite f-update"></i></a>                  
