@@ -54,23 +54,26 @@ public class MainModel {
         /*       Cookie        */
         Cookie[] cookies = request.getCookies();
         List<String> adIds = new ArrayList<String>();
+        List<AdVO> cookieList=null;
         
-        if (cookies != null) {
-			for (Cookie cook : cookies) {
-				String name = cook.getName();
-				String value = cook.getValue();
-				
-				if (name.equals("adview")) {
-					System.out.println(value);
+        for (int i = 0; i < cookies.length; i++) {
+			if ("adview".equals(cookies[i].getName()) ) {
+				for (Cookie cook : cookies) {
+					String name = cook.getName();
+					String value = cook.getValue();
 					
-					for (String id : value.split("%2C")) {
-						adIds.add(id);
+					if (name.equals("adview")) {
+						System.out.println(value);
+						
+						for (String id : value.split("%2C")) {
+							adIds.add(id);
+						}
 					}
-				}
+				}      
+				cookieList = a.adCookieList(adIds);
 			}
 		}
-        
-        List<AdVO> cookieList = a.adCookieList(adIds);
+
         request.setAttribute("cookieList", cookieList);         
                 
         request.setAttribute("company", company);
