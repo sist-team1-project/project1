@@ -20,16 +20,19 @@
       </div>
       
        <!---- 최근 본 공고 목록(cookie) ---->
+      <c:forEach var="cooiek" items="${cookieList }" varStatus="status">
+      <c:if test="${not empty cookieList}">
       <div class="row roomy-20">
-        <div class="col-md-12 no-select"><h4>&nbsp;&nbsp;<i class="fa fa-address-card" aria-hidden="true"></i> 최근 본 공고</h4></div>
-        <div class="col-md-12" id="cookieView">
+        <div class="no-select"><h4>&nbsp;&nbsp;<i class="fa fa-address-card" aria-hidden="true"></i> 최근 본 공고</h4></div>
+            </c:if>  
+        <div id="cookieView">
           <c:forEach var="ck" items="${cookieList}" varStatus="status">
             <div class="col-md-3 pad-5">
-              <div class="unit">
+              <div class="unit c-container">
                 <div class="small-font no-select">
                   <span class="lightyellowtag">${ck.ad_end} </span>
                   <span class="greytag">${ck.ad_workplace} </span>
-                  <a href="#"><i class="fa fa-star-o favorite"></i></a>
+                  <a href="#"><i class="fa fa-window-close c-delete"></i></a>
                 </div>
                 <div class="roomy-10 short-line">
                   <a href="../ad/ad.do?cid=${ck.c_id }&adid=${ck.ad_id}"><b>${ck.ad_title}</b></a>
@@ -38,7 +41,9 @@
             </div>
           </c:forEach>
         </div>      
-      </div>      
+      </div>  
+
+      </c:forEach>    
       <!-------------------->
            
       <!-- 인기기업 9개 -->
