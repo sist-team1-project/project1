@@ -82,7 +82,7 @@
         </div>
       </div>
       <!-------------->
-
+        
       <!-- 채용공고 top9 -->
       <div class="row roomy-20">
         <div class="col-md-12 no-select"><h4><i class="fa fa-handshake-o" aria-hidden="true"></i> BEST 공고</h4></div>
@@ -94,8 +94,15 @@
                 <span class="greentag"> ${a.ad_end } </span>&nbsp;
                 <span class="greytag"> ${a.ad_we } </span>&nbsp;
                 <span class="greytag"> ${a.ad_education } </span>
-                <a href="#"><i class="fa fa-star-o favorite"></i></a>
-              </div>  
+                <c:choose>
+                  <c:when test="${sessionScope.id==null }">
+                    <a href="#" onclick="return confirm('먼저 로그인을 진행해주세요')"><i class="fa fa-star-o favorite"></i></a>
+                  </c:when>
+                  <c:when test="${sessionScope.id!=null }">
+                    <a href="#"><i class="fa fa-star favorite f-update"></i></a>                  
+                  </c:when>
+                </c:choose>
+              </div>
               <div class="roomy-10 short-line">
                 <a href="../ad/ad.do?cid=${a.c_id }&adid=${a.ad_id}"><b>${a.ad_title }</b></a>
               </div>
@@ -107,8 +114,8 @@
           </div>
         </c:forEach>
       </div>
-      <!-------------->
-      
+      <!-------------->  
+       
       <!-- 책 추천 홍보 -->   
       <div class="row">     
         <div class="col-md-12 book pad-5 no-select">
@@ -127,7 +134,14 @@
                 <span class="redtag"> ${a.ad_end } </span>&nbsp;
                 <span class="greytag"> ${a.ad_we } </span>&nbsp;
                 <span class="greytag"> ${a.ad_education } </span>
-                <a href="#"><i class="fa fa-star-o favorite"></i></a>
+                <c:choose>
+                  <c:when test="${sessionScope.id==null }">
+                    <a href="#" onclick="return confirm('먼저 로그인을 진행해주세요')"><i class="fa fa-star-o favorite"></i></a>
+                  </c:when>
+                  <c:when test="${sessionScope.id!=null }">
+                    <a href="#"><i class="fa fa-star favorite f-update"></i></a>                  
+                  </c:when>
+                </c:choose>
               </div>
               <div class="roomy-10 short-line">
                 <a href="../ad/ad.do?cid=${a.c_id }&adid=${a.ad_id}"><b>${a.ad_title }</b></a>
@@ -223,6 +237,7 @@
  			$('#cookieDiv').remove();
 		}
       }
+
   </script>
 </body>
 </html>

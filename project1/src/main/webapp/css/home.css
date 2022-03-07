@@ -92,6 +92,11 @@ table {
 	font-size: 16px;
 	color: #797979;
 }
+.f-favorite {
+    float: right;
+    font-size: 16px;
+    color: yellow;
+}
 .c-delete {
     float: right;
     font-size: 16px;
