@@ -6,16 +6,13 @@
   border: 1px solid #E7E7E7;
   border-radius: 10px;
 }
-.btn-primary {
+
+#search-btn {
   padding: 10px 30px;
 }
-.adlist {
-  padding: 20px;
-}
 
-.ad-title {
-  font-size: 16px;
-  font-weight: bold;
+#reset-btn {
+  padding: 10px 10px;
 }
 
 input[name=keyword] {
@@ -31,6 +28,35 @@ input, select {
 :focus {
   outline: 1px solid black;
 }
+/* ----------- */
+
+
+
+/*    목록    */
+.title {
+  padding: 10px 20px;
+  background-color: rgb(231, 231, 231);
+  font-weight:  bold;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.list-content {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+#list {
+  padding: 20px;
+}
+
+.ad-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+/* ----------- */
+
+
 
 /*    페이지    */
 .page {
@@ -52,19 +78,31 @@ input, select {
 }
 /* ----------- */
 
+
+
 /* 링크 언더바 제거 */
 a, a:link, a:active, a:hover {
   text-decoration: none;
 }
 /* ----------- */
 
+
+
 @media screen and (min-width: 992px) {
   .container-pad {
     padding-left: 80px;
     padding-right: 80px;
   }
+}
+
+@media screen and (min-width: 768px) {
   .ad_end {
     text-align: right;
   }
+}
 
+@media screen and (max-width: 768px) {
+  .title {
+    display: none;
+  }
 }

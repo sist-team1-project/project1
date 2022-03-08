@@ -68,6 +68,29 @@
         $('input[type=date]').prop('min', function(){
             return new Date().toJSON().split('T')[0];
         });
+        
+        // 첫 시작시 로딩
+        $.ajax({
+            type : 'get',
+            url : '../search/searchad_result.do',
+            data : $('#search-form').serialize(),
+            success : function(result) {
+                $('#result').html(result);
+            }
+        });
+        
+        // 검색 버튼
+        $('#search-btn').click(function() {
+        	$.ajax({
+                type : 'get',
+                url : '../search/searchad_result.do',
+                data : $('#search-form').serialize(),
+                success : function(result) {
+                    $('#result').html(result);
+                }
+            });
+        })
+
     })
   </script>
 </head>
@@ -76,11 +99,12 @@
   <section>
     <div class="container container-pad">
       <div class="roomy-10 m-top-40 no-select">
-        <h3>채용정보 상세검색</h3>
+        <h3><i class="fa fa-search" aria-hidden="true"></i>&nbsp;<b>채용정보 상세검색</b></h3>
       </div>
+      
       <!--  검색창  -->
       <div class="search-container">
-      <form method="get" id="search-form" action="../search/searchad.do">
+      <form method="get" id="search-form">
         <div class="row">
           <div class="col-xs-2 roomy-10">키워드</div>
           <div class="col-xs-10 roomy-10">
@@ -94,7 +118,10 @@
             <select name="gugun" id="gugun"></select>
           </div>
         </div>
+        
         <div class="row">
+        
+          <!-- 경력 -->
           <div class="col-xs-2 col-sm-2 roomy-10">경력</div>
           <div class="col-xs-10 col-sm-4 roomy-10">
             <input type='checkbox' id="we-checkall" name="we" value="신입|경력|관계없음" checked> 전체<br> 
@@ -102,7 +129,9 @@
             <input type='checkbox' class="we" name="we" value="경력"> 경력<br>
             <input type='checkbox' class="we" name="we" value="관계없음"> 관계없음<br>
           </div>
+          <!-- --- -->
           
+          <!-- 학력 -->
           <div class="col-xs-2 col-sm-2 roomy-10">학력</div>
           <div class="col-xs-10 col-sm-4 roomy-10">
             <input type='checkbox' id="edu-checkall" name="edu" value="중졸이하|고졸|2~3년|4년|석사|박사|학력무관" checked> 전체 
@@ -117,6 +146,9 @@
             <input type='checkbox' class="edu" name='edu' value="학력무관"> 학력무관<br>
           </div>
         </div>
+        <!-- --- -->
+        
+        <!-- 기업형태 -->
         <div class="row">
           <div class="col-xs-2 roomy-10">기업형태</div>
           <div class="col-xs-10 roomy-10">
@@ -126,6 +158,9 @@
             <input type='checkbox' class="size" name="size" value="중소기업"> 중소기업
           </div>
         </div>
+        <!-- --- -->
+        
+        <!-- 근무형태 -->
         <div class="row">
           <div class="col-xs-2 roomy-10">근무형태</div>
           <div class="col-xs-10 roomy-10">
@@ -139,18 +174,27 @@
             <input type='checkbox' class="worktype" name="worktype" value="주 7일"> 주 7일
           </div>
         </div>
+        <!-- --- -->
+        
+        <!-- 자격면허 -->
         <div class="row">
           <div class="col-xs-2 roomy-10">자격면허</div>
           <div class="col-xs-10 roomy-10 qual">
             <input type="text" name="qual" value="" placeholder="자격증 입력"> <input type="button" class="btn btn-default btn-sm qual-add" value="추가"><br> 
           </div>
         </div>
+        <!-- --- -->
+        
+        <!-- 외국어 -->
         <div class="row">
           <div class="col-xs-2 roomy-10">외국어</div>
           <div class="col-xs-10 roomy-10 lang">
             <input type="text" name="lang" value="" placeholder="언어 입력"> <input type="button" class="btn btn-default btn-sm lang-add" value="추가"><br> 
           </div>
         </div>
+        <!-- --- -->
+        
+        <!-- 마감일 -->
         <div class="row roomy-10">
           <div class="col-xs-2 roomy-10">마감일</div>
           <div class="col-xs-10 roomy-10">
@@ -158,53 +202,32 @@
           </div>
         </div>
         <div class="row p-top-20">
-          <div class="col-xs-12 text-center"><input type="submit" id="search-btn" class="btn btn-primary" value="검색"></div>
+          <div class="col-xs-12 text-center">
+            <input type="button" id="search-btn" class="btn btn-primary" value="검색">&nbsp;&nbsp; <!-- 검색 버튼 -->
+            <input type="reset" id="reset-btn" class="btn btn-default" value="초기화"> <!-- 초기화 버튼 -->
+          </div>
         </div>
+        <!-- --- -->
+        
       </form>
       </div>
       <!-- ----------- -->
       
-      <!--  공고 리스트  -->
-      <div class="adlist">
-      <c:forEach var="a" items="${ad }" varStatus="status">
-        <div class="row roomy-20">
-          <div class="col-sm-2">${company[status.index] }</div>
-          <div class="col-sm-8">
-            <div class="ad-title"><a href="../ad/ad.do?cid=${a.c_id }&adid=${a.ad_id}">${a.ad_title }</a></div>
-            <div>${a.ad_we } | ${a.ad_education } | ${a.ad_worktype }</div>
-            <div>${a.ad_workplace } </div>
-          </div>
-          <div class="col-sm-2 ad_end">
-          ${a.ad_end }
-          </div>
-        </div>
-      </c:forEach>
+    <div class="title m-top-40">
+      <div class="row">
+        <div class="col-sm-3">회사명</div>
+        <div class="col-sm-7">채용정보</div>
+        <div class="col-sm-2 text-right">마감일</div>
       </div>
-      <!-- ----------- -->
+    </div>
+    
+      
+      <!-- 검색 결과 -->
+      <div id="result">
       
       
-      <!--    페이징    -->
-      <div class="row roomy-10">
-        <div class="page no-select">
-          <ul>
-            <c:if test="${startPage>1 }">
-              <li class="paging"><a href="../search/searchad.do?page=${startPage-1 }&keyword=${keyword }&sido=${sido }&gugun=${gugun }&we=${we }&edu=${edu }&size=${size }&worktype=${worktype }&qual=${qual }&lang=${lang }&date1=${date1 }&date2=${date2 }"><i class="fa fa-caret-left" aria-hidden="true"></i></a></li>
-            </c:if>
-            <c:forEach var="i" begin="${startPage }" end="${endPage }">
-              <c:if test="${i==curPage }">
-                <li class="current">${i }</li>
-              </c:if>
-              <c:if test="${i!=curPage }">
-                <li class="paging"><a href="../search/searchad.do?page=${i }&keyword=${keyword }&sido=${sido }&gugun=${gugun }&we=${we }&edu=${edu }&size=${size }&worktype=${worktype }&qual=${qual }&lang=${lang }&date1=${date1 }&date2=${date2 }">${i }</a></li>
-              </c:if>
-            </c:forEach>
-            <c:if test="${endPage<totalPage }">
-              <li class="paging"><a href="../search/searchad.do?page=${endPage+1 }"><i class="fa fa-caret-right" aria-hidden="true"></i></a></li>
-            </c:if>
-          </ul>
-        </div>
       </div>
-      <!-- ----------- -->
+      <!-- --- -->
       
     </div>
   </section>
