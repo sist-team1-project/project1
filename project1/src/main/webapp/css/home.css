@@ -16,6 +16,8 @@
   padding: 10px;
 }
 
+
+
 /*   기업   */
 table {
   width: 100%;
@@ -42,6 +44,8 @@ table {
 }
 /* -------- */
 
+
+
 /*   공고   */
 .greentag {
   border: 1px solid #017576;
@@ -67,6 +71,7 @@ table {
   background-color: #F2F2F2;
   color: #797979;
   padding: 3px;
+  display: inline-block;
 }
 
 .redtag {
@@ -75,7 +80,6 @@ table {
   background-color: #F78181;
   color: #fff;
   padding: 3px;
-  display: inline-block;
   display: inline-block;
 }
 
@@ -87,16 +91,19 @@ table {
   padding: 3px;
   display: inline-block;
 }
+
 .favorite {
 	float: right;
 	font-size: 16px;
 	color: #797979;
 }
+
 .f-favorite {
     float: right;
     font-size: 16px;
     color: yellow;
 }
+
 .c-delete {
     float: right;
     font-size: 16px;
@@ -111,6 +118,7 @@ table {
 /* -------- */
 
 
+
 /* 책 추천 홍보  */
 .book {
   background-color: #F2F2F2;
@@ -120,6 +128,7 @@ table {
   padding: 25px;
   border-radius: 20px;
 }
+
 
 
 /* 게시판  */
@@ -137,6 +146,7 @@ sup {
     float: right;
 }
 /* -------- */
+
 
 
 /* 슬라이더  */
@@ -167,8 +177,9 @@ sup {
 }
 /* -------- */
 
-/*   공통   */
-/* 링크 제거 */
+
+
+/* 링크 언더바 제거 */
 a,
 a:link,
 a:active,
