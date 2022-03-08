@@ -12,7 +12,7 @@
 </head>
 <body>
 		<section>
-		<input type="hidden" id="ad_id" value="${ad.ad_id }">
+				<input type="hidden" id="ad_id" value="${ad.ad_id }">
 				<!-- 공고 메인 정보 -->
 				<div class="container container-pad">
 						<div class="row row-border room m-top-40">
@@ -269,8 +269,28 @@
 
 						<!--              홈/즐겨찾기 버튼                -->
 
+						<!-- <c:if test="${count==0 }">
+	      		 		<a href="../jjim/jjim_insert.do?fno=${vo.no }" class="btn btn-xs btn-danger">찜하기</a>
+	      				</c:if>
+	      				<c:if test="${count!=0 }">
+	     	 				<span class="btn btn-xs btn-default">찜하기</span>
+	     	 				</c:if> -->
+
+
 						<div class="text-center row roomy-40">
-								<a href="../main/main.do" class="btn btn-primary">홈으로</a>&nbsp;<a href="#" class="btn btn-default"> 즐겨찾기 추가</a>&nbsp;&nbsp;
+								<a href="../main/main.do" class="btn btn-primary">홈으로</a>&nbsp;
+							 	<button type="button" id="favorite-insert-btn" class="btn btn-primary">즐겨찾기 추가</button>
+								&nbsp;&nbsp;
+								<c:if test="${sessionScope.id!=null }">
+										<c:if test="${count==0 }">
+												<button type="button" id="favorite-insert-btn" class="btn btn-primary">즐겨찾기 추가2</button>
+										</c:if>
+										<c:if test="${count!=0 }">
+										<a href="favorite/insert.do?adid=${ad.ad_id }" class="btn btn-danger btn-sm">즐겨찾기 추가3</a>
+												<span class="btn btn-default"> 즐겨찾기 추가4</span>
+										</c:if>
+								</c:if>
+								&nbsp;&nbsp;
 								<div class="row no-select padding-10">조회수 ${ad.ad_visits }</div>
 						</div>
 
@@ -341,65 +361,85 @@
 
 
 		<!-- ######################################################################################################################## -->
-   
-    <!--    cookie     -->
-    <script>
-    // 화면이 뜨는 것과 동시에 실행
-    $(document).ready(function(){ 
-        var adId = $('#ad_id').val();
-        addCookie(adId);
-    });
 
-    function setCookie(cookie_name, value, days) {
-      var exdate = new Date();
-      exdate.setDate(exdate.getDate() + days);
-      // 설정 일수만큼 현재시간에 만료값으로 지정
+		<!--    cookie     -->
+		<script>
+			// 화면이 뜨는 것과 동시에 실행
+			$(document).ready(function() {
+				var adId = $('#ad_id').val();
+				addCookie(adId);
+			});
 
-      var cookie_value = escape(value) + ((days == null) ? '' : '; expires=' + exdate.toUTCString());
-      document.cookie = cookie_name + '=' + cookie_value+"; path=/";
-    }
-    
-    function getCookie(cookie_name) {
-      var x, y;
-      
-      var val = document.cookie.split(';');
+			function setCookie(cookie_name, value, days) {
+				var exdate = new Date();
+				exdate.setDate(exdate.getDate() + days);
+				// 설정 일수만큼 현재시간에 만료값으로 지정
 
-      for (var i = 0; i < val.length; i++) {
-        x = val[i].substr(0, val[i].indexOf('='));
-        y = val[i].substr(val[i].indexOf('=') + 1);
-        x = x.replace(/^\s+|\s+$/g, ''); // 앞과 뒤의 공백 제거하기
-        if (x == cookie_name) {
-          return unescape(y); // unescape로 디코딩 후 값 리턴
-        }
-      }
-    }
-    
-    function addCookie(id) {
-      var items = getCookie('adview'); // 이미 저장된 값을 쿠키에서 가져오기
-      var maxItemNum = 4; // 최대 저장 가능한 공고개수
-      var expire = 7; // 쿠키값을 저장할 기간
-      if (items) {
-        var itemArray = items.split(',');
-        if (itemArray.indexOf(id) != -1) {
-          // 이미 존재하는 경우 종료
-          console.log('Already exists.');
-        }
-        else {
-          // 새로운 값 저장 및 최대 개수 유지하기
-          itemArray.unshift(id);
-          if (itemArray.length > maxItemNum ) itemArray.length = 4;
-          items = itemArray.join(',');
-          setCookie('adview', items, expire);
-        }
-      }
-      else {
-        // 신규 id값 저장하기
-        setCookie('adview', id, expire);
-      }
-    }
-    </script>
-    <!-- ------------------ -->
-    
+				var cookie_value = escape(value)
+						+ ((days == null) ? '' : '; expires='
+								+ exdate.toUTCString());
+				document.cookie = cookie_name + '=' + cookie_value + "; path=/";
+			}
+
+			function getCookie(cookie_name) {
+				var x, y;
+
+				var val = document.cookie.split(';');
+
+				for (var i = 0; i < val.length; i++) {
+					x = val[i].substr(0, val[i].indexOf('='));
+					y = val[i].substr(val[i].indexOf('=') + 1);
+					x = x.replace(/^\s+|\s+$/g, ''); // 앞과 뒤의 공백 제거하기
+					if (x == cookie_name) {
+						return unescape(y); // unescape로 디코딩 후 값 리턴
+					}
+				}
+			}
+
+			function addCookie(id) {
+				var items = getCookie('adview'); // 이미 저장된 값을 쿠키에서 가져오기
+				var maxItemNum = 4; // 최대 저장 가능한 공고개수
+				var expire = 7; // 쿠키값을 저장할 기간
+				if (items) {
+					var itemArray = items.split(',');
+					if (itemArray.indexOf(id) != -1) {
+						// 이미 존재하는 경우 종료
+						console.log('Already exists.');
+					} else {
+						// 새로운 값 저장 및 최대 개수 유지하기
+						itemArray.unshift(id);
+						if (itemArray.length > maxItemNum)
+							itemArray.length = 4;
+						items = itemArray.join(',');
+						setCookie('adview', items, expire);
+					}
+				} else {
+					// 신규 id값 저장하기
+					setCookie('adview', id, expire);
+				}
+			}
+		</script>
+		<!-- ######################################################################################################################## -->
+
+		
+		<script type="text/javascript">
+			$(function() {
+				var adId = $('#ad_id').val();
+				$('#favorite-insert-btn').click(function() {
+					$.ajax({
+						type : 'POST',
+						url : 'favorite/insert.do',
+						data : adId,
+						success : function() {
+							alert("즐겨찾기 추가 완료");
+						}
+					});
+				})
+			})
+		</script>
+		 
+
+		<!-- ######################################################################################################################## -->
 		<!-- 여기까지 직접 작성 -->
 
 </body>

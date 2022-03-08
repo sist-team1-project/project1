@@ -35,27 +35,22 @@ public class FavoriteDAO {
 
 	}
 
-	public List<FavoriteVO> favListData(String uid) {
-		List<FavoriteVO> list = new ArrayList<FavoriteVO>();
+	public List<Integer> favListData(String uid) {
+		List<Integer> list = new ArrayList<Integer>();
 
 		try {
 			conn = dbcp.getConnection();
 
-			String sql = "SELECT /*+ INDEX_DESC(favorite_1 fav_id_pk)*/ fav_id, u_id, ad_id, "
-					+ "(SELECT ad_title FROM ad_1 WHERE	ad_id = favorite_1.ad_id) as ad_title, "
-					+ "(SELECT c_logo FROM company_1 WHERE c_id = favorite_1.ad_id) as c_logo " + "FROM favorite_1	"
-					+ "WHERE u_id = ?";
+			String sql = "SELECT ad_id " + "FROM favorite_1	" + "WHERE u_id = ? " + "ORDER BY fav_id";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, uid);
 
 			ResultSet rs = ps.executeQuery();
+
 			while (rs.next()) {
-				FavoriteVO vo = new FavoriteVO();
-				vo.setFav_id(rs.getInt(1));
-				vo.setU_id(rs.getString(2));
-				vo.setAd_id(rs.getInt(3));
-				list.add(vo);
+				list.add(rs.getInt(1));
 			}
+
 			rs.close();
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -64,6 +59,7 @@ public class FavoriteDAO {
 		}
 		return list;
 	}
+
 
 	public int favCountData(FavoriteVO vo) {
 		int count = 0;
@@ -88,7 +84,6 @@ public class FavoriteDAO {
 	}
 
 	public void favDelete(int fid) {
-
 		try {
 			conn = dbcp.getConnection();
 
