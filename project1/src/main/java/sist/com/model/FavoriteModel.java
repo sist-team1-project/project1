@@ -12,8 +12,7 @@ import sist.com.dao.*;
 public class FavoriteModel {
 
 	@RequestMapping("favorite/insert.do")
-	public String favorite_insert(HttpServletRequest request, HttpServletResponse response) {
-		String cid = request.getParameter("cid");
+	public void favorite_insert(HttpServletRequest request, HttpServletResponse response) {
 		String adid = request.getParameter("adid");
 
 		HttpSession session = request.getSession();
@@ -25,28 +24,52 @@ public class FavoriteModel {
 
 		FavoriteDAO dao = new FavoriteDAO();
 		dao.favInsert(vo);
+		
+		//return "../main/main.do";
 
-		return "redirect:../ad/ad.do?cid=" + cid + "&adid=" + adid;
 	}
 
-	@RequestMapping("favorite/favorite.do")
+	@RequestMapping("users/favorite.do")
 	public String favorite_List(HttpServletRequest request, HttpServletResponse response) {
 
 		HttpSession session = request.getSession();
 		String uid = (String) session.getAttribute("id");
+		
+		String u_id = request.getParameter(uid);
 
+		// 공고 번호, 공고정보
 		FavoriteDAO dao = new FavoriteDAO();
-		List<FavoriteVO> flist = dao.favListData(uid);
-
+		FavoriteVO fvo;
+		// 즐찾 공고번호 리스트
+		List<Integer> flist = dao.favListData(u_id);
 		
-		
-		/*
-		 * for (FavoriteVO vo : flist) { String poster = vo.getPoster(); poster =
-		 * poster.substring(0, poster.indexOf("^"));
-		 */
+		// 공고번호들의 공고정보리스트, 회사정보리스트
+		List<AdVO> adList = new ArrayList<AdVO>();
+		List<String> cList = new ArrayList<String>();
 
-		request.setAttribute("favorite", flist);
-		return "";
+		AdDAO a = new AdDAO();
+		AdVO vo;
+		CompanyDAO c = new CompanyDAO();
+		
+		for (int i : flist) {
+			vo = a.adDetail(i);
+			adList.add(vo);
+			cList.add(c.companyName(vo.getC_id()));
+			
+		}
+		
+//		int count = 0;
+//		if (uid == null)
+//			count = 0;
+//		else
+//			count = dao.favCountData(vo);
+		
+//		request.setAttribute("count", count);
+
+		request.setAttribute("adList", adList);
+		request.setAttribute("c_name", cList);
+		request.setAttribute("main_jsp", "../users/favorite_Edit.jsp");
+		return "../main/main.jsp";
 
 	}
 
@@ -56,7 +79,7 @@ public class FavoriteModel {
 		FavoriteDAO dao = new FavoriteDAO();
 		dao.favDelete(Integer.parseInt(fid));
 
-		return "redirect:../";
+		return "redirect:../user/favorite.do";
 	}
 
 }
