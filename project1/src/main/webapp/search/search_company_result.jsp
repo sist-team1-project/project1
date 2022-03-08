@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <div class="m-top-40 result-container">
   <c:forEach var="c" items="${c_result }" varStatus="status">
-    <div class="row roomy-20 row-border">
+    <div class="row">
       <div class="col-sm-2">
         <div class="logo-container">
           <img class="clogo" src="${c.c_logo }">
@@ -16,8 +16,9 @@
         <div class="content short-line no-select">${c.c_industry }&nbsp;&nbsp;|&nbsp;&nbsp;${c.c_address }</div>
       </div>
       <div class="col-sm-3">
-        <div class="review-pad review">기업리뷰 ${r_result[status.index] }개</div>
+        <div class="review">기업리뷰 ${r_result[status.index] }개</div>
       </div>
     </div>
+    <hr>
   </c:forEach>
 </div>

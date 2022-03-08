@@ -1,9 +1,6 @@
 @charset "UTF-8";
 
-.row-border {
-  border-bottom: 1px solid #d6d6d6;
-}
-
+/*    검색창    */
 .search-container {
   padding-left: 20%;
   padding-right: 20%;
@@ -35,12 +32,21 @@
   cursor: pointer;
   font-size: 18px;
 }
+/* ----------- */
+
+
+/*   검색 결과   */
+.result-container {
+  padding-left: 100px;
+  padding-right: 100px;
+}
 
 .logo-container {
   height: 80px;
   line-height:80px;
   text-align: center;
 }
+
 
 .clogo {
   width: 100%;
@@ -50,15 +56,15 @@
   vertical-align: middle;
 }
 
-.content {
-  text-align: left;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
 .company-name {
   font-size: 16px;
   font-weight: bold;
+}
+
+.content {
+  text-align: left;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 .review {
@@ -66,12 +72,11 @@
   padding-top: 30px;
   padding-bottom: 30px;
 }
+/* ----------- */
 
-.result-container {
-  padding-left: 100px;
-  padding-right: 100px;
-}
 
+
+/*   반응형   */
 @media screen and (max-width: 768px) {
   .content,
   .review {
