@@ -283,10 +283,11 @@
 								&nbsp;&nbsp;
 								<c:if test="${sessionScope.id!=null }">
 										<c:if test="${count==0 }">
-												<button type="button" id="favorite-insert-btn" class="btn btn-primary">즐겨찾기 추가</button>
+												<button type="button" id="favorite-insert-btn" class="btn btn-primary">즐겨찾기 추가2</button>
 										</c:if>
 										<c:if test="${count!=0 }">
-												<span class="btn btn-default"> 즐겨찾기 추가</span>
+										<a href="favorite/insert.do?adid=${ad.ad_id }" class="btn btn-danger btn-sm">즐겨찾기 추가3</a>
+												<span class="btn btn-default"> 즐겨찾기 추가4</span>
 										</c:if>
 								</c:if>
 								&nbsp;&nbsp;
