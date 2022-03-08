@@ -25,17 +25,22 @@ $('document').ready(function() {
         selsido.next().append("<option value=''>구/군 선택</option>");
     });
     
-    
     $("#sido").change(function() {
         var area = "area" + $("option",$(this)).index($("option:selected",$(this)));
-        var $gugun = $(this).next(); // 선택영역 군구 객체
-        $("option",$gugun).remove(); // 구군 초기화
+        var gugun = $(this).next(); // 선택영역 군구 객체
+        $("option",gugun).remove(); // 구군 초기화
         if(area == "area0")
-            $gugun.append("<option value=''>구/군 선택</option>");
+            gugun.append("<option value=''>구/군 선택</option>");
         else {
             $.each(eval(area), function() {
-            $gugun.append("<option value='"+this+"'>"+this+"</option>");
+            gugun.append("<option value='"+this+"'>"+this+"</option>");
             });
         }
+    });
+    
+    $("#reset-btn").click(function() {
+        var gugun = $('#gugun'); // 선택영역 군구 객체
+        $("option",gugun).remove(); // 구군 초기화
+        gugun.append("<option value=''>구/군 선택</option>");
     });
 });

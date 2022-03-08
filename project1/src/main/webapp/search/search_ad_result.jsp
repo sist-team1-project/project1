@@ -5,7 +5,6 @@
 <script>
     $(function() {
     	$('.paging').css("cursor","pointer");
-    	
         $('.paging').click(function() {
             let url = $(this).attr('data-page');
             $.ajax({
@@ -44,18 +43,18 @@
   <div class="page no-select">
     <ul>
       <c:if test="${startPage>1 }">
-        <li class="paging" data-page="../search/searchad_result.do?${url }&page=${startPage-1 }"><i class="fa fa-caret-left" aria-hidden="true"></i></li>
+        <li class="paging" data-page="${url }&page=${startPage-1 }"><i class="fa fa-caret-left" aria-hidden="true"></i></li>
       </c:if>
       <c:forEach var="i" begin="${startPage }" end="${endPage }">
         <c:if test="${i==curPage }">
           <li class="current">${i }</li>
         </c:if>
         <c:if test="${i!=curPage }">
-          <li class="paging" data-page="../search/searchad_result.do?${url }&page=${i }">${i }</li>
+          <li class="paging" data-page="${url }&page=${i }">${i }</li>
         </c:if>
       </c:forEach>
       <c:if test="${endPage<totalPage }">
-        <li class="paging" data-page="../search/searchad_result.do?${url }&page=${endPage+1 }"><i class="fa fa-caret-right" aria-hidden="true"></i></li>
+        <li class="paging" data-page="${url }&page=${endPage+1 }"><i class="fa fa-caret-right" aria-hidden="true"></i></li>
       </c:if>
     </ul>
   </div>

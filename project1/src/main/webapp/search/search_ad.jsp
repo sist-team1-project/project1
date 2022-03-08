@@ -217,7 +217,7 @@
       <div class="row">
         <div class="col-sm-3">회사명</div>
         <div class="col-sm-7">채용정보</div>
-        <div class="col-sm-2 text-right">마감일</div>
+        <div class="col-sm-2">마감일</div>
       </div>
     </div>
     
