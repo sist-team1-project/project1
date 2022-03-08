@@ -24,13 +24,13 @@
         <div class="row roomy-20" id="cookieDiv">
           <div class="no-select">
             <h4>&nbsp;&nbsp;<i class="fa fa-address-card" aria-hidden="true"></i> 최근 본 공고</h4>
-          </div>  
+          </div>
           <div id="cookieView">
-            <c:forEach var="ck" items="${cookieList}" varStatus="status">
+           <c:forEach var="ck" items="${cookieList}" varStatus="status"> 
               <div class="col-md-3 pad-5 cookieArea">
                 <div class="unit c-container">
                   <div class="small-font no-select">
-                    <span class="lightyellowtag">${ck.ad_end} </span>
+                    <span class="lightbluetag">${ck.ad_end} </span>
                     <span class="greytag">${ck.ad_workplace} </span>
                    <a href="#" onclick="setCookie('adview', ${ck.ad_id}, -1, this)"><i class="fa fa-window-close c-delete"></i></a>
                   </div>
