@@ -99,21 +99,21 @@ table {
 }
 
 .f-favorite {
-    float: right;
-    font-size: 16px;
-    color: yellow;
+  float: right;
+  font-size: 16px;
+  color: yellow;
 }
 
 .c-delete {
-    float: right;
-    font-size: 16px;
-    color: #797979;	
+  float: right;
+  font-size: 16px;
+  color: #797979;	
 }
 
 .adplus {
-    text-decoration: none;
-    text-align: right;
-    color: rgb(214,214,214);
+  text-decoration: none;
+  text-align: right;
+  color: rgb(214,214,214);
 }
 /* -------- */
 
@@ -142,8 +142,8 @@ sup {
 }
 
 .boardplus { 
-    text-decoration: underline;
-    float: right;
+  text-decoration: underline;
+  float: right;
 }
 /* -------- */
 
@@ -162,7 +162,7 @@ sup {
 
 .slick-prev:before,
 .slick-next:before {
-      color: black;
+  color: black;
 }
 
 .slick-track {
