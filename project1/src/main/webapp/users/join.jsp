@@ -5,9 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="../shadow/css/shadowbox.css">
-<script type="text/javascript" src="../shadow/js/shadowbox.js"></script>
+<link rel="stylesheet" href="../css/users/join.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript" src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
@@ -18,7 +16,7 @@ $(function(){
     $('#checkBtn').click(function(){
       
         Shadowbox.open({
-            content:'../member/idcheck.do',
+            content:'../users/idcheck.do',
             player:'iframe',
             title:'아이디 중복체크',
             width:420,
@@ -97,7 +95,7 @@ $(function(){
   </div>
   <div class="wrapper row3">
    <main class="container clear">
-   <form method="post" action="../member/join_ok.do" name="join_frm" id="join_frm">
+   <form method="post" action="../users/join_ok.do" name="join_frm" id="join_frm">
     <table class="table">
       <tr>
        <td class="text-right" width=15%>아이디</td>

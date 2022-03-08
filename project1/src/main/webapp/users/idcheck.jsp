@@ -33,7 +33,7 @@ $(function(){
         }
         $.ajax({
             type:'POST',
-            url:'../login/idcheck_result.do',
+            url:'../users/idcheck_result.do',
             data:{"id":id},
             success:function(result) 
             {

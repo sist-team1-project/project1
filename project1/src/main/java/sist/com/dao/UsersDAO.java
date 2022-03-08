@@ -1,37 +1,50 @@
 package sist.com.dao;
 
 import java.sql.*;
-
-import sist.com.vo.UsersVO;
+import java.util.*;
 
 import sist.com.vo.*;
 
 public class UsersDAO {
+    
     private Connection conn;
     private PreparedStatement ps;
     private DBCPConnection dbcp = new DBCPConnection();
 
     public String isLogin(String id, String pwd) {
+        
         String result = "";
         try {
             conn = dbcp.getConnection();
-            String sql = "SELECT COUNT(*) FROM users_1 " + "WHERE u_id=?";
+            
+            String sql = "SELECT COUNT(*) FROM users_1 "
+                    + "WHERE u_id=?";
+            
             ps = conn.prepareStatement(sql);
             ps.setString(1, id);
+            
             ResultSet rs = ps.executeQuery();
             rs.next();
+            
             int count = rs.getInt(1);
+            
             rs.close();
+            
             if (count == 0) {
                 return "FAIL";
             } else {
-                sql = "SELECT u_password,u_name " + "FROM users_1 " + "WHERE u_id=?";
+                sql = "SELECT u_password,u_name "
+                        + "FROM users_1 "
+                        + "WHERE u_id=?";
                 ps = conn.prepareStatement(sql);
                 ps.setString(1, id);
+                
                 rs = ps.executeQuery();
                 rs.next();
+                
                 String password = rs.getString(1);
                 String name = rs.getString(2);
+                
                 rs.close();
 
                 if (password.equals(pwd)) {
@@ -48,16 +61,22 @@ public class UsersDAO {
         return result;
     }
 
-    public int loginIdcheck(String id) {
+    public int idCheck(String id) {
+        
         int count = 0;
         try {
             conn = dbcp.getConnection();
-            String sql = "SELECT COUNT(*) FROM users_1 " + "WHERE u_id=?";
+            
+            String sql = "SELECT COUNT(*) FROM users_1 "
+                    + "WHERE u_id=?";
+            
             ps = conn.prepareStatement(sql);
             ps.setString(1, id);
+            
             ResultSet rs = ps.executeQuery();
             rs.next();
             count = rs.getInt(1);
+            
             rs.close();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -67,11 +86,14 @@ public class UsersDAO {
         return count;
     }
 
-    public void loginJoin(UsersVO vo) {
+    public void join(UsersVO vo) {
+        
         try {
             conn = dbcp.getConnection();
+            
             String sql = "INSERT INTO users_1 VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-            ps=conn.prepareStatement(sql);
+            
+            ps = conn.prepareStatement(sql);
             ps.setString(1, vo.getU_id());
             ps.setString(2, vo.getU_password());
             ps.setString(3, vo.getU_name());
@@ -84,6 +106,7 @@ public class UsersDAO {
             ps.setString(10, vo.getU_question());
             ps.setString(11, vo.getU_answer());
             ps.executeUpdate();
+            
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
@@ -92,10 +115,14 @@ public class UsersDAO {
     }
 
     public UsersVO userDetail(String id) {
+        
         UsersVO vo = new UsersVO();
         try {
             conn = dbcp.getConnection();
-            String sql = "SELECT * " + "FROM users_1 " + "WHERE u_id=?";
+            
+            String sql = "SELECT * "
+                    + "FROM users_1 "
+                    + "WHERE u_id=?";
 
             ps = conn.prepareStatement(sql);
             ps.setString(1, id);
@@ -122,106 +149,162 @@ public class UsersDAO {
         }
         return vo;
     }
- // ID => 전화번호로 찾기 
-    public String idfind_name(String name)
-    {
-        String result="";
-        try
-        {
-            conn=dbcp.getConnection();
-            String sql="SELECT COUNT(*) "
-                      +"FROM users_1 "
-                      +"WHERE u_name=?";
-            ps=conn.prepareStatement(sql);
+
+    public String idFind(String name, String email) {
+        
+        String result = "";
+        try {
+            conn = dbcp.getConnection();
+            
+            String sql = "SELECT COUNT(*) "
+                    + "FROM users_1 "
+                    + "WHERE u_name=? AND u_email=?";
+            
+            ps = conn.prepareStatement(sql);
             ps.setString(1, name);
-            ResultSet rs=ps.executeQuery();
-            rs.next();
-            int count=rs.getInt(1);
-            rs.close();
-            if(count==0)
-            {
-                result="no";
-            }
-            else
-            {
-                // 전화번호가 존재 
-                sql="SELECT RPAD(SUBSTR(u_id,1,3),LENGTH(u_id),'*') "
-                   +"FROM users_1 "
-                   +"WHERE u_name=?";
-                ps=conn.prepareStatement(sql);
-                ps.setString(1,name);
-                rs=ps.executeQuery();
-                rs.next();
-                result=rs.getString(1);
-                rs.close();
-            }
+            ps.setString(2, email);
             
-        }catch(Exception ex)
-        {
-            ex.printStackTrace();
-        }
-        finally
-        {
-            dbcp.disConnection(conn, ps);
-        }
-        return result;
-    }
-    public String idfind_email(String email)
-    {
-        String result="";
-        try
-        {
-            conn=dbcp.getConnection();
-            String sql="SELECT COUNT(*) "
-                      +"FROM users_1 "
-                      +"WHERE u_email=?";
-            ps=conn.prepareStatement(sql);
-            ps.setString(1, email);
-            ResultSet rs=ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
             rs.next();
-            int count=rs.getInt(1);
+            int count = rs.getInt(1);
             rs.close();
-            if(count==0)
-            {
-                result="no";
-            }
-            else
-            {
+            
+            if (count == 0) {
+                result = "no";
+            } else {
+                sql = "SELECT RPAD(SUBSTR(u_id,1,4),LENGTH(u_id),'*') "
+                    + "FROM users_1 "
+                    + "WHERE u_name=? AND u_email=?";
                 
-                sql="SELECT RPAD(SUBSTR(u_id,1,3),LENGTH(u_id),'*') "
-                   +"FROM users_1 "
-                   +"WHERE u_email=?";
-                ps=conn.prepareStatement(sql);
-                ps.setString(1, email);
-                rs=ps.executeQuery();
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, name);
+                ps.setString(2, email);
+                
+                rs = ps.executeQuery();
                 rs.next();
-                result=rs.getString(1);
+                result = rs.getString(1);
                 rs.close();
             }
-            
-        }catch(Exception ex)
-        {
+        } catch (Exception ex) {
             ex.printStackTrace();
-        }
-        finally
-        {
+        } finally {
             dbcp.disConnection(conn, ps);
         }
         return result;
     }
-    public UsersVO memberUpdateData(String id)
-    {
-        UsersVO vo=new UsersVO();
-        try
-        {
-            conn=dbcp.getConnection();
-            String sql="SELECT u_id,u_name,u_gender,u_birthday,u_email,u_post,u_address1,"
-                      +"NVL(u_address2,' ')"
-                      +"FROM users_1 "
-                      +"WHERE u_id=?";
-            ps=conn.prepareStatement(sql);
+    
+    public String pwFind1(String name, String id) {
+        
+        String result = "";
+        try {
+            conn = dbcp.getConnection();
+            
+            String sql = "SELECT COUNT(*) "
+                    + "FROM users_1 "
+                    + "WHERE u_name=? AND u_id=?";
+            
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, name);
+            ps.setString(2, id);
+            
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            int count = rs.getInt(1);
+            rs.close();
+            if (count == 0) {
+                result = "no";
+            } else {
+                sql = "SELECT u_question "
+                    + "FROM users_1 "
+                    + "WHERE u_name=? AND u_id=?";
+                
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, name);
+                ps.setString(2, id);
+                
+                rs = ps.executeQuery();
+                
+                rs.next();
+                
+                result = rs.getString(1);
+                
+                rs.close();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            dbcp.disConnection(conn, ps);
+        }
+        return result;
+    }
+    
+    public String pwFind2(String id, String answer) {
+        
+        String result = "";
+        try {
+            conn = dbcp.getConnection();
+            
+            String sql = "SELECT COUNT(*) "
+                    + "FROM users_1 "
+                    + "WHERE u_id=? AND u_answer=?";
+            
+            ps = conn.prepareStatement(sql);
             ps.setString(1, id);
-            ResultSet rs=ps.executeQuery();
+            ps.setString(2, answer);
+            
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            int count = rs.getInt(1);
+            rs.close();
+            
+            if (count == 0) {
+                result = "no";
+            } else {
+                result = "yes";
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            dbcp.disConnection(conn, ps);
+        }
+        return result;
+    }
+
+    public void pwUpdate(String id, String password) {
+        try {
+            conn = dbcp.getConnection();
+            
+            String sql = "UPDATE users_1 "
+                    + "SET u_password=? "
+                    + "WHERE u_id=?";
+            
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, password);
+            ps.setString(2, id);
+            ps.executeUpdate();
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            dbcp.disConnection(conn, ps);
+        }
+    }
+    
+    public UsersVO userUpdate(String id) {
+        
+        UsersVO vo = new UsersVO();
+        try {
+            conn = dbcp.getConnection();
+            
+            String sql = "SELECT u_id,u_name,u_gender,u_birthday,u_email,u_post,u_address1,"
+                    + "NVL(u_address2,' ')"
+                    + "FROM users_1 "
+                    + "WHERE u_id=?";
+            
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, id);
+            
+            ResultSet rs = ps.executeQuery();
             rs.next();
             vo.setU_id(rs.getString(1));
             vo.setU_name(rs.getString(2));
@@ -232,50 +315,46 @@ public class UsersDAO {
             vo.setU_address1(rs.getString(7));
             vo.setU_address2(rs.getString(8));
             rs.close();
-        }catch(Exception ex)
-        {
+            
+        } catch (Exception ex) {
             ex.printStackTrace();
-        }
-        finally
-        {
+        } finally {
             dbcp.disConnection(conn, ps);
         }
         return vo;
     }
-    public String memberJoinDelete(String pwd,String id)
-    {
-        String result="";
-        try
-        {
-            conn=dbcp.getConnection();
-            String sql="SELECT u_password FROM users_1 "
-                      +"WHERE u_id=?";
-            ps=conn.prepareStatement(sql);
-            ps.setString(1, id);
-            ResultSet rs=ps.executeQuery();
-            rs.next();
-            String db_pwd=rs.getString(1);
-            rs.close();
+
+    public String userDelete(String pwd, String id) {
+        
+        String result = "";
+        try {
+            conn = dbcp.getConnection();
             
-            if(db_pwd.equals(pwd))
-            {
-                result="yes";
-                sql="DELETE FROM users_1 "
-                   +"WHERE u_id=?";
-                ps=conn.prepareStatement(sql);
+            String sql = "SELECT u_password FROM users_1 "
+                        + "WHERE u_id=?";
+            
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, id);
+            
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            String db_pwd = rs.getString(1);
+            
+            rs.close();
+
+            if (db_pwd.equals(pwd)) {
+                result = "yes";
+                sql = "DELETE FROM users_1 "
+                    + "WHERE u_id=?";
+                ps = conn.prepareStatement(sql);
                 ps.setString(1, id);
                 ps.executeUpdate();
+            } else {
+                result = "no";
             }
-            else
-            {
-                result="no";
-            }
-        }catch(Exception ex)
-        {
+        } catch (Exception ex) {
             ex.printStackTrace();
-        }
-        finally
-        {
+        } finally {
             dbcp.disConnection(conn, ps);
         }
         return result;
