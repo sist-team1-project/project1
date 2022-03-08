@@ -289,7 +289,7 @@
 		  </c:if>
         </c:if>
 
-        <div class="row no-select padding-10">조회수 ${ad.ad_visits }</div>
+        <div class="row no-select padding-10 m-top-10">조회수 ${ad.ad_visits }</div>
       </div>
 
 
