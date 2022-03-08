@@ -18,7 +18,7 @@ public class AdDAO {
 			conn = dbcp.getConnection();
 			String sql = "SELECT ad_id,ad_title,ad_end,ad_we,ad_education,ad_workplace,c_id "
 					+ "FROM (SELECT ad_id,ad_title,ad_end,ad_we,ad_education,ad_workplace,c_id,rownum as num "
-					+ "FROM (SELECT ad_id,ad_title,ad_end,ad_we,ad_education,ad_workplace,c_id FROM  ad_1 WHERE SYSDATE-1 < TO_DATE(ad_end) OR ad_end IS NULL ORDER BY ad_visits DESC)) "
+					+ "FROM (SELECT ad_id,ad_title,ad_end,ad_we,ad_education,ad_workplace,c_id FROM ad_1 WHERE SYSDATE-1 < TO_DATE(ad_end) OR ad_end IS NULL ORDER BY ad_visits DESC)) "
 					+ "WHERE num BETWEEN 1 AND 12";
 			ps = conn.prepareStatement(sql);
 
@@ -58,6 +58,7 @@ public class AdDAO {
 	}
 
 	// 메인 - 마감 임박 공고
+
 	public List<AdVO> adEndList() {
 		List<AdVO> list = new ArrayList<AdVO>();
 		try {
@@ -121,8 +122,14 @@ public class AdDAO {
 					}
 				} 
 			sql += ")";
+			sql += "order by case ad_id ";
+			for(int i = 0; i < cookieList.size(); i++) {
+					sql += "when " + cookieList.get(i) + " then " + (i)+1;
+					i++;
+			}
+			sql += "else " + cookieList.size() + " end ";		
+				
 			ps = conn.prepareStatement(sql);
-			
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				AdVO vo = new AdVO();
@@ -149,6 +156,8 @@ public class AdDAO {
 			dbcp.disConnection(conn, ps);
 		}
 		return list;
+		
+		
 	}
 		
 	// 공고 - 공고 상세정보

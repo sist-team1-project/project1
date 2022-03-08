@@ -22,8 +22,9 @@
      <c:if test="${not empty cookieList}">
       <!---- 최근 본 공고 목록(cookie) ---->
         <div class="row roomy-20" id="cookieDiv">
-          <div class="no-select">
+          <div class="col-md-12 no-select">
             <h4>&nbsp;&nbsp;<i class="fa fa-address-card" aria-hidden="true"></i> 최근 본 공고</h4>
+            <div class="c-d-all"><a href="#" onclick="allDelete()">최근 본 공고 전체삭제 <i class="fa fa-window-close "></i></a></div>
           </div>
           <div id="cookieView">
            <c:forEach var="ck" items="${cookieList}" varStatus="status"> 
@@ -32,7 +33,7 @@
                   <div class="small-font no-select">
                     <span class="lightbluetag">${ck.ad_end} </span>
                     <span class="greytag">${ck.ad_workplace} </span>
-                   <a href="#" onclick="setCookie('adview', ${ck.ad_id}, -1, this)"><i class="fa fa-window-close c-delete"></i></a>
+                   <a href="#" onclick="resetCookie(${ck.ad_id}, this)"><i class="fa fa-window-close c-delete"></i></a>
                   </div>
                   <div class="roomy-10 short-line">
                     <a href="../ad/ad.do?cid=${ck.c_id }&adid=${ck.ad_id}"><b>${ck.ad_title}</b></a>
@@ -96,7 +97,7 @@
                 <span class="greytag"> ${a.ad_education } </span>
                 <c:choose>
                   <c:when test="${sessionScope.id==null }">
-                    <a href="../member/loginpage.do" onclick="return confirm('먼저 로그인을 진행해주세요')"><i class="fa fa-star-o favorite"></i></a>
+                    <a href="../users/login.do" onclick="return confirm('먼저 로그인을 진행해주세요')"><i class="fa fa-star-o favorite"></i></a>
                   </c:when>
                   <c:when test="${sessionScope.id!=null }">
                     <a href="#"><i class="fa fa-star favorite f-update"></i></a>                  
@@ -136,7 +137,7 @@
                 <span class="greytag"> ${a.ad_education } </span>
                 <c:choose>
                   <c:when test="${sessionScope.id==null }">
-                    <a href="#" onclick="return confirm('먼저 로그인을 진행해주세요')"><i class="fa fa-star-o favorite"></i></a>
+                    <a href="../users/login.do" onclick="return confirm('먼저 로그인을 진행해주세요')"><i class="fa fa-star-o favorite"></i></a>
                   </c:when>
                   <c:when test="${sessionScope.id!=null }">
                     <a href="#"><i class="fa fa-star favorite f-update"></i></a>                  
@@ -221,23 +222,61 @@
 		} ]
 	});
 	
-    function setCookie(cookie_name, value, days, obj) {
+	function setCookie(cookie_name, value, days) {
         var exdate = new Date();
         exdate.setDate(exdate.getDate() + days);
         // 설정 일수만큼 현재시간에 만료값으로 지정
 
-        var cookie_value = escape(value) + ((days == null) ? '' : '; expires=' + exdate.toUTCString());
-        document.cookie = cookie_name + '=' + cookie_value+"; path=/";
-        
-        // 클릭한 X아이콘에서 가장 가까운 클래스 pad-5를 찾아 삭제
-        $(obj).closest('.cookieArea').remove();
-        
-        if ($('.cookieArea').length == 0) {
-        	// 최근 본 공고를 모두 지위서 0개인 경우에는 '최근 본 공고' 글자까지 삭제
- 			$('#cookieDiv').remove();
-		}
-      }
+        var cookie_value = escape(value)
+                + ((days == null) ? '' : '; expires='
+                        + exdate.toUTCString());
+        document.cookie = cookie_name + '=' + cookie_value + "; path=/";
+    }
+	
+     function getCookie(cookie_name) {
+         var x, y;
 
+         var val = document.cookie.split(';');
+
+         for (var i = 0; i < val.length; i++) {
+             x = val[i].substr(0, val[i].indexOf('='));
+             y = val[i].substr(val[i].indexOf('=') + 1);
+             x = x.replace(/^\s+|\s+$/g, ''); // 앞과 뒤의 공백 제거하기
+             if (x == cookie_name) {
+                 return unescape(y); // unescape로 디코딩 후 값 리턴
+             }
+         }
+     }
+     
+     function resetCookie(id, obj) {
+         var items = getCookie('adview'); // 이미 저장된 값을 쿠키에서 가져오기
+         var maxItemNum = 4; // 최대 저장 가능한 공고개수
+         var expire = 7; // 쿠키값을 저장할 기간
+         var itemArray = items.split(',');
+         
+         var filterArr = itemArray.filter(function(data){
+       	    return data != id
+       	 });
+         
+         setCookie('adview', filterArr.toString(), expire);
+         
+         // 클릭한 X아이콘에서 가장 가까운 클래스 cookieArea를 찾아 삭제
+         $(obj).closest('.cookieArea').remove();
+         
+         if ($('.cookieArea').length == 0) {
+             // 최근 본 공고를 모두 지위서 0개인 경우에는 '최근 본 공고' 글자까지 삭제
+             $('#cookieDiv').remove();
+         }
+     }
+     
+     function allDelete(){
+    	 if (confirm('최근 본 공고를 전체 삭제 하시겠습니까?')) {
+	    	 setCookie('adview', '', -1);
+	    	 
+             $('#cookieDiv').remove();
+		}
+     }
+     
   </script>
 </body>
 </html>
