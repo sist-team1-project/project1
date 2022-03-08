@@ -62,7 +62,7 @@
 </script>
 <c:forEach var="r" items="${reply }" varStatus="status">
   <div class="row roomy-20 word">
-    <div class="col-xs-2">${r.u_id }</div>
+    <div class="col-xs-2 short-line"><b>${r.u_id }</b></div>
     <div class="col-xs-7 word">
     <div><pre>${r.reply_content }</pre></div>
     <c:if test="${r.u_id==sessionScope.id}">
@@ -77,11 +77,11 @@
     </c:if>
     </div>
     <div class="col-xs-3 small-font text-right">
+      ${r.reply_date }<br>
       <c:if test="${r.u_id==sessionScope.id}">
         <span class="btn reply-update-btn" data-no="${r.reply_id }">수정</span>
         <span class="btn reply-delete-btn" data-no="${r.reply_id }">삭제</span>
       </c:if>
-      &nbsp;${r.reply_date }
     </div>
   </div>
 </c:forEach>

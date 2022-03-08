@@ -6,7 +6,7 @@ textarea, #reply-insert-btn, .reply-update {
 
 textarea {
   width: 85%;
-  height: 80px;
+  height: 75px;
   resize: none;
   border: 1px solid #d6d6d6;
   display: inline;
@@ -16,7 +16,7 @@ textarea {
 
 #reply-insert-btn {
   width: 15%;
-  height: 80px;
+  height: 75px;
   color: white;
   background-color: #017576;
   border: 1px solid #017576;
@@ -29,7 +29,7 @@ textarea {
 
 .reply-update {
   width: 15%;
-  height: 80px;
+  height: 75px;
   color: grey;
   background-color: #d6d6d6;
   border: 1px solid #d6d6d6;
@@ -41,7 +41,7 @@ textarea {
 }
 
 .content {
-  min-height: 400px;
+  min-height: 350px;
   vertical-align: top;
 }
 
@@ -58,7 +58,6 @@ textarea {
 .word {
   word-wrap: break-word;
 }
-
 
 
 /* 링크 언더바 제거 */
