@@ -35,6 +35,34 @@ public class FavoriteDAO {
 
 	}
 
+	public int favData(String uid, int adid) {
+		int fid = 0;
+
+		try {
+			conn = dbcp.getConnection();
+
+			String sql = "SELECT fav_id FROM favorite_1 WHERE u_id = ? AND ad_id = ?";
+			ps = conn.prepareStatement(sql);
+
+			ps.setString(1, uid);
+			ps.setInt(2, adid);
+			
+			
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			
+			fid = rs.getInt(1);
+
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbcp.disConnection(conn, ps);
+		}
+
+		return fid;
+	}
+
 	public List<Integer> favListData(String uid) {
 		List<Integer> list = new ArrayList<Integer>();
 
@@ -59,7 +87,6 @@ public class FavoriteDAO {
 		}
 		return list;
 	}
-
 
 	public int favCountData(FavoriteVO vo) {
 		int count = 0;

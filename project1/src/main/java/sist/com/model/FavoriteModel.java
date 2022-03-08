@@ -12,8 +12,9 @@ import sist.com.dao.*;
 public class FavoriteModel {
 
 	@RequestMapping("favorite/insert.do")
-	public void favorite_insert(HttpServletRequest request, HttpServletResponse response) {
+	public String favorite_insert(HttpServletRequest request, HttpServletResponse response) {
 		String adid = request.getParameter("adid");
+		String cid = request.getParameter("cid");
 
 		HttpSession session = request.getSession();
 		String uid = (String) session.getAttribute("id");
@@ -24,9 +25,8 @@ public class FavoriteModel {
 
 		FavoriteDAO dao = new FavoriteDAO();
 		dao.favInsert(vo);
-		
-		//return "../main/main.do";
 
+		return "redirect: ../ad/ad.do?cid=" + cid + "&adid=" + adid;
 	}
 
 	@RequestMapping("users/favorite.do")
@@ -34,15 +34,13 @@ public class FavoriteModel {
 
 		HttpSession session = request.getSession();
 		String uid = (String) session.getAttribute("id");
-		
-		String u_id = request.getParameter(uid);
 
 		// 공고 번호, 공고정보
 		FavoriteDAO dao = new FavoriteDAO();
-		FavoriteVO fvo;
-		// 즐찾 공고번호 리스트
-		List<Integer> flist = dao.favListData(u_id);
 		
+		// 즐찾 공고번호 리스트
+		List<Integer> flist = dao.favListData(uid);
+
 		// 공고번호들의 공고정보리스트, 회사정보리스트
 		List<AdVO> adList = new ArrayList<AdVO>();
 		List<String> cList = new ArrayList<String>();
@@ -50,24 +48,21 @@ public class FavoriteModel {
 		AdDAO a = new AdDAO();
 		AdVO vo;
 		CompanyDAO c = new CompanyDAO();
+
+		List<Integer> fid_list = new ArrayList<Integer>();
 		
+		// 공고번호 for문
 		for (int i : flist) {
 			vo = a.adDetail(i);
 			adList.add(vo);
 			cList.add(c.companyName(vo.getC_id()));
-			
+			fid_list.add(dao.favData(uid, i));
 		}
-		
-//		int count = 0;
-//		if (uid == null)
-//			count = 0;
-//		else
-//			count = dao.favCountData(vo);
-		
-//		request.setAttribute("count", count);
+
 
 		request.setAttribute("adList", adList);
 		request.setAttribute("c_name", cList);
+		request.setAttribute("fid_list", fid_list);
 		request.setAttribute("main_jsp", "../users/favorite_Edit.jsp");
 		return "../main/main.jsp";
 
@@ -75,11 +70,14 @@ public class FavoriteModel {
 
 	@RequestMapping("favorite/delete.do")
 	public String favorite_delete(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		String uid = (String) session.getAttribute("id");
+		
 		String fid = request.getParameter("fid");
 		FavoriteDAO dao = new FavoriteDAO();
 		dao.favDelete(Integer.parseInt(fid));
 
-		return "redirect:../user/favorite.do";
+		return "redirect: ../users/favorite.do";
 	}
 
 }

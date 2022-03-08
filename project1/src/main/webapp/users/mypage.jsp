@@ -18,7 +18,7 @@
             <a class="list-group-item list-group-item-info text-center font-weight-bold">내 정보</a>
             <a href="../users/update.do"class="list-group-item list-group-item-action text-center font-weight-bold">개인정보 수정</a> 
             <a href="../users/delete.do"class="list-group-item list-group-item-action text-center font-weight-bold">회원 탈퇴</a>
-            <a href="../users/favorite.do?uid=${user.u_id }" class="list-group-item list-group-item-action text-center font-weight-bold">즐겨찾기 관리</a>
+            <a href="../users/favorite.do" class="list-group-item list-group-item-action text-center font-weight-bold">즐겨찾기 관리</a>
      </div>
    </div>
 <div class="container">

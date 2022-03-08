@@ -11,193 +11,193 @@
 <link rel="stylesheet" href="../css/ad_book.css">
 </head>
 <body>
-		<section>
-				<input type="hidden" id="ad_id" value="${ad.ad_id }">
-				<!-- 공고 메인 정보 -->
-				<div class="container container-pad">
-						<div class="row row-border room m-top-40">
-								<div class="col-md-12 roomy-10">
-										<h4>
-												<b>${ad.ad_title }</b>
-										</h4>
-								</div>
-								<div class="col-md-4 roomy-10 no-select">
-										<div class="top-table-title title-deco">
-												<b>지원자격</b>
-										</div>
-										<table class="top-table">
-												<tr>
-														<th class="width-80">경력</th>
-														<td>${ad.ad_we }</td>
-												</tr>
-												<tr>
-														<th>학력</th>
-														<td>${ad.ad_education }</td>
-												</tr>
-										</table>
-								</div>
-								<div class="col-md-4 roomy-10 no-select">
-										<div class="top-table-title title-deco">
-												<b>근무조건</b>
-										</div>
-										<table class="top-table">
-												<tr>
-														<th class="width-80">근무예정지</th>
-														<td class="word-break">${ad.ad_workplace }</td>
-												</tr>
-												<tr>
-														<th class="width-80">임금</th>
-														<td>${ad.ad_wage }</td>
-												</tr>
-										</table>
-								</div>
-								<div class="col-md-4 roomy-10 no-select">
-										<div class="logo-container ">
-												<img class="clogo" src="${company.c_logo }">
-										</div>
-										<table class="top-table">
-												<tr>
-														<th class="top-table-left">기업명</th>
-														<td>
-																<a href="../company/company.do?cid=${company.c_id }">${company.c_name } </a>
-														</td>
-												</tr>
-												<tr>
-														<th class="width-80">업종</th>
-														<td>${company.c_industry }</td>
-												</tr>
-												<tr>
-														<th class="width-80">기업규모</th>
-														<td>${company.c_size }</td>
-												</tr>
-										</table>
-								</div>
-						</div>
-						<!-- ############################################################################################################################ -->
-						<!--              모집 요강                -->
-						<div class="row m-top-60 no-select">
-								<h3>
-										<i class="fa fa-book" aria-hidden="true"></i>&nbsp; <b>모집요강</b>
-								</h3>
-						</div>
-						<div class="row row-border">
-								<div class="col-md-12 bggrey no-select title-deco roomy-10 text-center">직무내용</div>
-								<div class="col-md-12 content">${ad.ad_content }</div>
+  <section>
+    <input type="hidden" id="ad_id" value="${ad.ad_id }">
+    <!-- 공고 메인 정보 -->
+    <div class="container container-pad">
+      <div class="row row-border room m-top-40">
+        <div class="col-md-12 roomy-10">
+          <h4>
+            <b>${ad.ad_title }</b>
+          </h4>
+        </div>
+        <div class="col-md-4 roomy-10 no-select">
+          <div class="top-table-title title-deco">
+            <b>지원자격</b>
+          </div>
+          <table class="top-table">
+            <tr>
+              <th class="width-80">경력</th>
+              <td>${ad.ad_we }</td>
+            </tr>
+            <tr>
+              <th>학력</th>
+              <td>${ad.ad_education }</td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-md-4 roomy-10 no-select">
+          <div class="top-table-title title-deco">
+            <b>근무조건</b>
+          </div>
+          <table class="top-table">
+            <tr>
+              <th class="width-80">근무예정지</th>
+              <td class="word-break">${ad.ad_workplace }</td>
+            </tr>
+            <tr>
+              <th class="width-80">임금</th>
+              <td>${ad.ad_wage }</td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-md-4 roomy-10 no-select">
+          <div class="logo-container ">
+            <img class="clogo" src="${company.c_logo }">
+          </div>
+          <table class="top-table">
+            <tr>
+              <th class="top-table-left">기업명</th>
+              <td>
+                <a href="../company/company.do?cid=${company.c_id }">${company.c_name } </a>
+              </td>
+            </tr>
+            <tr>
+              <th class="width-80">업종</th>
+              <td>${company.c_industry }</td>
+            </tr>
+            <tr>
+              <th class="width-80">기업규모</th>
+              <td>${company.c_size }</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <!-- ############################################################################################################################ -->
+      <!--              모집 요강                -->
+      <div class="row m-top-60 no-select">
+        <h3>
+          <i class="fa fa-book" aria-hidden="true"></i>&nbsp; <b>모집요강</b>
+        </h3>
+      </div>
+      <div class="row row-border">
+        <div class="col-md-12 bggrey no-select title-deco roomy-10 text-center">직무내용</div>
+        <div class="col-md-12 content">${ad.ad_content }</div>
 
 
-								<div class="col-md-4">
-										<div class="row bggrey title-deco no-select roomy-10 text-center">경력조건</div>
-										<div class="row text-center content">${ad.ad_we }</div>
-								</div>
-								<div class="col-md-4">
-										<div class="row bggrey title-deco no-select roomy-10 text-center">학력</div>
-										<div class="row text-center content">${ad.ad_education }</div>
-								</div>
-								<div class="col-md-4">
-										<div class="row bggrey title-deco no-select roomy-10 text-center">근무예정지</div>
-										<div class="row text-center content">
-												<a href="#wptarget">${ad.ad_workplace }</a>
-										</div>
-								</div>
+        <div class="col-md-4">
+          <div class="row bggrey title-deco no-select roomy-10 text-center">경력조건</div>
+          <div class="row text-center content">${ad.ad_we }</div>
+        </div>
+        <div class="col-md-4">
+          <div class="row bggrey title-deco no-select roomy-10 text-center">학력</div>
+          <div class="row text-center content">${ad.ad_education }</div>
+        </div>
+        <div class="col-md-4">
+          <div class="row bggrey title-deco no-select roomy-10 text-center">근무예정지</div>
+          <div class="row text-center content">
+            <a href="#wptarget">${ad.ad_workplace }</a>
+          </div>
+        </div>
 
-						</div>
-
-
-
-						<!-- ############################################################################################################################ -->
-
-						<!--              근무 조건                -->
-						<div class="row m-top-60 no-select">
-								<h3>
-										<i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp; <b>근무조건</b>
-								</h3>
-						</div>
-						<div class="row row-border">
-								<div class="col-md-4">
-										<div class="row bggrey title-deco no-select roomy-10 text-center">임금조건</div>
-										<div class="row text-center content">${ad.ad_wage }</div>
-								</div>
-								<div class="col-md-4">
-										<div class="row bggrey title-deco no-select roomy-10 text-center">근무시간</div>
-										<div class="row text-center content">${ad.ad_workhours }</div>
-								</div>
-								<div class="col-md-4">
-										<div class="row bggrey title-deco no-select roomy-10 text-center">근무형태</div>
-										<div class="row text-center content">${ad.ad_worktype }</div>
-								</div>
-
-						</div>
-
-
-						<!-- ############################################################################################################################ -->
-
-						<!--              우대사항 및 전형방법              -->
-						<div class="row m-top-60 no-select">
-								<h3>
-										<i class="fa fa-trophy" aria-hidden="true"></i>&nbsp; <b>우대사항 및 전형방법</b>
-								</h3>
-						</div>
-						<div class="row row-border">
-								<div class="col-md-3">
-										<div class="row bggrey title-deco no-select roomy-10 text-center">우대전공</div>
-										<div class="row text-center content">${ad.ad_major }</div>
-								</div>
-								<div class="col-md-3">
-										<div class="row bggrey title-deco no-select roomy-10 text-center">우대 자격증</div>
-										<div class="rrow text-center content">
-												<a href="#btarget">${ad.ad_qualification }</a>
-										</div>
-								</div>
-								<div class="col-md-3">
-										<div class="row bggrey title-deco no-select roomy-10 text-center">우대 언어</div>
-										<div class="row text-center content">${ad.ad_language }</div>
-								</div>
-								<div class="col-md-3">
-										<div class="row bggrey title-deco no-select roomy-10 text-center">접수 마감일</div>
-										<div class="row text-center content">${ad.ad_end }</div>
-								</div>
-						</div>
+      </div>
 
 
 
-						<!-- ############################################################################################################################ -->
+      <!-- ############################################################################################################################ -->
 
-						<!--              위치정보                 -->
+      <!--              근무 조건                -->
+      <div class="row m-top-60 no-select">
+        <h3>
+          <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp; <b>근무조건</b>
+        </h3>
+      </div>
+      <div class="row row-border">
+        <div class="col-md-4">
+          <div class="row bggrey title-deco no-select roomy-10 text-center">임금조건</div>
+          <div class="row text-center content">${ad.ad_wage }</div>
+        </div>
+        <div class="col-md-4">
+          <div class="row bggrey title-deco no-select roomy-10 text-center">근무시간</div>
+          <div class="row text-center content">${ad.ad_workhours }</div>
+        </div>
+        <div class="col-md-4">
+          <div class="row bggrey title-deco no-select roomy-10 text-center">근무형태</div>
+          <div class="row text-center content">${ad.ad_worktype }</div>
+        </div>
 
-						<div class="row m-top-60 no-select">
-								<a name="wptarget"></a>
-								<h3>
-										<i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp; <b>위치정보</b>
-								</h3>
-						</div>
-
-						<div class="row row-border">
-								<div id="map" style="width: 100%; height: 400px;"></div>
-						</div>
-
-
-						<!-- ########################################################################################## -->
-
-						<!--              추천 도서                -->
-
-						<div class="row m-top-60 no-select">
-								<a name="btarget"></a>
-								<h3>
-										<i class="fa fa-graduation-cap" aria-hidden="true"></i>&nbsp; <b>추천 도서</b>
-								</h3>
-						</div>
-						<div class="row row-border">
-								<div class="col-sm-12 bggrey title-deco no-select roomy-10 text-center">추천 수험서</div>
-								<div class="col-sm-12">
-										<c:forEach var="b" items="${booksList }" varStatus="status">
-												<div class="row content">
-
-														<!-- 추천 수험서가 있을 경우에만 출력 -->
-
-														<!-- ######################################################################################################################## -->
+      </div>
 
 
-														<%--
+      <!-- ############################################################################################################################ -->
+
+      <!--              우대사항 및 전형방법              -->
+      <div class="row m-top-60 no-select">
+        <h3>
+          <i class="fa fa-trophy" aria-hidden="true"></i>&nbsp; <b>우대사항 및 전형방법</b>
+        </h3>
+      </div>
+      <div class="row row-border">
+        <div class="col-md-3">
+          <div class="row bggrey title-deco no-select roomy-10 text-center">우대전공</div>
+          <div class="row text-center content">${ad.ad_major }</div>
+        </div>
+        <div class="col-md-3">
+          <div class="row bggrey title-deco no-select roomy-10 text-center">우대 자격증</div>
+          <div class="rrow text-center content">
+            <a href="#btarget">${ad.ad_qualification }</a>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="row bggrey title-deco no-select roomy-10 text-center">우대 언어</div>
+          <div class="row text-center content">${ad.ad_language }</div>
+        </div>
+        <div class="col-md-3">
+          <div class="row bggrey title-deco no-select roomy-10 text-center">접수 마감일</div>
+          <div class="row text-center content">${ad.ad_end }</div>
+        </div>
+      </div>
+
+
+
+      <!-- ############################################################################################################################ -->
+
+      <!--              위치정보                 -->
+
+      <div class="row m-top-60 no-select">
+        <a name="wptarget"></a>
+        <h3>
+          <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp; <b>위치정보</b>
+        </h3>
+      </div>
+
+      <div class="row row-border">
+        <div id="map" style="width: 100%; height: 400px;"></div>
+      </div>
+
+
+      <!-- ########################################################################################## -->
+
+      <!--              추천 도서                -->
+
+      <div class="row m-top-60 no-select">
+        <a name="btarget"></a>
+        <h3>
+          <i class="fa fa-graduation-cap" aria-hidden="true"></i>&nbsp; <b>추천 도서</b>
+        </h3>
+      </div>
+      <div class="row row-border">
+        <div class="col-sm-12 bggrey title-deco no-select roomy-10 text-center">추천 수험서</div>
+        <div class="col-sm-12">
+          <c:forEach var="b" items="${booksList }" varStatus="status">
+            <div class="row content">
+
+              <!-- 추천 수험서가 있을 경우에만 출력 -->
+
+              <!-- ######################################################################################################################## -->
+
+
+              <%--
                                                                 <div class="spacer"></div>
                                                                 <div class="arrow" onclick="mySlideLeft()">
                                                                         <img src="http://cerati.org/eoitecne/img/down.png" class="arrowleft arimage" />
@@ -239,37 +239,37 @@
 --%>
 
 
-														<!-- ######################################################################################################################## -->
-														<c:choose>
-																<c:when test="${fn:length(b)!=0 }">
-																		<div class="col-sm-12 qual-name">${qualList[status.index] }</div>
-																</c:when>
-														</c:choose>
+              <!-- ######################################################################################################################## -->
+              <c:choose>
+                <c:when test="${fn:length(b)!=0 }">
+                  <div class="col-sm-12 qual-name">${qualList[status.index] }</div>
+                </c:when>
+              </c:choose>
 
-														<c:forEach var="books" items="${b }">
-																<div class="col-sm-2 m-bottom-20">
-																		<div class="text-center">
-																				<img class="book-img" src="${books.book_img }">
-																		</div>
-																		<br>
-																		<div class="text-center short-container">
-																				<div class="short-multi-line">
-																						<a href="${books.book_link }"><b>${books.book_title }</b></a>
-																				</div>
-																		</div>
-																		<div class="text-center">판매지수 ${books.book_sold }</div>
-																</div>
-														</c:forEach>
-												</div>
-										</c:forEach>
-								</div>
-						</div>
+              <c:forEach var="books" items="${b }">
+                <div class="col-sm-2 m-bottom-20">
+                  <div class="text-center">
+                    <img class="book-img" src="${books.book_img }">
+                  </div>
+                  <br>
+                  <div class="text-center short-container">
+                    <div class="short-multi-line">
+                      <a href="${books.book_link }"><b>${books.book_title }</b></a>
+                    </div>
+                  </div>
+                  <div class="text-center">판매지수 ${books.book_sold }</div>
+                </div>
+              </c:forEach>
+            </div>
+          </c:forEach>
+        </div>
+      </div>
 
-						<!-- ########################################################################################## -->
+      <!-- ########################################################################################## -->
 
-						<!--              홈/즐겨찾기 버튼                -->
+      <!--              홈/즐겨찾기 버튼                -->
 
-						<!-- <c:if test="${count==0 }">
+      <!-- <c:if test="${count==0 }">
 	      		 		<a href="../jjim/jjim_insert.do?fno=${vo.no }" class="btn btn-xs btn-danger">찜하기</a>
 	      				</c:if>
 	      				<c:if test="${count!=0 }">
@@ -277,35 +277,34 @@
 	     	 				</c:if> -->
 
 
-						<div class="text-center row roomy-40">
-								<a href="../main/main.do" class="btn btn-primary">홈으로</a>&nbsp;
-							 	<button type="button" id="favorite-insert-btn" class="btn btn-primary">즐겨찾기 추가</button>
-								&nbsp;&nbsp;
-								<c:if test="${sessionScope.id!=null }">
-										<c:if test="${count==0 }">
-												<button type="button" id="favorite-insert-btn" class="btn btn-primary">즐겨찾기 추가2</button>
-										</c:if>
-										<c:if test="${count!=0 }">
-										<a href="favorite/insert.do?adid=${ad.ad_id }" class="btn btn-danger btn-sm">즐겨찾기 추가3</a>
-												<span class="btn btn-default"> 즐겨찾기 추가4</span>
-										</c:if>
-								</c:if>
-								&nbsp;&nbsp;
-								<div class="row no-select padding-10">조회수 ${ad.ad_visits }</div>
-						</div>
+      <div class="text-center row roomy-40">
+        <a href="../main/main.do" class="btn btn-primary">홈으로</a>
+
+        <c:if test="${sessionScope.id!=null }">
+          <c:if test="${count==0 }">
+            <a href="../favorite/insert.do?cid=${company.c_id }&adid=${ad.ad_id }" class="btn btn-danger">즐겨찾기 추가</a>&nbsp;&nbsp;
+		  </c:if>
+          <c:if test="${count!=0 }">
+            <button type="button" id="favorite-insert-btn" class="btn btn-default hide">즐겨찾기 완료</button>&nbsp;&nbsp;
+		  </c:if>
+        </c:if>
+
+        <div class="row no-select padding-10">조회수 ${ad.ad_visits }</div>
+      </div>
 
 
-						<div style="position: fixed; bottom: 50px; right: 60px;">
-								<a href="#" class="scrollToTop"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
-						</div>
-		</section>
+      <div style="position: fixed; bottom: 50px; right: 60px;">
+        <a href="#" class="scrollToTop"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
+      </div>
+    </div>
+  </section>
 
-		<!-- ########################################################################################## -->
+  <!-- ########################################################################################## -->
 
-		<!--              지도 API           -->
+  <!--              지도 API           -->
 
-		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5169c9ddd251dfb03456915e6dd020c6&libraries=services"></script>
-		<script>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5169c9ddd251dfb03456915e6dd020c6&libraries=services"></script>
+  <script>
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			mapOption = {
 				center : new kakao.maps.LatLng(37.499506307492915,
@@ -336,10 +335,10 @@
 		</script>
 
 
-		<!-- ######################################################################################################################## -->
+  <!-- ######################################################################################################################## -->
 
-		<!-- 맨 위로 이동 버튼 -->
-		<script>
+  <!-- 맨 위로 이동 버튼 -->
+  <script>
 			$(document).ready(function() {
 				//Check to see if the window is top if not then display button
 				$(window).scroll(function() {
@@ -360,10 +359,10 @@
 		</script>
 
 
-		<!-- ######################################################################################################################## -->
+  <!-- ######################################################################################################################## -->
 
-		<!--    cookie     -->
-		<script>
+  <!--    cookie     -->
+  <script>
 			// 화면이 뜨는 것과 동시에 실행
 			$(document).ready(function() {
 				var adId = $('#ad_id').val();
@@ -419,28 +418,23 @@
 				}
 			}
 		</script>
-		<!-- ######################################################################################################################## -->
+  <!-- ######################################################################################################################## -->
 
-		
-		<script type="text/javascript">
+
+  <script type="text/javascript">
 			$(function() {
 				var adId = $('#ad_id').val();
 				$('#favorite-insert-btn').click(function() {
 					$.ajax({
-						type : 'POST',
-						url : 'favorite/insert.do',
-						data : adId,
-						success : function() {
-							alert("즐겨찾기 추가 완료");
-						}
+						alert("즐겨찾기 추가 완료");
 					});
 				})
 			})
 		</script>
-		 
 
-		<!-- ######################################################################################################################## -->
-		<!-- 여기까지 직접 작성 -->
+
+  <!-- ######################################################################################################################## -->
+  <!-- 여기까지 직접 작성 -->
 
 </body>
 </html>
