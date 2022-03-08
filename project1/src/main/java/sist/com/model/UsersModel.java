@@ -230,7 +230,7 @@ public class UsersModel {
         UsersVO vo = dao.userUpdate(id);
         
         request.setAttribute("vo", vo);
-        request.setAttribute("main_jsp", "../users/join_update.jsp");
+        request.setAttribute("main_jsp", "../users/update.jsp");
         return "../main/main.jsp";
     }
     
@@ -249,7 +249,14 @@ public class UsersModel {
         request.setAttribute("main_jsp", "../users/update.jsp");
         return "../main/main.jsp";
     }
-    
+    @RequestMapping("users/delete.do")
+    public String memberjoinDelete(HttpServletRequest request,
+            HttpServletResponse response)
+    {
+        
+        request.setAttribute("main_jsp", "../users/delete.jsp");
+        return "../main/main.jsp";
+    }
 
     @RequestMapping("users/delete_ok.do")
     public String memberJoinDeleteOk(HttpServletRequest request, HttpServletResponse response) {
@@ -265,6 +272,6 @@ public class UsersModel {
             session.invalidate();
         }
         request.setAttribute("result", result);
-        return "../users/join_delete_ok.jsp";
+        return "../users/delete_ok.jsp";
     }
 }

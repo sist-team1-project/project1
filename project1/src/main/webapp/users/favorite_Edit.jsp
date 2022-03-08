@@ -15,7 +15,10 @@
 						<div class="col-sm-3 text-center">
 								<h3>&nbsp;</h3>
 								<div class="list-group sm-4">
-										<a class="list-group-item list-group-item-info text-center font-weight-bold">내 정보</a> <a href="#" class="list-group-item list-group-item-action text-center font-weight-bold">개인정보 수정</a> <a href="#" class="list-group-item list-group-item-action text-center font-weight-bold">즐겨찾기 관리</a>
+										<a href="../users/mypage.do" class="list-group-item list-group-item-action text-center font-weight-bold">내 정보</a>
+										<a href="../users/update.do" class="list-group-item list-group-item-action text-center font-weight-bold">개인정보 수정</a> 
+										<a href="../users/delete.do"class="list-group-item list-group-item-action text-center font-weight-bold">회원 탈퇴</a>
+										<a href="#" class="list-group-item list-group-item-action text-center font-weight-bold">즐겨찾기 관리</a>
 								</div>
 						</div>
 						<div class="col-sm-9">
