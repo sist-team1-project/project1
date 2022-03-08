@@ -49,7 +49,6 @@
             <!-- ----------------- -->
     
             <!-- 오늘 날짜에는 new 표시 -->
-            <fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" var="today" />
             <c:if test="${today==b.board_date }">
               <sup>new</sup>
             </c:if>

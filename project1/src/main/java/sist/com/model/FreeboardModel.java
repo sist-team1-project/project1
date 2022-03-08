@@ -1,6 +1,8 @@
 package sist.com.model;
 
 import sist.com.controller.RequestMapping;
+
+import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.servlet.http.*;
 
@@ -39,12 +41,16 @@ public class FreeboardModel {
         if (endPage > totalPage) {
             endPage = totalPage;
         }
+        
+        String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        
         request.setAttribute("curPage", curPage);
         request.setAttribute("totalPage", totalPage);
         request.setAttribute("startPage", startPage);
         request.setAttribute("endPage", endPage);
         request.setAttribute("board", board);
         request.setAttribute("rcount", rcount);
+        request.setAttribute("today", today);
         request.setAttribute("main_jsp", "../freeboard/freeboard.jsp");
         return "../main/main.jsp";
     }
