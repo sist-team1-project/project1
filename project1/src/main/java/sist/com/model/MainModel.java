@@ -12,7 +12,11 @@ public class MainModel {
     @RequestMapping("main/main.do")
     public String main_page(HttpServletRequest request, HttpServletResponse response) {
 
+        HttpSession session = request.getSession();
+        String uid = (String) session.getAttribute("id");
+        
         CompanyDAO c = new CompanyDAO();
+        FavoriteDAO f = new FavoriteDAO();
         AdDAO a = new AdDAO();
         ReviewDAO r = new ReviewDAO();
         BoardDAO p = new BoardDAO();
@@ -35,12 +39,20 @@ public class MainModel {
         /*       Best 공고       */
         List<AdVO> ad = a.bestAdList();
         List<String> adCname = new ArrayList<String>();
+        List<Integer> favorite = new ArrayList<Integer>();
         
         for (AdVO i : ad) {
             String cname = c.companyName(i.getC_id());
             adCname.add(cname);
+            
+            if(uid != null) {
+                int fav = f.favCount2(uid, i.getAd_id());
+                favorite.add(fav);
+                System.out.print(fav + " ");
+            }
+            
         }
-        
+        System.out.println();
         
         /*       마감 임박 공고       */
         List<AdVO> adEnd = a.adEndList();
@@ -87,6 +99,7 @@ public class MainModel {
         
         request.setAttribute("ad", ad);
         request.setAttribute("adCname", adCname);
+        request.setAttribute("favorite", favorite);       
         request.setAttribute("adEnd", adEnd);
         request.setAttribute("adEndCname", adEndCname);
         

@@ -88,15 +88,15 @@ public class FavoriteDAO {
 		return list;
 	}
 
-	public int favCountData(FavoriteVO vo) {
+	public int favCount(String uid, int adid) {
 		int count = 0;
 
 		try {
 			conn = dbcp.getConnection();
 			String sql = "SELECT COUNT(*) FROM favorite_1 WHERE u_id = ? " + "AND ad_id = ?";
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, vo.getU_id());
-			ps.setInt(2, vo.getAd_id());
+			ps.setString(1, uid);
+			ps.setInt(2, adid);
 			ResultSet rs = ps.executeQuery();
 			rs.next();
 			count = rs.getInt(1);
@@ -126,5 +126,47 @@ public class FavoriteDAO {
 			dbcp.disConnection(conn, ps);
 		}
 	}
+	
 
+    public int favCount2(String uid, int adid) {
+        int fid = 0;
+        try {
+            conn = dbcp.getConnection();
+            String sql = "SELECT COUNT(*) FROM favorite_1 WHERE u_id = ? " + "AND ad_id = ?";
+            
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, uid);
+            ps.setInt(2, adid);
+            
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            int count = rs.getInt(1);
+            rs.close();
+            
+            
+            
+            if(count == 0) {
+                fid = 0;
+            } else {
+                conn = dbcp.getConnection();
+                sql = "SELECT fav_id FROM favorite_1 WHERE u_id = ? " + "AND ad_id = ?";
+                
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, uid);
+                ps.setInt(2, adid);
+                
+                rs = ps.executeQuery();
+                rs.next();
+                fid = rs.getInt(1);
+                rs.close();
+            }
+            
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            dbcp.disConnection(conn, ps);
+        }
+        return fid;
+    }
 }

@@ -40,10 +40,8 @@ public class AdModel {
 		int count = 0;
 		FavoriteDAO fdao = new FavoriteDAO();
 		FavoriteVO fvo = new FavoriteVO();
-		fvo.setU_id(uid);
-		fvo.setAd_id(Integer.parseInt(adid));
-
-		count = fdao.favCountData(fvo);
+		
+		count = fdao.favCount(uid, Integer.parseInt(adid));
 
 		request.setAttribute("ad", ad);
 		request.setAttribute("company", company);
