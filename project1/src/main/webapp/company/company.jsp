@@ -53,7 +53,27 @@
             }
         });
     }
- 
+    
+    <!-------------- 맨 위로 이동 버튼 --------------------->     
+    $(document).ready(function() {
+        //Check to see if the window is top if not then display button
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 100) {
+                $('.scrollToTop').fadeIn();
+            } else {
+                $('.scrollToTop').fadeOut();
+            }
+        });
+        //Click event to scroll to top
+        $('.scrollToTop').click(function() {
+            $('html, body').animate({
+                scrollTop : 0
+            }, 800);
+            return false;
+        });
+    });  
+    
+    <!-------------------------------------------> 
   </script>
 </head>
 <body>
@@ -165,6 +185,11 @@
         <div class="row no-select text-center" style="margin-top: 20px;">조회수 ${company.c_visits }</div>
       </div>
     </div>
+ 
+    <!-- 맨위로 올라가는 버튼 -->
+    <div style="position: fixed; bottom: 50px; right: 60px;">
+      <a href="#" class="scrollToTop"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
+    </div>        
   </section>
 
 
