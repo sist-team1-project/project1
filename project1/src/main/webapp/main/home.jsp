@@ -102,11 +102,11 @@
                     <a href="../users/login.do" onclick="return confirm('먼저 로그인을 진행해주세요')"><i class="fa fa-star-o favorite"></i></a>
                   </c:when>
                   <c:otherwise>
-                    <c:if test="${favorite[status.index] == 0}">
-                      <a href="../favorite/insert.do?adid=${a.ad_id }"><i class="fa fa-star-o favorite"></i></a>                  
+                    <c:if test="${sessionScope.id != null}">
+                      <a href="#"><i class="fa fa-star-o favorite"></i></a>                  
                     </c:if>
-                    <c:if test="${favorite[status.index] > 0}">
-                      <a href="../favorite/delete.do?fid=${favorite[status.index] }" id="favorite-insert-btn"><i class="fa fa-star favorite"></i></a>                  
+                    <c:if test="">
+                      <a href="#" id="favorite-insert-btn"><i class="fa fa-star favorite"></i></a>                  
                     </c:if>
                   </c:otherwise>
                 </c:choose>

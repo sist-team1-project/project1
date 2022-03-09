@@ -33,6 +33,7 @@ public class DispatcherServlet extends HttpServlet {
         modelList.add("sist.com.model.ReplyModel");
         modelList.add("sist.com.model.FavoriteModel");
         modelList.add("sist.com.model.ReviewModel");
+        modelList.add("sist.com.model.CalendarModel");
     }
 
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
