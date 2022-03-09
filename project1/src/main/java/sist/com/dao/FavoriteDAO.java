@@ -143,8 +143,6 @@ public class FavoriteDAO {
             int count = rs.getInt(1);
             rs.close();
             
-            
-            
             if(count == 0) {
                 fid = 0;
             } else {

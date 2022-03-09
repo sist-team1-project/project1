@@ -2,6 +2,7 @@
     pageEncoding="UTF-8" import="sist.com.model.*,sist.com.dao.*,java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -102,11 +103,11 @@
                     <a href="../users/login.do" onclick="return confirm('먼저 로그인을 진행해주세요')"><i class="fa fa-star-o favorite"></i></a>
                   </c:when>
                   <c:otherwise>
-                    <c:if test="${sessionScope.id != null}">
-                      <a href="#"><i class="fa fa-star-o favorite"></i></a>                  
+                    <c:if test="${favorite[status.index] == 0}">
+                      <a href="../favorite/insert.do?adid=${a.ad_id }"><i class="fa fa-star-o favorite"></i></a>                               
                     </c:if>
-                    <c:if test="">
-                      <a href="#" id="favorite-insert-btn"><i class="fa fa-star favorite"></i></a>                  
+                    <c:if test="${favorite[status.index] > 0}">
+                      <a href="../favorite/delete.do?fid=${favorite[status.index] }" id="favorite-insert-btn"><i class="fa fa-star favorite"></i></a>                  
                     </c:if>
                   </c:otherwise>
                 </c:choose>
@@ -147,7 +148,12 @@
                     <a href="../users/login.do" onclick="return confirm('먼저 로그인을 진행해주세요')"><i class="fa fa-star-o favorite"></i></a>
                   </c:when>
                   <c:otherwise>
-                    <a href="#"><i class="fa fa-star favorite f-update"></i></a>   
+                    <c:if test="">
+                      <a href=""><i class="fa fa-star favorite-o f-update"></i></a>   
+                    </c:if>
+                    <c:if test="">
+                      <a href="#"><i class="fa fa-star favorite f-update"></i></a>   
+                    </c:if>                    
                   </c:otherwise>
                 </c:choose>
               </div>
@@ -202,40 +208,40 @@
   <script type="text/javascript" src="../css/slick/slick.js" charset="utf-8"></script>
   <script type="text/javascript" src="../css/slick/slick.min.js" charset="utf-8"></script>
   <script type="text/javascript">
-	$('.multi-slider').slick({
-		dots : true,
-		infinite : false,
-		speed : 300,
-		slidesToShow : 5,
-		slidesToScroll : 5,
-		centeredSlides : true,
-		accessibility : false,
-		responsive : [ {
-			breakpoint : 1024,
-			settings : {
-				slidesToShow : 4,
-				slidesToScroll : 4,
-				infinite : true,
-				dots : true
-			}
-		}, {
-			breakpoint : 600,
-			settings : {
-				slidesToShow : 3,
-				slidesToScroll : 3
-			}
-		}, {
-			breakpoint : 480,
-			settings : {
-				slidesToShow : 1,
-				slidesToScroll : 1
-			}
-		} ]
-	});
-	<!------------------------------------------->
-	
-	<!-------------- Cookie --------------------->
-	function setCookie(cookie_name, value, days) {
+    $('.multi-slider').slick({
+        dots : true,
+        infinite : false,
+        speed : 300,
+        slidesToShow : 5,
+        slidesToScroll : 5,
+        centeredSlides : true,
+        accessibility : false,
+        responsive : [ {
+            breakpoint : 1024,
+            settings : {
+                slidesToShow : 4,
+                slidesToScroll : 4,
+                infinite : true,
+                dots : true
+            }
+        }, {
+            breakpoint : 600,
+            settings : {
+                slidesToShow : 3,
+                slidesToScroll : 3
+            }
+        }, {
+            breakpoint : 480,
+            settings : {
+                slidesToShow : 1,
+                slidesToScroll : 1
+            }
+        } ]
+    });
+    <!------------------------------------------->
+    
+    <!-------------- Cookie --------------------->
+    function setCookie(cookie_name, value, days) {
         var exdate = new Date();
         exdate.setDate(exdate.getDate() + days);
         // 설정 일수만큼 현재시간에 만료값으로 지정
@@ -245,7 +251,7 @@
                         + exdate.toUTCString());
         document.cookie = cookie_name + '=' + cookie_value + "; path=/";
     }
-	
+    
      function getCookie(cookie_name) {
          var x, y;
 
@@ -268,8 +274,8 @@
          var itemArray = items.split(',');
          
          var filterArr = itemArray.filter(function(data){
-       	    return data != id
-       	 });
+            return data != id
+         });
          
          setCookie('adview', filterArr.toString(), expire);
          
@@ -283,11 +289,11 @@
      }
      
      function allDelete(){
-    	 if (confirm('최근 본 공고를 전체 삭제 하시겠습니까?')) {
-	    	 setCookie('adview', '', -1);
-	    	 
+         if (confirm('최근 본 공고를 전체 삭제 하시겠습니까?')) {
+             setCookie('adview', '', -1);
+             
              $('#cookieDiv').remove();
-		}
+        }
      }    
      <!------------------------------------------->
 

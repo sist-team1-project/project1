@@ -100,6 +100,7 @@ public class MainModel {
         request.setAttribute("ad", ad);
         request.setAttribute("adCname", adCname);
         request.setAttribute("favorite", favorite);       
+        
         request.setAttribute("adEnd", adEnd);
         request.setAttribute("adEndCname", adEndCname);
         
