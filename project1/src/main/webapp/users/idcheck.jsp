@@ -9,12 +9,7 @@
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/users/idpwfind.css">
   <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-
-<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-<!-- 
-     Shadow는 서버를 거쳐서 데이터 읽고 실행 => 종료 
- -->
-<script type="text/javascript">
+  <script type="text/javascript">
     $(function(){
         $('#id-check-btn').click(function(){
         	$('#ok').hide();
@@ -65,7 +60,8 @@
     })
 
     function validateId(id){
-        var num = id.search(/[0-9]/g);
+    	var num = id.search(/[0-9]/g);
+        var eng = id.search(/[a-z]/ig);
         
         if(id.length < 6 || id.length > 12){
             alert("아이디는 6자리 ~ 12자리 이내로 입력해주세요.");
@@ -80,7 +76,7 @@
             return true;
         }
     }
-</script>
+  </script>
 </head>
 <body>
   <div id="idcheck" class="m-top-60 text-center">
