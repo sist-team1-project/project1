@@ -59,7 +59,7 @@
 </script>
 </head>
 <body>
-  <div class="m-top-30 text-center">
+  <div class="m-top-40 text-center">
     <div id="pwdfind">
       <div class=""><h4><b>비밀번호 찾기</b></h4></div>
       <div class=roomy-10>&nbsp;&nbsp;&nbsp;&nbsp;<b>이름:</b> <input type=text size=20 id="name" placeholder="이름 입력"></div>

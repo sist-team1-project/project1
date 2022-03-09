@@ -24,16 +24,8 @@
                         $('#pwdfind').html('<div class="m-top-120">질문과 정답이 일치하지 않습니다</div>');
                         $('#ok').show();
                     } else {
-                        $.ajax({
-                            type : 'get',
-                            url : '../users/pwreset.do',
-                            data : {
-                                "id" : id,
-                            },
-                            success : function(result2) {
-                            	$('#pwdfind').html(result2);
-                            }
-                        })
+                    	$('#pwdfind').html('<div class="m-top-120">가입하신 이메일로 임시 비밀번호를 발급해드렸습니다.<br>이메일을 확인해주세요.<div>');
+                        $('#ok').show();
                     }
                 }
             })
@@ -45,5 +37,5 @@
 <input type=hidden id="id" value="${id }">
 <div class=roomy-10><b>질문:</b> ${question }</div>
 <div class=roomy-10><b>정답:</b> <input type=text size=20 id="answer" placeholder="정답"></div>
-<div class=roomy-10><input type="submit" class="btn btn-primary" id="pw-find-btn" value="제  출"></div>
+<div class=roomy-20><input type="submit" class="btn btn-primary" id="pw-find-btn" value="제  출"></div>
     
