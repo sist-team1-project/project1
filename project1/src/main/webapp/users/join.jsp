@@ -144,8 +144,8 @@
               <!--   아이디   -->
               <div class="roomy-10 fadeIn second">
                 <div>아이디</div>
-                <input type="text" name="id" id="id" placeholder="아이디 중복체크를 해주세요." readonly>
-                <input type="button" id="id-check-btn" class="btn btn-primary" value="중복체크">
+                <input type="text" name="id" id="id" placeholder="아이디 중복 확인을 해주세요" readonly>
+                <input type="button" id="id-check-btn" class="btn btn-primary" value="중복 확인">
                 <small> 6~12자 사이 및 영문+숫자</small>
               </div>
               <!-- -------- -->
@@ -153,8 +153,8 @@
               <!--   비밀번호   -->
               <div class="roomy-10 fadeIn second">
                 <div>비밀번호</div>
-                <input type="password" name="password" id="password" placeholder="비밀번호를 입력하세요.">
-                <input type="password" name="password2" id="password2" placeholder="비밀번호를 입력하세요.">
+                <input type="password" name="password" id="password" placeholder="비밀번호를 입력하세요">
+                <input type="password" name="password2" id="password2" placeholder="비밀번호를 입력하세요">
                 <small> 8~20자 사이 및 영문+숫자</small>
               </div>
               <!-- -------- -->
@@ -169,8 +169,8 @@
               <!--   이메일   -->
               <div class="roomy-10 fadeIn third">
                 <div>이메일</div>
-                <input type="text" name="email" id="email" placeholder="이메일 주소 중복체크를 해주세요." readonly>
-                <input type="button" id="email-check-btn" class="btn btn-default" value="중복체크">
+                <input type="text" name="email" id="email" placeholder="이메일 주소 중복 확인을 해주세요" readonly>
+                <input type="button" id="email-check-btn" class="btn btn-default" value="중복 확인">
               </div>
               <!-- -------- -->
               
@@ -192,8 +192,8 @@
               <!--   주소   -->
               <div class="roomy-10 fadeIn fourth">
                 <div>우편번호</div>
-                <input type="text" name="post" id="post" readonly>
-                <input type="button" id="post-btn" class="btn btn-primary" value="우편번호 찾기" placeholder="우편번호 찾기를 해주세요.">
+                <input type="text" name="post" id="post" placeholder="우편번호 찾기를 해주세요" readonly>
+                <input type="button" id="post-btn" class="btn btn-primary" value="우편번호 찾기">
                 <div>주소</div>
                 <input type="text" name="address1" id="address1" readonly>
                 <div>상세주소</div>
