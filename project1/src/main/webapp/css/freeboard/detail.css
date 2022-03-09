@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-textarea, #reply-insert-btn, .reply-update {
+textarea, .reply-insert-btn, .reply-update {
   vertical-align: middle;
 }
 
@@ -14,7 +14,7 @@ textarea {
   outline: none;
 }
 
-#reply-insert-btn {
+.reply-insert-btn {
   width: 15%;
   height: 75px;
   color: white;
@@ -80,8 +80,7 @@ a, a:link, a:active, a:hover {
     width: 80%;
   }
   
-  #reply-insert-btn {
+  .reply-insert-btn {
     width: 20%;
   }
-
 }

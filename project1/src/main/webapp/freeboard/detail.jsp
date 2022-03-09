@@ -25,10 +25,25 @@
                 data : $('#reply-form').serialize(),
                 success : function(){
                     replyList();
-               }
+                }
             });
         })
-
+        
+        $('#delete-btn').click(function() {
+        	var result = confirm('게시물을 삭제하시겠습니까?');
+            if (result) {
+                let bid = $('#bid').val();
+                $.ajax({
+                    type:'post',
+                    url : '../freeboard/delete.do',
+                    data : {"bid" : bid},
+                    success : function(result){
+                        alert("삭제되었습니다");
+                        location.href = result; 
+                    }
+                });
+            }
+        })
     })
     
     function replyList() {
@@ -82,7 +97,7 @@
         <c:if test="${detail.u_id==sessionScope.id }">
           <!-- 글쓴이일 때 수정/삭제 버튼 -->
           <a href="../freeboard/update.do?bid=${detail.board_id }" class="btn btn-pink">수정</a>
-          <a href="../freeboard/delete.do?bid=${detail.board_id }" id="delete-btn" class="btn btn-pink" onclick="return confirm('게시물을 삭제 하시겠습니까?')">삭제</a>
+          <span id="delete-btn" class="btn btn-pink">삭제</span>
         </c:if>
         <a href="../freeboard/freeboard.do" class="btn btn-default">목록</a>
       </div>
@@ -95,16 +110,15 @@
         <!-- 로그인 했을 때 댓글창 -->
         <c:if test="${sessionScope.id!=null }">
           <form id="reply-form">
-            <input type="hidden" name="uid" value="${sessionScope.id }">
             <input type="hidden" name="bid" value="${detail.board_id }">
             <textarea id="reply-content" name="content"></textarea>
-            <button type="button" id="reply-insert-btn">댓글<br>작성</button>
+            <button type="button" id="reply-insert-btn" class="reply-insert-btn">댓글<br>작성</button>
           </form>
         </c:if>
         <!-- 로그인 안했을 때 댓글창 -->
         <c:if test="${sessionScope.id==null }">
           <textarea readonly>로그인한 뒤 작성하여 주세요.</textarea>
-          <button type="button" id="reply-insert-btn">댓글<br>작성</button>
+          <button type="button" class="reply-insert-btn">댓글<br>작성</button>
         </c:if>
       </div>
     </div>

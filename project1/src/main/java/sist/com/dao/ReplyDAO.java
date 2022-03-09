@@ -14,7 +14,9 @@ public class ReplyDAO {
     private PreparedStatement ps;
     private DBCPConnection dbcp = new DBCPConnection();
     
+    // 게시물 - 댓글 목록
     public List<ReplyVO> replyList(int id) {
+        
         List<ReplyVO> list = new ArrayList<ReplyVO>();
         try {
             conn = dbcp.getConnection();
@@ -46,6 +48,7 @@ public class ReplyDAO {
         return list;
     }
     
+    // 자유게시판 - 댓글 수
     public int replyCount(int id) {
         int count = 0;
         try {
@@ -70,6 +73,7 @@ public class ReplyDAO {
         return count;
     }
     
+    // 게시물 - 댓글 달기
     public void replyInsert(ReplyVO vo) {
         try {
             conn = dbcp.getConnection();
@@ -91,6 +95,40 @@ public class ReplyDAO {
         }
     }
     
+    
+    // 게시물 - 댓글 수정 / 삭제 유효성 검사
+    public boolean checkUser(String uid, int rid) {
+        Boolean check = false;
+        try {
+            conn = dbcp.getConnection();
+            
+            String sql = "SELECT u_id FROM reply_1 "
+                    + "WHERE reply_id=?";
+            
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, rid);
+            
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            
+            String db_uid = rs.getString(1);
+            
+            rs.close();
+            
+            if (db_uid.equals(uid)) {
+                check = true;
+            } else {
+                check = false;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            dbcp.disConnection(conn, ps);
+        }
+        return check;
+    }
+    
+    // 게시물 - 댓글 삭제
     public void replyDelete(int id) {
         try {
             conn = dbcp.getConnection();
@@ -109,7 +147,8 @@ public class ReplyDAO {
             dbcp.disConnection(conn, ps);
         }
     }
-
+    
+    // 게시물 - 댓글 수정
     public void replyUpdate(int id, String content) {
         try {
             conn = dbcp.getConnection();

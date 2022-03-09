@@ -1,5 +1,6 @@
 package sist.com.dao;
 
+import java.security.interfaces.RSAKey;
 import java.sql.*;
 import java.util.*;
 
@@ -120,12 +121,12 @@ public class BoardDAO {
             conn = dbcp.getConnection();
             
             String sql = "";
-            if (no == 1) {
+            if (no == 1) { // 내 게시물
                 sql = "SELECT board_id,board_category,board_title,u_id,board_date,board_visits "
                         + "FROM (SELECT board_id,board_category,board_title,u_id,board_date,board_visits,rownum as num "
                         + "FROM (SELECT /*+ INDEX_DESC(board_1 board_id_pk_1)*/board_id,board_category,board_title,u_id,board_date,board_visits "
                         + "FROM board_1 " + "WHERE u_id=?)) " + "WHERE num BETWEEN ? AND ?";
-            } else if (no == 2) {
+            } else if (no == 2) { // 내 댓글
                 sql = "SELECT board_id,board_category,board_title,u_id,board_date,board_visits "
                         + "FROM (SELECT board_id,board_category,board_title,u_id,board_date,board_visits,rownum as num "
                         + "FROM (SELECT DISTINCT /*+ INDEX_DESC(board_1 board_id_pk_1)*/b.board_id,b.board_category,b.board_title,b.u_id,b.board_date,b.board_visits "
@@ -170,15 +171,15 @@ public class BoardDAO {
         try {
             conn = dbcp.getConnection();
             String sql = "";
-            if (no == 1) {
+            if (no == 1) { // 자유게시판
                 sql = "SELECT CEIL(COUNT(*)/10.0) " + "FROM board_1";
 
                 ps = conn.prepareStatement(sql);
-            } else if (no == 2) {
+            } else if (no == 2) { // 내 게시물
                 sql = "SELECT CEIL(COUNT(*)/10.0) " + "FROM board_1 " + "WHERE u_id=?";
                 ps = conn.prepareStatement(sql);
                 ps.setString(1, id);
-            } else if (no == 3) {
+            } else if (no == 3) { // 내 댓글
                 sql = "SELECT CEIL(COUNT(*)/10.0) " + "FROM (SELECT DISTINCT b.board_id " + "FROM board_1 b, reply_1 r "
                         + "WHERE b.board_id=r.board_id AND r.u_id=?)";
                 ps = conn.prepareStatement(sql);
@@ -204,14 +205,18 @@ public class BoardDAO {
             conn = dbcp.getConnection();
 
             // 조회수 증가
-            String sql = "UPDATE board_1 " + "SET board_visits=board_visits+1 " + "WHERE board_id=?";
+            String sql = "UPDATE board_1 "
+                    + "SET board_visits=board_visits+1 "
+                    + "WHERE board_id=?";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
 
             ps.executeUpdate(); // commit
 
             // 게시물 정보
-            sql = "SELECT * " + "FROM board_1 " + "WHERE board_id=?";
+            sql = "SELECT * "
+                + "FROM board_1 "
+                + "WHERE board_id=?";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
@@ -233,7 +238,7 @@ public class BoardDAO {
         }
         return vo;
     }
-
+    
     // 자유게시판 - 게시물 작성
     public void freeboardInsert(BoardVO vo) {
         try {
@@ -256,14 +261,17 @@ public class BoardDAO {
             dbcp.disConnection(conn, ps);
         }
     }
-
+    
+    // 자유게시판 - 수정 창 정보
     public BoardVO freeboardUpdateDetail(int id) {
+        
         BoardVO vo = new BoardVO();
 
         try {
             conn = dbcp.getConnection();
-
-            String sql = "SELECT board_id,board_category,board_title,board_content " + "FROM board_1 "
+            
+            String sql = "SELECT board_id,board_category,board_title,board_content "
+                    + "FROM board_1 "
                     + "WHERE board_id=?";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
@@ -283,43 +291,75 @@ public class BoardDAO {
             dbcp.disConnection(conn, ps);
         }
         return vo;
-
     }
-
-    // 자유게시판 - 게시물 수정
-    public void freeboardUpdate(BoardVO vo) {
+    
+    // 자유게시판 - 수정 / 삭제 유효성 검사
+    public boolean checkUser(String uid, int bid) {
+        Boolean check = false;
         try {
             conn = dbcp.getConnection();
-
-            String sql = "UPDATE board_1 SET board_category=?,board_title=?,board_content=? " + "WHERE board_id=?";
-
+            
+            String sql = "SELECT u_id FROM board_1 "
+                    + "WHERE board_id=?";
+            
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, bid);
+            
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            
+            String db_uid = rs.getString(1);
+            
+            rs.close();
+            
+            if (db_uid.equals(uid)) {
+                check = true;
+            } else {
+                check = false;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            dbcp.disConnection(conn, ps);
+        }
+        return check;
+    }
+    
+    // 자유게시판 - 게시물 수정
+    public void freeboardUpdate(BoardVO vo) {
+        
+        try {
+            conn = dbcp.getConnection();
+            
+            String sql = "UPDATE board_1 SET board_category=?,board_title=?,board_content=? "
+                + "WHERE board_id=?";
+            
             ps = conn.prepareStatement(sql);
             ps.setString(1, vo.getBoard_category());
             ps.setString(2, vo.getBoard_title());
             ps.setString(3, vo.getBoard_content());
             ps.setInt(4, vo.getBoard_id());
-
-            ps.executeUpdate(); // commit
-
+            ps.executeUpdate();
+            
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
             dbcp.disConnection(conn, ps);
         }
     }
-
-    // 자유게시판 - 게시물 수정
-    public void freeboardDelete(int id) {
+    
+    // 자유게시판 게시물 삭제
+    public void freeboardDelete(int bid) {
+        
         try {
             conn = dbcp.getConnection();
-
-            String sql = "DELETE FROM board_1 " + "WHERE board_id=?";
-
+            
+            String sql = "DELETE FROM board_1 WHERE board_id=?";
+            
             ps = conn.prepareStatement(sql);
-            ps.setInt(1, id);
-
-            ps.executeUpdate(); // commit
-
+            ps.setInt(1, bid);
+            ps.executeUpdate();
+            
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {

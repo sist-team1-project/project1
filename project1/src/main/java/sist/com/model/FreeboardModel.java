@@ -155,7 +155,13 @@ public class FreeboardModel {
     // 게시물 - 작성 페이지 이동
     @RequestMapping("freeboard/insert.do")
     public String freeboard_insert(HttpServletRequest request, HttpServletResponse response) {
-
+        
+        HttpSession session = request.getSession();
+        
+        if(session.getAttribute("id") == null) {
+            return "redirect: ../main/main.do";
+        }
+        
         request.setAttribute("main_jsp", "../freeboard/insert.jsp");
         return "../main/main.jsp";
     }
@@ -163,12 +169,18 @@ public class FreeboardModel {
     // 게시물 - 작성
     @RequestMapping("freeboard/insert_ok.do")
     public String freeboard_insert_ok(HttpServletRequest request, HttpServletResponse response) {
-
+        
         try {
             request.setCharacterEncoding("UTF-8");
         } catch (Exception ex) {
         }
-
+        
+        HttpSession session = request.getSession();
+        
+        if(session.getAttribute("id") == null) {
+            return "redirect: ../main/main.do";
+        }
+        
         String uid = request.getParameter("uid");
         String category = request.getParameter("category");
         String title = request.getParameter("title");
@@ -190,10 +202,17 @@ public class FreeboardModel {
     // 게시물 - 수정 페이지 이동
     @RequestMapping("freeboard/update.do")
     public String freeboard_update(HttpServletRequest request, HttpServletResponse response) {
-
+        
+        HttpSession session = request.getSession();
+        String id = (String) session.getAttribute("id");
         String bid = request.getParameter("bid");
-
+        
         BoardDAO dao = new BoardDAO();
+        
+        if(dao.checkUser(id, Integer.parseInt(bid)) == false) {
+            return "redirect: ../main/main.do";
+        }
+        
         BoardVO detail = dao.freeboardUpdateDetail(Integer.parseInt(bid));
 
         request.setAttribute("detail", detail);
@@ -205,26 +224,33 @@ public class FreeboardModel {
     // 게시물 - 수정
     @RequestMapping("freeboard/update_ok.do")
     public String freeboard_update_ok(HttpServletRequest request, HttpServletResponse response) {
-
+                
         try {
             request.setCharacterEncoding("UTF-8");
         } catch (Exception ex) {
         }
-
+        
+        HttpSession session = request.getSession();
+        String id = (String) session.getAttribute("id");
         String bid = request.getParameter("bid");
         String category = request.getParameter("category");
         String title = request.getParameter("title");
         String content = request.getParameter("content");
         
+        BoardDAO dao = new BoardDAO();
+        
+        // 유효성 검사
+        if(dao.checkUser(id, Integer.parseInt(bid)) == false) {
+            return "redirect: ../main/main.do";
+        }
+        
         BoardVO vo = new BoardVO();
-
         vo.setBoard_id(Integer.parseInt(bid));
         vo.setBoard_category(category);
         vo.setBoard_title(title);
         vo.setBoard_content(content);
-
-        BoardDAO dao = new BoardDAO();
-        dao.freeboardUpdate(vo);
+        
+        dao.freeboardUpdate(vo); // 업데이트
 
         return "redirect:../freeboard/detail.do?bid=" + bid;
     }
@@ -232,25 +258,47 @@ public class FreeboardModel {
     // 게시물 - 삭제
     @RequestMapping("freeboard/delete.do")
     public String freeboard_delete_ok(HttpServletRequest request, HttpServletResponse response) {
-
+        
+        HttpSession session = request.getSession();
+        String id = (String) session.getAttribute("id");
         String bid = request.getParameter("bid");
-
+        
         BoardDAO dao = new BoardDAO();
+        
+        // 유효성 검사
+        if(dao.checkUser(id, Integer.parseInt(bid)) == false) {
+            return "redirect: ../main/main.do";
+        }
+        
         dao.freeboardDelete(Integer.parseInt(bid));
-
-        return "redirect:../freeboard/freeboard.do";
+        
+        request.setAttribute("result", "../freeboard/freeboard.do");
+        return "../freeboard/result.jsp";
     }
     
     // 내 게시물 관리 - 다중 게시물 삭제
     @RequestMapping("freeboard/delete_multi.do")
     public String freeboard_delete_multi_ok(HttpServletRequest request, HttpServletResponse response) {
-
+        
+        HttpSession session = request.getSession();
+        String id = (String) session.getAttribute("id");
         String[] bid = request.getParameterValues("bid");
+        
+        // 유효성 검사
+        if(session.getAttribute("id") == null) {
+            return "redirect: ../main/main.do";
+        }
+        
         BoardDAO dao = new BoardDAO();
         
-        for(int i = 0; i < bid.length; i++) {
-            dao.freeboardDelete(Integer.parseInt(bid[i]));
+        for(String i : bid) {
+            if(dao.checkUser(id, Integer.parseInt(i)) == false) {
+                return "redirect: ../main/main.do";
+            }
+            dao.freeboardDelete(Integer.parseInt(i));
         }
-        return "../freeboard/freeboard.do";
+        
+        request.setAttribute("result", "../freeboard/mypage.do");
+        return "../freeboard/result.jsp";
     }
 }

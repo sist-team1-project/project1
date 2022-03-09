@@ -38,19 +38,19 @@
     		alert("선택된 글이 없습니다");
     	}
     	else {
-    		confirm("정말 삭제하시겠습니까?");
-    		$.ajax({
-    			url : '../freeboard/delete_multi.do',
-    			type : 'post',
-    			traditional : true,
-    			data : {
-    				"bid" : bid
-    			},
-    			success: function(result) {
-    				alert("삭제하였습니다");
-    				location.href = result;
-    			}
-    		})
+    		var result = confirm("정말 삭제하시겠습니까?");
+            if (result) {
+            	$.ajax({
+                    url : '../freeboard/delete_multi.do',
+                    type : 'post',
+                    traditional : true,
+                    data : {"bid" : bid},
+                    success: function(result) {
+                        alert("삭제하였습니다");
+                        location.href = result;
+                    }
+                })
+            }
     	}
     };
   </script>
