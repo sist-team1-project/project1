@@ -85,7 +85,32 @@ public class UsersDAO {
         }
         return count;
     }
-
+    
+    public int emailCheck(String email) {
+        
+        int count = 0;
+        try {
+            conn = dbcp.getConnection();
+            
+            String sql = "SELECT COUNT(*) FROM users_1 "
+                    + "WHERE u_email=?";
+            
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, email);
+            
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            count = rs.getInt(1);
+            
+            rs.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            dbcp.disConnection(conn, ps);
+        }
+        return count;
+    }
+    
     public void join(UsersVO vo) {
         
         try {

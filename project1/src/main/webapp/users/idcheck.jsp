@@ -5,87 +5,90 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<style type="text/css">
-.container{
-  margin-top: 50px;
-}
-.row {
-   margin: 0px auto;
-   width:380px;
-}
-h1{
-    text-align: center;
-}
-</style>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/users/idpwfind.css">
+  <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <!-- 
      Shadow는 서버를 거쳐서 데이터 읽고 실행 => 종료 
  -->
 <script type="text/javascript">
-$(function(){
-    $('#idBtn').click(function(){
-        let id=$('#check_id').val();
-        if(id.trim()=="")
-        {
-            $('#check_id').focus();
-            return;
-        }
-        $.ajax({
-            type:'POST',
-            url:'../users/idcheck_result.do',
-            data:{"id":id},
-            success:function(result) 
-            {
-                let count=result.trim();
-                if(count==0)
-                {
-                    $('#print').html('<font color=blue>'+id+"는(은) 사용가능합니다</font>")
-                    $('#ok').show();
-                }
-                else
-                {
-                    $('#print').html('<font color=red>'+id+"는(은) 사용중입니다</font>")
-                }
-                
+    $(function(){
+        $('#id-check-btn').click(function(){
+        	$('#ok').hide();
+        	
+            let id = $('#id').val();
+            if(id.trim() == "") {
+                $('#id').focus();
+                return;
             }
+            
+            if(validateId(id) == false) {
+                return;
+            }
+            
+            $.ajax({
+                type:'POST',
+                url:'../users/idcheck_result.do',
+                data:{"id" : id},
+                success:function(result) {
+                    let count=result.trim();
+                    if(count==0) {
+                    	$('#idcheck').removeAttr('class').addClass('m-top-40 text-center');
+                        $('#print').html('<font color=blue>'+id+"는(은) 사용가능합니다</font>");
+                        $('#check').hide();
+                        $('#ok').show();
+                    }
+                    else {
+                    	$('#idcheck').removeAttr('class').addClass('m-top-40 text-center');
+                        $('#print').html('<font color=red>'+id+"는(은) 사용중입니다</font>")
+                    }
+                    
+                }
+            })
+        })
+        
+        $('#ok-btn').click(function(){
+            parent.join_form.id.value=$('#id').val()
+            parent.Shadowbox.close()
+        })
+        
+        $('#id').focus(function(){
+            $('#idcheck').removeAttr('class').addClass('m-top-60 text-center');
+            $('#print').html('')
+            $('#id').val('');
+            $('#ok').hide();
+            $('#check').show();
         })
     })
-    $('#okBtn').click(function(){
-        parent.join_frm.u_id.value=$('#check_id').val()
-        parent.Shadowbox.close()
-    })
-})
+
+    function validateId(id){
+        var num = id.search(/[0-9]/g);
+        
+        if(id.length < 6 || id.length > 12){
+            alert("아이디는 6자리 ~ 12자리 이내로 입력해주세요.");
+            return false;
+        } else if(id.search(/\s/) != -1){
+            alert("아이디는 공백 없이 입력해주세요.");
+            return false;
+        } else if(num < 0 || eng < 0){
+            alert("아이디는 영문,숫자를 혼합하여 입력해주세요.");
+            return false;
+        } else {
+            return true;
+        }
+    }
 </script>
 </head>
 <body>
-  <div class="container">
-   <div class="row">
-    <table class="table">
-     <tr>
-       <td class="text-center">
-       ID:<input type=text name=u_id id="check_id" class="input-sm" size=15>
-       <input type=button value="아이디체크" class="btn btn-sm btn-danger"
-         id="idBtn"> 
-       </td>
-     </tr>
-     <tr>
-       <td class="text-center" id="print"></td>
-     </tr>
-     <tr id="ok" style="display:none">
-       <td class="text-center">
-        <input type=button value="확인" id="okBtn"
-          class="btn btn-sm btn-success">
-       </td>
-     </tr>
-    </table>
-   </div>
+  <div id="idcheck" class="m-top-60 text-center">
+    <div><h4><b>아이디 중복확인</b></h4></div>
+    <div class=roomy-10><b>아이디:</b> <input type="text" size=20 id="id" placeholder="아이디 입력"></div>
+    <div id="check" class=roomy-10><input type="button" class="btn btn-primary" id="id-check-btn" value="중복 검사"></div>
+    <div id="ok" class="roomy-10"><input type="button" id="ok-btn" class="btn btn-primary" value="확인"></div>
+    <div id="print"></div>
   </div>
 </body>
 </html>
-
-
-
-
-
-

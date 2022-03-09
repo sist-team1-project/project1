@@ -43,7 +43,7 @@
 
 <div class=""><h4><b>질문 답변</b></h4></div>
 <input type=hidden id="id" value="${id }">
-<div class=roomy-10>질문: ${question }</div>
-<div class=roomy-10>정답: <input type=text size=20 id="answer" placeholder="정답"></div>
+<div class=roomy-10><b>질문:</b> ${question }</div>
+<div class=roomy-10><b>정답:</b> <input type=text size=20 id="answer" placeholder="정답"></div>
 <div class=roomy-10><input type="submit" class="btn btn-primary" id="pw-find-btn" value="제  출"></div>
     

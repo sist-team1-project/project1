@@ -153,9 +153,6 @@ public class UsersModel {
         
         String id = request.getParameter("id");
         String password = request.getParameter("pwd");
-        System.out.println("여기");
-        System.out.println("id: " + id);
-        System.out.println("pwd: " + password);
         
         UsersDAO dao = new UsersDAO();
         dao.pwUpdate(id, password);
@@ -166,6 +163,13 @@ public class UsersModel {
     public String idcheck(HttpServletRequest request, HttpServletResponse response) {
         
         return "../users/idcheck.jsp";
+    }
+    
+    // 회원가입 - 이메일 중복 확인
+    @RequestMapping("users/emailcheck.do")
+    public String emailcheck(HttpServletRequest request, HttpServletResponse response) {
+        
+        return "../users/emailcheck.jsp";
     }
     
     // 회원가입 - 아이디 중복 확인 결과
@@ -179,6 +183,17 @@ public class UsersModel {
         return "../users/result.jsp";
     }
     
+    // 회원가입 - 아이디 중복 확인 결과
+    @RequestMapping("users/emailcheck_result.do")
+    public String emailcheck_result(HttpServletRequest request, HttpServletResponse response) {
+        
+        String email = request.getParameter("email");
+        UsersDAO dao = new UsersDAO();
+        int result = dao.emailCheck(email);
+        request.setAttribute("result", result);
+        return "../users/result.jsp";
+    }
+    
     // 회원가입 - 회원가입 결과
     @RequestMapping("users/join_ok.do")
     public String join_ok(HttpServletRequest request, HttpServletResponse response) {
@@ -188,17 +203,17 @@ public class UsersModel {
         } catch (Exception ex) {
         }
         
-        String id = request.getParameter("u_id");
-        String password = request.getParameter("u_password");
-        String name = request.getParameter("u_name");
-        String birthday = request.getParameter("u_birthday");
-        String gender = request.getParameter("u_gender");
-        String email = request.getParameter("u_email");
-        String post = request.getParameter("u_post");
-        String address1 = request.getParameter("u_address1");
-        String address2 = request.getParameter("u_address2");
-        String question = request.getParameter("u_question");
-        String answer = request.getParameter("u_answer");
+        String id = request.getParameter("id");
+        String password = request.getParameter("password");
+        String name = request.getParameter("name");
+        String birthday = request.getParameter("birthday");
+        String gender = request.getParameter("gender");
+        String email = request.getParameter("email");
+        String post = request.getParameter("post");
+        String address1 = request.getParameter("address1");
+        String address2 = request.getParameter("address2");
+        String question = request.getParameter("question");
+        String answer = request.getParameter("answer");
 
         UsersVO vo = new UsersVO();
         vo.setU_id(id);

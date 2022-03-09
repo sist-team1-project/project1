@@ -1,40 +1,36 @@
 @charset "UTF-8";
-
-.row {
-  margin-left: 0px;
-  margin-right: 0px;
-
-}
-
-.margin-150-180 {
-  margin-top: 150px;
-  margin-bottom: 180px;
-}
-
+/*   틀   */
 .middle {
   display: flex;
   justify-content: center;
+  align-items: center;
+  min-height: 800px;
 }
 
-.formContent {
-  border-radius: 10px 10px 10px 10px;
+.content {
+  border-radius: 10px;
   background: #fff;
   width: 100%;
-  max-width: 500px;
+  max-width: 550px;
   -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,0.3);
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.3);
   text-align: center;
 }
 
+.content-pad {
+   padding: 40px 30px;
+}
+
+
 .box {
   width: 100%;
-  max-width: 480px;
   background-color: #F2F2F2;
   font-size: 18px;
   text-align: center;
   font-style: italic;
   padding: 30px 10px;
 }
+
 
 .formcontent-pad {
     padding: 40px 30px;

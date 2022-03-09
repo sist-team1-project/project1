@@ -18,28 +18,56 @@
             }
             
             if(pwd != pwd2) {
-          	  alert("비밀번호가 다릅니다");
+          	    alert("비밀번호가 일치하지 않습니다.");
+          	    $('#pwd1').val('');
+          	    $('#pwd2').val('');
+          	    return;
+            }
+            
+            if(validatePassword(pwd) == false) {
+                return;
             }
             
             $.ajax({
                 type : 'post',
                 url : '../users/pwreset_ok.do',
-                data : {
-                    "id" : id,
-                    "pwd" : pwd
-                },
+                data : $('#pwreset-form').serialize(),
                 success : function(result) {
                 	alert("비밀번호가 재설정되었습니다");
                 	parent.Shadowbox.close()
                 }
             })
         })
+        $('#ok-btn').click(function() {
+            parent.Shadowbox.close()
+        })
     });
+    
+    function validatePassword(password){
+        var num = password.search(/[0-9]/g);
+        var eng = password.search(/[a-z]/ig);
+        
+        if(password.length < 8 || password.length > 20){
+            alert("비밀번호를 8자리 ~ 20자리 이내로 입력해주세요.");
+            return false;
+        } else if(password.search(/\s/) != -1){
+            alert("비밀번호는 공백 없이 입력해주세요.");
+            return false;
+        } else if(num < 0 || eng < 0){
+            alert("비밀번호는 영문,숫자를 혼합하여 입력해주세요.");
+            return false;
+        } else {
+            return true;
+        }
+    }
 </script>
-<div class=""><h4><b>비밀번호 재설정</b></h4></div>
-<form method="post" action="../users/pwreset_ok.do" id="pwreset-form">
+<div><h4><b>비밀번호 재설정</b></h4></div>
+<form method="post" id="pwreset-form">
   <input type=hidden id="id" name="id" value="${id }">
-  <div class=roomy-10>비밀번호: <input type=password size=20 id="pwd1" name="pwd" placeholder="비밀번호 입력"></div>
-  <div class=roomy-10>&nbsp;&nbsp;&nbsp;재입력: <input type=password size=20 id="pwd2" placeholder="비밀번호 재입력"></div>
+  <div class="roomy-10">
+    <div><b>비밀번호:</b> <input type=password size=20 id="pwd1" name="pwd" placeholder="비밀번호 입력"></div>
+    <div>&nbsp;&nbsp;&nbsp;<b>재입력:</b> <input type=password size=20 id="pwd2" placeholder="비밀번호 재입력"></div>
+  </div>
+  <small> 8~20자 사이 및 영문+숫자</small>
   <div class=roomy-10><input type="button" class="btn btn-primary" id="pw-find-btn" value="업데이트"></div>
 </form>
