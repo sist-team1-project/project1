@@ -21,8 +21,8 @@ public class MainModel {
         List<CompanyVO> company = c.bestCompanyList();
         List<String> review = new ArrayList<String>();
 
-        for (int i = 0; i < company.size(); i++) {
-            String bestreview = r.bestCompanyReviewList(company.get(i).getC_id());
+        for (CompanyVO i : company) {
+            String bestreview = r.bestCompanyReviewList(i.getC_id());
             review.add(bestreview);
         }
         
@@ -32,8 +32,8 @@ public class MainModel {
         List<AdVO> ad = a.bestAdList();
         List<String> adCname = new ArrayList<String>();
         
-        for (int i = 0; i < ad.size(); i++) {
-            String cname = c.companyName(ad.get(i).getC_id());
+        for (AdVO i : ad) {
+            String cname = c.companyName(i.getC_id());
             adCname.add(cname);
         }
         
@@ -42,8 +42,8 @@ public class MainModel {
         List<AdVO> adEnd = a.adEndList();
         List<String> adEndCname = new ArrayList<String>();
         
-        for (int i = 0; i < adEnd.size(); i++) {
-            String cname = c.companyName(ad.get(i).getC_id());
+        for (AdVO i: ad) {
+            String cname = c.companyName(i.getC_id());
             adEndCname.add(cname);
         }
         
