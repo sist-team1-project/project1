@@ -17,6 +17,7 @@ public class MainModel {
         ReviewDAO r = new ReviewDAO();
         BoardDAO p = new BoardDAO();
         
+        
         /*       Best 기업       */
         List<CompanyVO> company = c.bestCompanyList();
         List<String> review = new ArrayList<String>();
@@ -26,7 +27,10 @@ public class MainModel {
             review.add(bestreview);
         }
         
+        
+        /*      대기업 리스트      */
         List<CompanyVO> bigCompany = c.bigCompanyList();
+        
         
         /*       Best 공고       */
         List<AdVO> ad = a.bestAdList();
@@ -42,7 +46,7 @@ public class MainModel {
         List<AdVO> adEnd = a.adEndList();
         List<String> adEndCname = new ArrayList<String>();
         
-        for (AdVO i: ad) {
+        for (AdVO i: adEnd) {
             String cname = c.companyName(i.getC_id());
             adEndCname.add(cname);
         }
