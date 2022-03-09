@@ -15,8 +15,8 @@
     <div class="container">
       <div class="row m-top-40">
         <c:if test="${sessionScope.id!=null }">
-          <h5 class="text-center"><i class="fa fa-heart" aria-hidden="true"></i>
-          ${sessionScope.name }님 안녕하세요!<i class="fa fa-heart" aria-hidden="true"></i>
+          <h5 class="text-center"><i class="fa fa-heart" aria-hidden="true" style="color: #f78181;"></i>
+          ${sessionScope.name }님 안녕하세요!<i class="fa fa-heart" aria-hidden="true" style="color:#f78181;"></i>
           </h5>
         </c:if>
       </div>
@@ -89,7 +89,7 @@
       <!-- 채용공고 top9 -->
       <div class="row roomy-20">
         <div class="col-md-12 no-select"><h4><i class="fa fa-handshake-o" aria-hidden="true"></i> BEST 공고</h4></div>
-        <div class="col-md-12 adplus"><h6><a href="../ad/ad.do">더 많은 공고를 보고싶다면?&nbsp;<i class="fa fa-hand-o-right" aria-hidden="true"></i></a></h6></div>
+        <div class="col-md-12 adplus"><h6><a href="../search/searchad.do">더 많은 공고를 보고싶다면?&nbsp;<i class="fa fa-hand-o-right" aria-hidden="true"></i></a></h6></div>
         <c:forEach var="a" items="${ad }" varStatus="status">
           <div class="col-md-6 pad-5">
             <div class="unit">
@@ -98,7 +98,7 @@
                 <span class="greytag"> ${a.ad_we } </span>&nbsp;
                 <span class="greytag"> ${a.ad_education } </span>
                 <c:choose>
-                  <c:when test="${sessionScope.id ==  null || sessionScope.id == '' }" >
+                  <c:when test="${sessionScope.id == null}" >
                     <a href="../users/login.do" onclick="return confirm('먼저 로그인을 진행해주세요')"><i class="fa fa-star-o favorite"></i></a>
                   </c:when>
                   <c:otherwise>
@@ -147,7 +147,6 @@
                     <a href="../users/login.do" onclick="return confirm('먼저 로그인을 진행해주세요')"><i class="fa fa-star-o favorite"></i></a>
                   </c:when>
                   <c:otherwise>
-                    <a href="#"><i class="fa fa-star-o favorite"></i></a>
                     <a href="#"><i class="fa fa-star favorite f-update"></i></a>   
                   </c:otherwise>
                 </c:choose>
