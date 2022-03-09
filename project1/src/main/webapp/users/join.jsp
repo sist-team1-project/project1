@@ -135,7 +135,7 @@
     <div class="container">
       <div class="middle m-top-40">
         <div class="content fadeInDown">
-          <div class="text-center fadeIn first"><h4><b>회원가입</b></h4></div>
+          <div class="text-center fadeIn first"><h4><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;<b>회원가입</b></h4></div>
           <!-- Login Form -->
           <div class="text-left">
           
@@ -169,8 +169,8 @@
               <!--   이메일   -->
               <div class="roomy-10 fadeIn third">
                 <div>이메일</div>
-                <input type="text" name="email" id="email" placeholder="이메일 주소를 입력하세요.">
-                <input type="button" id="email-check-btn" class="btn btn-primary" value="중복체크">
+                <input type="text" name="email" id="email" placeholder="이메일 주소 중복체크를 해주세요." readonly>
+                <input type="button" id="email-check-btn" class="btn btn-default" value="중복체크">
               </div>
               <!-- -------- -->
               
@@ -193,7 +193,7 @@
               <div class="roomy-10 fadeIn fourth">
                 <div>우편번호</div>
                 <input type="text" name="post" id="post" readonly>
-                <input type="button" id="post-btn" class="btn btn-primary" value="우편번호 찾기">
+                <input type="button" id="post-btn" class="btn btn-primary" value="우편번호 찾기" placeholder="우편번호 찾기를 해주세요.">
                 <div>주소</div>
                 <input type="text" name="address1" id="address1" readonly>
                 <div>상세주소</div>

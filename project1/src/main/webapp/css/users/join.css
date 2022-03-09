@@ -49,11 +49,14 @@ select,
   width: 29%;
   padding-top: 8px;
   padding-bottom: 8px;
+  background-color: #7F9BB9;
+  color: white;
 }
 
 #id,
 #post,
-#address {
+#address,
+#email {
   background-color: #F6F6F6;
   outline: none;
 }
