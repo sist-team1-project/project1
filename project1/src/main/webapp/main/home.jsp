@@ -15,7 +15,9 @@
     <div class="container">
       <div class="row m-top-40">
         <c:if test="${sessionScope.id!=null }">
-          <h5 class="text-center">${sessionScope.name }님 안녕하세요!</h5>
+          <h5 class="text-center"><i class="fa fa-heart" aria-hidden="true"></i>
+          ${sessionScope.name }님 안녕하세요!<i class="fa fa-heart" aria-hidden="true"></i>
+          </h5>
         </c:if>
       </div>
       
@@ -96,12 +98,17 @@
                 <span class="greytag"> ${a.ad_we } </span>&nbsp;
                 <span class="greytag"> ${a.ad_education } </span>
                 <c:choose>
-                  <c:when test="${sessionScope.id==null }">
+                  <c:when test="${sessionScope.id ==  null || sessionScope.id == '' }" >
                     <a href="../users/login.do" onclick="return confirm('먼저 로그인을 진행해주세요')"><i class="fa fa-star-o favorite"></i></a>
                   </c:when>
-                  <c:when test="${sessionScope.id!=null }">
-                    <a href="#"><i class="fa fa-star favorite f-update"></i></a>                  
-                  </c:when>
+                  <c:otherwise>
+                    <c:if test="${sessionScope.id != null}">
+                      <a href="#"><i class="fa fa-star-o favorite"></i></a>                  
+                    </c:if>
+                    <c:if test="">
+                      <a href="#" id="favorite-insert-btn"><i class="fa fa-star favorite"></i></a>                  
+                    </c:if>
+                  </c:otherwise>
                 </c:choose>
               </div>
               <div class="roomy-10 short-line">
@@ -139,9 +146,10 @@
                   <c:when test="${sessionScope.id==null }">
                     <a href="../users/login.do" onclick="return confirm('먼저 로그인을 진행해주세요')"><i class="fa fa-star-o favorite"></i></a>
                   </c:when>
-                  <c:when test="${sessionScope.id!=null }">
-                    <a href="#"><i class="fa fa-star favorite f-update"></i></a>                  
-                  </c:when>
+                  <c:otherwise>
+                    <a href="#"><i class="fa fa-star-o favorite"></i></a>
+                    <a href="#"><i class="fa fa-star favorite f-update"></i></a>   
+                  </c:otherwise>
                 </c:choose>
               </div>
               <div class="roomy-10 short-line">
@@ -186,8 +194,12 @@
       <!-------------->  
       
     </div>
+    <div style="position: fixed; bottom: 50px; right: 60px;">
+      <a href="#" class="scrollToTop"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
+    </div>    
   </section>
-  <!-- 슬라이더 -->
+  
+  <!-------------- 슬라이더 --------------------->
   <script type="text/javascript" src="../css/slick/slick.js" charset="utf-8"></script>
   <script type="text/javascript" src="../css/slick/slick.min.js" charset="utf-8"></script>
   <script type="text/javascript">
@@ -221,7 +233,9 @@
 			}
 		} ]
 	});
+	<!------------------------------------------->
 	
+	<!-------------- Cookie --------------------->
 	function setCookie(cookie_name, value, days) {
         var exdate = new Date();
         exdate.setDate(exdate.getDate() + days);
@@ -275,7 +289,29 @@
 	    	 
              $('#cookieDiv').remove();
 		}
-     }
+     }    
+     <!------------------------------------------->
+
+     <!-------------- 맨 위로 이동 버튼 --------------------->     
+     $(document).ready(function() {
+         //Check to see if the window is top if not then display button
+         $(window).scroll(function() {
+             if ($(this).scrollTop() > 100) {
+                 $('.scrollToTop').fadeIn();
+             } else {
+                 $('.scrollToTop').fadeOut();
+             }
+         });
+         //Click event to scroll to top
+         $('.scrollToTop').click(function() {
+             $('html, body').animate({
+                 scrollTop : 0
+             }, 800);
+             return false;
+         });
+     });  
+     
+     <!------------------------------------------->
      
   </script>
 </body>

@@ -123,13 +123,14 @@ public class AdDAO {
 				} 
 			sql += ")";
 			sql += "order by case ad_id ";
+			
 			for(int i = 0; i < cookieList.size(); i++) {
-					sql += "when " + cookieList.get(i) + " then " + (i)+1;
-					i++;
+					sql += "when " + cookieList.get(i) + " then " + (i+1);
 			}
-			sql += "else " + cookieList.size() + " end ";		
-				
+			sql += " else " + cookieList.size() + " end ";
+			
 			ps = conn.prepareStatement(sql);
+			
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				AdVO vo = new AdVO();
