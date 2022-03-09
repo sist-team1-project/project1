@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/users/join.css">
 <link rel="stylesheet" href="../shadow/css/shadowbox.css">
 <script type="text/javascript" src="../shadow/js/shadowbox.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
@@ -99,72 +100,58 @@
 							<h2 class="sectiontitle">회원 수정</h2>
 							<form method="post" action="../users/update_ok.do"
 								name="join_frm" id="join_frm">
-								<table class="table">
-									<tr>
-										<td class="text-right" width=15%>아이디</td>
-										<td width=85% class="inline"><input type=text name=u_id
-											id="join_id" size=15 class="input-sm" readonly
-											value="${vo.u_id }"></td>
-									</tr>
-									<tr>
-										<td class="text-right" width=15%>비밀번호</td>
-										<td width=85% class="inline"><input type=password
-											name=u_password id=join_pwd size=15 class="input-sm">
-										</td>
-									</tr>
-									<tr>
-										<td class="text-right" width=15%>이름</td>
-										<td width=85%><input type=text name=u_name id=name
-											size=15 class="input-sm" value="${vo.u_name }">
-										</td>
-									</tr>
-									<tr>
-										<td class="text-right" width=15%>성별</td>
-										<td width=85% class="inline"><input type=radio value="남자"
-											name=u_gender ${vo.u_gender=="남자"?"checked":"" }>남자 <input
-											type=radio value="여자" name=u_gender
-											${vo.u_gender=="여자"?"checked":"" }>여자</td>
-									</tr>
-									<tr>
-										<td class="text-right" width=15%>생년월일</td>
-										<td width=85%><input type=date size=20 name=u_birthday
-											class="input-sm" id="day" value="${vo.u_birthday }">
-										</td>
-									</tr>
-									<tr>
-										<td class="text-right" width=15%>이메일</td>
-										<td width=85%><input type=text name=u_email id=email
-											size=50 class="input-sm" value="${vo.u_email }">
-										</td>
-									</tr>
-									<tr>
-										<td class="text-right" width=15%>우편번호</td>
-										<td width=85% class='inline'><input type=text name=u_post
-											id=post size=10 class="input-sm" readonly
-											value="${vo.u_post }"> <input type=button
-											id="postBtn" value="우편번호찾기" class="btn btn-sm btn-danger">
-										</td>
-									</tr>
-									<tr>
-										<td class="text-right" width=15%>주소</td>
-										<td width=85%><input type=text name=u_address1 id=addr1
-											size=50 class="input-sm" readonly value="${vo.u_address1 }">
-										</td>
-									</tr>
-									<tr>
-										<td class="text-right" width=15%>상세주소</td>
-										<td width=85%><input type=text name=u_address2 id=addr2
-											size=50 class="input-sm" value="${vo.u_address2 }">
-										</td>
-									</tr>
-									<tr>
-										<td colspan="2" class="text-center"><input type=button
-											class="btn btn-sm btn-primary" value="회원수정" id="joinBtn">
-											<input type=button class="btn btn-sm btn-danger" value="취소"
-											onclick="javascript:history.back()"></td>
-									</tr>
-								</table>
-							</form>
+								<div class="roomy=10 fadeIn second"></div>
+								<div>아이디</div>
+								<input type="text" name=u_id id="join_id" readonly
+									value="${vo.u_id }">
+					</div>
+
+					<div class="roomy=10 fadeIn second">
+						<div>비밀번호</div>
+						<input type=password name=u_password id=join_pwd class="input-sm">
+					</div>
+					<div class="roomy-10 fadeIn second">
+						<div>이름</div>
+						<input type=text name=u_name id=name class="input-sm"
+							value="${vo.u_name }">
+						<div class="roomy-10 fadeIn third">
+							<div>성별</div>
+							<input type=radio value="남자" name=u_gender
+								${vo.u_gender=="남자"?"checked":"" }>남자 <input type=radio
+								value="여자" name=u_gender ${vo.u_gender=="여자"?"checked":"" }>여자
+						</div>
+						<div class="roomy-10 fadeIn third">
+							<div>생년월일</div>
+							<input type=date size=20 name=u_birthday class="input-sm"
+								id="day" value="${vo.u_birthday }">
+						</div>
+						<div class="roomy-10 fadeIn third">
+						<div>이메일</div>
+						<input type=text name=u_email id=email size=50 class="input-sm"
+							value="${vo.u_email }">
+                        </div>
+                        <div class="roomy-10 fadeIn third">
+						<div>우편번호</div>
+						<input type=text name=u_post id=post size=10 class="input-sm"
+							readonly value="${vo.u_post }"> <input type=button
+							id="postBtn" value="우편번호찾기" class="btn btn-primary">
+					
+							<div>주소</div>
+							<input type=text name=u_address1 id=addr1
+								  readonly value="${vo.u_address1 }">
+
+							<div>상세주소</div>
+							<input type=text name=u_address2 id=addr2
+							   value="${vo.u_address2 }">  
+							   </div>
+
+							<td colspan="2" class="text-center"><input type=button
+								class="btn btn-sm btn-primary" value="회원수정" id="joinBtn">
+								<input type=button class="btn btn-sm btn-danger" value="취소"
+								onclick="javascript:history.back()"></td>
+						</tr>
+						</table>
+						</form>
 						</main>
 					</div>
 </body>
