@@ -48,31 +48,26 @@ sup {
   }
 }
 
-@media
-screen
-and
-(max-width:
-768px)
-{
-#board-top {
-  display: none;
+@media screen and (max-width: 768px) {
+  #board-top {
+    display: none;
+  }
+  
+  .border-bttom {
+    border-bottom: 1px solid #d6d6d6;
+  }
+  
+  #board-title {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px;
+  }
+  
+  .menu, .check, #board-title, #board-uid, #board-date, #board-visits {
+    text-align: left;
+  }
 }
 
-.border-bttom {
-  border-bottom: 1px solid #d6d6d6;
-}
-
-#board-title {
-  font-size: 16px;
-  font-weight: bold;
-  padding: 10px;
-}
-
-.menu, .check, #board-title, #board-uid, #board-date, #board-visits {
-  text-align: left;
-}
-
-}
 @media screen and (min-width: 768px) {
   #small {
     display: none;
