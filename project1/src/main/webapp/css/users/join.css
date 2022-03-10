@@ -14,10 +14,11 @@
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.3);
   padding: 40px 30px;
 }
+/* -------- */
 
 
 
-/* 폼 */
+/*    폼    */
 input[type=text],
 input[type=password],
 input[type=button],
@@ -56,10 +57,12 @@ select,
 #id,
 #post,
 #address,
-#email {
+#email,
+#address1 {
   background-color: #F6F6F6;
   outline: none;
 }
+/* -------- */
 
 
 
@@ -70,6 +73,7 @@ a:active,
 a:hover {
   text-decoration: none;
 }
+/* -------- */
 
 
 

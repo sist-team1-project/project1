@@ -20,7 +20,7 @@
     })
 </script>
 
-<div class="m-top-30 roomy-20 text-center no-select">
+<div class="roomy-20 text-center no-select">
   <h4>
     <span data-year="${year }" data-month="${month-1}"><i class="fa fa-chevron-left" aria-hidden="true"></i></span>
     <span class="date"><b>${year }년 ${month }월</b></span>
@@ -42,7 +42,7 @@
       </c:forEach>
     </c:if>
     <td>
-      <div>${i }</div>
+      <div><b>${i }</b></div>
       <c:forEach var="a" items="${ad[status.index-1] }" varStatus="status2">
         <div class="title short-line"><a href="../ad/ad.do?adid=${a.ad_id}">${a.ad_title }</a></div>
       </c:forEach>

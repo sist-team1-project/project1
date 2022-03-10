@@ -52,7 +52,7 @@
         })
         
         $('#ok-btn').click(function(){
-            parent.join_form.email.value=$('#email').val()
+            parent.user_form.email.value=$('#email').val();
             parent.Shadowbox.close()
         })
         

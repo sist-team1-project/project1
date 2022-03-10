@@ -48,22 +48,6 @@ public class UsersModel {
         return "redirect:../main/main.do";
     }
     
-    // 헤더 - 마이페이지 이동
-    @RequestMapping("users/mypage.do")
-    public String mypage(HttpServletRequest request, HttpServletResponse response) {
-        
-        HttpSession session = request.getSession();
-        String id = (String) session.getAttribute("id");
-        UsersDAO dao = new UsersDAO();
-
-        UsersVO user = dao.userDetail(id);
-
-        request.setAttribute("user", user);
-
-        request.setAttribute("main_jsp", "../users/mypage.jsp");
-        return "../main/main.jsp";
-    }
-    
     // 로그인 - 회원가입 페이지 이동
     @RequestMapping("users/join.do")
     public String join(HttpServletRequest request, HttpServletResponse response) {
@@ -72,21 +56,21 @@ public class UsersModel {
         return "../main/main.jsp";
     }
     
-    // 로그인 - 아이디 찾기
+    // 로그인 - 아이디 찾기 쉐도우박스
     @RequestMapping("users/idfind.do")
     public String idfind(HttpServletRequest request, HttpServletResponse response) {
         
         return "../users/idfind.jsp";
     }
     
-    // 로그인 - 비밀번호 찾기
+    // 로그인 - 비밀번호 찾기 쉐도우박스
     @RequestMapping("users/pwfind.do")
     public String qfind(HttpServletRequest request, HttpServletResponse response) {
         
         return "../users/pwfind.jsp";
     }
     
-    // 로그인 - 비밀번호 찾기
+    // 로그인 - 비밀번호 찾기 쉐도우박스
     @RequestMapping("users/pwfind2.do")
     public String pwfind(HttpServletRequest request, HttpServletResponse response) {
         
@@ -96,15 +80,6 @@ public class UsersModel {
         request.setAttribute("id", id);
         request.setAttribute("question", question);
         return "../users/pwfind2.jsp";
-    }
-    
-    // 로그인 - 비밀번호 초기화
-    @RequestMapping("users/pwreset.do")
-    public String pwrest(HttpServletRequest request, HttpServletResponse response) {
-        
-        String id = request.getParameter("id");
-        request.setAttribute("id", id);
-        return "../users/pwreset.jsp";
     }
     
     // 로그인 - 아이디 찾기 결과
@@ -145,17 +120,6 @@ public class UsersModel {
         
         request.setAttribute("result", result);
         return "../users/result.jsp";
-    }
-    
-    // 로그인 - 비밀번호 찾기 - 비밀번호 업데이트
-    @RequestMapping("users/pwreset_ok.do")
-    public void pwreset_result(HttpServletRequest request, HttpServletResponse response) {
-        
-        String id = request.getParameter("id");
-        String password = request.getParameter("pwd");
-        
-        UsersDAO dao = new UsersDAO();
-        dao.pwUpdate(id, password);
     }
     
     // 회원가입 - 아이디 중복 확인
@@ -231,62 +195,5 @@ public class UsersModel {
         
         dao.join(vo);
         return "redirect:../main/main.do";
-    }
-    
-    // 마이페이지 - 회원정보 수정
-    @RequestMapping("users/update.do")
-    public String update(HttpServletRequest request, HttpServletResponse response) {
-        
-        HttpSession session = request.getSession();
-        
-        String id = (String) session.getAttribute("id");
-        
-        UsersDAO dao = new UsersDAO();
-        UsersVO vo = dao.userUpdate(id);
-        
-        request.setAttribute("vo", vo);
-        request.setAttribute("main_jsp", "../users/update.jsp");
-        return "../main/main.jsp";
-    }
-    
-    // 마이페이지 - 회원정보 수정 결과
-    @RequestMapping("users/update_ok.do")
-    public String update_ok(HttpServletRequest request, HttpServletResponse response) {
-        
-        HttpSession session = request.getSession();
-        
-        String id = (String) session.getAttribute("id");
-        
-        UsersDAO dao = new UsersDAO();
-        UsersVO vo = dao.userUpdate(id);
-        
-        request.setAttribute("vo", vo);
-        request.setAttribute("main_jsp", "../users/update.jsp");
-        return "../main/main.jsp";
-    }
-    @RequestMapping("users/delete.do")
-    public String memberjoinDelete(HttpServletRequest request,
-            HttpServletResponse response)
-    {
-        
-        request.setAttribute("main_jsp", "../users/delete.jsp");
-        return "../main/main.jsp";
-    }
-
-    @RequestMapping("users/delete_ok.do")
-    public String memberJoinDeleteOk(HttpServletRequest request, HttpServletResponse response) {
-        
-        String pwd = request.getParameter("pwd");
-        
-        HttpSession session = request.getSession();
-        String id = (String) session.getAttribute("id");
-        UsersDAO dao = new UsersDAO();
-        
-        String result = dao.userDelete(pwd, id);
-        if (result.equals("yes")) {
-            session.invalidate();
-        }
-        request.setAttribute("result", result);
-        return "../users/delete_ok.jsp";
     }
 }

@@ -22,12 +22,11 @@
 </head>
 <body>
   <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-      
+    <div class="row m-top-30 ">
+      <div class="col-md-12 text-center">
+        <h3><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;<b>이번달 채용공고 한눈에 보기!</b></h3>
       </div>
     </div>
-    
     <div id="calendar">
     
     </div>

@@ -53,20 +53,25 @@
                 return;
             }
             
-            let pwd = $('#password').val()
-            if(pwd.trim() == "") {
+            let password = $('#password').val();
+            if(password.trim() == "") {
                 $('#password').focus();
                 return;
             }
             
-            let pwd2 = $('#password2').val()
-            if(pwd2 != pwd)  {
-            	alert("비밀번호가 일치하지 않습니다.");
-                $('#pwd2').focus();
+            let password2 = $('#password2').val();
+            if(password2.trim() == "") {
+                $('#password2').focus();
                 return;
             }
             
-            if(validatePassword(pwd) == false) {
+            if(password2 != password)  {
+            	alert("비밀번호가 일치하지 않습니다.");
+                $('#password2').focus();
+                return;
+            }
+            
+            if(validatePassword(password) == false) {
             	return;
             }
             
@@ -75,16 +80,16 @@
                 $('#name').focus();
                 return;
             }
-          
-            let birthday = $('#birthday').val()
-            if(birthday.trim() == "") {
-                alert("생년월일을 입력하세요") 
-                return;
-            }
             
             let email = $('#email').val()
             if(email.trim() == "") {
                 alert("이메일을 입력하세요")
+                return;
+            }
+            
+            let birthday = $('#birthday').val()
+            if(birthday.trim() == "") {
+                alert("생년월일을 입력하세요") 
                 return;
             }
             
@@ -96,17 +101,12 @@
                         
             let answer = $('#answer').val()
             if(answer.trim() == "") {
+            	$('#answer').focus();
                 alert("비밀번호 찾기 답변을 입력하세요")
                 return;
             }
             
-            $('#join_form').submit()
-        })
-        
-        // 아이디 재입력 시도시 확인버튼 사라지게
-        $('#id').focus(function(){
-            $('#id').val('');
-            $('#ok').hide();
+            $('#user_form').submit()
         })
     })
     
@@ -136,16 +136,15 @@
       <div class="middle m-top-40">
         <div class="content fadeInDown">
           <div class="text-center fadeIn first"><h4><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;<b>회원가입</b></h4></div>
-          <!-- Login Form -->
           <div class="text-left">
           
             <!--   폼   -->
-            <form id="join_form" method="post" action="../users/join_ok.do">
+            <form id="user_form" method="post" action="../users/join_ok.do">
               <!--   아이디   -->
               <div class="roomy-10 fadeIn second">
                 <div>아이디</div>
                 <input type="text" name="id" id="id" placeholder="아이디 중복 확인을 해주세요" readonly>
-                <input type="button" id="id-check-btn" class="btn btn-primary" value="중복 확인">
+                <input type="button" id="id-check-btn" value="중복 확인">
                 <small> 6~12자 사이 및 영문+숫자</small>
               </div>
               <!-- -------- -->
@@ -154,7 +153,7 @@
               <div class="roomy-10 fadeIn second">
                 <div>비밀번호</div>
                 <input type="password" name="password" id="password" placeholder="비밀번호를 입력하세요">
-                <input type="password" name="password2" id="password2" placeholder="비밀번호를 입력하세요">
+                <input type="password" id="password2" placeholder="비밀번호를 재입력하세요">
                 <small> 8~20자 사이 및 영문+숫자</small>
               </div>
               <!-- -------- -->
@@ -170,7 +169,7 @@
               <div class="roomy-10 fadeIn third">
                 <div>이메일</div>
                 <input type="text" name="email" id="email" placeholder="이메일 주소 중복 확인을 해주세요" readonly>
-                <input type="button" id="email-check-btn" class="btn btn-default" value="중복 확인">
+                <input type="button" id="email-check-btn" value="중복 확인">
               </div>
               <!-- -------- -->
               
@@ -193,7 +192,7 @@
               <div class="roomy-10 fadeIn fourth">
                 <div>우편번호</div>
                 <input type="text" name="post" id="post" placeholder="우편번호 찾기를 해주세요" readonly>
-                <input type="button" id="post-btn" class="btn btn-primary" value="우편번호 찾기">
+                <input type="button" id="post-btn" value="우편번호 찾기">
                 <div>주소</div>
                 <input type="text" name="address1" id="address1" readonly>
                 <div>상세주소</div>

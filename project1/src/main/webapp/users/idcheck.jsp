@@ -46,13 +46,13 @@
         })
         
         $('#ok-btn').click(function(){
-            parent.join_form.id.value=$('#id').val()
-            parent.Shadowbox.close()
+            parent.user_form.id.value=$('#id').val();
+            parent.Shadowbox.close();
         })
         
         $('#id').focus(function(){
             $('#idcheck').removeAttr('class').addClass('m-top-60 text-center');
-            $('#print').html('')
+            $('#print').html('');
             $('#id').val('');
             $('#ok').hide();
             $('#check').show();

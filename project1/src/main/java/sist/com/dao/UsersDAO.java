@@ -1,7 +1,6 @@
 package sist.com.dao;
 
 import java.sql.*;
-import java.util.*;
 
 import sist.com.vo.*;
 
@@ -294,35 +293,57 @@ public class UsersDAO {
         }
         return result;
     }
-
-    public void pwUpdate(String id, String password) {
+    
+    public String userUpdate(UsersVO vo) {
+        String result = "";
         try {
             conn = dbcp.getConnection();
-            
-            String sql = "UPDATE users_1 "
-                    + "SET u_password=? "
+        
+            String sql = "SELECT u_password "
+                    + "FROM users_1 "
                     + "WHERE u_id=?";
             
             ps = conn.prepareStatement(sql);
-            ps.setString(1, password);
-            ps.setString(2, id);
-            ps.executeUpdate();
+            ps.setString(1, vo.getU_id());
+            
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            String db_password = rs.getString(1);
+            rs.close();
+
+            if (db_password.equals(vo.getU_password())) {
+                result = "yes";
+                sql = "UPDATE users_1 "
+                    + "SET u_email=?,u_post=?,u_address1=?,u_address2=?,u_question=?,u_answer=? "
+                    + "WHERE u_id=?";
+                
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, vo.getU_email());
+                ps.setString(2, vo.getU_post());
+                ps.setString(3, vo.getU_address1());
+                ps.setString(4, vo.getU_address2());
+                ps.setString(5, vo.getU_question());
+                ps.setString(6, vo.getU_answer());
+                ps.setString(7, vo.getU_id());
+                ps.executeUpdate();
+            } else {
+                result = "no";
+            }
             
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
             dbcp.disConnection(conn, ps);
         }
+        return result;
     }
-    
-    public UsersVO userUpdate(String id) {
-        
-        UsersVO vo = new UsersVO();
+
+    public String userPwdUpdate(String id, String password, String newPassword) {
+        String result = "";
         try {
             conn = dbcp.getConnection();
-            
-            String sql = "SELECT u_id,u_name,u_gender,u_birthday,u_email,u_post,u_address1,"
-                    + "NVL(u_address2,' ')"
+        
+            String sql = "SELECT u_password "
                     + "FROM users_1 "
                     + "WHERE u_id=?";
             
@@ -331,43 +352,51 @@ public class UsersDAO {
             
             ResultSet rs = ps.executeQuery();
             rs.next();
-            vo.setU_id(rs.getString(1));
-            vo.setU_name(rs.getString(2));
-            vo.setU_gender(rs.getString(3));
-            vo.setU_birthday(rs.getString(4));
-            vo.setU_email(rs.getString(5));
-            vo.setU_post(rs.getString(6));
-            vo.setU_address1(rs.getString(7));
-            vo.setU_address2(rs.getString(8));
+            String db_password = rs.getString(1);
             rs.close();
+
+            if (db_password.equals(password)) {
+                result = "yes";
+                sql = "UPDATE users_1 "
+                    + "SET u_password=? "
+                    + "WHERE u_id=?";
+                
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, newPassword);
+                ps.setString(2, id);
+                ps.executeUpdate();
+                
+            } else {
+                result = "no";
+            }
             
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
             dbcp.disConnection(conn, ps);
         }
-        return vo;
+        return result;
     }
-
-    public String userDelete(String pwd, String id) {
+    
+    public String userDelete(String id, String password) {
         
         String result = "";
         try {
             conn = dbcp.getConnection();
             
-            String sql = "SELECT u_password FROM users_1 "
-                        + "WHERE u_id=?";
+            String sql = "SELECT u_password "
+                    + "FROM users_1 "
+                    + "WHERE u_id=?";
             
             ps = conn.prepareStatement(sql);
             ps.setString(1, id);
             
             ResultSet rs = ps.executeQuery();
             rs.next();
-            String db_pwd = rs.getString(1);
-            
+            String db_password = rs.getString(1);
             rs.close();
-
-            if (db_pwd.equals(pwd)) {
+            
+            if (db_password.equals(password)) {
                 result = "yes";
                 sql = "DELETE FROM users_1 "
                     + "WHERE u_id=?";
