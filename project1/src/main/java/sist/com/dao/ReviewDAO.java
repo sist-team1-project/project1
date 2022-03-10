@@ -124,6 +124,39 @@ public class ReviewDAO {
     	}
     }
     
+
+    // 기업정보 - 리뷰 수정 / 삭제 유효성 검사
+    public boolean checkUser(String uid, int rid) {
+        Boolean check = false;
+        try {
+            conn = dbcp.getConnection();
+            
+            String sql = "SELECT u_id FROM review_1 "
+                    + "WHERE review_id=?";
+            
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, rid);
+            
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            
+            String db_uid = rs.getString(1);
+            
+            rs.close();
+            
+            if (db_uid.equals(uid)) {
+                check = true;
+            } else {
+                check = false;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            dbcp.disConnection(conn, ps);
+        }
+        return check;
+    }
+    
     // 추가 - 면접 후기 삭제
     public void reviewDelete(int id) {
         

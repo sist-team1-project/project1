@@ -13,8 +13,8 @@ public class ReviewModel {
         
         String cid = request.getParameter("cid");
         
-        ReviewDAO rdao = new ReviewDAO();
-        List<ReviewVO> review = rdao.reviewList(Integer.parseInt(cid));
+        ReviewDAO dao = new ReviewDAO();
+        List<ReviewVO> review = dao.reviewList(Integer.parseInt(cid));
         
         request.setAttribute("review", review);
         
@@ -42,17 +42,21 @@ public class ReviewModel {
         vo.setReview_job(job);
         vo.setReview_content(content);
         
-        ReviewDAO rdao = new ReviewDAO();
-        rdao.reviewInsert(vo); 
+        ReviewDAO dao = new ReviewDAO();
+        dao.reviewInsert(vo); 
     }
     
     @RequestMapping("review/delete.do")
     public void company_review_delete(HttpServletRequest request, HttpServletResponse response) {
         
+        HttpSession session = request.getSession();
+        String id = (String) session.getAttribute("id");
         String rid = request.getParameter("rid");
         
-        ReviewDAO rdao = new ReviewDAO();
-        rdao.reviewDelete(Integer.parseInt(rid));
+        ReviewDAO dao = new ReviewDAO();
+        if(dao.checkUser(id, Integer.parseInt(rid)) == true) {
+            dao.reviewDelete(Integer.parseInt(rid));
+        }
     }
     
     @RequestMapping("review/update.do")
@@ -62,13 +66,17 @@ public class ReviewModel {
             request.setCharacterEncoding("UTF-8");
         } catch (Exception ex) {
         }
-
+        
+        HttpSession session = request.getSession();
+        String id = (String) session.getAttribute("id");
         String rid = request.getParameter("rid");
         String goodbad = request.getParameter("goodbad");
         String job = request.getParameter("job");
         String content = request.getParameter("content");
         
         ReviewDAO dao = new ReviewDAO();
-        dao.reviewUpdate(Integer.parseInt(rid), Integer.parseInt(goodbad), job, content);
+        if(dao.checkUser(id, Integer.parseInt(rid)) == true) {
+            dao.reviewUpdate(Integer.parseInt(rid), Integer.parseInt(goodbad), job, content);
+        }
     }
 }
