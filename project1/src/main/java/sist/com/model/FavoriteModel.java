@@ -70,8 +70,7 @@ public class FavoriteModel {
 
 	@RequestMapping("favorite/delete.do")
 	public String favorite_delete(HttpServletRequest request, HttpServletResponse response) {
-		HttpSession session = request.getSession();
-		String uid = (String) session.getAttribute("id");
+		// 마이페이지 - 즐겨찾기관리 - 삭제
 		
 		String fid = request.getParameter("fid");
 		FavoriteDAO dao = new FavoriteDAO();
@@ -80,4 +79,16 @@ public class FavoriteModel {
 		return "redirect: ../users/favorite.do";
 	}
 
+	@RequestMapping("ad_favorite/delete.do")
+	public String adfav_delete(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		String uid = (String) session.getAttribute("id");		
+		String adid = request.getParameter("adid");
+		
+		FavoriteDAO dao = new FavoriteDAO();
+		dao.ad_favDelete(uid, Integer.parseInt(adid));
+		
+		return "redirect: ../ad.ad.do?adid=" + adid;
+	}
+	
 }

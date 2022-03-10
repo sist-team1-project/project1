@@ -194,52 +194,6 @@
 
               <!-- 추천 수험서가 있을 경우에만 출력 -->
 
-              <!-- ######################################################################################################################## -->
-
-
-              <%--
-                                                                <div class="spacer"></div>
-                                                                <div class="arrow" onclick="mySlideLeft()">
-                                                                        <img src="http://cerati.org/eoitecne/img/down.png" class="arrowleft arimage" />
-                                                                </div>
-                                                                <div class="slider-cont" id="slider-cont">
-                                                                        <!--<div class="slider-layer"  id="slider-cont"></div>-->
-                                                                        <div class="test-slider">
-                                                                                <div class="cont-slider" onclick="selectSliderElement(this)" id="ext-1">
-                                                                                        <img class="flat-w-image image-slider" src="http://cerati.org/eoitecne/imghttp://cerati.org/eoitecne//prodotti/05.png" /><img src="http://cerati.org/eoitecne/img/prodotti/05.png" class="image-w" />
-                                                                                </div>
-                                                                                <div class="cont-slider" onclick="selectSliderElement(this)" id="ext-2">
-                                                                                        <img class="flat-w-image image-slider" src="http://cerati.org/eoitecne/img/prodotti/02.png" /><img src="http://cerati.org/eoitecne/img/prodotti/02.png" class="image-w" />
-                                                                                </div>
-                                                                                <div class="cont-slider" onclick="selectSliderElement(this)" id="ext-3">
-                                                                                        <img class="flat-w-image image-slider" src="http://cerati.org/eoitecne/img/prodotti/05.png" /><img src="http://cerati.org/eoitecne/img/prodotti/05.png" class="image-w" />
-                                                                                </div>
-                                                                                <div class="cont-slider" onclick="selectSliderElement(this)" id="ext-4">
-                                                                                        <img class="flat-w-image image-slider" src="http://cerati.org/eoitecne/img/prodotti/02.png" /><img src="http://cerati.org/eoitecne/img/prodotti/02.png" class="image-w" />
-                                                                                </div>
-                                                                                <div class="cont-slider" onclick="selectSliderElement(this)" id="ext-5">
-                                                                                        <img class="flat-w-image image-slider" src="http://cerati.org/eoitecne/img/prodotti/05.png" /><img src="http://cerati.org/eoitecne/img/prodotti/05.png" class="image-w" />
-                                                                                </div>
-                                                                                <div class="cont-slider" onclick="selectSliderElement(this)" id="ext-6">
-                                                                                        <img class="flat-w-image image-slider" src="http://cerati.org/eoitecne/img/prodotti/02.png" /><img src="http://cerati.org/eoitecne/img/prodotti/02.png" class="image-w" />
-                                                                                </div>
-                                                                                <div class="cont-slider" onclick="selectSliderElement(this)" id="ext-7">
-                                                                                        <img class="flat-w-image image-slider" src="http://cerati.org/eoitecne/img/prodotti/05.png" /><img src="http://cerati.org/eoitecne/img/prodotti/05.png" class="image-w" />
-                                                                                </div>
-                                                                                <div class="cont-slider" onclick="selectSliderElement(this)" id="ext-8">
-                                                                                        <img class="flat-w-image image-slider" src="http://cerati.org/eoitecne/img/prodotti/02.png" /><img src="http://cerati.org/eoitecne/img/prodotti/02.png" class="image-w" />
-                                                                                </div>
-                                                                        </div>
-                                                                </div>
-                                                                <div class="arrow" onclick="mySlideRight()">
-                                                                        <img src="http://cerati.org/eoitecne/img/down.png" class="arrowright arimage" />
-                                                                </div>
-
-
---%>
-
-
-              <!-- ######################################################################################################################## -->
               <c:choose>
                 <c:when test="${fn:length(b)!=0 }">
                   <div class="col-sm-12 qual-name">${qualList[status.index] }</div>
@@ -269,24 +223,16 @@
 
       <!--              홈/즐겨찾기 버튼                -->
 
-      <!-- <c:if test="${count==0 }">
-	      		 		<a href="../jjim/jjim_insert.do?fno=${vo.no }" class="btn btn-xs btn-danger">찜하기</a>
-	      				</c:if>
-	      				<c:if test="${count!=0 }">
-	     	 				<span class="btn btn-xs btn-default">찜하기</span>
-	     	 				</c:if> -->
-
-
       <div class="text-center row roomy-40">
         <a href="../main/main.do" class="btn btn-primary">홈으로</a>
 
         <c:if test="${sessionScope.id!=null }">
           <c:if test="${count==0 }">
-            <a href="../favorite/insert.do?cid=${company.c_id }&adid=${ad.ad_id }" class="btn btn-danger">즐겨찾기 추가</a>&nbsp;&nbsp;
-		  </c:if>
+            &nbsp;&nbsp;<a href="../favorite/insert.do?cid=${company.c_id }&adid=${ad.ad_id }" class="btn btn-danger">즐겨찾기 추가</a>
+          </c:if>
           <c:if test="${count!=0 }">
-            <button type="button" id="favorite-insert-btn" class="btn btn-default hide">즐겨찾기 완료</button>&nbsp;&nbsp;
-		  </c:if>
+            &nbsp;&nbsp;<button type="button" id="favorite-insert-btn" class="btn btn-default">즐겨찾기 해제</button>
+          </c:if>
         </c:if>
 
         <div class="row no-select padding-10 m-top-10">조회수 ${ad.ad_visits }</div>
@@ -420,14 +366,31 @@
 		</script>
   <!-- ######################################################################################################################## -->
 
-
   <script type="text/javascript">
 			$(function() {
-				var adId = $('#ad_id').val();
+				$('#favorite-insert-btn').hover(function() {
+					$(this).css('background-color', '#F08080	');
+				}, function() {
+					$(this).css("background-color", "");
+				});
+
 				$('#favorite-insert-btn').click(function() {
-					$.ajax({
-						alert("즐겨찾기 추가 완료");
-					});
+					var adId = $('#ad_id').val();
+					let ask = confirm('즐겨찾기 해제 하시겠습니까?')
+					if (ask == false) {
+						return;
+					} else {
+						$.ajax({
+							type : 'POST',
+							url : '../ad_favorite/delete.do',
+							data : {
+								"adid" : adId
+							},
+							success : function() {
+								document.location.reload();
+							}
+						});
+					}
 				})
 			})
 		</script>
