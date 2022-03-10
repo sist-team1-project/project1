@@ -39,7 +39,7 @@
                    <a href="#" onclick="resetCookie(${ck.ad_id}, this)"><i class="fa fa-window-close c-delete"></i></a>
                   </div>
                   <div class="roomy-10 short-line">
-                    <a href="../ad/ad.do?cid=${ck.c_id }&adid=${ck.ad_id}"><b>${ck.ad_title}</b></a>
+                    <a href="../ad/ad.do?adid=${ck.ad_id}"><b>${ck.ad_title}</b></a>
                   </div>
                 </div>
               </div>
@@ -113,7 +113,7 @@
                 </c:choose>
               </div>
               <div class="roomy-10 short-line">
-                <a href="../ad/ad.do?cid=${a.c_id }&adid=${a.ad_id}"><b>${a.ad_title }</b></a>
+                <a href="../ad/ad.do?adid=${a.ad_id}"><b>${a.ad_title }</b></a>
               </div>
               <div class="small-font no-select">
                 <span class="lightgreytag">${adCname[status.index] }</span>&nbsp;
@@ -158,7 +158,7 @@
                 </c:choose>
               </div>
               <div class="roomy-10 short-line">
-                <a href="../ad/ad.do?cid=${a.c_id }&adid=${a.ad_id}"><b>${a.ad_title }</b></a>
+                <a href="../ad/ad.do?adid=${a.ad_id}"><b>${a.ad_title }</b></a>
               </div>
               <div class="small-font no-select">
                 <span class="lightgreytag">${adEndCname[status.index] }</span>&nbsp;
@@ -252,72 +252,69 @@
         document.cookie = cookie_name + '=' + cookie_value + "; path=/";
     }
     
-     function getCookie(cookie_name) {
-         var x, y;
-
-         var val = document.cookie.split(';');
-
-         for (var i = 0; i < val.length; i++) {
-             x = val[i].substr(0, val[i].indexOf('='));
-             y = val[i].substr(val[i].indexOf('=') + 1);
-             x = x.replace(/^\s+|\s+$/g, ''); // 앞과 뒤의 공백 제거하기
-             if (x == cookie_name) {
-                 return unescape(y); // unescape로 디코딩 후 값 리턴
-             }
-         }
-     }
-     
-     function resetCookie(id, obj) {
-         var items = getCookie('adview'); // 이미 저장된 값을 쿠키에서 가져오기
-         var maxItemNum = 4; // 최대 저장 가능한 공고개수
-         var expire = 7; // 쿠키값을 저장할 기간
-         var itemArray = items.split(',');
-         
-         var filterArr = itemArray.filter(function(data){
-            return data != id
-         });
-         
-         setCookie('adview', filterArr.toString(), expire);
-         
-         // 클릭한 X아이콘에서 가장 가까운 클래스 cookieArea를 찾아 삭제
-         $(obj).closest('.cookieArea').remove();
-         
-         if ($('.cookieArea').length == 0) {
-             // 최근 본 공고를 모두 지위서 0개인 경우에는 '최근 본 공고' 글자까지 삭제
-             $('#cookieDiv').remove();
-         }
-     }
-     
-     function allDelete(){
-         if (confirm('최근 본 공고를 전체 삭제 하시겠습니까?')) {
-             setCookie('adview', '', -1);
-             
-             $('#cookieDiv').remove();
+    function getCookie(cookie_name) {
+        var x, y;
+        
+        var val = document.cookie.split(';');
+        
+        for (var i = 0; i < val.length; i++) {
+            x = val[i].substr(0, val[i].indexOf('='));
+            y = val[i].substr(val[i].indexOf('=') + 1);
+            x = x.replace(/^\s+|\s+$/g, ''); // 앞과 뒤의 공백 제거하기
+            if (x == cookie_name) {
+                return unescape(y); // unescape로 디코딩 후 값 리턴
+            }
         }
-     }    
-     <!------------------------------------------->
-
-     <!-------------- 맨 위로 이동 버튼 --------------------->     
-     $(document).ready(function() {
-         //Check to see if the window is top if not then display button
-         $(window).scroll(function() {
-             if ($(this).scrollTop() > 100) {
-                 $('.scrollToTop').fadeIn();
-             } else {
-                 $('.scrollToTop').fadeOut();
-             }
-         });
-         //Click event to scroll to top
-         $('.scrollToTop').click(function() {
-             $('html, body').animate({
-                 scrollTop : 0
-             }, 800);
+    }
+     
+    function resetCookie(id, obj) {
+        var items = getCookie('adview'); // 이미 저장된 값을 쿠키에서 가져오기
+        var maxItemNum = 4; // 최대 저장 가능한 공고개수
+        var expire = 7; // 쿠키값을 저장할 기간
+        var itemArray = items.split(',');
+        
+        var filterArr = itemArray.filter(function(data){
+            return data != id
+        });
+         
+        setCookie('adview', filterArr.toString(), expire);
+         
+        // 클릭한 X아이콘에서 가장 가까운 클래스 cookieArea를 찾아 삭제
+        $(obj).closest('.cookieArea').remove();
+         
+        if ($('.cookieArea').length == 0) {
+            // 최근 본 공고를 모두 지위서 0개인 경우에는 '최근 본 공고' 글자까지 삭제
+            $('#cookieDiv').remove();
+        }
+    }
+     
+    function allDelete(){
+        if (confirm('최근 본 공고를 전체 삭제 하시겠습니까?')) {
+            setCookie('adview', '', -1);
+             
+            $('#cookieDiv').remove();
+        }
+    }    
+    <!------------------------------------------->
+     
+     
+    <!-------------- 맨 위로 이동 버튼 --------------------->     
+    $(function() {
+    	$(window).scroll(function() {
+            if ($(this).scrollTop() > 100) {
+                $('.scrollToTop').fadeIn();
+            } else {
+                $('.scrollToTop').fadeOut();
+            }
+        });
+        $('.scrollToTop').click(function() {
+            $('html, body').animate({
+                scrollTop : 0
+            }, 800);
              return false;
-         });
-     });  
-     
-     <!------------------------------------------->
-     
+        });
+    }
+    <!------------------------------------------->
   </script>
 </body>
 </html>

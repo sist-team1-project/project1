@@ -48,11 +48,8 @@ public class MainModel {
             if(uid != null) {
                 int fav = f.favCount2(uid, i.getAd_id());
                 favorite.add(fav);
-                System.out.print(fav + " ");
             }
-            
         }
-        System.out.println();
         
         /*       마감 임박 공고       */
         List<AdVO> adEnd = a.adEndList();

@@ -58,7 +58,6 @@ public class AdDAO {
 	}
 
 	// 메인 - 마감 임박 공고
-
 	public List<AdVO> adEndList() {
 		List<AdVO> list = new ArrayList<AdVO>();
 		try {
@@ -167,12 +166,16 @@ public class AdDAO {
 		try {
 			conn = dbcp.getConnection();
 			
-			String sql = "UPDATE ad_1 " + "SET ad_visits = ad_visits+1 " + "WHERE ad_id=?";
+			String sql = "UPDATE ad_1 "
+			        + "SET ad_visits = ad_visits+1 "
+			        + "WHERE ad_id=?";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
-            ps.executeUpdate(); // commit
+            ps.executeUpdate();
 			
-			sql = "SELECT * " + "FROM ad_1 " + "WHERE ad_id = ?";
+			sql = "SELECT * "
+			        + "FROM ad_1 "
+			        + "WHERE ad_id = ?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, id);
 
@@ -215,7 +218,9 @@ public class AdDAO {
 		List<AdVO> list = new ArrayList<AdVO>();
 		try {
 			conn = dbcp.getConnection();
-			String sql = "SELECT ad_id,c_id,ad_title,ad_end " + "FROM ad_1 " + "WHERE c_id=? AND (SYSDATE-1 < TO_DATE(ad_end) OR ad_end IS NULL)";
+			String sql = "SELECT ad_id,c_id,ad_title,ad_end "
+			        + "FROM ad_1 "
+			        + "WHERE c_id=? AND (SYSDATE-1 < TO_DATE(ad_end) OR ad_end IS NULL)";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, id);
 
@@ -242,7 +247,8 @@ public class AdDAO {
 		}
 		return list;
 	}
-
+	
+	// 공고 검색 - 검색 결과
     public List<AdVO> adSearchList(int page, String keyword, String address, String we, String edu, String size, String worktype, String qual, String lang, String date1, String date2) {
         List<AdVO> list = new ArrayList<AdVO>();
        try {
@@ -332,6 +338,7 @@ public class AdDAO {
         return list;
     }
     
+    // 공고 검색 - 검색 결과 총 페이지
     public int adSearchListTotalPage(String keyword, String address, String we, String edu, String size, String worktype, String qual, String lang, String date1, String date2) {
         int total = 0;
         try {
@@ -362,7 +369,6 @@ public class AdDAO {
             } else {
                 sql += "AND (TO_DATE(ad_end) BETWEEN TO_DATE(?) AND TO_DATE(?) OR ad_end IS NULL))";
             }
-
             
             ps = conn.prepareStatement(sql);
             
@@ -391,5 +397,41 @@ public class AdDAO {
             dbcp.disConnection(conn, ps);
         }
         return total;
+    }
+    
+    // 채용 달력 - 날짜별 공고
+    public List<AdVO> adByDate(String date) {
+        ArrayList<AdVO> list = new ArrayList<AdVO>();
+        try {
+            conn = dbcp.getConnection();
+            
+            String sql = "SELECT ad_id,ad_title "
+                    + "FROM (SELECT ad_id,ad_title,rownum AS num "
+                    + "FROM (SELECT ad_id,ad_title "
+                    + "FROM ad_1 "
+                    + "WHERE ad_end=to_date(?,'yyyy-mm-dd') "
+                    + "ORDER BY ad_visits)) "
+                    + "WHERE num BETWEEN 1 AND 5";
+                        
+            ps = conn.prepareStatement(sql);
+            
+            ps.setString(1, date);
+            
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            while (rs.next()) {
+                AdVO vo = new AdVO();
+                vo.setAd_id(rs.getInt(1));
+                vo.setAd_title(rs.getString(2));
+                
+                list.add(vo);
+            }
+            rs.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            dbcp.disConnection(conn, ps);
+        }
+        return list;
     }
 }

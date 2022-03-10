@@ -100,8 +100,8 @@ public class CompanyDAO {
         }
         return name;
     }
-    // 기업 - 기업 상세정보
-    public CompanyVO companyDetail(int id) {
+    
+    public CompanyVO updateCompanyVisits(int id) {
         CompanyVO vo = new CompanyVO();
         try {
             conn = dbcp.getConnection();
@@ -114,7 +114,21 @@ public class CompanyDAO {
             
             ps.executeUpdate();
             
-            sql = "SELECT * "
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            dbcp.disConnection(conn, ps);
+        }
+        return vo;
+    }
+    
+    // 기업 - 기업 상세정보
+    public CompanyVO companyDetail(int id) {
+        CompanyVO vo = new CompanyVO();
+        try {
+            conn = dbcp.getConnection();
+                    
+            String sql = "SELECT * "
                     + "FROM company_1 "
                     + "WHERE c_id=?";
 

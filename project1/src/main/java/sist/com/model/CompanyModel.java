@@ -13,13 +13,14 @@ public class CompanyModel {
         String cid = request.getParameter("cid");
         
         CompanyDAO cdao = new CompanyDAO();
-        CompanyVO company = cdao.companyDetail(Integer.parseInt(cid));
+        cdao.updateCompanyVisits(Integer.parseInt(cid)); // 조회수 증가
+        CompanyVO company = cdao.companyDetail(Integer.parseInt(cid)); // 기업 정보
 
         AdDAO a = new AdDAO();
-        List<AdVO> adlist = a.companyAdList(Integer.parseInt(cid));
+        List<AdVO> adlist = a.companyAdList(Integer.parseInt(cid)); // 진행중인 공고
         
-        ReviewDAO rdao = new ReviewDAO();
-        List<ReviewVO> review = rdao.reviewList(Integer.parseInt(cid));
+        ReviewDAO dao = new ReviewDAO();
+        List<ReviewVO> review = dao.reviewList(Integer.parseInt(cid)); // 리뷰 목록
 
         request.setAttribute("company", company);
         request.setAttribute("adlist", adlist);
@@ -28,54 +29,5 @@ public class CompanyModel {
         request.setAttribute("main_jsp", "../company/company.jsp");
         
         return "../main/main.jsp";
-    }
-    
-    @RequestMapping("company/review.do")
-    public String company_review(HttpServletRequest request, HttpServletResponse response) {
-        String cid = request.getParameter("cid");
-        
-        ReviewDAO rdao = new ReviewDAO();
-        List<ReviewVO> review = rdao.reviewList(Integer.parseInt(cid));
-        
-        request.setAttribute("review", review);
-        
-        return "../company/review.jsp";
-    }
-    
-    @RequestMapping("company/review_insert.do")
-    public void company_review_insert(HttpServletRequest request, HttpServletResponse response) {
-        String uid = request.getParameter("uid");
-        String cid = request.getParameter("cid");
-        String content = request.getParameter("content");
-        String goodbad = request.getParameter("goodbad");
-        String job = request.getParameter("job");
-        
-        
-        try {
-        	request.setCharacterEncoding("UTF-8");
-        } catch(Exception ex) {}
-        
-        ReviewVO vo = new ReviewVO();
-        vo.setU_id(uid);
-        vo.setC_id(Integer.parseInt(cid));
-        vo.setReview_goodbad(Integer.parseInt(goodbad));
-        vo.setReview_job(job);
-        vo.setReview_content(content);
-        
-        ReviewDAO rdao = new ReviewDAO();
-        rdao.reviewInsert(vo); 
-    }
-    
-    @RequestMapping("company/review_delete.do")
-    public void company_review_delete(HttpServletRequest request, HttpServletResponse response) {
-        String rid = request.getParameter("rid");
-        
-        try {
-            request.setCharacterEncoding("UTF-8");
-        } catch(Exception ex) {}
-        
-        
-        ReviewDAO rdao = new ReviewDAO();
-        rdao.reviewDelete(Integer.parseInt(rid));
     }
 }

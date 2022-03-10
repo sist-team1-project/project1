@@ -11,7 +11,7 @@ public class AdModel {
 
 	@RequestMapping("ad/ad.do")
 	public String ad_page(HttpServletRequest request, HttpServletResponse response) {
-		String cid = request.getParameter("cid");
+		
 		String adid = request.getParameter("adid");
 
 		HttpSession session = request.getSession();
@@ -19,10 +19,10 @@ public class AdModel {
 
 		AdDAO a = new AdDAO();
 		AdVO ad = a.adDetail(Integer.parseInt(adid));
-
+		
 		CompanyDAO c = new CompanyDAO();
-		CompanyVO company = c.companyDetail(Integer.parseInt(cid));
-
+		CompanyVO company = c.companyDetail(ad.getC_id());
+		
 		BookDAO b = new BookDAO();
 		List<List<BookVO>> booksList = new ArrayList<List<BookVO>>();
 		List<String> qualList = new ArrayList<String>();

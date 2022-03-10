@@ -5,10 +5,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="../css/company.css">
- <script>
+  <meta charset="UTF-8">
+  <title>Insert title here</title>
+  <link rel="stylesheet" href="../css/company.css">
+ <script type="text/javascript">
     $(function() {
         reviewList();
         
@@ -37,7 +37,38 @@
                }
             });
         })
-
+        
+        $('#delete-btn').click(function() {
+            var result = confirm('게시물을 삭제하시겠습니까?');
+            if (result) {
+                let bid = $('#bid').val();
+                $.ajax({
+                    type:'post',
+                    url : '../freeboard/delete.do',
+                    data : {"bid" : bid},
+                    success : function(result){
+                        alert("삭제되었습니다");
+                        location.href = result; 
+                    }
+                });
+            }
+        })
+        
+        <!-------------- 맨 위로 이동 버튼 --------------------->
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 100) {
+                $('.scrollToTop').fadeIn();
+            } else {
+                $('.scrollToTop').fadeOut();
+            }
+        });
+        $('.scrollToTop').click(function() {
+            $('html, body').animate({
+                scrollTop : 0
+            }, 800);
+            return false;
+        });
+        <!-------------------------------------------> 
     })
     
      function reviewList() {
@@ -53,27 +84,6 @@
             }
         });
     }
-    
-    <!-------------- 맨 위로 이동 버튼 --------------------->     
-    $(document).ready(function() {
-        //Check to see if the window is top if not then display button
-        $(window).scroll(function() {
-            if ($(this).scrollTop() > 100) {
-                $('.scrollToTop').fadeIn();
-            } else {
-                $('.scrollToTop').fadeOut();
-            }
-        });
-        //Click event to scroll to top
-        $('.scrollToTop').click(function() {
-            $('html, body').animate({
-                scrollTop : 0
-            }, 800);
-            return false;
-        });
-    });  
-    
-    <!-------------------------------------------> 
   </script>
 </head>
 <body>
@@ -131,7 +141,7 @@
       </div>
       <c:forEach var="a" items="${adlist }" varStatus="status">
         <div class="row roomy-20 text-center">
-          <a href="../ad/ad.do?cid=${a.c_id }&adid=${a.ad_id}">
+          <a href="../ad/ad.do?adid=${a.ad_id}">
             <div class="col-md-9">${a.ad_title }</div>
             <div class="col-md-3"><b>${a.ad_end }</b></div>
           </a>
@@ -140,7 +150,6 @@
       <!-------------->
 
       <!-- 면접 후기 -->
-
       <div class="row m-top-40 no-select">
         <h3>
           <i class="fa fa-quote-right" aria-hidden="true"></i>&nbsp;<b>면접 후기</b>
@@ -194,7 +203,7 @@
 
 
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cf7ea2881e3c2b76986cc65a16553a55&libraries=services"></script>
-  <script>
+  <script type="text/javascript">
   	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
   	mapOption = {
   		center : new kakao.maps.LatLng(37.499506307492915,
@@ -211,24 +220,24 @@
   
   	// 주소로 좌표를 검색합니다
   	geocoder.addressSearch('${company.c_address }',
-  			function(result, status) {
-  
-  				// 정상적으로 검색이 완료됐으면 
-  				if (status === kakao.maps.services.Status.OK) {
-  
-  					var coords = new kakao.maps.LatLng(result[0].y,
-  							result[0].x);
-  
-  					// 결과값으로 받은 위치를 마커로 표시합니다
-  					var marker = new kakao.maps.Marker({
-  						map : map,
-  						position : coords
-  					});
-  
-  					// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-  					map.setCenter(coords);
-  				}
-  			});
+	function(result, status) {
+
+		// 정상적으로 검색이 완료됐으면 
+		if (status === kakao.maps.services.Status.OK) {
+
+			var coords = new kakao.maps.LatLng(result[0].y,
+					result[0].x);
+
+			// 결과값으로 받은 위치를 마커로 표시합니다
+			var marker = new kakao.maps.Marker({
+				map : map,
+				position : coords
+			});
+
+			// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+			map.setCenter(coords);
+		}
+	});
   </script>
 </body>
 </html>
