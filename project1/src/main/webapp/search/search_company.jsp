@@ -24,9 +24,6 @@
                 data : {"search" : search},
                 success : function(result) {
                     $('#result').html(result);
-                },
-                error : function(err) {
-                    alert(err)
                 }
             }) 
         })

@@ -23,7 +23,7 @@
     <div class="row roomy-10">
       <div class="col-sm-3">${company[status.index] }</div>
       <div class="col-sm-7">
-        <div class="ad-title"><a href="../ad/ad.do?cid=${a.c_id }&adid=${a.ad_id}">${a.ad_title }</a></div>
+        <div class="ad-title"><a href="../ad/ad.do?adid=${a.ad_id}">${a.ad_title }</a></div>
         <div class="small-font list-content">${a.ad_we } | ${a.ad_education } | ${a.ad_worktype }</div>
         <div class="small-font list-content">${a.ad_workplace } </div>
       </div>
