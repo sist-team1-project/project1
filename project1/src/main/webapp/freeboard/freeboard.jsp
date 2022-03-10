@@ -62,7 +62,6 @@
       </c:forEach>
     </div>
     
-    
     <c:if test="${sessionScope.id!=null }">
       <!-- 글쓰기 버튼 로그인시에만 보이기 -->
       <div class="row">
@@ -71,28 +70,42 @@
         </div>
       </div>
     </c:if>
-  
+    
+    <!--    검색    -->
+    <div class="row roomy-10 text-center">
+      <form method="post" action="../freeboard/freeboard.do">
+        <select name="topic">
+          <option value="title" <c:if test="${topic eq 'title' }">selected</c:if>>제목</option>
+          <option value="writer" <c:if test="${topic eq 'writer' }">selected</c:if>>작성자</option>
+          <option value="content" <c:if test="${topic eq 'content' }">selected</c:if>>내용</option>
+        </select>
+        <input type=text name="search" value="${search }"> <input type=submit class="btn btn-primary" value="검색">
+      </form>
+    </div>
+    <!-- ---------- -->
+    
     <!--    페이징    -->
     <div class="row roomy-10">
       <div class="page no-select">
         <ul>
           <c:if test="${startPage>1 }">
-            <li class="paging"><a href="../freeboard/freeboard.do?page=${startPage-1 }"><i class="fa fa-caret-left" aria-hidden="true"></i></a></li>
+            <li class="paging"><a href="../freeboard/freeboard.do?page=${startPage-1 }&topic=${topic }&search=${search }"><i class="fa fa-caret-left" aria-hidden="true"></i></a></li>
           </c:if>
           <c:forEach var="i" begin="${startPage }" end="${endPage }">
             <c:if test="${i==curPage }">
               <li class="current">${i }</li>
             </c:if>
             <c:if test="${i!=curPage }">
-              <li class="paging"><a href="../freeboard/freeboard.do?page=${i }">${i }</a></li>
+              <li class="paging"><a href="../freeboard/freeboard.do?page=${i }&topic=${topic }&search=${search }">${i }</a></li>
             </c:if>
           </c:forEach>
           <c:if test="${endPage<totalPage }">
-            <li class="paging"><a href="../freeboard/freeboard.do?page=${endPage+1 }"><i class="fa fa-caret-right" aria-hidden="true"></i></a></li>
+            <li class="paging"><a href="../freeboard/freeboard.do?page=${endPage+1 }&topic=${topic }&search=${search }"><i class="fa fa-caret-right" aria-hidden="true"></i></a></li>
           </c:if>
         </ul>
       </div>
     </div>
+    <!-- ---------- -->
   </div>
 </body>
 </html>

@@ -76,7 +76,7 @@ public class BoardDAO {
     }
     
     // 자유게시판 - 게시물 목록
-    public List<BoardVO> freeboardList(int page, int no) {
+    public List<BoardVO> freeboardList(int page, String topic, String search, int no) {
         List<BoardVO> list = new ArrayList<BoardVO>();
         try {
             conn = dbcp.getConnection();
@@ -85,16 +85,19 @@ public class BoardDAO {
             sql = "SELECT board_id,board_category,board_title,u_id,board_date,board_visits "
                     + "FROM (SELECT board_id,board_category,board_title,u_id,board_date,board_visits,rownum as num "
                     + "FROM (SELECT /*+ INDEX_DESC(board_1 board_id_pk_1)*/board_id,board_category,board_title,u_id,board_date,board_visits "
-                    + "FROM board_1)) " + "WHERE num BETWEEN ? AND ?";
+                    + "FROM board_1 "
+                    + "WHERE " + topic +" LIKE '%'||?||'%')) "
+                    + "WHERE num BETWEEN ? AND ?";
             
             int rowSize = 10;
             int start = (rowSize * page) - (rowSize) + 1;
             int end = rowSize * page;
             
             ps = conn.prepareStatement(sql);
-            ps.setInt(1, start);
-            ps.setInt(2, end);
-
+            ps.setString(1, search);
+            ps.setInt(2, start);
+            ps.setInt(3, end);
+            
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 BoardVO vo = new BoardVO();
@@ -166,15 +169,15 @@ public class BoardDAO {
     }
 
     // 자유게시판 - 페이징 - 총 페이지 수
-    public int freeboardTotalPage(String id, int no) {
+    public int freeboardTotalPage(String id, int no, String topic, String search) {
         int total = 0;
         try {
             conn = dbcp.getConnection();
             String sql = "";
             if (no == 1) { // 자유게시판
-                sql = "SELECT CEIL(COUNT(*)/10.0) " + "FROM board_1";
-
+                sql = "SELECT CEIL(COUNT(*)/10.0) " + "FROM board_1 " + "WHERE " + topic +" LIKE '%'||?||'%'";
                 ps = conn.prepareStatement(sql);
+                ps.setString(1, search);
             } else if (no == 2) { // 내 게시물
                 sql = "SELECT CEIL(COUNT(*)/10.0) " + "FROM board_1 " + "WHERE u_id=?";
                 ps = conn.prepareStatement(sql);

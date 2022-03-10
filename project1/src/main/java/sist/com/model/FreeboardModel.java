@@ -16,14 +16,30 @@ public class FreeboardModel {
     @RequestMapping("freeboard/freeboard.do")
     public String freeboard(HttpServletRequest request, HttpServletResponse response) {
         
+        try {
+            request.setCharacterEncoding("UTF-8");
+        } catch (Exception ex) {
+        }
+        
         String page = request.getParameter("page");
+        String topic = request.getParameter("topic");
+        String search = request.getParameter("search");
         
         if (page == null) page = "1";
+        if (topic == null) topic = "";
+        if (search == null) search = "";
         
         int curPage = Integer.parseInt(page);
+        String stopic = topic;
+        String ssearch = search;
+        
+        if(stopic.equals("")) stopic = "board_title";
+        if(stopic.equals("title")) stopic = "board_title";
+        if(stopic.equals("writer")) stopic = "u_id";
+        if(stopic.equals("content")) stopic = "board_content";
         
         BoardDAO bdao = new BoardDAO();
-        List<BoardVO> board = bdao.freeboardList(curPage, 1);
+        List<BoardVO> board = bdao.freeboardList(curPage, stopic, ssearch, 1);
         
         // 댓글 수 가져오기
         ReplyDAO rdao = new ReplyDAO();
@@ -32,7 +48,7 @@ public class FreeboardModel {
             rcount.add(rdao.replyCount(b.getBoard_id()));
         }
         
-        int totalPage = bdao.freeboardTotalPage("", 1);
+        int totalPage = bdao.freeboardTotalPage("", 1, stopic, ssearch);
         
         // 페이지
         final int BLOCK = 10;
@@ -45,6 +61,8 @@ public class FreeboardModel {
         String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         
         request.setAttribute("curPage", curPage);
+        request.setAttribute("topic", topic);
+        request.setAttribute("search", search);
         request.setAttribute("totalPage", totalPage);
         request.setAttribute("startPage", startPage);
         request.setAttribute("endPage", endPage);
@@ -77,7 +95,7 @@ public class FreeboardModel {
             rcount.add(rdao.replyCount(b.getBoard_id()));
         }
         
-        int totalPage = bdao.freeboardTotalPage(id, 2);
+        int totalPage = bdao.freeboardTotalPage(id, 2, "", "");
         
         // 페이지
         final int BLOCK = 10;
@@ -118,7 +136,7 @@ public class FreeboardModel {
             rcount.add(rdao.replyCount(b.getBoard_id()));
         }
         
-        int totalPage = bdao.freeboardTotalPage(id, 3);
+        int totalPage = bdao.freeboardTotalPage(id, 3, "", "");
         
         // 페이지
         final int BLOCK = 10;
@@ -210,9 +228,9 @@ public class FreeboardModel {
         BoardDAO dao = new BoardDAO();
         
         if(dao.checkUser(id, Integer.parseInt(bid)) == false) {
-            return "redirect: ../main/main.do";
+            
+            return "redirect:../main/main.do";
         }
-        
         BoardVO detail = dao.freeboardUpdateDetail(Integer.parseInt(bid));
 
         request.setAttribute("detail", detail);
@@ -241,7 +259,7 @@ public class FreeboardModel {
         
         // 유효성 검사
         if(dao.checkUser(id, Integer.parseInt(bid)) == false) {
-            return "redirect: ../main/main.do";
+            return "redirect:../main/main.do";
         }
         
         BoardVO vo = new BoardVO();
@@ -267,7 +285,7 @@ public class FreeboardModel {
         
         // 유효성 검사
         if(dao.checkUser(id, Integer.parseInt(bid)) == false) {
-            return "redirect: ../main/main.do";
+            return "redirect:../main/main.do";
         }
         
         dao.freeboardDelete(Integer.parseInt(bid));
@@ -286,14 +304,14 @@ public class FreeboardModel {
         
         // 유효성 검사
         if(session.getAttribute("id") == null) {
-            return "redirect: ../main/main.do";
+            return "redirect:../main/main.do";
         }
         
         BoardDAO dao = new BoardDAO();
         
         for(String i : bid) {
             if(dao.checkUser(id, Integer.parseInt(i)) == false) {
-                return "redirect: ../main/main.do";
+                return "redirect:../main/main.do";
             }
             dao.freeboardDelete(Integer.parseInt(i));
         }
