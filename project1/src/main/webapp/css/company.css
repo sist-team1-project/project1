@@ -149,6 +149,28 @@ a, a:link, a:active, a:hover {
 
 
 
+/*    페이지    */
+.page {
+  display: block;
+  width: 100%;
+  text-align: center;
+  clear: both;
+}
+
+.page li {
+  display: inline-block;
+  margin: 0 2px 0 0;
+  padding: 5px 10px;
+}
+
+.page .current {
+  color: black;
+  font-weight: bold;
+}
+/* ----------- */
+
+
+
 /*   반응형   */
 @media screen and (max-width: 992px) {
   #adend {

@@ -12,11 +12,29 @@ public class ReviewModel {
     public String company_review(HttpServletRequest request, HttpServletResponse response) {
         
         String cid = request.getParameter("cid");
+        String page = request.getParameter("page");
+        
+        if (page == null) page = "1";
+        
+        int curPage = Integer.parseInt(page);
         
         ReviewDAO dao = new ReviewDAO();
         List<ReviewVO> review = dao.reviewList(Integer.parseInt(cid));
+        int totalPage = dao.reviewTotalPage(Integer.parseInt(cid));
         
+        // 페이지
+        final int BLOCK = 5;
+        int startPage = ((curPage - 1) / BLOCK * BLOCK) + 1;
+        int endPage = ((curPage - 1) / BLOCK * BLOCK) + BLOCK;
+        if (endPage > totalPage) {
+            endPage = totalPage;
+        }
         request.setAttribute("review", review);
+        request.setAttribute("curPage", curPage);
+        request.setAttribute("totalPage", totalPage);
+        request.setAttribute("startPage", startPage);
+        request.setAttribute("endPage", endPage);
+        request.setAttribute("cid", cid);
         
         return "../company/review.jsp";
     }

@@ -199,4 +199,28 @@ public class ReviewDAO {
             dbcp.disConnection(conn, ps);
         }
     }
+    
+    // 리뷰 - 페이징 - 총 페이지 수
+    public int reviewTotalPage(int cid) {
+        int total = 0;
+        try {
+            conn = dbcp.getConnection();
+            String sql = "SELECT CEIL(COUNT(*)/5.0) " 
+            		+ "FROM review_1 "
+            		+ "where c_id =?";
+                
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, cid);
+            
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            total = rs.getInt(1);
+            rs.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            dbcp.disConnection(conn, ps);
+        }
+        return total;
+    }
 }
