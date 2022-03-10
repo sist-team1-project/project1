@@ -66,9 +66,7 @@
                 $('.review-update-btn').text("수정");
             }
         })
-    })
-    
-    $(function() {
+        
         $('.paging').css("cursor","pointer");
         $('.paging').click(function() {
             let cid = $(this).attr('data-page');
@@ -76,12 +74,11 @@
                 type : 'get',
                 url : '../review/review.do?' + cid,
                 success : function(result) {
-                    $('#result').html(result);
+                    $('#review').html(result);
                 }
             });
         })
     })
-    
 </script>
       
 <div>
@@ -119,18 +116,18 @@
   <div class="page no-select">
     <ul>
       <c:if test="${startPage>1 }">
-        <li class="paging" data-page="${cid }&page=${startPage-1 }"><i class="fa fa-caret-left" aria-hidden="true"></i></li>
+        <li class="paging" data-page="cid=${cid }&page=${startPage-1 }"><i class="fa fa-caret-left" aria-hidden="true"></i></li>
       </c:if>
       <c:forEach var="i" begin="${startPage }" end="${endPage }">
         <c:if test="${i==curPage }">
           <li class="current">${i }</li>
         </c:if>
         <c:if test="${i!=curPage }">
-          <li class="paging" data-page="${cid }&page=${i }">${i }</li>
+          <li class="paging" data-page="cid=${cid }&page=${i }">${i }</li>
         </c:if>
       </c:forEach>
       <c:if test="${endPage<totalPage }">
-        <li class="paging" data-page="${cid }&page=${endPage+1 }"><i class="fa fa-caret-right" aria-hidden="true"></i></li>
+        <li class="paging" data-page="cid=${cid }&page=${endPage+1 }"><i class="fa fa-caret-right" aria-hidden="true"></i></li>
       </c:if>
     </ul>
   </div>

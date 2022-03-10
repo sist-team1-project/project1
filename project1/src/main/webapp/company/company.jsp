@@ -71,7 +71,7 @@
         <!-------------------------------------------> 
     })
     
-     function reviewList() {
+    function reviewList() {
         $('#review-content').val("");
         $('#review-job').val("");
         let cid = $('#cid').val();
