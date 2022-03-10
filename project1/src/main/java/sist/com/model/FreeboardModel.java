@@ -298,7 +298,7 @@ public class FreeboardModel {
             dao.freeboardDelete(Integer.parseInt(i));
         }
         
-        request.setAttribute("result", "../freeboard/mypage.do");
+        request.setAttribute("result", "../freeboard/mypost.do");
         return "../freeboard/result.jsp";
     }
 }
