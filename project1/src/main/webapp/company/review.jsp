@@ -74,7 +74,7 @@
             let cid = $(this).attr('data-page');
             $.ajax({
                 type : 'get',
-                url : '../review/review.do?cid=' + cid,
+                url : '../review/review.do?' + cid,
                 success : function(result) {
                     $('#result').html(result);
                 }

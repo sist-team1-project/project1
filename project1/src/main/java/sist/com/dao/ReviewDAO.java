@@ -42,16 +42,23 @@ public class ReviewDAO {
         return review;
     }
     
-    public List<ReviewVO> reviewList(int id) {
+    public List<ReviewVO> reviewList(int id, int page) {
         List<ReviewVO> list = new ArrayList<ReviewVO>();
         try {
             conn = dbcp.getConnection();
+            
+            int rowSize = 5;
+            int start = (rowSize * page) - (rowSize) + 1;
+            int end = rowSize * page;
+            
             String sql = "SELECT /*+ INDEX_DESC(review_1 review_id_pk_1)*/ review_id,u_id,c_id,review_content,review_goodbad,review_job,review_date "
-                    + "FROM review_1 "
-                    + "WHERE c_id=?";
+                    + "FROM (SELECT review_id,u_id,c_id,review_content,review_goodbad,review_job,review_date, rownum AS num from review_1 where c_id = ?) "
+                    + "WHERE num BETWEEN ? AND ?";
 
             ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
+            ps.setInt(2, start);
+            ps.setInt(3, end);
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

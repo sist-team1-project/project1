@@ -19,7 +19,7 @@ public class ReviewModel {
         int curPage = Integer.parseInt(page);
         
         ReviewDAO dao = new ReviewDAO();
-        List<ReviewVO> review = dao.reviewList(Integer.parseInt(cid));
+        List<ReviewVO> review = dao.reviewList(Integer.parseInt(cid), Integer.parseInt(page));
         int totalPage = dao.reviewTotalPage(Integer.parseInt(cid));
         
         // 페이지
