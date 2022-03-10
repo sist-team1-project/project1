@@ -95,7 +95,6 @@ public class ReplyDAO {
         }
     }
     
-    
     // 게시물 - 댓글 수정 / 삭제 유효성 검사
     public boolean checkUser(String uid, int rid) {
         Boolean check = false;
