@@ -76,8 +76,6 @@ public class MainModel {
 					String value = cook.getValue();
 					
 					if (name.equals("adview")) {
-						System.out.println(value);
-						
 						for (String id : value.split("%2C")) {
 							adIds.add(id);
 						}
