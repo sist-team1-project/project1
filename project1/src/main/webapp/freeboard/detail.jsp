@@ -8,7 +8,7 @@
   <meta charset="UTF-8">
   <title>Insert title here</title>
   <link rel="stylesheet" href="../css/freeboard/detail.css">
-  <script>
+  <script type="text/javascript">
     $(function() {
     	replyList();
     	
@@ -28,22 +28,6 @@
                 }
             });
         })
-        
-        $('#delete-btn').click(function() {
-        	var result = confirm('게시물을 삭제하시겠습니까?');
-            if (result) {
-                let bid = $('#bid').val();
-                $.ajax({
-                    type:'post',
-                    url : '../freeboard/delete.do',
-                    data : {"bid" : bid},
-                    success : function(result){
-                        alert("삭제되었습니다");
-                        location.href = result; 
-                    }
-                });
-            }
-        })
     })
     
     function replyList() {
@@ -58,7 +42,6 @@
             }
         });
     }
-
   </script>
 </head>
 <body>
