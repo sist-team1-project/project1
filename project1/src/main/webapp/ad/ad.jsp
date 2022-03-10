@@ -43,7 +43,7 @@
           <table class="top-table">
             <tr>
               <th class="width-80">근무예정지</th>
-              <td class="word-break">${ad.ad_workplace }</td>
+              <td class="word-break"><a href="#" class="scrollToMap">${ad.ad_workplace }</a></td>
             </tr>
             <tr>
               <th class="width-80">임금</th>
@@ -96,7 +96,7 @@
         <div class="col-md-4">
           <div class="row bggrey title-deco no-select roomy-10 text-center">근무예정지</div>
           <div class="row text-center content">
-            <a href="#wptarget">${ad.ad_workplace }</a>
+            <a href="#" class="scrollToMap">${ad.ad_workplace }</a>
           </div>
         </div>
 
@@ -145,7 +145,7 @@
         <div class="col-md-3">
           <div class="row bggrey title-deco no-select roomy-10 text-center">우대 자격증</div>
           <div class="rrow text-center content">
-            <a href="#btarget">${ad.ad_qualification }</a>
+            <a href="#" class="scrollToBook">${ad.ad_qualification }</a>
           </div>
         </div>
         <div class="col-md-3">
@@ -164,8 +164,7 @@
 
       <!--              위치정보                 -->
 
-      <div class="row m-top-60 no-select">
-        <a name="wptarget"></a>
+      <div class="row m-top-60 no-select scroll-map">
         <h3>
           <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp; <b>위치정보</b>
         </h3>
@@ -180,8 +179,7 @@
 
       <!--              추천 도서                -->
 
-      <div class="row m-top-60 no-select">
-        <a name="btarget"></a>
+      <div class="row m-top-60 no-select scroll-book">
         <h3>
           <i class="fa fa-graduation-cap" aria-hidden="true"></i>&nbsp; <b>추천 도서</b>
         </h3>
@@ -303,6 +301,30 @@
 				});
 			});
 		</script>
+    
+    <script>
+      $(document).ready(function() {
+        //Click event to scroll to Map
+        $('.scrollToMap').click(function() {
+          $('html, body').stop().animate({
+            scrollTop : $('.scroll-map i').offset().top
+          }, 600);
+          return false;
+        });
+      });
+    </script>
+    
+    <script>
+      $(document).ready(function() {
+        //Click event to scroll to Map
+        $('.scrollToBook').click(function() {
+          $('html, body').stop().animate({
+            scrollTop : $('.scroll-book i').offset().top
+          }, 600);
+          return false;
+        });
+      });
+    </script>
 
 
   <!-- ######################################################################################################################## -->
