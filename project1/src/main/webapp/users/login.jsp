@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
   <title>Insert title here</title>
   <link rel="stylesheet" href="../css/users/login.css">
-  <script>
+  <script type="text/javascript">
     Shadowbox.init({
         players:['iframe'],
         overlayOpacity: 0.5
