@@ -9,25 +9,25 @@
   <link rel="stylesheet" href="../css/freeboard/freeboard.css">
   <script type="text/javascript">
     $(function() {
-	    $("#check-all").click(function() {
-	        if($("#check-all").is(":checked")) $("input[name=bid]").prop("checked", true);
-	        else $("input[name=bid]").prop("checked", false);
+	    $('#check-all').click(function() {
+	        if($('#check-all').is(":checked")) $('input[name=bid]').prop("checked", true);
+	        else $('input[name=bid]').prop("checked", false);
 	    });
-	    $("input[name=bid]").click(function() {
-	        var total = $("input[name=bid]").length;
-	        var checked = $("input[name=bid]:checked").length;
+	    $('input[name=bid]').click(function() {
+	        var total = $('input[name=bid]').length;
+	        var checked = $('input[name=bid]:checked').length;
 
 	        if(total != checked) $("#check-all").prop("checked", false);
-	        else $("#check-all").prop("checked", true); 
+	        else $('#check-all').prop("checked", true); 
 	    });
-	    $("delete-btn").click(function() {
-            if($("#check-all").is(":checked")) $("input[name=bid]").prop("checked", true);
+	    $('delete-btn').click(function() {
+            if($('#check-all').is(":checked")) $("input[name=bid]").prop("checked", true);
             else $("input[name=bid]").prop("checked", false);
         });
 	});
     
     function deleteChecked() {
-    	let check = $("input[name=bid]");
+    	let check = $('input[name=bid]');
     	let bid = new Array();
     	for(let i = 0; i < check.length; i++) {
     		if(check[i].checked) {
