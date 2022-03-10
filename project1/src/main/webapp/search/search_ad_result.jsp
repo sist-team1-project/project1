@@ -17,6 +17,7 @@
         })
     })
 </script>
+
 <!--  공고 리스트  -->
 <div id="list">
   <c:forEach var="a" items="${ad }" varStatus="status">
@@ -28,7 +29,7 @@
         <div class="small-font list-content">${a.ad_workplace } </div>
       </div>
       <div class="col-sm-2 ad_end">
-        <c:if test="${today==a.ad_end }"><b>마감일</b></c:if> <!-- 오늘일 경우 -->
+        <c:if test="${today==a.ad_end }"><b>금일마감</b></c:if> <!-- 오늘일 경우 -->
         <c:if test="${today!=a.ad_end }"><b>${a.ad_end }</b></c:if> <!-- 오늘이 아닐 경우 -->
       </div>
     </div>
