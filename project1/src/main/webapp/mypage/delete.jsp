@@ -40,7 +40,7 @@
 </head>
 <body>
   <div class="row border">
-    <div class="col-md-12"><h4>&nbsp;&nbsp;<i class="fa fa-user-circle" aria-hidden="true"></i> <b>비밀번호 확인</b></h4></div>
+    <div class="col-md-12"><h4>&nbsp;&nbsp;<i class="fa fa-user-circle" aria-hidden="true"></i> <b>마이페이지 / 회원 탈퇴</b></h4></div>
   </div>
   <div class="pwd-check roomy-20">
     <div class="row">
