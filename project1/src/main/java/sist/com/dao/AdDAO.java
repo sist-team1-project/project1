@@ -112,7 +112,6 @@ public class AdDAO {
 			sql += "SELECT ad_id,ad_title,ad_end,ad_workplace,c_id ";
 			sql += "FROM ad_1 ";
 			sql += "where ad_id in (";
-			System.out.println(cookieList.size());
 				for (int i = 0; i < cookieList.size(); i++) {
 					if (i != cookieList.size()-1) {
 						sql += "'" + cookieList.get(i)+ "',";
@@ -315,7 +314,6 @@ public class AdDAO {
                 avo.setC_id(rs.getInt(1));
                 avo.setAd_id(rs.getInt(2));
                 avo.setAd_title(rs.getString(3));
-                //System.out.println(rs.getString(3));
                 avo.setAd_we(rs.getString(4));
                 avo.setAd_education(rs.getString(5));
                 avo.setAd_workplace(rs.getString(6));

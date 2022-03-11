@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="../css/company.css">
  <script type="text/javascript">
     $(function() {
+    	
+    	<!-------------- 리뷰 --------------->
         reviewList();
         
         $('#review-insert-btn').click(function() {
@@ -53,8 +55,8 @@
                 });
             }
         })
-        
-        <!-------------- 맨 위로 이동 버튼 --------------------->
+        <!-------------------------------------------> 
+        <!-------------- 맨 위로 이동 버튼 -------------->
         $(window).scroll(function() {
             if ($(this).scrollTop() > 100) {
                 $('.scrollToTop').fadeIn();

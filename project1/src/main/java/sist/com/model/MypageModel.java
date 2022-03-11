@@ -90,7 +90,24 @@ public class MypageModel {
     
     // 마이페이지 - 즐겨찾기 관리 이동
     @RequestMapping("mypage/favorite.do")
-    public String favorite_List(HttpServletRequest request, HttpServletResponse response) {
+    public String favorite(HttpServletRequest request, HttpServletResponse response) {
+
+        HttpSession session = request.getSession();
+        String uid = (String) session.getAttribute("id");
+        
+        if (uid == null) {
+            return "redirect: ../main/main.do";
+        }
+        
+        request.setAttribute("tab", 5);
+        request.setAttribute("main_jsp", "../mypage/mypage.jsp");
+        request.setAttribute("content_jsp", "../mypage/favorite.jsp");
+        return "../main/main.jsp";
+    }
+    
+    // 마이페이지 - 즐겨찾기 목록
+    @RequestMapping("mypage/favorite_list.do")
+    public String favorite_list(HttpServletRequest request, HttpServletResponse response) {
 
         HttpSession session = request.getSession();
         String uid = (String) session.getAttribute("id");
@@ -103,34 +120,27 @@ public class MypageModel {
         FavoriteDAO dao = new FavoriteDAO();
 
         // 즐찾 공고번호 리스트
-        List<Integer> flist = dao.favListData(uid);
+        List<Integer> favlist = dao.favListData(uid);
 
         // 공고번호들의 공고정보리스트, 회사정보리스트
-        List<AdVO> adList = new ArrayList<AdVO>();
-        List<String> cList = new ArrayList<String>();
+        List<AdVO> adlist = new ArrayList<AdVO>();
+        List<String> clist = new ArrayList<String>();
 
         AdDAO a = new AdDAO();
-        AdVO vo;
         CompanyDAO c = new CompanyDAO();
 
-        List<Integer> fid_list = new ArrayList<Integer>();
-
         // 공고번호 for문
-        for (int i : flist) {
-            vo = a.adDetail(i);
-            adList.add(vo);
-            cList.add(c.companyName(vo.getC_id()));
-            fid_list.add(dao.favData(uid, i));
+        for (int i : favlist) {
+            AdVO ad = a.adDetail(i);
+            adlist.add(ad);
+            clist.add(c.companyName(ad.getC_id()));
         }
         
-        request.setAttribute("adList", adList);
-        request.setAttribute("c_name", cList);
-        request.setAttribute("fid_list", fid_list);
+        request.setAttribute("adlist", adlist);
+        request.setAttribute("clist", clist);
+        request.setAttribute("favlist", favlist);
         
-        request.setAttribute("tab", 5);
-        request.setAttribute("main_jsp", "../mypage/mypage.jsp");
-        request.setAttribute("content_jsp", "../mypage/favorite.jsp");
-        return "../main/main.jsp";
+        return "../mypage/favorite_list.jsp";
     }
     
     // 마이페이지 - 회원정보 수정 결과

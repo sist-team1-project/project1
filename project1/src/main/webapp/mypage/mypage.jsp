@@ -5,9 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="../css/mypage/mypage.css">
-<meta charset="UTF-8">
-<title>Insert title here</title>
+  <link rel="stylesheet" href="../css/mypage/mypage.css">
+  <meta charset="UTF-8">
+  <title>Insert title here</title>
 </head>
 <body>
 <div class="container">

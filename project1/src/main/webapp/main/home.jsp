@@ -9,6 +9,83 @@
   <meta charset="UTF-8">
   <title>Insert title here</title>
   <link rel="stylesheet" href="../css/home.css">
+  <script type="text/javascript">
+  
+    $(function() {
+    	
+    	// 베스트 공고
+        $('.fav').click(function() {
+        	id = $(this).attr('id');
+        	if(id.startsWith("nofav")){
+                let adid = $(this).attr("data-ad");
+                let index = $(this).attr("data-index");
+                $.ajax({
+                    type: 'post',
+                    url : '../favorite/insert.do',
+                    data : {"adid" : adid},
+                    success:function(result) {
+                        let res = result.trim();
+                        $('#nofav' + index).html('<i class="fa fa-star favorite"></i>');
+                        $('#nofav' + index).attr('data-fav', res);
+                        $('#nofav' + index).attr('id','fav'+index);
+                        alert("즐겨찾기에 등록하였습니다");
+                    }
+                });
+        	}
+        	else if (id.startsWith("fav")) {
+                let fid = $(this).attr("data-fav");
+                let index = $(this).attr("data-index");
+                $.ajax({
+                    type: 'post',
+                    url : '../favorite/delete.do',
+                    data : {"fid" : fid},
+                    success : function(result){
+                        $('#fav' + index).html('<i class="fa fa-star-o favorite"></i>');
+                        $('#fav' + index).removeAttr('data-fav');
+                        $('#fav' + index).attr('id','nofav'+index);
+                        alert("즐겨찾기에서 해제하였습니다");
+                    }
+                });
+        	}
+        })
+        
+        // 마감임박 공고
+        $('.fav2').click(function() {
+            id = $(this).attr('id');
+            if(id.startsWith("nofav2")){
+                let adid = $(this).attr("data-ad");
+                let index = $(this).attr("data-index");
+                $.ajax({
+                    type: 'post',
+                    url : '../favorite/insert.do',
+                    data : {"adid" : adid},
+                    success:function(result) {
+                        let res = result.trim();
+                        $('#nofav2' + index).html('<i class="fa fa-star favorite"></i>');
+                        $('#nofav2' + index).attr('data-fav', res);
+                        $('#nofav2' + index).attr('id','fav2'+index);
+                        alert("즐겨찾기에 등록하였습니다");
+                    }
+                });
+            }
+            else if (id.startsWith("fav2")) {
+                let fid = $(this).attr("data-fav");
+                let index = $(this).attr("data-index");
+                $.ajax({
+                    type: 'post',
+                    url : '../favorite/delete.do',
+                    data : {"fid" : fid},
+                    success : function(result){
+                        $('#fav2' + index).html('<i class="fa fa-star-o favorite"></i>');
+                        $('#fav2' + index).removeAttr('data-fav');
+                        $('#fav2' + index).attr('id','nofav2'+index);
+                        alert("즐겨찾기에서 해제하였습니다");
+                    }
+                });
+            }
+        })
+    }) 
+  </script>
 </head>
 <body>
 <!-- 여기부터 -->
@@ -104,10 +181,10 @@
                   </c:when>
                   <c:otherwise>
                     <c:if test="${favorite[status.index] == 0}">
-                      <a href="../favorite/insert.do?adid=${a.ad_id }"><i class="fa fa-star-o favorite"></i></a>                               
+                      <span id="nofav${status.index }" class="fav" data-index="${status.index }" data-ad="${a.ad_id }"><i class="fa fa-star-o favorite"></i></span>
                     </c:if>
                     <c:if test="${favorite[status.index] > 0}">
-                      <a href="../favorite/delete.do?fid=${favorite[status.index] }" id="favorite-insert-btn"><i class="fa fa-star favorite"></i></a>                  
+                      <span id="fav${status.index }" class="fav" data-index="${status.index }" data-fav="${favorite[status.index] }" data-ad="${a.ad_id }"><i class="fa fa-star favorite"></i></span>                  
                     </c:if>
                   </c:otherwise>
                 </c:choose>
@@ -144,16 +221,16 @@
                 <span class="greytag"> ${a.ad_we } </span>&nbsp;
                 <span class="greytag"> ${a.ad_education } </span>
                 <c:choose>
-                  <c:when test="${sessionScope.id==null }">
+                  <c:when test="${sessionScope.id == null}" >
                     <a href="../users/login.do" onclick="return confirm('먼저 로그인을 진행해주세요')"><i class="fa fa-star-o favorite"></i></a>
                   </c:when>
                   <c:otherwise>
-                    <c:if test="">
-                      <a href=""><i class="fa fa-star favorite-o f-update"></i></a>   
+                    <c:if test="${favorite2[status.index] == 0}">
+                      <span id="nofav2${status.index }" class="fav2" data-index="${status.index }" data-ad="${a.ad_id }"><i class="fa fa-star-o favorite"></i></span>
                     </c:if>
-                    <c:if test="">
-                      <a href="#"><i class="fa fa-star favorite f-update"></i></a>   
-                    </c:if>                    
+                    <c:if test="${favorite2[status.index] > 0}">
+                      <span id="fav2${status.index }" class="fav2" data-index="${status.index }" data-fav="${favorite2[status.index] }" data-ad="${a.ad_id }"><i class="fa fa-star favorite"></i></span>                  
+                    </c:if>
                   </c:otherwise>
                 </c:choose>
               </div>

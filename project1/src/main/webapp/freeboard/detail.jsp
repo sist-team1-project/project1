@@ -11,7 +11,7 @@
   <script type="text/javascript">
     $(function() {
     	replyList();
-    	
+    	// 댓글 작성
         $('#reply-insert-btn').click(function() {
             let content = $('#reply-content').val();
             if (content.trim() == "") {
@@ -27,6 +27,22 @@
                     replyList();
                 }
             });
+        })
+        // 게시물 삭제
+        $('#delete-btn').click(function() {
+            var result = confirm('게시물을 삭제하시겠습니까?');
+            if (result) {
+                let bid = $('#bid').val();
+                $.ajax({
+                    type:'post',
+                    url : '../freeboard/delete.do',
+                    data : {"bid" : bid},
+                    success : function(result){
+                        alert("삭제되었습니다");
+                        location.href = result; 
+                    }
+                });
+            }
         })
     })
     

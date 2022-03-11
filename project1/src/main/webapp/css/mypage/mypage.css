@@ -4,6 +4,13 @@
 :focus {
   outline: 1px solid black
 }
+
+.info,
+#list,
+.pwd-check,
+.update {
+  min-height: 700px;
+}
 /* --------------- */
 
 
@@ -51,7 +58,6 @@
 
 /*     내 정보     */
 .info {
-  min-height: 600px;
   padding: 30px 40px;
 }
 /* --------------- */
@@ -115,17 +121,25 @@ select,
 
 
 
-/* 링크 언더바 제거 */
+/*   즐겨찾기 관리   */
+.btn-pink {
+  padding: 5px;
+}
+/* ------------- */
+
+
+
+/*   링크 언더바 제거   */
 a,
 a:link,
 a:active,
 a:hover {
   text-decoration: none;
 }
+/* ------------- */ 
 
 
-
-/*   반응형   */
+/*     반응형     */
 @media screen and (min-width: 992px) {
   .update {
     max-width: 60%;
@@ -139,4 +153,12 @@ a:hover {
     width: 50%;
   }
 }
-/* ----------- */
+
+@media screen and (max-width: 768px) {
+  #ad-title {
+    display:none;
+  }
+}
+
+
+/* ------------ */

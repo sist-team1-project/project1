@@ -37,17 +37,17 @@ public class AdModel {
 			booksList.add(books);
 		}
 
-		int count = 0;
+		int favorite = 0;
 		FavoriteDAO fdao = new FavoriteDAO();
 		FavoriteVO fvo = new FavoriteVO();
 		
-		count = fdao.favCount(uid, Integer.parseInt(adid));
+		favorite = fdao.favCount(uid, Integer.parseInt(adid));
 
 		request.setAttribute("ad", ad);
 		request.setAttribute("company", company);
 		request.setAttribute("booksList", booksList);
 		request.setAttribute("qualList", qualList);
-		request.setAttribute("count", count);
+		request.setAttribute("favorite", favorite);
 		request.setAttribute("main_jsp", "../ad/ad.jsp");
 		return "../main/main.jsp";
 	}

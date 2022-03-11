@@ -45,21 +45,22 @@ public class MainModel {
             String cname = c.companyName(i.getC_id());
             adCname.add(cname);
             
-            if(uid != null) {
-                int fav = f.favCount2(uid, i.getAd_id());
-                favorite.add(fav);
-            }
+            int fav = f.favCount(uid, i.getAd_id());
+            favorite.add(fav);
         }
         
         /*       마감 임박 공고       */
         List<AdVO> adEnd = a.adEndList();
         List<String> adEndCname = new ArrayList<String>();
+        List<Integer> favorite2 = new ArrayList<Integer>();
         
         for (AdVO i: adEnd) {
             String cname = c.companyName(i.getC_id());
             adEndCname.add(cname);
+            
+            int fav = f.favCount(uid, i.getAd_id());
+            favorite2.add(fav);
         }
-        
         
         List<BoardVO> freeBoardVisits = p.freeboardListByVisits();
         List<BoardVO> freeBoardReply = p.freeboardListByReply();
@@ -98,6 +99,7 @@ public class MainModel {
         
         request.setAttribute("adEnd", adEnd);
         request.setAttribute("adEndCname", adEndCname);
+        request.setAttribute("favorite2", favorite2);   
         
         request.setAttribute("freeBoardVisits", freeBoardVisits);
         request.setAttribute("freeBoardReply", freeBoardReply);
