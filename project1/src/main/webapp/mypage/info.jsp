@@ -12,7 +12,7 @@
   </div>
   <div class="info">
     <div class="row roomy-20">
-      <div class="col-md-12"><h4><b>${user.u_name }님 안녕하세요!</b></h4></div>
+      <div class="col-md-12"><h4><b>${user.u_name }님 안녕하세요!</b><i class="fa fa-heart" aria-hidden="true"></i></h4></div>
     </div>
     <div class="row roomy-10">
       <div class="col-sm-3"><b>아이디</b></div>

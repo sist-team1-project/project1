@@ -15,7 +15,7 @@
     <input type="hidden" id="ad_id" value="${ad.ad_id }">
     <!-- 공고 메인 정보 -->
     <div class="container container-pad">
-      <div class="row row-border room m-top-40">
+      <div class="row row-border radius-10 room m-top-40">
         <div class="col-md-12 roomy-10">
           <h4>
             <b>${ad.ad_title }</b>
@@ -51,7 +51,7 @@
             </tr>
           </table>
         </div>
-        <div class="col-md-4 roomy-10 no-select">
+        <div class="col-md-4 no-select">
           <div class="logo-container ">
             <img class="clogo" src="${company.c_logo }">
           </div>
@@ -252,7 +252,6 @@
             id = $(this).attr('id');
             if(id.startsWith("nofav")){
                 let adid = $(this).attr("data-ad");
-                alert(adid);
                 $.ajax({
                     type: 'post',
                     url : '../favorite/insert.do',
