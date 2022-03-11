@@ -88,7 +88,7 @@
                             $('#password').val("");
                             $('#password').focus();
                         } else {
-                            alert("비밀번호를 변경했습니다");
+                            alert("회원님의 정보를 수정하였습니다");
                             location.href = "../mypage/mypage.do";
                         }
                     }

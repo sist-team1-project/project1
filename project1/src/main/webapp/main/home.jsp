@@ -12,6 +12,7 @@
   <script type="text/javascript">
   
     $(function() {
+    	$('.fav').css('cursor','pointer');
     	
     	// 베스트 공고
         $('.fav').click(function() {
