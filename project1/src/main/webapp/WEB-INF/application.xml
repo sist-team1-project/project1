@@ -4,6 +4,12 @@
   <bean class="sist.com.model.MainModel"/>
   <bean class="sist.com.model.AdModel"/>
   <bean class="sist.com.model.CompanyModel"/>
+  <bean class="sist.com.model.FreeboardModel"/>
+  <bean class="sist.com.model.SearchModel"/>
   <bean class="sist.com.model.UsersModel"/>
+  <bean class="sist.com.model.ReplyModel"/>
   <bean class="sist.com.model.FavoriteModel"/>
+  <bean class="sist.com.model.ReviewModel"/>
+  <bean class="sist.com.model.CalendarModel"/>
+  <bean class="sist.com.model.MypageModel"/>
 </beans>
