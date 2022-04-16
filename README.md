@@ -1,4 +1,4 @@
-# Project1
+# Project1 - 취업 커뮤니티 <img width="18%" src="https://user-images.githubusercontent.com/70963337/158332763-93cc9669-5c8e-4279-a1be-6f9e91fac427.jpg"/>
 
 <br>
 
@@ -12,14 +12,12 @@
 
 <br>
 
-## 취업 커뮤니티 <img width="12%" src="https://user-images.githubusercontent.com/70963337/158332763-93cc9669-5c8e-4279-a1be-6f9e91fac427.jpg"/>
-
-### 담당 파트
+## 담당 파트
 **메인** - 최미래  
 **기업 상세** - 오영진  
 **공고 상세** - 홍성민  
 **기업 검색/공고 검색** - 김승경  
-**자유게시판** - 최은영  
+**자유게시판/공고 달력** - 최은영  
 **로그인/회원가입/마이페이지** - 주석영  
 
 <br>
