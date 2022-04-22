@@ -20,7 +20,7 @@ public class BookDAO {
             String sql = "SELECT book_id, book_title, book_img, book_sold, book_link "
                     + "FROM (SELECT book_id, book_title, book_img, book_sold, book_link, rownum as num "
                     + "FROM (SELECT book_id, book_title, book_img, book_sold, book_link "
-                    + "FROM textbook_1 "
+                    + "FROM textbook "
                     + "WHERE book_title LIKE '%'||?||'%' "
                     + "ORDER BY book_sold DESC)) "
                     + "WHERE num BETWEEN 1 and 6";

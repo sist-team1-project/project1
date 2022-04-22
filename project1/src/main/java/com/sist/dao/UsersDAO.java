@@ -16,7 +16,7 @@ public class UsersDAO {
         try {
             conn = dbcp.getConnection(conn);
             
-            String sql = "SELECT COUNT(*) FROM users_1 "
+            String sql = "SELECT COUNT(*) FROM users "
                     + "WHERE u_id=?";
             
             ps = conn.prepareStatement(sql);
@@ -33,7 +33,7 @@ public class UsersDAO {
                 return "FAIL";
             } else {
                 sql = "SELECT u_password,u_name "
-                        + "FROM users_1 "
+                        + "FROM users "
                         + "WHERE u_id=?";
                 ps = conn.prepareStatement(sql);
                 ps.setString(1, id);
@@ -66,7 +66,7 @@ public class UsersDAO {
         try {
             conn = dbcp.getConnection(conn);
             
-            String sql = "SELECT COUNT(*) FROM users_1 "
+            String sql = "SELECT COUNT(*) FROM users "
                     + "WHERE u_id=?";
             
             ps = conn.prepareStatement(sql);
@@ -91,7 +91,7 @@ public class UsersDAO {
         try {
             conn = dbcp.getConnection(conn);
             
-            String sql = "SELECT COUNT(*) FROM users_1 "
+            String sql = "SELECT COUNT(*) FROM users "
                     + "WHERE u_email=?";
             
             ps = conn.prepareStatement(sql);
@@ -115,7 +115,7 @@ public class UsersDAO {
         try {
             conn = dbcp.getConnection(conn);
             
-            String sql = "INSERT INTO users_1 VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO users VALUES(?,?,?,?,?,?,?,?,?,?,?)";
             
             ps = conn.prepareStatement(sql);
             ps.setString(1, vo.getU_id());
@@ -145,7 +145,7 @@ public class UsersDAO {
             conn = dbcp.getConnection(conn);
             
             String sql = "SELECT * "
-                    + "FROM users_1 "
+                    + "FROM users "
                     + "WHERE u_id=?";
 
             ps = conn.prepareStatement(sql);
@@ -181,7 +181,7 @@ public class UsersDAO {
             conn = dbcp.getConnection(conn);
             
             String sql = "SELECT COUNT(*) "
-                    + "FROM users_1 "
+                    + "FROM users "
                     + "WHERE u_name=? AND u_email=?";
             
             ps = conn.prepareStatement(sql);
@@ -197,7 +197,7 @@ public class UsersDAO {
                 result = "no";
             } else {
                 sql = "SELECT RPAD(SUBSTR(u_id,1,4),LENGTH(u_id),'*') "
-                    + "FROM users_1 "
+                    + "FROM users "
                     + "WHERE u_name=? AND u_email=?";
                 
                 ps = conn.prepareStatement(sql);
@@ -224,7 +224,7 @@ public class UsersDAO {
             conn = dbcp.getConnection(conn);
             
             String sql = "SELECT COUNT(*) "
-                    + "FROM users_1 "
+                    + "FROM users "
                     + "WHERE u_name=? AND u_id=?";
             
             ps = conn.prepareStatement(sql);
@@ -239,7 +239,7 @@ public class UsersDAO {
                 result = "no";
             } else {
                 sql = "SELECT u_question "
-                    + "FROM users_1 "
+                    + "FROM users "
                     + "WHERE u_name=? AND u_id=?";
                 
                 ps = conn.prepareStatement(sql);
@@ -269,7 +269,7 @@ public class UsersDAO {
             conn = dbcp.getConnection(conn);
             
             String sql = "SELECT COUNT(*) "
-                    + "FROM users_1 "
+                    + "FROM users "
                     + "WHERE u_id=? AND u_answer=?";
             
             ps = conn.prepareStatement(sql);
@@ -300,7 +300,7 @@ public class UsersDAO {
             conn = dbcp.getConnection(conn);
         
             String sql = "SELECT u_password "
-                    + "FROM users_1 "
+                    + "FROM users "
                     + "WHERE u_id=?";
             
             ps = conn.prepareStatement(sql);
@@ -313,7 +313,7 @@ public class UsersDAO {
 
             if (db_password.equals(vo.getU_password())) {
                 result = "yes";
-                sql = "UPDATE users_1 "
+                sql = "UPDATE users "
                     + "SET u_email=?,u_post=?,u_address1=?,u_address2=?,u_question=?,u_answer=? "
                     + "WHERE u_id=?";
                 
@@ -344,7 +344,7 @@ public class UsersDAO {
             conn = dbcp.getConnection(conn);
         
             String sql = "SELECT u_password "
-                    + "FROM users_1 "
+                    + "FROM users "
                     + "WHERE u_id=?";
             
             ps = conn.prepareStatement(sql);
@@ -357,7 +357,7 @@ public class UsersDAO {
 
             if (db_password.equals(password)) {
                 result = "yes";
-                sql = "UPDATE users_1 "
+                sql = "UPDATE users "
                     + "SET u_password=? "
                     + "WHERE u_id=?";
                 
@@ -385,7 +385,7 @@ public class UsersDAO {
             conn = dbcp.getConnection(conn);
             
             String sql = "SELECT u_password "
-                    + "FROM users_1 "
+                    + "FROM users "
                     + "WHERE u_id=?";
             
             ps = conn.prepareStatement(sql);
@@ -398,7 +398,7 @@ public class UsersDAO {
             
             if (db_password.equals(password)) {
                 result = "yes";
-                sql = "DELETE FROM users_1 "
+                sql = "DELETE FROM users "
                     + "WHERE u_id=?";
                 ps = conn.prepareStatement(sql);
                 ps.setString(1, id);

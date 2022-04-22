@@ -18,8 +18,8 @@ public class ReviewDAO {
             conn = dbcp.getConnection(conn);
             String sql = "SELECT review_content "
                     + "FROM (SELECT review_content,rownum as num "
-                    + "FROM (SELECT /*+ INDEX_DESC(review_1 review_id_pk_1)*/ review_content "
-                    + "FROM review_1 "
+                    + "FROM (SELECT /*+ INDEX_DESC(review review_id_pk)*/ review_content "
+                    + "FROM review "
                     + "WHERE c_id=?)) "
                     + "WHERE num=1";
             ps = conn.prepareStatement(sql);
@@ -51,8 +51,8 @@ public class ReviewDAO {
             int start = (rowSize * page) - (rowSize) + 1;
             int end = rowSize * page;
             
-            String sql = "SELECT /*+ INDEX_DESC(review_1 review_id_pk_1)*/ review_id,u_id,c_id,review_content,review_goodbad,review_job,review_date "
-                    + "FROM (SELECT review_id,u_id,c_id,review_content,review_goodbad,review_job,review_date, rownum AS num from review_1 where c_id = ?) "
+            String sql = "SELECT /*+ INDEX_DESC(review review_id_pk)*/ review_id,u_id,c_id,review_content,review_goodbad,review_job,review_date "
+                    + "FROM (SELECT review_id,u_id,c_id,review_content,review_goodbad,review_job,review_date, rownum AS num from review where c_id = ?) "
                     + "WHERE num BETWEEN ? AND ?";
 
             ps = conn.prepareStatement(sql);
@@ -87,7 +87,7 @@ public class ReviewDAO {
         try {
             conn = dbcp.getConnection(conn);
             String sql = "SELECT count(*) "
-                    + "FROM review_1 "
+                    + "FROM review "
                     + "WHERE c_id=?";
 
             ps = conn.prepareStatement(sql);
@@ -110,8 +110,8 @@ public class ReviewDAO {
     	
     	try {
     		conn = dbcp.getConnection(conn);
-    		String sql="INSERT INTO review_1(review_id,u_id,c_id,review_content,review_goodbad,review_job) "
-    				+"VALUES(review_id_seq_1.NEXTVAL,?,?,?,?,?)";
+    		String sql="INSERT INTO review(review_id,u_id,c_id,review_content,review_goodbad,review_job) "
+    				+"VALUES(review_id_seq.NEXTVAL,?,?,?,?,?)";
     		
     		ps = conn.prepareStatement(sql);
     		
@@ -138,7 +138,7 @@ public class ReviewDAO {
         try {
             conn = dbcp.getConnection(conn);
             
-            String sql = "SELECT u_id FROM review_1 "
+            String sql = "SELECT u_id FROM review "
                     + "WHERE review_id=?";
             
             ps = conn.prepareStatement(sql);
@@ -169,7 +169,7 @@ public class ReviewDAO {
         
         try {
             conn = dbcp.getConnection(conn);
-            String sql="DELETE FROM review_1 "
+            String sql="DELETE FROM review "
                     + "WHERE review_id=?";
             
             ps = conn.prepareStatement(sql);
@@ -188,7 +188,7 @@ public class ReviewDAO {
         try {
             conn = dbcp.getConnection(conn);
             
-            String sql = "UPDATE review_1 "
+            String sql = "UPDATE review "
                     + "SET review_goodbad=?, review_job=?, review_content=? "
                     + "WHERE review_id=?";
             
@@ -213,7 +213,7 @@ public class ReviewDAO {
         try {
             conn = dbcp.getConnection(conn);
             String sql = "SELECT CEIL(COUNT(*)/5.0) " 
-            		+ "FROM review_1 "
+            		+ "FROM review "
             		+ "where c_id =?";
                 
             ps = conn.prepareStatement(sql);

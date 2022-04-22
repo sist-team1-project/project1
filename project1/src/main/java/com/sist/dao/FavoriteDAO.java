@@ -15,14 +15,14 @@ public class FavoriteDAO {
 	    try {
             conn = dbcp.getConnection(conn);
             
-            String sql = "INSERT INTO favorite_1 VALUES(favorite_id_seq_1.NEXTVAL, ?, ?)";
+            String sql = "INSERT INTO favorite VALUES(favorite_id_seq.NEXTVAL, ?, ?)";
             
             ps = conn.prepareStatement(sql);
             ps.setString(1, uid);
             ps.setInt(2, adid);
             ps.executeUpdate();
             
-            sql = "SELECT fav_id FROM favorite_1 WHERE u_id=? "
+            sql = "SELECT fav_id FROM favorite WHERE u_id=? "
                     + "AND ad_id=?";
 
             ps = conn.prepareStatement(sql);
@@ -46,7 +46,7 @@ public class FavoriteDAO {
         try {
             conn = dbcp.getConnection(conn);
             
-            String sql = "DELETE FROM favorite_1 "
+            String sql = "DELETE FROM favorite "
                     + "WHERE fav_id=?";
             
             ps = conn.prepareStatement(sql);
@@ -67,8 +67,8 @@ public class FavoriteDAO {
 		try {
 			conn = dbcp.getConnection(conn);
 
-			String sql = "SELECT /*+ INDEX_ASC(favorite_1 favorite_id_pk_1)*/ fav_id "
-			        + "FROM favorite_1 "
+			String sql = "SELECT /*+ INDEX_ASC(favorite favorite_id_pk)*/ fav_id "
+			        + "FROM favorite "
 			        + "WHERE u_id=?";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, uid);
@@ -92,7 +92,7 @@ public class FavoriteDAO {
 		int fid = 0;
 		try {
 			conn = dbcp.getConnection(conn);
-			String sql = "SELECT COUNT(*) FROM favorite_1 "
+			String sql = "SELECT COUNT(*) FROM favorite "
 			        + "WHERE u_id=? "
 			        + "AND ad_id=?";
 
@@ -108,7 +108,7 @@ public class FavoriteDAO {
 			if (count == 0) {
 				fid = 0;
 			} else {
-				sql = "SELECT fav_id FROM favorite_1 WHERE u_id=? " + "AND ad_id=?";
+				sql = "SELECT fav_id FROM favorite WHERE u_id=? " + "AND ad_id=?";
 
 				ps = conn.prepareStatement(sql);
 				ps.setString(1, uid);

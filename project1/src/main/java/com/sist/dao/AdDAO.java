@@ -18,7 +18,7 @@ public class AdDAO {
 			conn = dbcp.getConnection(conn);
 			String sql = "SELECT ad_id,ad_title,ad_end,ad_we,ad_education,ad_workplace,c_id "
 					+ "FROM (SELECT ad_id,ad_title,ad_end,ad_we,ad_education,ad_workplace,c_id,rownum as num "
-					+ "FROM (SELECT ad_id,ad_title,ad_end,ad_we,ad_education,ad_workplace,c_id FROM ad_1 WHERE SYSDATE-1 < TO_DATE(ad_end) OR ad_end IS NULL ORDER BY ad_visits DESC)) "
+					+ "FROM (SELECT ad_id,ad_title,ad_end,ad_we,ad_education,ad_workplace,c_id FROM ad WHERE SYSDATE-1 < TO_DATE(ad_end) OR ad_end IS NULL ORDER BY ad_visits DESC)) "
 					+ "WHERE num BETWEEN 1 AND 12";
 			ps = conn.prepareStatement(sql);
 			
@@ -64,7 +64,7 @@ public class AdDAO {
 			conn = dbcp.getConnection(conn);
 			String sql = "SELECT ad_id,ad_title,ad_end,ad_we,ad_education,ad_workplace,c_id "
 					+ "FROM (SELECT ad_id,ad_title,ad_end,ad_we,ad_education,ad_workplace,c_id,rownum as num "
-					+ "FROM (SELECT ad_id,ad_title,ad_end,ad_we,ad_education,ad_workplace,c_id FROM  ad_1 WHERE SYSDATE-1 < TO_DATE(ad_end) ORDER BY ad_end ASC)) "
+					+ "FROM (SELECT ad_id,ad_title,ad_end,ad_we,ad_education,ad_workplace,c_id FROM  ad WHERE SYSDATE-1 < TO_DATE(ad_end) ORDER BY ad_end ASC)) "
 					+ "WHERE num BETWEEN 1 AND 6";
 			ps = conn.prepareStatement(sql);
 			
@@ -110,7 +110,7 @@ public class AdDAO {
 			conn = dbcp.getConnection(conn);
 			String sql = "";
 			sql += "SELECT ad_id,ad_title,ad_end,ad_workplace,c_id ";
-			sql += "FROM ad_1 ";
+			sql += "FROM ad ";
 			sql += "where ad_id in (";
 				for (int i = 0; i < cookieList.size(); i++) {
 					if (i != cookieList.size()-1) {
@@ -165,7 +165,7 @@ public class AdDAO {
 		try {
 			conn = dbcp.getConnection(conn);
 			
-			String sql = "UPDATE ad_1 "
+			String sql = "UPDATE ad "
 			        + "SET ad_visits = ad_visits+1 "
 			        + "WHERE ad_id=?";
             ps = conn.prepareStatement(sql);
@@ -173,7 +173,7 @@ public class AdDAO {
             ps.executeUpdate();
 			
 			sql = "SELECT * "
-			        + "FROM ad_1 "
+			        + "FROM ad "
 			        + "WHERE ad_id = ?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, id);
@@ -218,7 +218,7 @@ public class AdDAO {
 		try {
 			conn = dbcp.getConnection(conn);
 			String sql = "SELECT ad_id,c_id,ad_title,ad_end "
-			        + "FROM ad_1 "
+			        + "FROM ad "
 			        + "WHERE c_id=? AND (SYSDATE-1 < TO_DATE(ad_end) OR ad_end IS NULL)";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, id);
@@ -260,7 +260,7 @@ public class AdDAO {
             String sql = "SELECT c_id,ad_id,ad_title,ad_we,ad_education,ad_workplace,ad_wage,ad_worktype,ad_end "
                     + "FROM (SELECT c_id,ad_id,ad_title,ad_we,ad_education,ad_workplace,ad_wage,ad_worktype,ad_end,rownum As num "
                     + "FROM (SELECT c_id,ad_id,ad_title,ad_we,ad_education,ad_workplace,ad_wage,ad_worktype,ad_end "
-                    + "FROM (SELECT a.c_id,ad_id,ad_title,ad_we,ad_education,ad_workplace,ad_wage,ad_worktype,ad_qualification,ad_language,ad_end,c_size FROM ad_1 a, company_1 c "
+                    + "FROM (SELECT a.c_id,ad_id,ad_title,ad_we,ad_education,ad_workplace,ad_wage,ad_worktype,ad_qualification,ad_language,ad_end,c_size FROM ad a, company c "
                     + "WHERE a.c_id = c.c_id(+)) "
                     + "WHERE ad_title LIKE '%'||?||'%' "
                     + "AND ad_workplace LIKE '%'||?||'%' "
@@ -344,7 +344,7 @@ public class AdDAO {
             
             String sql = "SELECT CEIL(COUNT(*)/10.0) "
                     + "FROM (SELECT c_id,ad_id,ad_title,ad_we,ad_education,ad_workplace,ad_wage,ad_worktype,ad_end "
-                    + "FROM (SELECT a.c_id,ad_id,ad_title,ad_we,ad_education,ad_workplace,ad_wage,ad_worktype,ad_qualification,ad_language,ad_end,c_size FROM ad_1 a, company_1 c "
+                    + "FROM (SELECT a.c_id,ad_id,ad_title,ad_we,ad_education,ad_workplace,ad_wage,ad_worktype,ad_qualification,ad_language,ad_end,c_size FROM ad a, company c "
                     + "WHERE a.c_id = c.c_id(+)) "
                     + "WHERE ad_title LIKE '%'||?||'%' "
                     + "AND ad_workplace LIKE '%'||?||'%' "
@@ -406,7 +406,7 @@ public class AdDAO {
             String sql = "SELECT ad_id,ad_title "
                     + "FROM (SELECT ad_id,ad_title,rownum AS num "
                     + "FROM (SELECT ad_id,ad_title "
-                    + "FROM ad_1 "
+                    + "FROM ad "
                     + "WHERE ad_end=to_date(?,'yyyy-mm-dd') "
                     + "ORDER BY ad_visits)) "
                     + "WHERE num BETWEEN 1 AND 5";

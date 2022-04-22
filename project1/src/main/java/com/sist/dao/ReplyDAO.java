@@ -22,8 +22,8 @@ public class ReplyDAO {
             conn = dbcp.getConnection(conn);
             String sql = "SELECT reply_id,board_id,u_id,reply_content,reply_date "
                     + "FROM (SELECT reply_id,board_id,u_id,reply_content,reply_date,rownum as num "
-                    + "FROM (SELECT /*+ INDEX_DESC(reply_1 reply_id_pk_1)*/reply_id,board_id,u_id,reply_content,reply_date "
-                    + "FROM reply_1 "
+                    + "FROM (SELECT /*+ INDEX_DESC(reply reply_id_pk)*/reply_id,board_id,u_id,reply_content,reply_date "
+                    + "FROM reply "
                     + "WHERE board_id=?))";
             
             ps = conn.prepareStatement(sql);
@@ -54,7 +54,7 @@ public class ReplyDAO {
         try {
             conn = dbcp.getConnection(conn);
             String sql = "SELECT COUNT(*) "
-                    + "FROM reply_1 "
+                    + "FROM reply "
                     + "WHERE board_id=?";
             
 
@@ -78,8 +78,8 @@ public class ReplyDAO {
         try {
             conn = dbcp.getConnection(conn);
             
-            String sql = "INSERT INTO reply_1(reply_id,board_id,u_id,reply_content) "
-                    + "VALUES(reply_id_seq_1.NEXTVAL,?,?,?)";
+            String sql = "INSERT INTO reply(reply_id,board_id,u_id,reply_content) "
+                    + "VALUES(reply_id_seq.NEXTVAL,?,?,?)";
             
             ps = conn.prepareStatement(sql);
             ps.setInt(1, vo.getBoard_id());
@@ -101,7 +101,7 @@ public class ReplyDAO {
         try {
             conn = dbcp.getConnection(conn);
             
-            String sql = "SELECT u_id FROM reply_1 "
+            String sql = "SELECT u_id FROM reply "
                     + "WHERE reply_id=?";
             
             ps = conn.prepareStatement(sql);
@@ -132,7 +132,7 @@ public class ReplyDAO {
         try {
             conn = dbcp.getConnection(conn);
             
-            String sql = "DELETE FROM reply_1 "
+            String sql = "DELETE FROM reply "
                     + "WHERE reply_id=?";
             
             ps = conn.prepareStatement(sql);
@@ -152,7 +152,7 @@ public class ReplyDAO {
         try {
             conn = dbcp.getConnection(conn);
             
-            String sql = "UPDATE reply_1 "
+            String sql = "UPDATE reply "
                     + "SET reply_content=? "
                     + "WHERE reply_id=?";
             

@@ -18,8 +18,8 @@ public class BoardDAO {
             conn = dbcp.getConnection(conn);
             String sql = "SELECT board_id,board_category,board_title "
                     + "FROM (SELECT board_id,board_category,board_title,rownum as num "
-                    + "FROM (SELECT /*+ INDEX_DESC(board_1 board_id_pk_1)*/ board_id,board_category,board_title "
-                    + "FROM board_1 "
+                    + "FROM (SELECT /*+ INDEX_DESC(board board_id_pk)*/ board_id,board_category,board_title "
+                    + "FROM board "
                     + "WHERE SYSDATE-8 < board_date "
                     + "ORDER BY board_visits DESC)) "
                     + "WHERE num BETWEEN 1 AND 5";
@@ -50,8 +50,8 @@ public class BoardDAO {
             String sql = "SELECT board_id,board_category,board_title "
                     + "FROM (SELECT board_id,board_category,board_title,rownum AS num "
                     + "FROM (SELECT b.board_id,b.board_category,b.board_title,NVL(count,0) AS count "
-                    + "FROM (SELECT /*+ INDEX_DESC(board_1 board_id_pk_1)*/ board_id,board_category,board_title FROM board_1 WHERE SYSDATE-8 < board_date) b, "
-                    + "(SELECT board_id,count(reply_id) AS count FROM reply_1 GROUP BY board_id) r "
+                    + "FROM (SELECT /*+ INDEX_DESC(board board_id_pk)*/ board_id,board_category,board_title FROM board WHERE SYSDATE-8 < board_date) b, "
+                    + "(SELECT board_id,count(reply_id) AS count FROM reply GROUP BY board_id) r "
                     + "WHERE b.board_id=r.board_id(+)) "
                     + "ORDER BY count DESC) "
                     + "WHERE num BETWEEN 1 AND 5";
@@ -83,8 +83,8 @@ public class BoardDAO {
             String sql = "";
             sql = "SELECT board_id,board_category,board_title,u_id,board_date,board_visits "
                     + "FROM (SELECT board_id,board_category,board_title,u_id,board_date,board_visits,rownum as num "
-                    + "FROM (SELECT /*+ INDEX_DESC(board_1 board_id_pk_1)*/board_id,board_category,board_title,u_id,board_date,board_visits "
-                    + "FROM board_1 "
+                    + "FROM (SELECT /*+ INDEX_DESC(board board_id_pk)*/board_id,board_category,board_title,u_id,board_date,board_visits "
+                    + "FROM board "
                     + "WHERE " + topic +" LIKE '%'||?||'%')) "
                     + "WHERE num BETWEEN ? AND ?";
             
@@ -126,13 +126,13 @@ public class BoardDAO {
             if (no == 1) { // 내 게시물
                 sql = "SELECT board_id,board_category,board_title,u_id,board_date,board_visits "
                         + "FROM (SELECT board_id,board_category,board_title,u_id,board_date,board_visits,rownum as num "
-                        + "FROM (SELECT /*+ INDEX_DESC(board_1 board_id_pk_1)*/board_id,board_category,board_title,u_id,board_date,board_visits "
-                        + "FROM board_1 " + "WHERE u_id=?)) " + "WHERE num BETWEEN ? AND ?";
+                        + "FROM (SELECT /*+ INDEX_DESC(board board_id_pk)*/board_id,board_category,board_title,u_id,board_date,board_visits "
+                        + "FROM board " + "WHERE u_id=?)) " + "WHERE num BETWEEN ? AND ?";
             } else if (no == 2) { // 내 댓글
                 sql = "SELECT board_id,board_category,board_title,u_id,board_date,board_visits "
                         + "FROM (SELECT board_id,board_category,board_title,u_id,board_date,board_visits,rownum as num "
-                        + "FROM (SELECT DISTINCT /*+ INDEX_DESC(board_1 board_id_pk_1)*/b.board_id,b.board_category,b.board_title,b.u_id,b.board_date,b.board_visits "
-                        + "FROM board_1 b, reply_1 r " + "WHERE b.board_id=r.board_id AND r.u_id=?)) "
+                        + "FROM (SELECT DISTINCT /*+ INDEX_DESC(board board_id_pk)*/b.board_id,b.board_category,b.board_title,b.u_id,b.board_date,b.board_visits "
+                        + "FROM board b, reply r " + "WHERE b.board_id=r.board_id AND r.u_id=?)) "
                         + "WHERE num BETWEEN ? AND ?";
                 
             }
@@ -174,15 +174,15 @@ public class BoardDAO {
             conn = dbcp.getConnection(conn);
             String sql = "";
             if (no == 1) { // 자유게시판
-                sql = "SELECT CEIL(COUNT(*)/10.0) " + "FROM board_1 " + "WHERE " + topic +" LIKE '%'||?||'%'";
+                sql = "SELECT CEIL(COUNT(*)/10.0) " + "FROM board " + "WHERE " + topic +" LIKE '%'||?||'%'";
                 ps = conn.prepareStatement(sql);
                 ps.setString(1, search);
             } else if (no == 2) { // 내 게시물
-                sql = "SELECT CEIL(COUNT(*)/10.0) " + "FROM board_1 " + "WHERE u_id=?";
+                sql = "SELECT CEIL(COUNT(*)/10.0) " + "FROM board " + "WHERE u_id=?";
                 ps = conn.prepareStatement(sql);
                 ps.setString(1, id);
             } else if (no == 3) { // 내 댓글
-                sql = "SELECT CEIL(COUNT(*)/10.0) " + "FROM (SELECT DISTINCT b.board_id " + "FROM board_1 b, reply_1 r "
+                sql = "SELECT CEIL(COUNT(*)/10.0) " + "FROM (SELECT DISTINCT b.board_id " + "FROM board b, reply r "
                         + "WHERE b.board_id=r.board_id AND r.u_id=?)";
                 ps = conn.prepareStatement(sql);
                 ps.setString(1, id);
@@ -207,7 +207,7 @@ public class BoardDAO {
             conn = dbcp.getConnection(conn);
 
             // 조회수 증가
-            String sql = "UPDATE board_1 "
+            String sql = "UPDATE board "
                     + "SET board_visits=board_visits+1 "
                     + "WHERE board_id=?";
             ps = conn.prepareStatement(sql);
@@ -217,7 +217,7 @@ public class BoardDAO {
 
             // 게시물 정보
             sql = "SELECT * "
-                + "FROM board_1 "
+                + "FROM board "
                 + "WHERE board_id=?";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
@@ -246,8 +246,8 @@ public class BoardDAO {
         try {
             conn = dbcp.getConnection(conn);
 
-            String sql = "INSERT INTO board_1(board_id,u_id,board_category,board_title,board_content) "
-                    + "VALUES(board_id_seq_1.NEXTVAL,?,?,?,?)";
+            String sql = "INSERT INTO board(board_id,u_id,board_category,board_title,board_content) "
+                    + "VALUES(board_id_seq.NEXTVAL,?,?,?,?)";
 
             ps = conn.prepareStatement(sql);
             ps.setString(1, vo.getU_id());
@@ -273,7 +273,7 @@ public class BoardDAO {
             conn = dbcp.getConnection(conn);
             
             String sql = "SELECT board_id,board_category,board_title,board_content "
-                    + "FROM board_1 "
+                    + "FROM board "
                     + "WHERE board_id=?";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
@@ -301,7 +301,7 @@ public class BoardDAO {
         try {
             conn = dbcp.getConnection(conn);
             
-            String sql = "SELECT u_id FROM board_1 "
+            String sql = "SELECT u_id FROM board "
                     + "WHERE board_id=?";
             
             ps = conn.prepareStatement(sql);
@@ -333,7 +333,7 @@ public class BoardDAO {
         try {
             conn = dbcp.getConnection(conn);
             
-            String sql = "UPDATE board_1 SET board_category=?,board_title=?,board_content=? "
+            String sql = "UPDATE board SET board_category=?,board_title=?,board_content=? "
                 + "WHERE board_id=?";
             
             ps = conn.prepareStatement(sql);
@@ -356,7 +356,7 @@ public class BoardDAO {
         try {
             conn = dbcp.getConnection(conn);
             
-            String sql = "DELETE FROM board_1 WHERE board_id=?";
+            String sql = "DELETE FROM board WHERE board_id=?";
             
             ps = conn.prepareStatement(sql);
             ps.setInt(1, bid);

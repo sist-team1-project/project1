@@ -19,7 +19,7 @@ public class CompanyDAO {
             String sql = "SELECT c_id, c_logo, c_name FROM ("
                     + "SELECT c_id, c_logo, c_name, rownum as num "
                     + "FROM (SELECT c_id, c_logo, c_name "
-                    + "FROM company_1 "
+                    + "FROM company "
                     + "ORDER BY c_visits DESC)) "
                     + "WHERE num BETWEEN 1 AND 9";
 
@@ -51,7 +51,7 @@ public class CompanyDAO {
             String sql = "SELECT c_id, c_logo, c_name FROM ("
                     + "SELECT c_id, c_logo, c_name, rownum as num "
                     + "FROM (SELECT c_id, c_logo, c_name "
-                    + "FROM company_1 "
+                    + "FROM company "
                     + "WHERE c_size='대기업' AND NOT c_logo='https://work.go.kr/images/common/none_imglogo.gif'"
                     + "ORDER BY c_visits DESC)) "
                     + "WHERE num BETWEEN 1 AND 12";
@@ -83,7 +83,7 @@ public class CompanyDAO {
             conn = dbcp.getConnection(conn);
             
             String sql = "SELECT c_name "
-                    + "FROM company_1 "
+                    + "FROM company "
                     + "WHERE c_id=?";
 
             ps = conn.prepareStatement(sql);
@@ -106,7 +106,7 @@ public class CompanyDAO {
         try {
             conn = dbcp.getConnection(conn);
             
-            String sql = "UPDATE company_1 "
+            String sql = "UPDATE company "
                     + "SET c_visits=c_visits+1 "
                     + "WHERE c_id=?";
             ps = conn.prepareStatement(sql);
@@ -129,7 +129,7 @@ public class CompanyDAO {
             conn = dbcp.getConnection(conn);
                     
             String sql = "SELECT * "
-                    + "FROM company_1 "
+                    + "FROM company "
                     + "WHERE c_id=?";
 
             ps = conn.prepareStatement(sql);
@@ -164,7 +164,7 @@ public class CompanyDAO {
             String sql = "SELECT c_id, c_name,c_logo,c_industry,c_address "
                     + "FROM (SELECT c_id, c_name,c_logo,c_industry,c_address,rownum as num "
                     + "FROM (SELECT c_id, c_name,c_logo,c_industry,c_address "
-                    + "FROM company_1 "
+                    + "FROM company "
                     + "ORDER BY c_visits DESC)) "
                     + "WHERE c_name LIKE '%'||?||'%'";
 
