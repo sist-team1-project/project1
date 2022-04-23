@@ -257,8 +257,6 @@ public class AdDAO {
     public List<AdVO> adSearchList(int page, String keyword, String address, String we, String edu, String size, String worktype, String qual, String lang, String date1, String date2) {
         List<AdVO> list = new ArrayList<AdVO>();
        try {
-            System.out.println(date1);
-            System.out.println(date2);
             conn = dbcp.getConnection(conn);
             
             int rowSize = 10;
@@ -412,10 +410,9 @@ public class AdDAO {
             conn = dbcp.getConnection(conn);
             String sql = "SELECT ad_id,ad_title "
                     + "FROM (SELECT ad_id,ad_title,rownum AS num "
-                    + "FROM (SELECT ad_id,ad_title "
+                    + "FROM (SELECT /*+ INDEX(a AD_INDEX_VISITS) */ ad_id,ad_title "
                     + "FROM ad "
-                    + "WHERE ad_end=? "
-                    + "ORDER BY ad_visits)) "
+                    + "WHERE ad_end=?)) "
                     + "WHERE num BETWEEN 1 AND 5";
                         
             ps = conn.prepareStatement(sql);
