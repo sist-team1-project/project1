@@ -136,9 +136,6 @@ public class SearchModel {
             endPage = totalPage;
         }
         
-        // 디버깅용
-        //System.out.println(url);
-        
         String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         
         request.setAttribute("url", url);
