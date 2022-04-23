@@ -20,45 +20,28 @@ public class MainModel {
         AdDAO a = new AdDAO();
         ReviewDAO r = new ReviewDAO();
         BoardDAO p = new BoardDAO();
-        
-        
+                
         /*       Best 기업       */
-        List<CompanyVO> company = c.bestCompanyList();
-        List<String> review = new ArrayList<String>();
-
-        for (CompanyVO i : company) {
-            String bestreview = r.bestCompanyReviewList(i.getC_id());
-            review.add(bestreview);
-        }
-        
-        
+        List<Map<String,Object>> company = c.bestCompanyList();
+                
         /*      대기업 리스트      */
         List<CompanyVO> bigCompany = c.bigCompanyList();
         
-        
         /*       Best 공고       */
-        List<AdVO> ad = a.bestAdList();
-        List<String> adCname = new ArrayList<String>();
+        List<Map<String,Object>> ad = a.bestAdList();
         List<Integer> favorite = new ArrayList<Integer>();
         
-        for (AdVO i : ad) {
-            String cname = c.companyName(i.getC_id());
-            adCname.add(cname);
-            
-            int fav = f.favCount(uid, i.getAd_id());
+        for (Map<String,Object> i : ad) {
+            int fav = f.favCount(uid, (int) i.get("ad_id"));
             favorite.add(fav);
         }
         
         /*       마감 임박 공고       */
-        List<AdVO> adEnd = a.adEndList();
-        List<String> adEndCname = new ArrayList<String>();
+        List<Map<String,Object>> adEnd = a.adEndList();
         List<Integer> favorite2 = new ArrayList<Integer>();
         
-        for (AdVO i: adEnd) {
-            String cname = c.companyName(i.getC_id());
-            adEndCname.add(cname);
-            
-            int fav = f.favCount(uid, i.getAd_id());
+        for (Map<String,Object> i: adEnd) {
+            int fav = f.favCount(uid, (int) i.get("ad_id"));
             favorite2.add(fav);
         }
         
@@ -68,7 +51,7 @@ public class MainModel {
         /*       Cookie        */
         Cookie[] cookies = request.getCookies();
         List<String> adIds = new ArrayList<String>();
-        List<AdVO> cookieList=null;
+        List<AdVO> cookieList = null;
         
         for (int i = 0; i < cookies.length; i++) {
 			if ("adview".equals(cookies[i].getName()) ) {
@@ -89,16 +72,13 @@ public class MainModel {
         request.setAttribute("cookieList", cookieList);         
                 
         request.setAttribute("company", company);
-        request.setAttribute("review", review);
         
         request.setAttribute("bigCompany", bigCompany);
         
         request.setAttribute("ad", ad);
-        request.setAttribute("adCname", adCname);
         request.setAttribute("favorite", favorite);       
         
         request.setAttribute("adEnd", adEnd);
-        request.setAttribute("adEndCname", adEndCname);
         request.setAttribute("favorite2", favorite2);   
         
         request.setAttribute("freeBoardVisits", freeBoardVisits);

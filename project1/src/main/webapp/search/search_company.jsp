@@ -64,7 +64,7 @@
                   <td class="c-content">
                     <a href="../company/company.do?cid=${c.c_id }">
                       <div class="c-name short-line"><b>${c.c_name }</b></div>
-                      <div class="short-container"><span class="short-multi-line small-font">${review[status.index] }</span></div>
+                      <div class="short-container"><span class="short-multi-line small-font">${c.review_content }</span></div>
                     </a>
                   </td>
                 </tr>

@@ -143,7 +143,7 @@
                   <td class="c-content">
                     <a href="../company/company.do?cid=${c.c_id }">
                       <div class="c-name short-line"><b>${c.c_name }</b></div>
-                      <div class="short-container"><span class="short-multi-line small-font">${review[status.index] }</span></div>
+                      <div class="short-container"><span class="short-multi-line small-font">${c.review_content }</span></div>
                     </a>
                   </td>
                 </tr>
@@ -196,7 +196,7 @@
                 <a href="../ad/ad.do?adid=${a.ad_id}"><b>${a.ad_title }</b></a>
               </div>
               <div class="small-font no-select">
-                <span class="lightgreytag">${adCname[status.index] }</span>&nbsp;
+                <span class="lightgreytag">${a.c_name}</span>&nbsp;
                 <span class="lightgreytag">${a.ad_workplace }</span>
               </div>
             </div>
@@ -241,7 +241,7 @@
                 <a href="../ad/ad.do?adid=${a.ad_id}"><b>${a.ad_title }</b></a>
               </div>
               <div class="small-font no-select">
-                <span class="lightgreytag">${adEndCname[status.index] }</span>&nbsp;
+                <span class="lightgreytag">${a.c_name }</span>&nbsp;
                 <span class="lightgreytag">${a.ad_workplace }</span>
               </div>
             </div>

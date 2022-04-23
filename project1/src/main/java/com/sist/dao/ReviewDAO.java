@@ -10,37 +10,6 @@ public class ReviewDAO {
     private Connection conn;
     private PreparedStatement ps;
     private DBCPConnection dbcp = new DBCPConnection();
-
-    // 메인 - 베스트 기업의 리뷰
-    public String bestCompanyReviewList(int id) {
-        String review = "";
-        try {
-            conn = dbcp.getConnection(conn);
-            String sql = "SELECT review_content "
-                    + "FROM (SELECT review_content,rownum as num "
-                    + "FROM (SELECT /*+ INDEX_DESC(review review_id_pk)*/ review_content "
-                    + "FROM review "
-                    + "WHERE c_id=?)) "
-                    + "WHERE num=1";
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, id);
-                
-            ResultSet rs = ps.executeQuery();
-            
-            try {
-                rs.next();
-                review = rs.getString(1);
-            } catch (Exception ex) {
-                review = "유저들의 리뷰를 기다리고 있습니다.";
-            }
-            rs.close();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        } finally {
-            dbcp.disConnection(conn, ps);
-        }
-        return review;
-    }
     
     public List<ReviewVO> reviewList(int id, int page) {
         List<ReviewVO> list = new ArrayList<ReviewVO>();

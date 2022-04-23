@@ -12,26 +12,31 @@ public class CompanyDAO {
     private DBCPConnection dbcp = new DBCPConnection();
 
     // 메인 - 베스트 기업
-    public List<CompanyVO> bestCompanyList() {
-        List<CompanyVO> list = new ArrayList<CompanyVO>();
+    public List<Map<String,Object>> bestCompanyList() {
+        List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
         try {
             conn = dbcp.getConnection(conn);
-            String sql = "SELECT c_id, c_logo, c_name FROM ("
-                    + "SELECT c_id, c_logo, c_name, rownum as num "
-                    + "FROM (SELECT c_id, c_logo, c_name "
-                    + "FROM company "
+            String sql = "SELECT c_id,c_logo,c_name,review_content "
+                    + "FROM (SELECT c_id,c_logo,c_name,review_content,rownum AS num2 "
+                    + "FROM (SELECT c_id,c_logo,c_name,review_content "
+                    + "FROM (SELECT c_id,c_logo,c_name,review_content,c_visits,ROW_NUMBER() OVER(PARTITION BY c_id ORDER BY review_id DESC) AS num "
+                    + "FROM (SELECT c.c_id,c.c_logo,c.c_name,c.c_visits,r.review_id,r.review_content "
+                    + "FROM (SELECT c_id,c_logo,c_name,c_visits FROM company) c, (SELECT c_id,review_id,review_content FROM review) r "
+                    + "WHERE c.c_id=r.c_id(+))) "
+                    + "WHERE num=1 "
                     + "ORDER BY c_visits DESC)) "
-                    + "WHERE num BETWEEN 1 AND 9";
+                    + "WHERE num2 BETWEEN 1 AND 9";
 
             ps = conn.prepareStatement(sql);
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                CompanyVO vo = new CompanyVO();
-                vo.setC_id(rs.getInt(1));
-                vo.setC_logo(rs.getString(2));
-                vo.setC_name(rs.getString(3));
-                list.add(vo);
+                Map map = new HashMap();
+                map.put("c_id",rs.getInt(1));
+                map.put("c_logo",rs.getString(2));
+                map.put("c_name",rs.getString(3));
+                map.put("review_content",rs.getString(4));
+                list.add(map);
             }
             rs.close();
 

@@ -14,30 +14,29 @@
                     $('#result').html(result);
                 }
             });
+            
+            document.getElementById('result-title').scrollIntoView(true);
         })
     })
 </script>
 
 <!--  공고 리스트  -->
-<div id="list">
-  <c:forEach var="a" items="${ad }" varStatus="status">
-    <div class="row roomy-10">
-      <div class="col-sm-3">${company[status.index] }</div>
-      <div class="col-sm-7">
-        <div class="ad-title"><a href="../ad/ad.do?adid=${a.ad_id}">${a.ad_title }</a></div>
-        <div class="small-font list-content">${a.ad_we } | ${a.ad_education } | ${a.ad_worktype }</div>
-        <div class="small-font list-content">${a.ad_workplace } </div>
-      </div>
-      <div class="col-sm-2 ad_end">
-        <c:if test="${today==a.ad_end }"><b>금일마감</b></c:if> <!-- 오늘일 경우 -->
-        <c:if test="${today!=a.ad_end }"><b>${a.ad_end }</b></c:if> <!-- 오늘이 아닐 경우 -->
-      </div>
+<c:forEach var="a" items="${ad }" varStatus="status">
+  <div class="row roomy-10">
+    <div class="col-sm-3">${a.c_name }</div>
+    <div class="col-sm-7">
+      <div class="ad-title"><a href="../ad/ad.do?adid=${a.ad_id}">${a.ad_title }</a></div>
+      <div class="small-font list-content">${a.ad_we } | ${a.ad_education } | ${a.ad_worktype }</div>
+      <div class="small-font list-content">${a.ad_workplace } </div>
     </div>
-    <hr>
-  </c:forEach>
-</div>
+    <div class="col-sm-2 ad_end">
+      <c:if test="${today==a.ad_end }"><b>금일마감</b></c:if> <!-- 오늘일 경우 -->
+      <c:if test="${today!=a.ad_end }"><b>${a.ad_end }</b></c:if> <!-- 오늘이 아닐 경우 -->
+    </div>
+  </div>
+  <hr>
+</c:forEach>
 <!-- ----------- -->
-
 
 <!--    페이징    -->
 <div class="row roomy-10">

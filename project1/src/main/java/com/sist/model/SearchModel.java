@@ -19,17 +19,11 @@ public class SearchModel {
         CompanyDAO c = new CompanyDAO();
         ReviewDAO r = new ReviewDAO();
         
-        List<CompanyVO> company = c.bestCompanyList();
-        List<String> review = new ArrayList<String>();
+        /*       Best 기업       */
+        List<Map<String,Object>> company = c.bestCompanyList();
         
-        // 베스트 기업 출력용
-        for (int i = 0; i < company.size(); i++) {
-            String bestreview = r.bestCompanyReviewList(company.get(i).getC_id());
-            review.add(bestreview);
-        }
         
         request.setAttribute("company", company);
-        request.setAttribute("review", review);
         
         request.setAttribute("main_jsp", "../search/search_company.jsp");
         return "../main/main.jsp";
@@ -106,12 +100,8 @@ public class SearchModel {
         
         // 검색 결과
         AdDAO adao = new AdDAO();
-        List<AdVO> ad = adao.adSearchList(Integer.parseInt(page), keyword, address, we, edu, size, worktype, qual, lang, date1, date2);
+        List<Map<String,Object>> ad = adao.adSearchList(Integer.parseInt(page), keyword, address, we, edu, size, worktype, qual, lang, date1, date2);
         
-        // 공고마다 회사 이름 저장
-        CompanyDAO cdao = new CompanyDAO();
-        List<String> company = new ArrayList<String>();
-        for(AdVO a : ad) company.add(cdao.companyName(a.getC_id()));
         
         // 페이지 처리를 위해 주소 만들기
         url += "keyword=" + keyword;
@@ -146,7 +136,6 @@ public class SearchModel {
         request.setAttribute("endPage", endPage);
         // 출력
         request.setAttribute("ad", ad);
-        request.setAttribute("company", company);
         // 오늘날짜
         request.setAttribute("today", today);
         

@@ -39,11 +39,10 @@ public class CalendarModel {
             newYear = Integer.parseInt(year);
             newMonth = Integer.parseInt(month);
         }
-                
         if (newMonth == 0) {
             newYear = newYear - 1;
             newMonth = 12;
-        } else if (newYear == 13) {
+        } else if (newMonth == 13) {
             newYear = newYear + 1;
             newMonth = 1;
         }
@@ -58,9 +57,17 @@ public class CalendarModel {
         AdDAO dao = new AdDAO();
         List<List<AdVO>> ad = new ArrayList<List<AdVO>>();
         
-        String date = newYear + "-" + String.format("%02d", newMonth) + "-";
+        String yearAndMonth = newYear + "-" + String.format("%02d", newMonth) + "-";
+        List<AdVO> list = dao.adByDate(yearAndMonth);
         for(int i = 1; i <= lastday; i++) {
-            ad.add(dao.adByDate(date + String.format("%02d", i)));
+            List<AdVO> list2 = new ArrayList<AdVO>();
+            String date = yearAndMonth + String.format("%02d", i);
+            for(AdVO vo : list) {
+                if (vo.getAd_end().equals(date)) {
+                    list2.add(vo);
+                }
+            }
+            ad.add(list2);
         }
         
         request.setAttribute("year", newYear);

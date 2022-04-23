@@ -213,7 +213,7 @@
       </div>
       <!-- ----------- -->
       
-    <div class="title m-top-40">
+    <div class="title m-top-40 m-bottom-10" id="result-title">
       <div class="row">
         <div class="col-sm-3">회사명</div>
         <div class="col-sm-7">채용정보</div>
