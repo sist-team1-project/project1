@@ -1,7 +1,9 @@
 package com.sist.dao;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.Date;
 
 import com.sist.vo.*;
 
@@ -16,9 +18,10 @@ public class AdDAO {
 		List<AdVO> list = new ArrayList<AdVO>();
 		try {
 			conn = dbcp.getConnection(conn);
+			
 			String sql = "SELECT ad_id,ad_title,ad_end,ad_we,ad_education,ad_workplace,c_id "
 					+ "FROM (SELECT ad_id,ad_title,ad_end,ad_we,ad_education,ad_workplace,c_id,rownum as num "
-					+ "FROM (SELECT ad_id,ad_title,ad_end,ad_we,ad_education,ad_workplace,c_id FROM ad WHERE SYSDATE-1 < TO_DATE(ad_end) OR ad_end IS NULL ORDER BY ad_visits DESC)) "
+					+ "FROM (SELECT ad_id,ad_title,ad_end,ad_we,ad_education,ad_workplace,c_id FROM ad WHERE ad_end>=TO_CHAR(SYSDATE,'YYYY-MM-DD') OR ad_end IS NULL ORDER BY ad_visits DESC)) "
 					+ "WHERE num BETWEEN 1 AND 12";
 			ps = conn.prepareStatement(sql);
 			
@@ -60,11 +63,12 @@ public class AdDAO {
 	// 메인 - 마감 임박 공고
 	public List<AdVO> adEndList() {
 		List<AdVO> list = new ArrayList<AdVO>();
+        
 		try {
 			conn = dbcp.getConnection(conn);
 			String sql = "SELECT ad_id,ad_title,ad_end,ad_we,ad_education,ad_workplace,c_id "
 					+ "FROM (SELECT ad_id,ad_title,ad_end,ad_we,ad_education,ad_workplace,c_id,rownum as num "
-					+ "FROM (SELECT ad_id,ad_title,ad_end,ad_we,ad_education,ad_workplace,c_id FROM  ad WHERE SYSDATE-1 < TO_DATE(ad_end) ORDER BY ad_end ASC)) "
+					+ "FROM (SELECT ad_id,ad_title,ad_end,ad_we,ad_education,ad_workplace,c_id FROM ad WHERE ad_end>=TO_CHAR(SYSDATE,'YYYY-MM-DD') ORDER BY ad_end ASC)) "
 					+ "WHERE num BETWEEN 1 AND 6";
 			ps = conn.prepareStatement(sql);
 			
@@ -114,16 +118,18 @@ public class AdDAO {
 			sql += "where ad_id in (";
 				for (int i = 0; i < cookieList.size(); i++) {
 					if (i != cookieList.size()-1) {
-						sql += "'" + cookieList.get(i)+ "',";
+					    sql += "'" + cookieList.get(i)+ "',";
 					} else {
 						sql += "'" + cookieList.get(i)+ "'";
 					}
 				} 
-			sql += ")";
-			sql += "order by case ad_id ";
+			sql += ") ";
+			sql += "order by case ad_id";
 			
 			for(int i = 0; i < cookieList.size(); i++) {
-					sql += "when " + cookieList.get(i) + " then " + (i+1);
+			    if(!cookieList.get(i).equals("")) {
+			        sql += " when " + cookieList.get(i) + " then " + (i+1);
+			    }
 			}
 			sql += " else " + cookieList.size() + " end ";
 			
@@ -219,7 +225,7 @@ public class AdDAO {
 			conn = dbcp.getConnection(conn);
 			String sql = "SELECT ad_id,c_id,ad_title,ad_end "
 			        + "FROM ad "
-			        + "WHERE c_id=? AND (SYSDATE-1 < TO_DATE(ad_end) OR ad_end IS NULL)";
+			        + "WHERE c_id=? AND (ad_end>=TO_CHAR(SYSDATE,'YYYY-MM-DD') OR ad_end IS NULL)";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, id);
 
@@ -251,6 +257,8 @@ public class AdDAO {
     public List<AdVO> adSearchList(int page, String keyword, String address, String we, String edu, String size, String worktype, String qual, String lang, String date1, String date2) {
         List<AdVO> list = new ArrayList<AdVO>();
        try {
+            System.out.println(date1);
+            System.out.println(date2);
             conn = dbcp.getConnection(conn);
             
             int rowSize = 10;
@@ -279,9 +287,9 @@ public class AdDAO {
                 sql += "AND regexp_like(ad_language, ?) ";
             }
             if(date2.equals("")) {
-                sql += "AND (TO_DATE(ad_end) >= TO_DATE(?) OR ad_end IS NULL) ";
+                sql += "AND (ad_end >= ? OR ad_end IS NULL) ";
             } else {
-                sql += "AND (TO_DATE(ad_end) BETWEEN TO_DATE(?) AND TO_DATE(?) OR ad_end IS NULL) ";
+                sql += "AND (ad_end BETWEEN ? AND ? OR ad_end IS NULL) ";
             }
             sql += "ORDER BY ad_end ASC)) "
                 + "WHERE num BETWEEN ? AND ?";
@@ -363,9 +371,9 @@ public class AdDAO {
                 sql += "AND regexp_like(ad_language, ?) ";
             }
             if(date2.equals("")) {
-                sql += "AND (TO_DATE(ad_end) >= TO_DATE(?) OR ad_end IS NULL))";
+                sql += "AND (ad_end >= ? OR ad_end IS NULL))";
             } else {
-                sql += "AND (TO_DATE(ad_end) BETWEEN TO_DATE(?) AND TO_DATE(?) OR ad_end IS NULL))";
+                sql += "AND (ad_end BETWEEN ? AND ? OR ad_end IS NULL))";
             }
             
             ps = conn.prepareStatement(sql);
@@ -402,12 +410,11 @@ public class AdDAO {
         ArrayList<AdVO> list = new ArrayList<AdVO>();
         try {
             conn = dbcp.getConnection(conn);
-            
             String sql = "SELECT ad_id,ad_title "
                     + "FROM (SELECT ad_id,ad_title,rownum AS num "
                     + "FROM (SELECT ad_id,ad_title "
                     + "FROM ad "
-                    + "WHERE ad_end=to_date(?,'yyyy-mm-dd') "
+                    + "WHERE ad_end=? "
                     + "ORDER BY ad_visits)) "
                     + "WHERE num BETWEEN 1 AND 5";
                         

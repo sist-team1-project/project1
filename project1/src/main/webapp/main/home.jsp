@@ -9,10 +9,12 @@
   <meta charset="UTF-8">
   <title>Insert title here</title>
   <link rel="stylesheet" href="../css/home.css">
+  
   <script type="text/javascript">
   
     $(function() {
     	$('.fav').css('cursor','pointer');
+    	$('.fav2').css('cursor','pointer');
     	
     	// 베스트 공고
         $('.fav').click(function() {

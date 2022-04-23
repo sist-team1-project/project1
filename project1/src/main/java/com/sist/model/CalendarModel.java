@@ -31,7 +31,7 @@ public class CalendarModel {
         if(year == null && month == null) {
             Date date = new Date();
             
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String today = sdf.format(date);
             StringTokenizer st = new StringTokenizer(today, "-");
             year = st.nextToken();
